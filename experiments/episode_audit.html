@@ -1,0 +1,1235 @@
+<html><head><meta charset='utf-8'><title>Episode audit — Carlsbad</title><style>
+body{font-family:sans-serif;max-width:920px;margin:2em auto;line-height:1.5}
+.c{border:1px solid #ccc;border-radius:8px;padding:1em;margin:1em 0}
+.c.done{opacity:.55;border-color:#8c8}
+code{background:#f4f4f4;padding:2px 4px;border-radius:3px;font-size:.9em}
+a{color:#06c} .btns{margin-top:.6em;display:flex;gap:.5em;align-items:center}
+button{padding:.3em .8em;border-radius:6px;border:1px solid #aaa;background:#fafafa;cursor:pointer}
+button:hover{background:#eef} input{flex:1;padding:.3em;border:1px solid #ccc;border-radius:6px}
+.verdict{margin-left:.6em;font-weight:bold} #bar{position:sticky;top:0;background:#fff;
+border-bottom:2px solid #333;padding:.6em 0;display:flex;gap:1em;align-items:center;z-index:9}
+#out{width:100%;height:6em;display:none}
+</style></head><body>
+<div id='bar'><b id='count'></b>
+<button onclick='exportV()'>📋 export verdicts</button></div>
+<h1>Episode audit — Carlsbad plans, 100 spans</h1>
+<p><b>Workflow:</b> ▶ opens the real game on Lichess at the span's exact move;
+step with →. Then: <b>is this one coherent plan/happening?</b> Name it if nameable.</p>
+<textarea id='out' readonly></textarea>
+<div class='c' id='ep0'>
+<b>#0</b> — <b>activity +83cp</b> over moves 32–39
+<span class='verdict' data-id='ep0'></span><br>
+moves: <code>Rg8 b4 axb4 Rxb4 Ra7 a5 Be6 Rh1 Nf8 Rbb1 Bd7 Rh6 Kd8 Ra1</code><br>
+<a href='https://lichess.org/golf87Id#63' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 39) ·
+<a href='https://lichess.org/golf87Id#77' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep0','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep0','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep0','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep0' oninput="setNote('ep0',this.value)">
+</div></div><div class='c' id='ep1'>
+<b>#1</b> — <b>activity -117cp</b> over moves 5–16
+<span class='verdict' data-id='ep1'></span><br>
+moves: <code>Nf3 Bf5 Bf4 Nd7 e3 Ngf6 Be2 h6 O-O Be7 h3 O-O Ne5 Nxe5 Bxe5 Bd6 Bxd6 Qxd6 a3 a5 Rc1 Rfe8 Na4 Nd7</code><br>
+<a href='https://lichess.org/Dx8PCb6p#8' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 16) ·
+<a href='https://lichess.org/Dx8PCb6p#32' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep1','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep1','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep1','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep1' oninput="setNote('ep1',this.value)">
+</div></div><div class='c' id='ep2'>
+<b>#2</b> — <b>pawns -68cp</b> over moves 14–22
+<span class='verdict' data-id='ep2'></span><br>
+moves: <code>Qg3 Na6 Bh6 Rf7 e6 Bxe6 Ne5 Qf8 Nxf7 Qxf7 Rae1 Bf8 Bf4 Kh8 Re2 h6 Rfe1</code><br>
+<a href='https://lichess.org/MTcwy5Lg#26' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 22) ·
+<a href='https://lichess.org/MTcwy5Lg#43' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep2','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep2','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep2','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep2' oninput="setNote('ep2',this.value)">
+</div></div><div class='c' id='ep3'>
+<b>#3</b> — <b>activity -68cp</b> over moves 9–20
+<span class='verdict' data-id='ep3'></span><br>
+moves: <code>Re8 O-O Nf8 Rab1 Ng6 b4 a6 a4 Bd6 b5 axb5 axb5 h6 Bxf6 Qxf6 bxc6 bxc6 e4 Nf4 e5 Qe6 Ne2</code><br>
+<a href='https://lichess.org/7udkoKb1#17' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 20) ·
+<a href='https://lichess.org/7udkoKb1#39' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep3','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep3','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep3','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep3' oninput="setNote('ep3',this.value)">
+</div></div><div class='c' id='ep4'>
+<b>#4</b> — <b>activity -140cp</b> over moves 11–27
+<span class='verdict' data-id='ep4'></span><br>
+moves: <code>Bd3 Ng7 O-O-O Bf5 g4 Bxd3 Nxd3 Ne6 f4 Qa5 Ne5 f6 Nxg6 hxg6 Qxg6+ Kd7 Qf5 Bb4 Rd3 Bxc3 Rxc3 Qxa2 Kc2 Qa4+ Kb1 Rhf8 h4 Rae8 h5 Qb4 h6 Qe7 e4 Qd6</code><br>
+<a href='https://lichess.org/zNrnACzs#20' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 27) ·
+<a href='https://lichess.org/zNrnACzs#54' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep4','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep4','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep4','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep4' oninput="setNote('ep4',this.value)">
+</div></div><div class='c' id='ep5'>
+<b>#5</b> — <b>pawns +63cp</b> over moves 19–26
+<span class='verdict' data-id='ep5'></span><br>
+moves: <code>Bd6 Bg5 Re6 e4 Be7 Bxf6 gxf6 Re1 Bd6 Bf1 Qc7 h4 Bg3 h5</code><br>
+<a href='https://lichess.org/UVGmLVFt#37' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 26) ·
+<a href='https://lichess.org/UVGmLVFt#51' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep5','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep5','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep5','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep5' oninput="setNote('ep5',this.value)">
+</div></div><div class='c' id='ep6'>
+<b>#6</b> — <b>activity -106cp</b> over moves 17–24
+<span class='verdict' data-id='ep6'></span><br>
+moves: <code>Bf8 Rf3 g6 h3 gxf5 hxg4 fxg4 Rg3 f5 Na2 Re6 Kf2 Kf7 Rh1 Kg6</code><br>
+<a href='https://lichess.org/hyUoPz5T#33' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 24) ·
+<a href='https://lichess.org/hyUoPz5T#48' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep6','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep6','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep6','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep6' oninput="setNote('ep6',this.value)">
+</div></div><div class='c' id='ep7'>
+<b>#7</b> — <b>pawns +85cp</b> over moves 31–40
+<span class='verdict' data-id='ep7'></span><br>
+moves: <code>g5 f4 Be6 f5 Bf7 Rf2 Kh7 Bc2 Kh6 f6 Bf8 Bf5 Be6 Bxe6 Rxe6 Rcc2 Kg6 Rc3 Ra5</code><br>
+<a href='https://lichess.org/jk0zxnUl#61' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 40) ·
+<a href='https://lichess.org/jk0zxnUl#80' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep7','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep7','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep7','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep7' oninput="setNote('ep7',this.value)">
+</div></div><div class='c' id='ep8'>
+<b>#8</b> — <b>activity -73cp</b> over moves 18–27
+<span class='verdict' data-id='ep8'></span><br>
+moves: <code>Qa5 g3 Kf8 a3 Nb5 Nxb5 Qxe1+ Rxe1 Rxe1+ Kg2 axb5 Qb4+ Re7 g4 Re8 Kf3 g6 Bf1 Kg7</code><br>
+<a href='https://lichess.org/YaEZCY82#35' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 27) ·
+<a href='https://lichess.org/YaEZCY82#54' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep8','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep8','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep8','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep8' oninput="setNote('ep8',this.value)">
+</div></div><div class='c' id='ep9'>
+<b>#9</b> — <b>activity -87cp</b> over moves 10–16
+<span class='verdict' data-id='ep9'></span><br>
+moves: <code>Be2 O-O O-O Re8 b4 a6 a4 Bf5 Ne1 Nd7 Nd3 Qc7 Nc5 a5</code><br>
+<a href='https://lichess.org/VKLSnhce#18' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 16) ·
+<a href='https://lichess.org/VKLSnhce#32' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep9','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep9','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep9','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep9' oninput="setNote('ep9',this.value)">
+</div></div><div class='c' id='ep10'>
+<b>#10</b> — <b>activity +50cp</b> over moves 12–16
+<span class='verdict' data-id='ep10'></span><br>
+moves: <code>a3 Ba5 Qc2 Kf8 O-O-O Kg7 Bd3 Nf6 f3</code><br>
+<a href='https://lichess.org/mr1b9SKQ#22' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 16) ·
+<a href='https://lichess.org/mr1b9SKQ#31' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep10','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep10','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep10','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep10' oninput="setNote('ep10',this.value)">
+</div></div><div class='c' id='ep11'>
+<b>#11</b> — <b>activity -52cp</b> over moves 27–31
+<span class='verdict' data-id='ep11'></span><br>
+moves: <code>Re7 Kh2 Nf4 Kg3 Ne6 f4 Rae8 h4</code><br>
+<a href='https://lichess.org/CYT6g9Wx#53' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 31) ·
+<a href='https://lichess.org/CYT6g9Wx#61' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep11','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep11','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep11','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep11' oninput="setNote('ep11',this.value)">
+</div></div><div class='c' id='ep12'>
+<b>#12</b> — <b>pawns +63cp</b> over moves 22–29
+<span class='verdict' data-id='ep12'></span><br>
+moves: <code>Rf8 Ref1 Be6 Ne2 h4 gxh4 gxh4 Nf4 Rg8 Qc5 Bg4 a4 Kb8 a5 Nc8</code><br>
+<a href='https://lichess.org/Fd01pUic#43' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 29) ·
+<a href='https://lichess.org/Fd01pUic#58' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep12','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep12','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep12','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep12' oninput="setNote('ep12',this.value)">
+</div></div><div class='c' id='ep13'>
+<b>#13</b> — <b>pawns +74cp</b> over moves 41–52
+<span class='verdict' data-id='ep13'></span><br>
+moves: <code>Rg6 g4 Ng5 Nxg5 Rxg5 Ra8 Rg6 Rh8 e6 Bc8 Kg1 Rf8 Rf1 Re8 Bxf5 Rxa5 Bxg4 Ra3 Rff6 Rxe3 Kf2 Re4 Bf5</code><br>
+<a href='https://lichess.org/golf87Id#80' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 52) ·
+<a href='https://lichess.org/golf87Id#103' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep13','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep13','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep13','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep13' oninput="setNote('ep13',this.value)">
+</div></div><div class='c' id='ep14'>
+<b>#14</b> — <b>activity -68cp</b> over moves 7–15
+<span class='verdict' data-id='ep14'></span><br>
+moves: <code>e3 Bd6 Bxd6 Qxd6 Bd3 Bg4 Qc2 Bxf3 gxf3 Nbd7 O-O-O O-O-O Kb1 Kb8 f4 Nb6 Rhg1 g6</code><br>
+<a href='https://lichess.org/QW9SzHPQ#12' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 15) ·
+<a href='https://lichess.org/QW9SzHPQ#30' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep14','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep14','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep14','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep14' oninput="setNote('ep14',this.value)">
+</div></div><div class='c' id='ep15'>
+<b>#15</b> — <b>material -87cp</b> over moves 24–33
+<span class='verdict' data-id='ep15'></span><br>
+moves: <code>Bc2 Nc4 Qd3 g6 f5 Bxb4 fxg6 fxg6 Rf1 Rf8 Rxf8+ Qxf8 Bg5 Be7 Qg3 Bc8 Bc1 Bf5 Bd1</code><br>
+<a href='https://lichess.org/w8dsuom7#46' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 33) ·
+<a href='https://lichess.org/w8dsuom7#65' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep15','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep15','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep15','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep15' oninput="setNote('ep15',this.value)">
+</div></div><div class='c' id='ep16'>
+<b>#16</b> — <b>king_safety -78cp</b> over moves 19–30
+<span class='verdict' data-id='ep16'></span><br>
+moves: <code>d4 Rfe8 Rxe8+ Rxe8 Be3 a5 Rc1 Qg7 Qxg7+ Kxg7 Na4 Rc8 Kf1 Bd3+ Ke1 Bb5 Nc5 Bxc5 Rxc5 a4 Kd2 g5 g4</code><br>
+<a href='https://lichess.org/hmv9lDua#36' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 30) ·
+<a href='https://lichess.org/hmv9lDua#59' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep16','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep16','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep16','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep16' oninput="setNote('ep16',this.value)">
+</div></div><div class='c' id='ep17'>
+<b>#17</b> — <b>king_safety -60cp</b> over moves 6–11
+<span class='verdict' data-id='ep17'></span><br>
+moves: <code>c6 h3 Bb4 Rc1 O-O e3 Re8 a3 Bf8 Bd3 Ne4</code><br>
+<a href='https://lichess.org/hRi2FwOb#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 11) ·
+<a href='https://lichess.org/hRi2FwOb#22' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep17','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep17','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep17','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep17' oninput="setNote('ep17',this.value)">
+</div></div><div class='c' id='ep18'>
+<b>#18</b> — <b>activity -47cp</b> over moves 14–22
+<span class='verdict' data-id='ep18'></span><br>
+moves: <code>Nb6 b3 Qd7 a4 Bf5 Qb2 Qe7 a5 Nbd7 Na4 Ne4 Rec1 Nxd2 Nxd2 Bb4 a6 b5</code><br>
+<a href='https://lichess.org/kjN7hMGG#27' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 22) ·
+<a href='https://lichess.org/kjN7hMGG#44' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep18','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep18','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep18','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep18' oninput="setNote('ep18',this.value)">
+</div></div><div class='c' id='ep19'>
+<b>#19</b> — <b>material +93cp</b> over moves 74–81
+<span class='verdict' data-id='ep19'></span><br>
+moves: <code>Kf2 Bb5 Kg3 Kc4 Kf2 g3+ Kxg3 Kd3 Kf2 Ke4 Kg3 Ke3 Bb6 Kd3 Bc5</code><br>
+<a href='https://lichess.org/8hEjGbvH#146' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 81) ·
+<a href='https://lichess.org/8hEjGbvH#161' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep19','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep19','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep19','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep19' oninput="setNote('ep19',this.value)">
+</div></div><div class='c' id='ep20'>
+<b>#20</b> — <b>material +159cp</b> over moves 21–34
+<span class='verdict' data-id='ep20'></span><br>
+moves: <code>h6 b4 axb4 axb4 Nh4 Qg4 Ng6 f4 Rxe3 Bxe3 Rxe3 Rf3 f5 Qh5 Re6 Qxf5 Bb6 Qd3 Qe7 Kg2 Re1 f5 Nf8 Rxe1 Qxe1 Qe2 Qc1</code><br>
+<a href='https://lichess.org/iYJ0Rj3q#41' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 34) ·
+<a href='https://lichess.org/iYJ0Rj3q#68' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep20','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep20','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep20','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep20' oninput="setNote('ep20',this.value)">
+</div></div><div class='c' id='ep21'>
+<b>#21</b> — <b>pawns -85cp</b> over moves 13–24
+<span class='verdict' data-id='ep21'></span><br>
+moves: <code>Rg8 Kd2 Bd6 Nce2 Nb4 Bxg6 fxg6 a3 Na6 Rag1 Kf7 g4 hxg4 Rxg4 Rg7 Rhg1 Rag8 Nd3 Nc7 f3 Ne6 e4</code><br>
+<a href='https://lichess.org/gE9DQ2J1#25' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 24) ·
+<a href='https://lichess.org/gE9DQ2J1#47' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep21','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep21','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep21','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep21' oninput="setNote('ep21',this.value)">
+</div></div><div class='c' id='ep22'>
+<b>#22</b> — <b>material +168cp</b> over moves 25–35
+<span class='verdict' data-id='ep22'></span><br>
+moves: <code>Be8 Bxf5 Bd6 h3 gxh3 Bxh3 Qg7 Qg4 Qh6 Ra3 Bh5 Qxh4 Rcg8 Qf6 Rg6 Nd7+ Kc7 Qf2 Rhg8 b5 Bg4</code><br>
+<a href='https://lichess.org/FRr7Dwa2#49' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 35) ·
+<a href='https://lichess.org/FRr7Dwa2#70' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep22','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep22','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep22','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep22' oninput="setNote('ep22',this.value)">
+</div></div><div class='c' id='ep23'>
+<b>#23</b> — <b>activity +50cp</b> over moves 7–13
+<span class='verdict' data-id='ep23'></span><br>
+moves: <code>c6 Bd3 Bg4 Qc2 h6 Ne5 Be6 O-O Nbd7 a3 Ba5 b4 Bc7</code><br>
+<a href='https://lichess.org/Bi5YDWmS#13' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 13) ·
+<a href='https://lichess.org/Bi5YDWmS#26' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep23','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep23','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep23','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep23' oninput="setNote('ep23',this.value)">
+</div></div><div class='c' id='ep24'>
+<b>#24</b> — <b>activity +77cp</b> over moves 7–16
+<span class='verdict' data-id='ep24'></span><br>
+moves: <code>Bd6 e3 O-O Bd3 Re8 Nf3 Bg4 h3 Bxf3 gxf3 Be7 O-O-O Nh5 Bxe7 Qxe7 Rhg1 Nd7 Kb1 b5</code><br>
+<a href='https://lichess.org/7a7V2dzt#13' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 16) ·
+<a href='https://lichess.org/7a7V2dzt#32' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep24','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep24','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep24','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep24' oninput="setNote('ep24',this.value)">
+</div></div><div class='c' id='ep25'>
+<b>#25</b> — <b>pawns -45cp</b> over moves 16–29
+<span class='verdict' data-id='ep25'></span><br>
+moves: <code>f4 Bxg4 fxg5 Nxh5 O-O-O Qxg5 Rdg1 f5 Qd2 Kh8 Nf4 Nxf4 exf4 Qe7 Bh4 Qe3 Qxe3 Rxe3 Kd2 Re6 Be2 Bxe2 Nxe2 Rae8 Nc1 Nd7 Nd3</code><br>
+<a href='https://lichess.org/nPwTEvEy#30' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 29) ·
+<a href='https://lichess.org/nPwTEvEy#57' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep25','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep25','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep25','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep25' oninput="setNote('ep25',this.value)">
+</div></div><div class='c' id='ep26'>
+<b>#26</b> — <b>activity +75cp</b> over moves 7–14
+<span class='verdict' data-id='ep26'></span><br>
+moves: <code>Ne4 Bf4 Qa5 Qb3 Bb4 Rc1 O-O Bd3 Nd7 O-O Ndf6 Ne5 Nd2 Qc2</code><br>
+<a href='https://lichess.org/3p6DAhxo#13' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 14) ·
+<a href='https://lichess.org/3p6DAhxo#27' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep26','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep26','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep26','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep26' oninput="setNote('ep26',this.value)">
+</div></div><div class='c' id='ep27'>
+<b>#27</b> — <b>material +112cp</b> over moves 16–25
+<span class='verdict' data-id='ep27'></span><br>
+moves: <code>Rc8 Nxf7 Rh7 Nxe4 Bxe4 Bf4+ Ka8 Nd6 Bxd6 Bxd6 g5 f3 Bd3 Rfe1 Rg8 Re3 Bf5 Re5</code><br>
+<a href='https://lichess.org/BqohsXdG#31' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 25) ·
+<a href='https://lichess.org/BqohsXdG#49' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep27','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep27','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep27','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep27' oninput="setNote('ep27',this.value)">
+</div></div><div class='c' id='ep28'>
+<b>#28</b> — <b>material -91cp</b> over moves 34–43
+<span class='verdict' data-id='ep28'></span><br>
+moves: <code>Rf1 Qg5 Qf2 g6 Rf3 Rxe3 Rxe3 Qxe3 Nd7 Qxf2+ Kxf2 Kg7 Rd1 Re7 Nc5 Nd6 Kf3 Ne4 Re1</code><br>
+<a href='https://lichess.org/2MroQs4Y#66' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 43) ·
+<a href='https://lichess.org/2MroQs4Y#85' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep28','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep28','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep28','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep28' oninput="setNote('ep28',this.value)">
+</div></div><div class='c' id='ep29'>
+<b>#29</b> — <b>activity -53cp</b> over moves 18–25
+<span class='verdict' data-id='ep29'></span><br>
+moves: <code>Bh4 Rd2 Be7 Qf3 Qe8 Rg1 Qf7 g5 Qg7 h4 h6 gxh6 Qxh6 Ne1 Kf7</code><br>
+<a href='https://lichess.org/iMd3oShh#35' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 25) ·
+<a href='https://lichess.org/iMd3oShh#50' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep29','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep29','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep29','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep29' oninput="setNote('ep29',this.value)">
+</div></div><div class='c' id='ep30'>
+<b>#30</b> — <b>activity +46cp</b> over moves 18–27
+<span class='verdict' data-id='ep30'></span><br>
+moves: <code>g6 bxc6 bxc6 Rfc1 Qd7 Ne2 Ra6 Qd3 Rfa8 Bf4 Bxf4 Nxf4 Nd6 Qc2 Ne4 Nd3 Qf5 Nc5</code><br>
+<a href='https://lichess.org/8ObZ9B0M#35' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 27) ·
+<a href='https://lichess.org/8ObZ9B0M#53' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep30','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep30','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep30','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep30' oninput="setNote('ep30',this.value)">
+</div></div><div class='c' id='ep31'>
+<b>#31</b> — <b>activity +49cp</b> over moves 6–13
+<span class='verdict' data-id='ep31'></span><br>
+moves: <code>c6 e3 Be7 Qc2 Nh5 Be5 Nxe5 Nxe5 g6 Bd3 Ng7 O-O-O Bf5 g4</code><br>
+<a href='https://lichess.org/zNrnACzs#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 13) ·
+<a href='https://lichess.org/zNrnACzs#25' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep31','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep31','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep31','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep31' oninput="setNote('ep31',this.value)">
+</div></div><div class='c' id='ep32'>
+<b>#32</b> — <b>king_safety -82cp</b> over moves 19–29
+<span class='verdict' data-id='ep32'></span><br>
+moves: <code>Kf8 a3 Nb5 Nxb5 Qxe1+ Rxe1 Rxe1+ Kg2 axb5 Qb4+ Re7 g4 Re8 Kf3 g6 Bf1 Kg7 Bd3 Ne4 h4</code><br>
+<a href='https://lichess.org/YaEZCY82#37' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 29) ·
+<a href='https://lichess.org/YaEZCY82#57' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep32','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep32','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep32','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep32' oninput="setNote('ep32',this.value)">
+</div></div><div class='c' id='ep33'>
+<b>#33</b> — <b>activity +49cp</b> over moves 5–12
+<span class='verdict' data-id='ep33'></span><br>
+moves: <code>c6 e3 Be7 Bd3 O-O Nge2 Nbd7 O-O Re8 a4 Nf8 f3 h6 Bh4</code><br>
+<a href='https://lichess.org/PchgvW2Q#9' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 12) ·
+<a href='https://lichess.org/PchgvW2Q#23' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep33','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep33','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep33','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep33' oninput="setNote('ep33',this.value)">
+</div></div><div class='c' id='ep34'>
+<b>#34</b> — <b>activity +85cp</b> over moves 5–13
+<span class='verdict' data-id='ep34'></span><br>
+moves: <code>c6 e3 Bd6 Bd3 Nbd7 Nf3 Nf8 Qc2 Bg4 Ne5 Bh5 f4 h6 Bh4 g6 g4</code><br>
+<a href='https://lichess.org/9kxP1UnM#9' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 13) ·
+<a href='https://lichess.org/9kxP1UnM#25' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep34','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep34','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep34','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep34' oninput="setNote('ep34',this.value)">
+</div></div><div class='c' id='ep35'>
+<b>#35</b> — <b>activity +74cp</b> over moves 23–30
+<span class='verdict' data-id='ep35'></span><br>
+moves: <code>Kf2 Nf5 Rc3 Qd6 g4 Ng7 Rh1 Re6 Ng3 Rae8 Re1 Qf8 Qc2 Qd6 Qd2 Rf8</code><br>
+<a href='https://lichess.org/blV5U2Sr#44' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 30) ·
+<a href='https://lichess.org/blV5U2Sr#60' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep35','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep35','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep35','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep35' oninput="setNote('ep35',this.value)">
+</div></div><div class='c' id='ep36'>
+<b>#36</b> — <b>activity +51cp</b> over moves 9–13
+<span class='verdict' data-id='ep36'></span><br>
+moves: <code>c6 O-O Qc7 Bh4 h6 Rab1 g5 Bg3</code><br>
+<a href='https://lichess.org/ETfxe5Hf#17' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 13) ·
+<a href='https://lichess.org/ETfxe5Hf#25' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep36','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep36','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep36','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep36' oninput="setNote('ep36',this.value)">
+</div></div><div class='c' id='ep37'>
+<b>#37</b> — <b>activity +113cp</b> over moves 26–31
+<span class='verdict' data-id='ep37'></span><br>
+moves: <code>Rh2 Rh8 Qf2 Qh5 a3 Rh7 Rgg2 Bc4 Rh3 Rah8 Qd2</code><br>
+<a href='https://lichess.org/iMd3oShh#50' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 31) ·
+<a href='https://lichess.org/iMd3oShh#61' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep37','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep37','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep37','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep37' oninput="setNote('ep37',this.value)">
+</div></div><div class='c' id='ep38'>
+<b>#38</b> — <b>king_safety -453cp</b> over moves 22–35
+<span class='verdict' data-id='ep38'></span><br>
+moves: <code>e4 Rg8 Qe3 Raf8 Nf3 Ke8 e5 Be7 Qb3 Bb4 Ne1 Qh6 Nc2 Rh8 h3 Bxh3 Qe3 Qh4 gxh3 Qxh3 Rfd1 Be7 Rd2 Bh4 f4 Bxg3 Qf3 Rfg8</code><br>
+<a href='https://lichess.org/g0TYvu1j#42' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 35) ·
+<a href='https://lichess.org/g0TYvu1j#70' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep38','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep38','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep38','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep38' oninput="setNote('ep38',this.value)">
+</div></div><div class='c' id='ep39'>
+<b>#39</b> — <b>king_safety -54cp</b> over moves 5–10
+<span class='verdict' data-id='ep39'></span><br>
+moves: <code>c6 e3 Nf6 Bd3 O-O h3 Nbd7 Nf3 Nh5 Bh2 g6</code><br>
+<a href='https://lichess.org/MavnsrDw#9' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 10) ·
+<a href='https://lichess.org/MavnsrDw#20' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep39','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep39','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep39','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep39' oninput="setNote('ep39',this.value)">
+</div></div><div class='c' id='ep40'>
+<b>#40</b> — <b>material -274cp</b> over moves 12–22
+<span class='verdict' data-id='ep40'></span><br>
+moves: <code>Qd8 g4 Ne4 Rc1 f6 Bxe4 fxe5 Bxh7+ Kxh7 Bxe5 Nd7 Bg3 Nf6 f4 Bxg4 Qd3+ Kg8 Nd2 Bd6 e4</code><br>
+<a href='https://lichess.org/f2lDhnsu#23' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 22) ·
+<a href='https://lichess.org/f2lDhnsu#43' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep40','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep40','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep40','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep40' oninput="setNote('ep40',this.value)">
+</div></div><div class='c' id='ep41'>
+<b>#41</b> — <b>king_safety -113cp</b> over moves 43–54
+<span class='verdict' data-id='ep41'></span><br>
+moves: <code>Bh3 Rh8 Kg2 Rf6 Qe5 Rh5 Qe7 Rf2+ Kg1 Rxh3 Qe5+ Rf6 Kg2 Rg3+ Kh2 Rg5 Qe7 Rh5+ Kg2 Rg5+ Kh2 Rf4 Kh3</code><br>
+<a href='https://lichess.org/YaEZCY82#84' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 54) ·
+<a href='https://lichess.org/YaEZCY82#107' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep41','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep41','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep41','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep41' oninput="setNote('ep41',this.value)">
+</div></div><div class='c' id='ep42'>
+<b>#42</b> — <b>pawns +118cp</b> over moves 13–28
+<span class='verdict' data-id='ep42'></span><br>
+moves: <code>g4 Bxd3 Nxd3 Ne6 f4 Qa5 Ne5 f6 Nxg6 hxg6 Qxg6+ Kd7 Qf5 Bb4 Rd3 Bxc3 Rxc3 Qxa2 Kc2 Qa4+ Kb1 Rhf8 h4 Rae8 h5 Qb4 h6 Qe7 e4 Qd6 h7</code><br>
+<a href='https://lichess.org/zNrnACzs#24' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 28) ·
+<a href='https://lichess.org/zNrnACzs#55' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep42','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep42','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep42','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep42' oninput="setNote('ep42',this.value)">
+</div></div><div class='c' id='ep43'>
+<b>#43</b> — <b>activity -77cp</b> over moves 34–41
+<span class='verdict' data-id='ep43'></span><br>
+moves: <code>Re7 f4 Rce8 f5 gxf5 gxf5 Nh6 Qf3 Kg8 Qh5 Nf7 Kh2 Kh8 Bh4</code><br>
+<a href='https://lichess.org/ZTUz5h0m#67' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 41) ·
+<a href='https://lichess.org/ZTUz5h0m#81' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep43','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep43','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep43','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep43' oninput="setNote('ep43',this.value)">
+</div></div><div class='c' id='ep44'>
+<b>#44</b> — <b>activity -55cp</b> over moves 19–27
+<span class='verdict' data-id='ep44'></span><br>
+moves: <code>Nd2 Nxd2 Bxd2 Nc4 Be1 Rfe8 e3 h5 Nb1 Bxb1 Rxb1 h4 Bf1 b5 Qa2 Bf8 b3</code><br>
+<a href='https://lichess.org/Bh2jGvXC#36' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 27) ·
+<a href='https://lichess.org/Bh2jGvXC#53' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep44','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep44','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep44','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep44' oninput="setNote('ep44',this.value)">
+</div></div><div class='c' id='ep45'>
+<b>#45</b> — <b>activity -114cp</b> over moves 19–31
+<span class='verdict' data-id='ep45'></span><br>
+moves: <code>Bg3 Qg5 Bf4 Qh4 Rh1 hxg4 hxg4 Qxg4+ Kf1 Nh5 Be2 Ng3+ Bxg3 Qxg3 Rfh2 Qxe3 Qd3 Qxd3 Bxd3 Be6 Na4 b5 Nc5 Rac8 Kf2</code><br>
+<a href='https://lichess.org/PP34fcUa#36' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 31) ·
+<a href='https://lichess.org/PP34fcUa#61' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep45','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep45','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep45','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep45' oninput="setNote('ep45',this.value)">
+</div></div><div class='c' id='ep46'>
+<b>#46</b> — <b>activity +77cp</b> over moves 6–13
+<span class='verdict' data-id='ep46'></span><br>
+moves: <code>c6 Bd3 Nbd7 Qc2 Nh5 Bxe7 Qxe7 Nge2 g6 O-O Ndf6 Rab1 Ng7 b4</code><br>
+<a href='https://lichess.org/nFwoHNyy#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 13) ·
+<a href='https://lichess.org/nFwoHNyy#25' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep46','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep46','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep46','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep46' oninput="setNote('ep46',this.value)">
+</div></div><div class='c' id='ep47'>
+<b>#47</b> — <b>king_safety -49cp</b> over moves 6–10
+<span class='verdict' data-id='ep47'></span><br>
+moves: <code>c6 Qc2 O-O Bd3 Nbd7 h3 Re8 Nge2 Nf8</code><br>
+<a href='https://lichess.org/TF2X7JdP#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 10) ·
+<a href='https://lichess.org/TF2X7JdP#20' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep47','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep47','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep47','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep47' oninput="setNote('ep47',this.value)">
+</div></div><div class='c' id='ep48'>
+<b>#48</b> — <b>activity +47cp</b> over moves 8–15
+<span class='verdict' data-id='ep48'></span><br>
+moves: <code>h5 g5 Nd7 Nf3 Bb4 Bd3 Ne7 Ne5 Nxe5 Bxe5 O-O Qc2 Qd7 O-O-O</code><br>
+<a href='https://lichess.org/3mCM9ojK#15' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 15) ·
+<a href='https://lichess.org/3mCM9ojK#29' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep48','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep48','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep48','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep48' oninput="setNote('ep48',this.value)">
+</div></div><div class='c' id='ep49'>
+<b>#49</b> — <b>activity -58cp</b> over moves 13–21
+<span class='verdict' data-id='ep49'></span><br>
+moves: <code>Bd3 Rg8 Kd2 Bd6 Nce2 Nb4 Bxg6 fxg6 a3 Na6 Rag1 Kf7 g4 hxg4 Rxg4 Rg7 Rhg1 Rag8</code><br>
+<a href='https://lichess.org/gE9DQ2J1#24' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 21) ·
+<a href='https://lichess.org/gE9DQ2J1#42' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep49','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep49','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep49','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep49' oninput="setNote('ep49',this.value)">
+</div></div><div class='c' id='ep50'>
+<b>#50</b> — <b>king_safety -51cp</b> over moves 5–10
+<span class='verdict' data-id='ep50'></span><br>
+moves: <code>c6 Qc2 Be7 e3 O-O Bd3 Nbd7 Nge2 h6 Bh4 Re8</code><br>
+<a href='https://lichess.org/s49MUG5Y#9' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 10) ·
+<a href='https://lichess.org/s49MUG5Y#20' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep50','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep50','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep50','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep50' oninput="setNote('ep50',this.value)">
+</div></div><div class='c' id='ep51'>
+<b>#51</b> — <b>king_safety -45cp</b> over moves 6–11
+<span class='verdict' data-id='ep51'></span><br>
+moves: <code>e3 Bd6 Bd3 h6 Bh4 O-O Nf3 Nbd7 Bg3 Qe7 Nh4 Nb6</code><br>
+<a href='https://lichess.org/cnKoouB8#10' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 11) ·
+<a href='https://lichess.org/cnKoouB8#22' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep51','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep51','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep51','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep51' oninput="setNote('ep51',this.value)">
+</div></div><div class='c' id='ep52'>
+<b>#52</b> — <b>king_safety -62cp</b> over moves 7–12
+<span class='verdict' data-id='ep52'></span><br>
+moves: <code>Qc2 Bd6 Bd3 Ne4 Nge2 O-O f3 Ng5 O-O-O Qe7 Rhe1 g6</code><br>
+<a href='https://lichess.org/nCgJPrHy#12' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 12) ·
+<a href='https://lichess.org/nCgJPrHy#24' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep52','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep52','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep52','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep52' oninput="setNote('ep52',this.value)">
+</div></div><div class='c' id='ep53'>
+<b>#53</b> — <b>king_safety -57cp</b> over moves 6–11
+<span class='verdict' data-id='ep53'></span><br>
+moves: <code>c6 e3 Be7 Bd3 O-O Qc2 Re8 h3 Nf8 g4 Be6</code><br>
+<a href='https://lichess.org/cCx0QN1j#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 11) ·
+<a href='https://lichess.org/cCx0QN1j#22' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep53','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep53','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep53','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep53' oninput="setNote('ep53',this.value)">
+</div></div><div class='c' id='ep54'>
+<b>#54</b> — <b>material +190cp</b> over moves 12–21
+<span class='verdict' data-id='ep54'></span><br>
+moves: <code>h3 Be6 f4 Rae8 f5 Bxf5 Bxf5 Rxe3+ Kf2 Rfe8 Rhe1 Bf4 Nf3 g5 Bg3 Bxg3+ Kxg3 Qc7+ Kf2 Qf4</code><br>
+<a href='https://lichess.org/dREi2ond#22' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 21) ·
+<a href='https://lichess.org/dREi2ond#42' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep54','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep54','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep54','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep54' oninput="setNote('ep54',this.value)">
+</div></div><div class='c' id='ep55'>
+<b>#55</b> — <b>material -170cp</b> over moves 19–27
+<span class='verdict' data-id='ep55'></span><br>
+moves: <code>h5 Qf3 Qxa2 Rc2 Rab8 b4 Qa4 Qc3 Rxb4 Ra1 Qb5 e3 Rb3 Qd2 Rb8 Ba3 a6</code><br>
+<a href='https://lichess.org/sAiC38kL#37' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 27) ·
+<a href='https://lichess.org/sAiC38kL#54' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep55','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep55','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep55','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep55' oninput="setNote('ep55',this.value)">
+</div></div><div class='c' id='ep56'>
+<b>#56</b> — <b>material +194cp</b> over moves 51–58
+<span class='verdict' data-id='ep56'></span><br>
+moves: <code>Rbf8 Ng6 Rf7 Ne5 Ke6 Nxf7 Kxf7 Rh4 Rg7 Rh2 Ke6 Rd2 Ne4 Rc2 Nd6</code><br>
+<a href='https://lichess.org/1krden06#101' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 58) ·
+<a href='https://lichess.org/1krden06#116' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep56','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep56','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep56','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep56' oninput="setNote('ep56',this.value)">
+</div></div><div class='c' id='ep57'>
+<b>#57</b> — <b>material -89cp</b> over moves 31–37
+<span class='verdict' data-id='ep57'></span><br>
+moves: <code>Bd8 Re8 Bc7 h5 e4 Rxe4 Rd3 Ne7 Be5 Ng8 Rc1 Nf6 Kh2 h4</code><br>
+<a href='https://lichess.org/hyUoPz5T#60' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 37) ·
+<a href='https://lichess.org/hyUoPz5T#74' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep57','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep57','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep57','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep57' oninput="setNote('ep57',this.value)">
+</div></div><div class='c' id='ep58'>
+<b>#58</b> — <b>king_safety +47cp</b> over moves 8–13
+<span class='verdict' data-id='ep58'></span><br>
+moves: <code>Bg4 Qc2 h6 Ne5 Be6 O-O Nbd7 a3 Ba5 b4 Bc7</code><br>
+<a href='https://lichess.org/Bi5YDWmS#15' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 13) ·
+<a href='https://lichess.org/Bi5YDWmS#26' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep58','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep58','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep58','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep58' oninput="setNote('ep58',this.value)">
+</div></div><div class='c' id='ep59'>
+<b>#59</b> — <b>king_safety +92cp</b> over moves 36–57
+<span class='verdict' data-id='ep59'></span><br>
+moves: <code>Nef8 Nd3 Kg8 Ndc5 Nxc5 Nxc5 Re8 e6 Qc7+ Qf4 Qxf4+ Kxf4 Bxe6 fxe6 Nxe6+ Nxe6 Rxe6 Rbg1 Rf6+ Ke3 Rh3+ R1g3 Rxg3+ Rxg3 Kf7 Rf3 Ke6 Rxf6+ Kxf6 Kf4 g5+ Kg4 Ke7 Kxg5 Ke6 Kg6 Kd7 Bf5+ Kc7 Kf6 Kd6 Be6 Kc7</code><br>
+<a href='https://lichess.org/olvDG5on#71' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 57) ·
+<a href='https://lichess.org/olvDG5on#114' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep59','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep59','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep59','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep59' oninput="setNote('ep59',this.value)">
+</div></div><div class='c' id='ep60'>
+<b>#60</b> — <b>pawns -157cp</b> over moves 13–33
+<span class='verdict' data-id='ep60'></span><br>
+moves: <code>Rb8 b3 a5 Qc3 f4 exf4 Qe4 g3 Bg4 Ne5 Bxe5 Rhe1 Bxf4+ gxf4 Qxf4+ Rd2 Qxh2 Nc5 Rxf2 Rxf2 Qxf2 Qxa5 Bf5 Qd2 Qxd2+ Kxd2 h5 Rf1 g6 Ke3 h4 Kf4 Re8 Kg5 h3 Rh1 Kf7 b4 Re2 a4 Rb2</code><br>
+<a href='https://lichess.org/Csbz34xC#25' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 33) ·
+<a href='https://lichess.org/Csbz34xC#66' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep60','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep60','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep60','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep60' oninput="setNote('ep60',this.value)">
+</div></div><div class='c' id='ep61'>
+<b>#61</b> — <b>king_safety -45cp</b> over moves 6–10
+<span class='verdict' data-id='ep61'></span><br>
+moves: <code>c6 Bd3 O-O Qc2 h6 Bh4 Nbd7 Nge2 Nb6</code><br>
+<a href='https://lichess.org/ACboSeVV#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 10) ·
+<a href='https://lichess.org/ACboSeVV#20' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep61','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep61','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep61','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep61' oninput="setNote('ep61',this.value)">
+</div></div><div class='c' id='ep62'>
+<b>#62</b> — <b>king_safety -48cp</b> over moves 6–14
+<span class='verdict' data-id='ep62'></span><br>
+moves: <code>Bf5 e3 Bd6 Bd3 Bxd3 Qxd3 Bxf4 exf4 O-O O-O-O Nbd7 Ne5 Nb6 g4 Re8 f3</code><br>
+<a href='https://lichess.org/O3XEF1gq#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 14) ·
+<a href='https://lichess.org/O3XEF1gq#27' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep62','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep62','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep62','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep62' oninput="setNote('ep62',this.value)">
+</div></div><div class='c' id='ep63'>
+<b>#63</b> — <b>king_safety -55cp</b> over moves 8–14
+<span class='verdict' data-id='ep63'></span><br>
+moves: <code>Nc3 Bd6 Nh4 Be6 Qc2 O-O Nf5 Bc7 b4 a6 Ne3 Re8 a4</code><br>
+<a href='https://lichess.org/PoabxJZb#14' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 14) ·
+<a href='https://lichess.org/PoabxJZb#27' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep63','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep63','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep63','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep63' oninput="setNote('ep63',this.value)">
+</div></div><div class='c' id='ep64'>
+<b>#64</b> — <b>pawns -49cp</b> over moves 17–24
+<span class='verdict' data-id='ep64'></span><br>
+moves: <code>Rde1 O-O-O Nf3 Bg7 Ne5 Bxe5 fxe5 h5 Rhf1 Rh6 Rf2 Rf8 Ref1 Be6 Ne2</code><br>
+<a href='https://lichess.org/Fd01pUic#32' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 24) ·
+<a href='https://lichess.org/Fd01pUic#47' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep64','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep64','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep64','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep64' oninput="setNote('ep64',this.value)">
+</div></div><div class='c' id='ep65'>
+<b>#65</b> — <b>pawns -152cp</b> over moves 34–50
+<span class='verdict' data-id='ep65'></span><br>
+moves: <code>Rh6 Rg4 Rxh7 Rg2 Kc3 Rg3+ Kb4 b6 Rh1 a5+ Ka4 f5 b4 axb4 Kxb4 Rg4 Kc3 Kd6 Rh6+ Kc7 Rf6 f4 a4 Rg3+ Kb4 f3 Rf7+ Kd6 Rf6+ Kd7 a5 bxa5+ Kc5 f2</code><br>
+<a href='https://lichess.org/NDkvTlSj#66' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 50) ·
+<a href='https://lichess.org/NDkvTlSj#100' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep65','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep65','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep65','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep65' oninput="setNote('ep65',this.value)">
+</div></div><div class='c' id='ep66'>
+<b>#66</b> — <b>material +86cp</b> over moves 16–24
+<span class='verdict' data-id='ep66'></span><br>
+moves: <code>Rb6 O-O Ra8 Nd2 a5 Bxd6 cxd6 bxa5 Rba6 Nb3 h5 h4 Be4 Nd2 Bg6 f3</code><br>
+<a href='https://lichess.org/V3LRDw0f#31' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 24) ·
+<a href='https://lichess.org/V3LRDw0f#47' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep66','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep66','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep66','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep66' oninput="setNote('ep66',this.value)">
+</div></div><div class='c' id='ep67'>
+<b>#67</b> — <b>pawns +57cp</b> over moves 40–47
+<span class='verdict' data-id='ep67'></span><br>
+moves: <code>Ra5 Re2 Ra8 e4 Bd6 Bxd6 Rxd6 e5 Re6 Rf3 Rf8 Rf5 b5 Ref2 Rf7</code><br>
+<a href='https://lichess.org/jk0zxnUl#79' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 47) ·
+<a href='https://lichess.org/jk0zxnUl#94' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep67','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep67','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep67','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep67' oninput="setNote('ep67',this.value)">
+</div></div><div class='c' id='ep68'>
+<b>#68</b> — <b>material +91cp</b> over moves 35–52
+<span class='verdict' data-id='ep68'></span><br>
+moves: <code>Bb7 Ne5+ Kf6 Rb3 g5 Nd7+ Ke7 Nc5 gxf4 Kf3 Ba8 Kxf4 Rb8 Kxf5 Rh8 Re3+ Kd6 Re6+ Kc7 Re7+ Kb8 Kg4 Rg8+ Kf4 Rh8 Re3 Rh4+ Ke5 Rh5+ Kd6 Rh6+ Ne6 Ka7 Kd7 Ka6</code><br>
+<a href='https://lichess.org/ag26RqKo#69' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 52) ·
+<a href='https://lichess.org/ag26RqKo#104' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep68','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep68','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep68','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep68' oninput="setNote('ep68',this.value)">
+</div></div><div class='c' id='ep69'>
+<b>#69</b> — <b>pawns +63cp</b> over moves 6–14
+<span class='verdict' data-id='ep69'></span><br>
+moves: <code>Bg4 Ne5 Bh5 Bg5 Nbd7 Nxd7 Qxd7 Bxf6 gxf6 e3 Bb4 Bd3 Bg6 a3 Ba5 h4 Qg4</code><br>
+<a href='https://lichess.org/NDkvTlSj#11' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 14) ·
+<a href='https://lichess.org/NDkvTlSj#28' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep69','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep69','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep69','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep69' oninput="setNote('ep69',this.value)">
+</div></div><div class='c' id='ep70'>
+<b>#70</b> — <b>material +85cp</b> over moves 14–22
+<span class='verdict' data-id='ep70'></span><br>
+moves: <code>b5 h3 Nd7 Qc2 a4 Bxh7+ Kf8 Bf5 Nb6 Bxc8 Rxc8 Ne2 Nc4 Nf4 g6 Nd2 Kg7</code><br>
+<a href='https://lichess.org/PQpXUlvG#27' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 22) ·
+<a href='https://lichess.org/PQpXUlvG#44' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep70','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep70','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep70','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep70' oninput="setNote('ep70',this.value)">
+</div></div><div class='c' id='ep71'>
+<b>#71</b> — <b>pawns +123cp</b> over moves 18–30
+<span class='verdict' data-id='ep71'></span><br>
+moves: <code>Nf5 Ne2 Qd7 Ng3 Rfe8 Nxf5 Qxf5 Qxf5 gxf5 Kd2 Kf7 Re3 Bf8 Kc3 b5 Rhe1 Rxe3+ fxe3 Re8 Rc1 Re6 Kd3 Bb4 Rg1 Bf8</code><br>
+<a href='https://lichess.org/lBfCXdvG#35' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 30) ·
+<a href='https://lichess.org/lBfCXdvG#60' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep71','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep71','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep71','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep71' oninput="setNote('ep71',this.value)">
+</div></div><div class='c' id='ep72'>
+<b>#72</b> — <b>pawns -73cp</b> over moves 18–33
+<span class='verdict' data-id='ep72'></span><br>
+moves: <code>b6 Nc3 Ba6 Qd1 Bxf1 Kxf1 Bxh4 gxh4 Qxh4 Nxe4 fxe4 Be3 Nf4 Bxf4 Rxf4 f3 exf3 Nxf3 Raf8 Rc1 g5 Kg1 Qg3 Rc3 g4 Nh2 Qf2+ Kh1 g3 Ng4</code><br>
+<a href='https://lichess.org/YY94yEB8#35' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 33) ·
+<a href='https://lichess.org/YY94yEB8#65' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep72','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep72','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep72','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep72' oninput="setNote('ep72',this.value)">
+</div></div><div class='c' id='ep73'>
+<b>#73</b> — <b>material -857cp</b> over moves 36–65
+<span class='verdict' data-id='ep73'></span><br>
+moves: <code>Re1 Kg6 Ng3 Reh7 Nh5 Rh2+ Kg1 Rxb2 Rb1 Rxb1 Rxb1 f5 Kg2 fxg4 fxg4 Bxg4 Ng3 Bc8 Nd3 Bh3+ Kf2 Rf7+ Nf4+ gxf4 Ne2 fxe3+ Kxe3 Bc8 Rg1+ Kf6 Rf1+ Ke7 Rh1 Kd8 Rh8+ Rf8 Rh6 Re8+ Kd3 Kc7 Rh7+ Re7 Rh6 Bf5+ Kc3 Rxe2 Rh7+ Re7 Rh6 Re3+ Kd2 Rxb3 Ke2 Bd7 Rh7 Rb4 Kd3 Rc4 Rh5 a5</code><br>
+<a href='https://lichess.org/Vy5bB23G#70' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 65) ·
+<a href='https://lichess.org/Vy5bB23G#130' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep73','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep73','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep73','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep73' oninput="setNote('ep73',this.value)">
+</div></div><div class='c' id='ep74'>
+<b>#74</b> — <b>material -176cp</b> over moves 15–28
+<span class='verdict' data-id='ep74'></span><br>
+moves: <code>Nf8 h4 Ne6 Qd2 f6 gxf6 Qxf6 Rhg1 Qxf4 Qxf4 Nxf4 Rg4 Nh5 Rdg1 Re7 f4 Rf8 b3 Nxf4 Kd2 Nd7 Nf3 Nh3 R1g3 Nf2 Rg5 Nf6</code><br>
+<a href='https://lichess.org/O3XEF1gq#29' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 28) ·
+<a href='https://lichess.org/O3XEF1gq#56' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep74','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep74','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep74','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep74' oninput="setNote('ep74',this.value)">
+</div></div><div class='c' id='ep75'>
+<b>#75</b> — <b>material -83cp</b> over moves 19–28
+<span class='verdict' data-id='ep75'></span><br>
+moves: <code>b4 Na4 Ba6 Bxa6 Rxa6 Qc2 Ne4 Bh2 bxa3 bxa3 Bxa3 f5 N6g5 h4 Nf7 g4 Nfd6 Nf4 Bb4</code><br>
+<a href='https://lichess.org/Ixm2KGZK#37' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 28) ·
+<a href='https://lichess.org/Ixm2KGZK#56' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep75','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep75','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep75','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep75' oninput="setNote('ep75',this.value)">
+</div></div><div class='c' id='ep76'>
+<b>#76</b> — <b>material -84cp</b> over moves 11–22
+<span class='verdict' data-id='ep76'></span><br>
+moves: <code>h6 Bh4 g6 g4 g5 fxg5 Nxg4 Nxg4 Bxg4 Bf5 hxg5 Bxg4 Rxh4 h3 Bg3+ Ke2 Qe7 Raf1 Ne6 Kd1 O-O-O Rf3 Bc7</code><br>
+<a href='https://lichess.org/9kxP1UnM#21' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 22) ·
+<a href='https://lichess.org/9kxP1UnM#44' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep76','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep76','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep76','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep76' oninput="setNote('ep76',this.value)">
+</div></div><div class='c' id='ep77'>
+<b>#77</b> — <b>king_safety +49cp</b> over moves 8–15
+<span class='verdict' data-id='ep77'></span><br>
+moves: <code>Bd3 h6 Bh4 Ne8 Bxe7 Qxe7 Nge2 Nd6 O-O Nd7 Rae1 f5 Ng3 g6 f3</code><br>
+<a href='https://lichess.org/hOzn9I4h#14' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 15) ·
+<a href='https://lichess.org/hOzn9I4h#29' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep77','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep77','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep77','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep77' oninput="setNote('ep77',this.value)">
+</div></div><div class='c' id='ep78'>
+<b>#78</b> — <b>material -208cp</b> over moves 13–26
+<span class='verdict' data-id='ep78'></span><br>
+moves: <code>g4 Bxd3 Nxd3 Ne6 f4 Qa5 Ne5 f6 Nxg6 hxg6 Qxg6+ Kd7 Qf5 Bb4 Rd3 Bxc3 Rxc3 Qxa2 Kc2 Qa4+ Kb1 Rhf8 h4 Rae8 h5 Qb4 h6 Qe7</code><br>
+<a href='https://lichess.org/zNrnACzs#24' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 26) ·
+<a href='https://lichess.org/zNrnACzs#52' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep78','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep78','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep78','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep78' oninput="setNote('ep78',this.value)">
+</div></div><div class='c' id='ep79'>
+<b>#79</b> — <b>king_safety +49cp</b> over moves 12–20
+<span class='verdict' data-id='ep79'></span><br>
+moves: <code>Nbd7 O-O Nxe5 Bxe5 Qd7 Na4 b6 Bd3 Bxd3 Qxd3 Ne4 Bxg7 Kxg7 Rc2 Rac8 Rfc1 f5</code><br>
+<a href='https://lichess.org/i9b1mJzg#23' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 20) ·
+<a href='https://lichess.org/i9b1mJzg#40' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep79','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep79','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep79','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep79' oninput="setNote('ep79',this.value)">
+</div></div><div class='c' id='ep80'>
+<b>#80</b> — <b>material +203cp</b> over moves 25–30
+<span class='verdict' data-id='ep80'></span><br>
+moves: <code>c6 Nxb8 Rxb8 a4 Kf7 f3 Ke6 e4 Kd6 Re2 Ng6</code><br>
+<a href='https://lichess.org/WEyS7OIF#49' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 30) ·
+<a href='https://lichess.org/WEyS7OIF#60' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep80','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep80','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep80','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep80' oninput="setNote('ep80',this.value)">
+</div></div><div class='c' id='ep81'>
+<b>#81</b> — <b>material -89cp</b> over moves 22–29
+<span class='verdict' data-id='ep81'></span><br>
+moves: <code>f3 Ng3 Rh3 Nf5 Ne5 Nxe3 Rd3 Nf5 Nd7 Rfc8 Nf6+ Kg7 Kd2 Rc7 Kc3 Re7</code><br>
+<a href='https://lichess.org/3mCM9ojK#42' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 29) ·
+<a href='https://lichess.org/3mCM9ojK#58' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep81','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep81','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep81','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep81' oninput="setNote('ep81',this.value)">
+</div></div><div class='c' id='ep82'>
+<b>#82</b> — <b>material -90cp</b> over moves 28–39
+<span class='verdict' data-id='ep82'></span><br>
+moves: <code>f5 exf6 Qxf6 Bg2 g6 Re5 Rf8 Kh2 Qxf4 Qxf4 Rxf4 Re7 Rf7 Rce1 Kf8 Rxf7+ Kxf7 Nb2 b5 Nd3 Kf8 Ne5</code><br>
+<a href='https://lichess.org/RfjIyT0W#55' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 39) ·
+<a href='https://lichess.org/RfjIyT0W#77' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep82','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep82','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep82','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep82' oninput="setNote('ep82',this.value)">
+</div></div><div class='c' id='ep83'>
+<b>#83</b> — <b>material +152cp</b> over moves 31–43
+<span class='verdict' data-id='ep83'></span><br>
+moves: <code>Be4 Qh3 f3 g3 Qg6 Rxb7 Bf5 Qf1 Bc8 Rbxh7 Qxh7 Rxh7 Kxh7 Qxf3 Rf5 Qd3 Rg8 e6 Bxe6 Be5 Kh6 Qd2+ Kh5 h3</code><br>
+<a href='https://lichess.org/qSWcX4og#61' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 43) ·
+<a href='https://lichess.org/qSWcX4og#85' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep83','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep83','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep83','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep83' oninput="setNote('ep83',this.value)">
+</div></div><div class='c' id='ep84'>
+<b>#84</b> — <b>material -52cp</b> over moves 20–31
+<span class='verdict' data-id='ep84'></span><br>
+moves: <code>Qd2 Kh8 Nf4 Nxf4 exf4 Qe7 Bh4 Qe3 Qxe3 Rxe3 Kd2 Re6 Be2 Bxe2 Nxe2 Rae8 Nc1 Nd7 Nd3 Re2+ Kd1 Kg8 Re1</code><br>
+<a href='https://lichess.org/nPwTEvEy#38' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 31) ·
+<a href='https://lichess.org/nPwTEvEy#61' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep84','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep84','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep84','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep84' oninput="setNote('ep84',this.value)">
+</div></div><div class='c' id='ep85'>
+<b>#85</b> — <b>material +133cp</b> over moves 9–17
+<span class='verdict' data-id='ep85'></span><br>
+moves: <code>Be7 Bb7 Rc8 Bxc8 Qxc8 Rc1 Qb7 O-O O-O Ne5 Nxe5 Bxe5 Nd7 Bg3 Re8 h3</code><br>
+<a href='https://lichess.org/M6qnCeSB#17' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 17) ·
+<a href='https://lichess.org/M6qnCeSB#33' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep85','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep85','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep85','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep85' oninput="setNote('ep85',this.value)">
+</div></div><div class='c' id='ep86'>
+<b>#86</b> — <b>material +197cp</b> over moves 9–17
+<span class='verdict' data-id='ep86'></span><br>
+moves: <code>O-O Qc7 Rc1 Bxh2+ Kh1 Qb8 g3 Bxg3 Nxg3 h5 Bf4 Qd8 Kg2 h4 Nf5 h3+ Kh1 g6</code><br>
+<a href='https://lichess.org/GExqNXza#16' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 17) ·
+<a href='https://lichess.org/GExqNXza#34' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep86','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep86','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep86','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep86' oninput="setNote('ep86',this.value)">
+</div></div><div class='c' id='ep87'>
+<b>#87</b> — <b>material -145cp</b> over moves 16–28
+<span class='verdict' data-id='ep87'></span><br>
+moves: <code>Rh6 Nd2 Qd7 Bg4 f5 Nxe4 fxg4 Nxd6 Rxd6 h3 gxh3 Kh2 Rf8 Rc1 Rdf6 Qc2 Nxb3 Rce1 Na5 Bc3 Nc4 Bb4 R8f7 e4</code><br>
+<a href='https://lichess.org/zoT5H4rX#31' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 28) ·
+<a href='https://lichess.org/zoT5H4rX#55' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep87','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep87','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep87','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep87' oninput="setNote('ep87',this.value)">
+</div></div><div class='c' id='ep88'>
+<b>#88</b> — <b>pawns +180cp</b> over moves 35–52
+<span class='verdict' data-id='ep88'></span><br>
+moves: <code>g6 Nh6+ Kg7 Bc1 Bd7 Nh4 Be8 hxg6 fxg6 Rf6 Qd7 N6f5+ Kg8 Nxg6 Bxg6 Rxg6+ Kf8 Rf6+ Qf7 Qf2 Qxf6 exf6 Kf7 Qe2 Bb8 Ng7 Ng5 Qe7+ Kg6 Nh5 Nf3+ Kg3 Rg8 f7 Ng5</code><br>
+<a href='https://lichess.org/FtqDfQMZ#69' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 52) ·
+<a href='https://lichess.org/FtqDfQMZ#104' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep88','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep88','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep88','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep88' oninput="setNote('ep88',this.value)">
+</div></div><div class='c' id='ep89'>
+<b>#89</b> — <b>pawns +95cp</b> over moves 74–81
+<span class='verdict' data-id='ep89'></span><br>
+moves: <code>Kf2 Bb5 Kg3 Kc4 Kf2 g3+ Kxg3 Kd3 Kf2 Ke4 Kg3 Ke3 Bb6 Kd3 Bc5</code><br>
+<a href='https://lichess.org/8hEjGbvH#146' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 81) ·
+<a href='https://lichess.org/8hEjGbvH#161' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep89','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep89','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep89','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep89' oninput="setNote('ep89',this.value)">
+</div></div><div class='c' id='ep90'>
+<b>#90</b> — <b>king_safety +55cp</b> over moves 21–30
+<span class='verdict' data-id='ep90'></span><br>
+moves: <code>Ne6 Rc1 Rc8 Ne2 Qd8 Bxe6 fxe6 Nf4 Qd6 Nxe6 Rfe8 Qf5 Rb8 Re2 Re7 Rce1 Rbe8 Re5</code><br>
+<a href='https://lichess.org/ROoIPqMs#41' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 30) ·
+<a href='https://lichess.org/ROoIPqMs#59' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep90','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep90','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep90','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep90' oninput="setNote('ep90',this.value)">
+</div></div><div class='c' id='ep91'>
+<b>#91</b> — <b>material +74cp</b> over moves 14–21
+<span class='verdict' data-id='ep91'></span><br>
+moves: <code>a3 Rde8 b4 Nb6 Be2 Rxe3 fxe3 Qxg3+ Kd2 Re8 Qg1 Ng4 Rh3 Qd6 Qe1 Qe7</code><br>
+<a href='https://lichess.org/wb7BrtVH#26' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 21) ·
+<a href='https://lichess.org/wb7BrtVH#42' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep91','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep91','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep91','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep91' oninput="setNote('ep91',this.value)">
+</div></div><div class='c' id='ep92'>
+<b>#92</b> — <b>center +53cp</b> over moves 13–19
+<span class='verdict' data-id='ep92'></span><br>
+moves: <code>Rc8 Rac1 Bc4 Nd2 b5 e4 Bf8 e5 Nh7 f4 Qb6 Ne2 Be7</code><br>
+<a href='https://lichess.org/vhJ495Pj#25' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 19) ·
+<a href='https://lichess.org/vhJ495Pj#38' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep92','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep92','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep92','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep92' oninput="setNote('ep92',this.value)">
+</div></div><div class='c' id='ep93'>
+<b>#93</b> — <b>king_safety +129cp</b> over moves 31–42
+<span class='verdict' data-id='ep93'></span><br>
+moves: <code>f6 Rf3 Qd6 Qxd6 Nxd6 Rxf6 Red8 Rxh6 Ne4 Re6 Kg7 Re7+ Kf6 Rf7+ Ke6 Rh7 Rh8 Bg4+ Kf6 Rd7 Kg6 Rc7</code><br>
+<a href='https://lichess.org/1krden06#61' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 42) ·
+<a href='https://lichess.org/1krden06#83' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep93','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep93','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep93','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep93' oninput="setNote('ep93',this.value)">
+</div></div><div class='c' id='ep94'>
+<b>#94</b> — <b>pawns -73cp</b> over moves 16–26
+<span class='verdict' data-id='ep94'></span><br>
+moves: <code>Rh6 Nd2 Qd7 Bg4 f5 Nxe4 fxg4 Nxd6 Rxd6 h3 gxh3 Kh2 Rf8 Rc1 Rdf6 Qc2 Nxb3 Rce1 Na5 Bc3 Nc4</code><br>
+<a href='https://lichess.org/zoT5H4rX#31' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 26) ·
+<a href='https://lichess.org/zoT5H4rX#52' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep94','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep94','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep94','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep94' oninput="setNote('ep94',this.value)">
+</div></div><div class='c' id='ep95'>
+<b>#95</b> — <b>pawns +63cp</b> over moves 5–13
+<span class='verdict' data-id='ep95'></span><br>
+moves: <code>c6 e3 Bf5 Qf3 Bg6 Bxf6 Qxf6 Qxf6 gxf6 h4 h5 Kd2 Nd7 Nh3 Bd6 Bd3 Rg8</code><br>
+<a href='https://lichess.org/dXU53edx#9' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 13) ·
+<a href='https://lichess.org/dXU53edx#26' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep95','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep95','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep95','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep95' oninput="setNote('ep95',this.value)">
+</div></div><div class='c' id='ep96'>
+<b>#96</b> — <b>king_safety +54cp</b> over moves 33–47
+<span class='verdict' data-id='ep96'></span><br>
+moves: <code>Kg8 Rf1 Bc8 Kh2 g6 Nh6+ Kg7 Bc1 Bd7 Nh4 Be8 hxg6 fxg6 Rf6 Qd7 N6f5+ Kg8 Nxg6 Bxg6 Rxg6+ Kf8 Rf6+ Qf7 Qf2 Qxf6 exf6 Kf7 Qe2</code><br>
+<a href='https://lichess.org/FtqDfQMZ#65' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 47) ·
+<a href='https://lichess.org/FtqDfQMZ#93' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep96','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep96','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep96','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep96' oninput="setNote('ep96',this.value)">
+</div></div><div class='c' id='ep97'>
+<b>#97</b> — <b>king_safety +55cp</b> over moves 15–30
+<span class='verdict' data-id='ep97'></span><br>
+moves: <code>f4 exf4 Qe4 g3 Bg4 Ne5 Bxe5 Rhe1 Bxf4+ gxf4 Qxf4+ Rd2 Qxh2 Nc5 Rxf2 Rxf2 Qxf2 Qxa5 Bf5 Qd2 Qxd2+ Kxd2 h5 Rf1 g6 Ke3 h4 Kf4 Re8 Kg5</code><br>
+<a href='https://lichess.org/Csbz34xC#29' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 30) ·
+<a href='https://lichess.org/Csbz34xC#59' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep97','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep97','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep97','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep97' oninput="setNote('ep97',this.value)">
+</div></div><div class='c' id='ep98'>
+<b>#98</b> — <b>king_safety +70cp</b> over moves 24–33
+<span class='verdict' data-id='ep98'></span><br>
+moves: <code>Nc5 Bc8 Bf4 Rxe1+ Rxe1 Na6 Ne6 Re8 Nxg7 Kxg7 Rxe8 Qxe8 Bd6 Kg6 a3 Bf5 Qf4 Qe6 Bf8</code><br>
+<a href='https://lichess.org/Outrrd3M#46' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 33) ·
+<a href='https://lichess.org/Outrrd3M#65' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep98','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep98','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep98','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep98' oninput="setNote('ep98',this.value)">
+</div></div><div class='c' id='ep99'>
+<b>#99</b> — <b>pawns +64cp</b> over moves 13–21
+<span class='verdict' data-id='ep99'></span><br>
+moves: <code>Nf5 Nd1 Na6 Ne3 Qd7 Nxf5 Qxf5 Qxf5 gxf5 Nc3 Nb4 Rf2 Kd7 Nd1 Rag8 Ne3 Ke6</code><br>
+<a href='https://lichess.org/xOEHrMJT#25' target='_blank'><b>▶ open game AT the span start</b></a>
+(arrow through to move 21) ·
+<a href='https://lichess.org/xOEHrMJT#42' target='_blank'>span end</a>
+<div class='btns'>
+<button onclick="setV('ep99','coherent')">✅ one coherent thing</button>
+<button onclick="setV('ep99','incoherent')">❌ not a thing</button>
+<button onclick="setV('ep99','split')">✂️ two+ things merged</button>
+<input placeholder='what is it? (minority attack, regroup, ...)' data-note='ep99' oninput="setNote('ep99',this.value)">
+</div></div>
+<script>
+const KEY='episode_audit_v1';
+const load=()=>JSON.parse(localStorage.getItem(KEY)||'{}');
+const save=v=>localStorage.setItem(KEY,JSON.stringify(v));
+function setV(id,verdict){const v=load();v[id]=v[id]||{};v[id].verdict=verdict;save(v);render()}
+function setNote(id,t){const v=load();v[id]=v[id]||{};v[id].note=t;save(v)}
+function render(){const v=load();let n=0;
+ document.querySelectorAll('.c').forEach(c=>{const id=c.id;const e=c.querySelector('.verdict');
+  if(v[id]&&v[id].verdict){n++;c.classList.add('done');e.textContent='→ '+v[id].verdict;}
+  else{c.classList.remove('done');e.textContent='';}
+  const inp=c.querySelector('input');if(v[id]&&v[id].note)inp.value=v[id].note;});
+ document.getElementById('count').textContent=n+' / 100 audited';}
+function exportV(){const o=document.getElementById('out');o.style.display='block';
+ o.value=JSON.stringify(load(),null,1);o.select();document.execCommand('copy');}
+render();
+</script></body></html>
