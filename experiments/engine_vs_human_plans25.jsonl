@@ -1,0 +1,120 @@
+{"n": 5, "cp": 24, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 10, "cp": 34, "engine": [], "actual": [], "random": ["B:pair_acquisition"], "maia": ["W:rook_activation"]}
+{"n": 16, "cp": 24, "engine": ["W:rook_activation"], "actual": ["W:rook_activation"], "random": [], "maia": []}
+{"n": 25, "cp": 20, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 26, "cp": 35, "engine": ["W:weakness_harvest"], "actual": ["W:weakness_harvest"], "random": ["B:seal_to_entomb", "W:outpost_occupation"], "maia": ["B:bad_bishop_escape", "W:bad_bishop_escape"]}
+{"n": 29, "cp": -21, "engine": ["B:weakness_harvest"], "actual": ["B:weakness_harvest", "W:open_king", "W:passer_creation"], "random": [], "maia": ["W:pair_acquisition"]}
+{"n": 30, "cp": 6, "engine": ["W:rook_activation"], "actual": ["B:weakness_harvest"], "random": [], "maia": []}
+{"n": 32, "cp": 30, "engine": ["B:minority_attack_general:launched", "B:rook_activation", "W:rook_activation"], "actual": ["W:weakness_harvest"], "random": [], "maia": ["W:open_king", "W:weakness_harvest"]}
+{"n": 36, "cp": 38, "engine": [], "actual": ["B:rook_activation"], "random": ["B:seal_to_entomb", "W:entomb"], "maia": ["B:rook_activation", "W:weakness_harvest"]}
+{"n": 37, "cp": 26, "engine": ["W:passer_creation"], "actual": ["B:rook_activation"], "random": ["B:minority_attack_general:advanced", "W:blockade"], "maia": ["B:king_march"]}
+{"n": 38, "cp": 27, "engine": ["B:pair_acquisition", "B:rook_activation", "B:seventh_invasion", "B:weakness_harvest", "W:weakness_harvest"], "actual": ["B:rook_activation"], "random": [], "maia": ["B:pair_acquisition", "B:weakness_harvest", "W:rook_activation", "W:seventh_invasion"]}
+{"n": 44, "cp": 45, "engine": [], "actual": ["B:open_king", "B:weakness_harvest", "W:passer_creation"], "random": ["W:weakness_harvest"], "maia": []}
+{"n": 50, "cp": 25, "engine": [], "actual": ["B:rook_activation", "W:minority_attack:launched", "W:outpost_occupation", "W:rook_activation"], "random": ["B:pair_acquisition", "W:entomb", "W:minority_attack:launched"], "maia": ["W:outpost_occupation", "W:rook_activation"]}
+{"n": 52, "cp": 28, "engine": [], "actual": ["B:rook_activation", "W:rook_activation"], "random": [], "maia": ["W:rook_activation"]}
+{"n": 54, "cp": 24, "engine": ["W:weakness_harvest"], "actual": ["B:rook_activation"], "random": ["W:passer_creation"], "maia": ["B:passer_creation", "B:weakness_harvest", "W:rook_activation"]}
+{"n": 57, "cp": -32, "engine": ["B:entomb", "W:seal_to_entomb"], "actual": ["B:entomb", "W:outpost_occupation", "W:passer_creation", "W:seal_to_entomb"], "random": ["W:bad_bishop_escape"], "maia": ["B:rook_activation", "W:rook_activation", "W:seal_to_entomb"]}
+{"n": 59, "cp": -34, "engine": ["W:pawn_storm"], "actual": ["W:pawn_storm"], "random": ["W:blockade", "W:outpost_occupation", "W:passer_creation"], "maia": ["W:pawn_storm"]}
+{"n": 61, "cp": 8, "engine": [], "actual": ["B:entomb", "W:outpost_occupation", "W:seal_to_entomb"], "random": [], "maia": ["B:outpost_occupation", "B:weakness_harvest", "W:pair_acquisition", "W:seventh_invasion"]}
+{"n": 62, "cp": 3, "engine": ["B:rook_activation", "B:weakness_harvest", "W:rook_activation"], "actual": ["B:rook_activation"], "random": [], "maia": ["W:rook_activation"]}
+{"n": 63, "cp": -11, "engine": ["B:seventh_invasion", "B:weakness_harvest"], "actual": ["B:blockade"], "random": [], "maia": ["B:passer_creation", "B:rook_activation", "B:weakness_harvest", "W:pair_acquisition", "W:rook_activation", "W:seventh_invasion"]}
+{"n": 64, "cp": 8, "engine": ["W:weakness_harvest"], "actual": [], "random": [], "maia": []}
+{"n": 73, "cp": -30, "engine": ["B:entomb"], "actual": ["B:weakness_harvest", "W:weakness_harvest"], "random": [], "maia": []}
+{"n": 79, "cp": -4, "engine": ["B:outpost_occupation"], "actual": ["W:rook_activation"], "random": ["B:pair_acquisition", "B:weakness_harvest"], "maia": ["B:rook_activation", "W:rook_activation"]}
+{"n": 81, "cp": 28, "engine": ["B:outpost_occupation"], "actual": ["B:rook_activation"], "random": ["W:minority_attack_general:launched"], "maia": ["B:outpost_occupation"]}
+{"n": 82, "cp": 12, "engine": [], "actual": ["B:entomb", "B:outpost_occupation", "B:rook_activation", "W:seal_to_entomb"], "random": ["B:entomb", "W:seal_to_entomb"], "maia": []}
+{"n": 89, "cp": 0, "engine": ["B:rook_activation"], "actual": ["B:passer_creation", "B:passer_push", "B:weakness_harvest", "W:rook_activation"], "random": [], "maia": ["B:blockade", "W:pawn_storm"]}
+{"n": 96, "cp": 24, "engine": ["B:weakness_harvest", "W:rook_activation"], "actual": ["B:passer_creation", "W:weakness_harvest"], "random": ["W:rook_activation", "W:weakness_harvest"], "maia": ["B:passer_creation", "B:weakness_harvest", "W:blockade"]}
+{"n": 97, "cp": 19, "engine": [], "actual": ["W:rook_activation"], "random": ["B:rook_activation", "W:pair_acquisition"], "maia": ["W:rook_activation"]}
+{"n": 101, "cp": 19, "engine": ["B:rook_activation"], "actual": ["B:rook_activation", "W:seventh_invasion"], "random": [], "maia": ["W:rook_activation"]}
+{"n": 104, "cp": 33, "engine": ["B:bad_bishop_escape", "W:weakness_harvest"], "actual": ["B:pair_acquisition", "W:bad_bishop_escape"], "random": ["W:bad_bishop_escape"], "maia": ["B:pair_acquisition", "W:bad_bishop_escape", "W:rook_activation", "W:seventh_invasion"]}
+{"n": 106, "cp": 47, "engine": ["B:minority_attack:launched"], "actual": ["B:rook_activation"], "random": [], "maia": ["B:rook_activation"]}
+{"n": 108, "cp": 13, "engine": [], "actual": ["B:open_king"], "random": ["W:entomb"], "maia": ["B:blockade", "B:rook_activation"]}
+{"n": 114, "cp": 0, "engine": ["B:rook_activation", "W:rook_activation"], "actual": [], "random": [], "maia": ["W:king_march"]}
+{"n": 115, "cp": 32, "engine": [], "actual": ["B:rook_activation", "W:outpost_occupation", "W:passer_creation", "W:seal_to_entomb"], "random": ["B:rook_activation"], "maia": []}
+{"n": 116, "cp": 29, "engine": [], "actual": ["W:rook_activation"], "random": ["W:minority_attack:launched", "W:rook_activation"], "maia": ["B:passer_creation", "B:weakness_harvest"]}
+{"n": 119, "cp": 25, "engine": ["B:rook_activation"], "actual": ["B:minority_attack_general:launched", "W:pair_acquisition", "W:weakness_harvest"], "random": ["B:open_king", "B:pair_acquisition", "W:rook_activation"], "maia": ["B:rook_activation"]}
+{"n": 120, "cp": 0, "engine": ["B:weakness_harvest"], "actual": ["B:weakness_harvest", "W:passer_creation", "W:weakness_harvest"], "random": [], "maia": ["B:passer_creation", "W:bad_bishop_escape", "W:passer_creation", "W:seventh_invasion"]}
+{"n": 121, "cp": -18, "engine": ["B:rook_activation"], "actual": ["W:rook_activation"], "random": [], "maia": ["W:rook_activation"]}
+{"n": 130, "cp": -20, "engine": ["W:king_march"], "actual": ["B:weakness_harvest", "W:rook_activation"], "random": ["B:blockade", "B:outpost_occupation"], "maia": ["B:rook_activation"]}
+{"n": 137, "cp": 23, "engine": [], "actual": [], "random": [], "maia": ["B:entomb"]}
+{"n": 140, "cp": 24, "engine": ["B:weakness_harvest", "W:weakness_harvest"], "actual": ["B:seal_to_entomb", "W:entomb", "W:outpost_occupation"], "random": ["B:rook_activation"], "maia": []}
+{"n": 142, "cp": 5, "engine": ["W:blockade", "W:outpost_occupation"], "actual": ["W:weakness_harvest"], "random": ["W:weakness_harvest"], "maia": ["B:rook_activation"]}
+{"n": 145, "cp": 14, "engine": [], "actual": [], "random": ["B:weakness_harvest", "W:passer_creation", "W:seventh_invasion"], "maia": []}
+{"n": 149, "cp": 12, "engine": [], "actual": ["B:weakness_harvest", "W:rook_activation"], "random": [], "maia": ["W:rook_activation"]}
+{"n": 152, "cp": 23, "engine": ["B:minority_attack_general:launched", "W:rook_activation"], "actual": ["W:rook_activation"], "random": [], "maia": ["B:blockade", "W:open_king"]}
+{"n": 155, "cp": -16, "engine": ["B:seventh_invasion", "W:rook_activation", "W:seventh_invasion", "W:weakness_harvest"], "actual": ["B:rook_activation", "W:weakness_harvest"], "random": ["W:passer_creation", "W:weakness_harvest"], "maia": ["B:passer_creation", "B:passer_push", "B:rook_activation", "W:rook_activation", "W:weakness_harvest"]}
+{"n": 160, "cp": 5, "engine": ["B:rook_activation", "B:seventh_invasion"], "actual": ["B:rook_activation"], "random": [], "maia": ["W:passer_creation"]}
+{"n": 169, "cp": 32, "engine": [], "actual": [], "random": ["B:pair_acquisition"], "maia": []}
+{"n": 174, "cp": 16, "engine": [], "actual": ["W:pair_acquisition", "W:weakness_harvest"], "random": ["W:open_king", "W:passer_creation"], "maia": []}
+{"n": 176, "cp": 34, "engine": ["W:rook_activation"], "actual": ["W:rook_activation"], "random": ["W:outpost_occupation", "W:pair_acquisition"], "maia": ["W:outpost_occupation"]}
+{"n": 177, "cp": 30, "engine": [], "actual": ["B:rook_activation", "W:rook_activation"], "random": [], "maia": ["B:rook_activation", "B:seventh_invasion"]}
+{"n": 180, "cp": -8, "engine": [], "actual": ["B:rook_activation", "B:weakness_harvest"], "random": ["W:rook_activation"], "maia": ["B:passer_creation", "B:rook_activation"]}
+{"n": 183, "cp": 12, "engine": ["W:blockade"], "actual": ["W:blockade"], "random": ["B:blockade", "W:rook_activation", "W:weakness_harvest"], "maia": ["B:rook_activation", "W:weakness_harvest"]}
+{"n": 184, "cp": 10, "engine": [], "actual": [], "random": ["W:passer_creation"], "maia": ["W:blockade", "W:rook_activation"]}
+{"n": 188, "cp": 6, "engine": [], "actual": ["B:passer_creation", "W:blockade", "W:passer_creation", "W:weakness_harvest"], "random": [], "maia": ["B:rook_activation", "W:weakness_harvest"]}
+{"n": 190, "cp": 0, "engine": ["W:passer_push"], "actual": ["W:passer_push"], "random": ["B:weakness_harvest"], "maia": ["W:passer_creation", "W:pawn_storm"]}
+{"n": 195, "cp": 8, "engine": [], "actual": ["W:rook_activation"], "random": [], "maia": ["W:weakness_harvest"]}
+{"n": 196, "cp": 31, "engine": ["W:rook_activation"], "actual": ["B:seal_to_entomb", "W:entomb"], "random": [], "maia": ["B:weakness_harvest"]}
+{"n": 198, "cp": 37, "engine": ["W:rook_activation"], "actual": ["W:rook_activation"], "random": [], "maia": []}
+{"n": 201, "cp": 10, "engine": ["B:rook_activation"], "actual": ["B:rook_activation", "W:rook_activation", "W:weakness_harvest"], "random": ["B:minority_attack_general:launched", "W:rook_activation"], "maia": ["B:blockade", "B:king_march", "B:rook_activation", "W:blockade"]}
+{"n": 202, "cp": 17, "engine": ["B:outpost_occupation", "W:rook_activation"], "actual": ["B:passer_creation", "W:rook_activation", "W:weakness_harvest"], "random": ["W:weakness_harvest"], "maia": ["B:outpost_occupation", "B:weakness_harvest", "W:rook_activation"]}
+{"n": 204, "cp": 37, "engine": ["B:entomb", "B:pair_acquisition", "B:weakness_harvest", "W:seal_to_entomb"], "actual": ["B:pair_acquisition", "B:rook_activation", "B:weakness_harvest", "W:open_king", "W:outpost_occupation", "W:seal_to_entomb", "W:weakness_harvest"], "random": [], "maia": ["B:outpost_occupation", "B:rook_activation", "B:weakness_harvest", "W:bad_bishop_escape", "W:passer_creation"]}
+{"n": 205, "cp": 21, "engine": ["B:weakness_harvest"], "actual": ["B:weakness_harvest"], "random": ["B:entomb", "W:pair_acquisition", "W:seal_to_entomb", "W:seventh_invasion"], "maia": []}
+{"n": 209, "cp": -14, "engine": [], "actual": [], "random": [], "maia": ["W:rook_activation", "W:weakness_harvest"]}
+{"n": 210, "cp": 17, "engine": ["W:rook_activation", "W:weakness_harvest"], "actual": ["W:rook_activation"], "random": ["B:weakness_harvest"], "maia": ["B:rook_activation", "W:bad_bishop_escape"]}
+{"n": 212, "cp": 3, "engine": [], "actual": ["B:blockade"], "random": [], "maia": ["B:rook_activation"]}
+{"n": 214, "cp": -22, "engine": ["B:rook_activation", "B:weakness_harvest", "W:weakness_harvest"], "actual": ["B:rook_activation", "W:blockade"], "random": ["B:minority_attack_general:launched"], "maia": ["B:blockade", "B:rook_activation", "W:blockade", "W:outpost_occupation"]}
+{"n": 215, "cp": -2, "engine": ["B:weakness_harvest", "W:rook_activation"], "actual": ["B:weakness_harvest", "W:rook_activation", "W:weakness_harvest"], "random": [], "maia": ["B:rook_activation", "W:passer_creation", "W:rook_activation", "W:seventh_invasion"]}
+{"n": 217, "cp": 0, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 218, "cp": 26, "engine": ["B:minority_attack_general:advanced", "B:weakness_harvest"], "actual": ["B:minority_attack_general:completed", "B:weakness_harvest", "W:passer_creation"], "random": ["B:bad_bishop_escape", "W:bad_bishop_escape"], "maia": ["B:rook_activation", "B:weakness_harvest"]}
+{"n": 222, "cp": 25, "engine": ["B:minority_attack_general:launched", "W:rook_activation"], "actual": ["W:outpost_occupation", "W:rook_activation", "W:weakness_harvest"], "random": ["W:pair_acquisition"], "maia": []}
+{"n": 225, "cp": 13, "engine": ["B:rook_activation", "W:passer_creation"], "actual": [], "random": ["W:blockade", "W:weakness_harvest"], "maia": ["B:rook_activation", "B:seventh_invasion"]}
+{"n": 228, "cp": 11, "engine": ["B:minority_attack_general:launched"], "actual": ["B:rook_activation", "W:rook_activation"], "random": ["B:passer_creation"], "maia": ["B:rook_activation", "B:weakness_harvest", "W:rook_activation", "W:weakness_harvest"]}
+{"n": 231, "cp": 4, "engine": ["W:minority_attack_general:launched"], "actual": ["W:outpost_occupation", "W:passer_creation"], "random": ["W:blockade", "W:minority_attack_general:launched", "W:rook_activation"], "maia": ["B:outpost_occupation", "W:rook_activation"]}
+{"n": 233, "cp": 32, "engine": [], "actual": [], "random": [], "maia": ["W:bad_bishop_escape"]}
+{"n": 234, "cp": -49, "engine": ["B:rook_activation", "B:seal_to_entomb", "B:weakness_harvest"], "actual": ["B:pawn_storm", "W:minority_attack_general:advanced", "W:pair_acquisition"], "random": ["W:minority_attack_general:advanced"], "maia": ["B:bad_bishop_escape", "W:weakness_harvest"]}
+{"n": 237, "cp": 31, "engine": [], "actual": ["W:outpost_occupation"], "random": ["B:seventh_invasion"], "maia": ["B:rook_activation", "W:outpost_occupation"]}
+{"n": 242, "cp": 42, "engine": [], "actual": ["B:seventh_invasion"], "random": [], "maia": ["B:entomb", "B:pair_acquisition", "W:passer_creation", "W:rook_activation", "W:seal_to_entomb"]}
+{"n": 244, "cp": 45, "engine": [], "actual": ["B:rook_activation"], "random": [], "maia": []}
+{"n": 248, "cp": 33, "engine": ["W:entomb"], "actual": [], "random": ["B:passer_creation"], "maia": ["B:passer_creation", "W:rook_activation", "W:seventh_invasion"]}
+{"n": 251, "cp": 19, "engine": [], "actual": ["B:outpost_occupation", "W:rook_activation"], "random": ["W:rook_activation"], "maia": ["W:rook_activation"]}
+{"n": 269, "cp": 42, "engine": [], "actual": [], "random": ["B:rook_activation"], "maia": ["W:passer_creation", "W:weakness_harvest"]}
+{"n": 274, "cp": 33, "engine": ["B:rook_activation", "W:pair_acquisition"], "actual": ["B:open_king", "B:rook_activation", "W:rook_activation", "W:weakness_harvest"], "random": ["B:bad_bishop_escape"], "maia": ["W:open_king", "W:pair_acquisition", "W:passer_creation"]}
+{"n": 285, "cp": 29, "engine": ["B:weakness_harvest"], "actual": ["B:rook_activation", "B:weakness_harvest", "W:rook_activation", "W:seventh_invasion"], "random": [], "maia": []}
+{"n": 286, "cp": -9, "engine": ["B:outpost_occupation", "W:blockade", "W:outpost_occupation", "W:pair_acquisition", "W:seventh_invasion"], "actual": ["B:rook_activation", "B:weakness_harvest", "W:outpost_occupation", "W:weakness_harvest"], "random": ["W:blockade", "W:outpost_occupation"], "maia": ["B:rook_activation", "B:weakness_harvest", "W:blockade", "W:outpost_occupation", "W:pair_acquisition", "W:rook_activation"]}
+{"n": 287, "cp": 10, "engine": ["W:rook_activation"], "actual": ["W:rook_activation"], "random": ["B:rook_activation"], "maia": ["W:rook_activation", "W:weakness_harvest"]}
+{"n": 291, "cp": -7, "engine": [], "actual": ["W:bad_bishop_escape"], "random": ["W:bad_bishop_escape"], "maia": ["B:rook_activation"]}
+{"n": 297, "cp": 28, "engine": ["B:rook_activation", "W:rook_activation"], "actual": ["B:passer_push", "B:rook_activation"], "random": ["B:pair_acquisition"], "maia": ["B:passer_creation", "B:rook_activation"]}
+{"n": 302, "cp": 33, "engine": ["B:rook_activation", "B:weakness_harvest"], "actual": ["B:rook_activation", "W:rook_activation", "W:weakness_harvest"], "random": ["B:entomb", "B:passer_creation", "B:weakness_harvest"], "maia": ["B:pair_acquisition", "B:rook_activation", "W:seal_to_entomb"]}
+{"n": 306, "cp": 33, "engine": ["B:entomb", "W:seal_to_entomb"], "actual": ["B:entomb"], "random": ["B:entomb", "B:pair_acquisition", "W:seal_to_entomb"], "maia": ["B:rook_activation", "W:pair_acquisition"]}
+{"n": 307, "cp": 21, "engine": ["B:rook_activation", "W:pair_acquisition"], "actual": ["B:rook_activation", "W:pair_acquisition", "W:rook_activation"], "random": ["B:rook_activation"], "maia": ["B:blockade", "B:outpost_occupation", "B:rook_activation", "W:rook_activation", "W:weakness_harvest"]}
+{"n": 309, "cp": -3, "engine": [], "actual": ["B:passer_creation", "B:weakness_harvest"], "random": ["B:open_king", "B:rook_activation"], "maia": ["B:weakness_harvest", "W:outpost_occupation", "W:weakness_harvest"]}
+{"n": 310, "cp": 36, "engine": [], "actual": ["B:minority_attack_general:launched"], "random": [], "maia": ["W:rook_activation", "W:seventh_invasion"]}
+{"n": 311, "cp": 37, "engine": ["B:rook_activation"], "actual": ["W:rook_activation"], "random": ["B:rook_activation"], "maia": []}
+{"n": 312, "cp": 12, "engine": ["W:rook_activation"], "actual": ["W:rook_activation"], "random": ["B:weakness_harvest"], "maia": []}
+{"n": 315, "cp": 31, "engine": ["W:bad_bishop_escape", "W:passer_creation"], "actual": [], "random": ["B:bad_bishop_escape"], "maia": ["W:passer_creation", "W:seventh_invasion"]}
+{"n": 316, "cp": 40, "engine": [], "actual": ["W:blockade"], "random": ["B:outpost_occupation"], "maia": []}
+{"n": 318, "cp": -6, "engine": ["W:open_king", "W:rook_activation"], "actual": ["B:minority_attack_general:launched", "W:rook_activation"], "random": ["B:rook_activation", "B:weakness_harvest"], "maia": ["B:rook_activation", "B:weakness_harvest", "W:rook_activation"]}
+{"n": 321, "cp": -46, "engine": ["B:passer_creation", "W:blockade"], "actual": ["W:open_king", "W:passer_creation", "W:passer_push"], "random": ["B:open_king", "B:passer_creation"], "maia": []}
+{"n": 322, "cp": 12, "engine": ["W:passer_creation"], "actual": [], "random": ["W:minority_attack_general:advanced"], "maia": ["B:rook_activation", "W:rook_activation"]}
+{"n": 326, "cp": -7, "engine": ["W:weakness_harvest"], "actual": ["W:weakness_harvest"], "random": [], "maia": ["W:bad_bishop_escape", "W:blockade", "W:outpost_occupation"]}
+{"n": 331, "cp": 3, "engine": [], "actual": [], "random": ["B:minority_attack_general:completed", "W:outpost_occupation", "W:rook_activation"], "maia": ["W:rook_activation"]}
+{"n": 338, "cp": -14, "engine": ["B:minority_attack_general:completed", "W:bad_bishop_escape", "W:pair_acquisition", "W:weakness_harvest"], "actual": ["B:minority_attack_general:completed", "B:passer_creation", "W:pair_acquisition", "W:weakness_harvest"], "random": ["B:pair_acquisition", "B:weakness_harvest", "W:bad_bishop_escape"], "maia": ["B:bad_bishop_escape", "B:minority_attack_general:completed", "B:pair_acquisition", "W:passer_creation", "W:rook_activation", "W:weakness_harvest"]}
+{"n": 340, "cp": 24, "engine": ["B:rook_activation"], "actual": ["B:bad_bishop_escape", "B:rook_activation"], "random": [], "maia": ["B:passer_creation", "W:pair_acquisition"]}
+{"n": 341, "cp": 43, "engine": ["B:rook_activation", "W:minority_attack_general:launched", "W:passer_creation", "W:rook_activation"], "actual": ["B:passer_creation", "B:weakness_harvest"], "random": [], "maia": ["B:rook_activation", "W:outpost_occupation", "W:passer_creation", "W:rook_activation"]}
+{"n": 343, "cp": -25, "engine": ["W:rook_activation"], "actual": ["B:rook_activation", "B:weakness_harvest", "W:rook_activation", "W:weakness_harvest"], "random": [], "maia": ["B:outpost_occupation"]}
+{"n": 353, "cp": 22, "engine": ["W:entomb"], "actual": ["B:passer_creation", "W:weakness_harvest"], "random": ["B:rook_activation"], "maia": ["B:rook_activation", "W:weakness_harvest"]}
+{"n": 354, "cp": -17, "engine": [], "actual": ["B:entomb"], "random": [], "maia": ["B:bad_bishop_escape", "W:passer_creation"]}
+{"n": 357, "cp": 17, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 358, "cp": -17, "engine": ["B:pair_acquisition"], "actual": ["B:rook_activation", "B:weakness_harvest", "W:blockade", "W:rook_activation", "W:weakness_harvest"], "random": ["W:weakness_harvest"], "maia": ["B:rook_activation", "W:blockade", "W:rook_activation"]}
+{"n": 359, "cp": 9, "engine": [], "actual": ["B:weakness_harvest"], "random": ["B:pair_acquisition"], "maia": ["W:rook_activation"]}
+{"n": 363, "cp": 16, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 364, "cp": 1, "engine": ["W:pair_acquisition", "W:rook_activation"], "actual": ["B:rook_activation", "B:weakness_harvest", "W:pair_acquisition", "W:rook_activation"], "random": [], "maia": ["W:rook_activation"]}
+{"n": 366, "cp": 46, "engine": ["B:entomb"], "actual": ["B:outpost_occupation"], "random": [], "maia": ["B:seal_to_entomb", "W:entomb", "W:rook_activation"]}
+{"n": 368, "cp": 0, "engine": ["B:passer_creation"], "actual": ["B:rook_activation", "W:blockade"], "random": [], "maia": ["B:rook_activation", "W:blockade", "W:weakness_harvest"]}
+{"n": 369, "cp": 44, "engine": [], "actual": [], "random": ["B:pair_acquisition"], "maia": ["B:bad_bishop_escape", "W:passer_creation"]}
+{"n": 373, "cp": 30, "engine": ["W:minority_attack:launched"], "actual": [], "random": [], "maia": ["W:rook_activation"]}
+{"n": 375, "cp": 43, "engine": ["B:rook_activation"], "actual": ["W:rook_activation"], "random": ["B:open_king", "B:weakness_harvest"], "maia": ["B:rook_activation", "B:seventh_invasion", "W:outpost_occupation", "W:rook_activation", "W:seventh_invasion", "W:weakness_harvest"]}
+{"n": 378, "cp": 23, "engine": ["B:passer_creation", "B:rook_activation", "W:rook_activation"], "actual": ["B:passer_creation"], "random": ["W:blockade"], "maia": ["B:outpost_occupation", "B:passer_creation", "W:rook_activation"]}
+{"n": 379, "cp": 41, "engine": ["W:rook_activation"], "actual": [], "random": ["W:passer_creation"], "maia": ["W:pawn_storm", "W:rook_activation"]}

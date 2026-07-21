@@ -1,0 +1,18 @@
+[Event "The Minority Attack: Benko vs. Taimanov"]
+[Date "2021.04.24"]
+[White "Pal Benko"]
+[Black "Mark Taimanov"]
+[Result "*"]
+[Variant "Standard"]
+[ECO "A13"]
+[Opening "English Opening: Agincourt Defense"]
+[StudyName "The Minority Attack"]
+[ChapterName "Benko vs. Taimanov"]
+[ChapterURL "https://lichess.org/study/u7TU4WU0/XH3TfAiN"]
+[Annotator "https://lichess.org/@/Larakepara"]
+[UTCDate "2021.04.24"]
+[UTCTime "14:51:28"]
+
+1. c4 e6 2. g3 d5 3. Bg2 Nf6 4. Nf3 Nc6 5. O-O Be7 6. d4 { This pawn structure is the same as the queen's gambit declined. } { [%csl Bc4,Bd4,Bd5,Be6] } 6... O-O 7. cxd5 exd5 { [%csl Rc2,Re7] } 8. Bg5 h6 9. Bxf6 Bxf6 10. Nc3 Ne7 { black wants to play c6. } { [%csl Bc6][%cal Bc7c6] } 11. Rc1 { White takes the semi-open c file. } { [%cal Bc1c8] } 11... c6 { Benko begins the minority attack quickly. } 12. b4 a6 { Black adds a defender to the b5 square. } { [%csl Gb5][%cal Ga6b5] } 13. a4 { [%csl Bb5][%cal Ba4b5] } 13... Nf5 { Black ignores the minority attack. } 14. b5 Re8 { Black ignores the minority attack again, which is inaccurate. How can Benko create the desired weakness? } (14... axb5 { The following is the best line for black according to the engine, yet it is not easy to play for black either. } 15. axb5 Re8 (15... cxb5 { White will have accomplished one of the goals of the minority attack: isolate the b and d pawns. } { [%csl Rb5,Rb7,Rd5] }) 16. bxc6 bxc6 { White achieves one of the goals of the minority attack here, the backwards c pawn. I would rather have the white pieces here, although the engine believes this position is slightly better for black. } { [%csl Rc6,Be1,Be3,Bd1,Bc2][%cal Bf1e1,Be2e3,Bd1c2,Bc1c8] }) 15. bxc6 bxc6 { Black has the isolated a pawn and backwards c pawn. Benko has succeeded and only now fortifies his pawn structure. } { [%csl Ra6,Rc6] } 16. e3 { [%csl Gf2,Ge3,Gd4] } 16... h5 { Black is trying to play h4. However, Benko (correctly) does not regard this as a threat. } 17. Ne2 { Guess which square this knight is going? } 17... Qd6 18. Nf4 h4 19. g4 g5 20. Nd3 { Funnily enough the engine recommended Nh5. } { [%csl Bc5,Gh5][%cal Bd3c5,Gf4h5] } 20... Ne7 21. h3 { [%csl Bh3,Bg4,Bg5,Bh4] } 21... Ng6 { [%csl Gc6] } 22. Qc2 { [%csl Gc6][%cal Gc1c6] } 22... Bd7 23. Nc5 { Benko places the knight on c5. } 23... Rec8 { [%csl Gc5] } 24. Rb1 Be8 25. a5 { The weak pawns are locked, and Benko has more space. The rest of the game is a good example of who benefits from more space. } { [%csl Ra6,Rc6,Ba5,Bc5] } 25... Rc7 26. Rb6 { [%csl Bd6,Rc6][%cal Bb6d6] } 26... Rca7 27. Rfb1 { [%csl Bb1,Bb8][%cal Bb1b8] } 27... Ne7 28. Bf1 { Black has no way of defending the pawn. } { [%csl Ba6][%cal Bf1a6] } 28... Nc8 29. Rxa6 Rxa6 30. Bxa6 Qd8 31. Bxc8 Qxc8 32. a6 { The a pawn is passed. } { [%csl Ba6] } 32... Be7 33. Rb7 { [%csl Ge7][%cal Gb7h7,Gb7a7,Ba6b7,Bc5b7,Bc5a6] } 33... Qd8 { [%cal Gd8e7] } 34. a7 Bf8 35. Qf5 { [%cal Gf5g5,Gf3g5] } 35... Be7 { [%cal Ge7g5] } 36. Nxg5 { Knight sacrifice. } 36... Bxg5 37. Ne6 { [%csl Re6,Gh7,Gg7,Gf8,Bd8,Bg5][%cal Rf7e6,Gf5h7,Gb7h7,Gh7g7,Gg8f8,Be6d8,Be6g5] } 37... Qf6 38. Qxf6 Bxf6 39. Nc7 Rxa7 40. Rxa7 { Taimanov resigned, as he was down the exchange as well as two pawns. He would eventually lose. } { [%csl Be8,Rf8,Ga8,Gd7,Gd5][%cal Bc7e8,Rg8f8,Ga7a8,Ge8d7,Gc7d5,Ba7d7] } 40... Bd7 41. Nxd5 cxd5 42. Rxd7 { There is no stopping Benko's passed pawns with just the bishop. } { [%csl Gd5][%cal Gd7d5] } *
+
+

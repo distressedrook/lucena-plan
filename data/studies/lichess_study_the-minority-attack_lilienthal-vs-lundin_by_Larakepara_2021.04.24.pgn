@@ -1,0 +1,18 @@
+[Event "The Minority Attack: Lilienthal vs. Lundin"]
+[Date "2021.04.24"]
+[White "Andre Lilienthal"]
+[Black "Erik Ruben Lundin"]
+[Result "*"]
+[Variant "Standard"]
+[ECO "D36"]
+[Opening "Queen's Gambit Declined: Exchange Variation, Reshevsky Variation"]
+[StudyName "The Minority Attack"]
+[ChapterName "Lilienthal vs. Lundin"]
+[ChapterURL "https://lichess.org/study/u7TU4WU0/Mrj8UQge"]
+[Annotator "https://lichess.org/@/Larakepara"]
+[UTCDate "2021.04.24"]
+[UTCTime "14:51:28"]
+
+1. d4 Nf6 2. c4 e6 3. Nc3 d5 { Transposes to the Queen's Gambit Declined } 4. Bg5 c6 5. e3 Nbd7 { Knight variation of the modern Queen's Gambit Declined. } 6. cxd5 exd5 { [%csl Rc2,Re7] } 7. Bd3 Be7 8. Qc2 O-O 9. Nf3 Re8 10. O-O Nf8 { [%csl Gh7][%cal Gc8h3,Rd7f8,Gf8h7,Bc2h7] } 11. Ne5 Nh5 12. Bxe7 Rxe7 { And now the minority attack begins. Lilienthal is taking advantage of the fact that several of black's pieces are not on good squares right now. } { [%csl Rf8,Rh5,Re7,Rd8,Rc8] } 13. b4 Nf6 14. Rfe1 Ne8 { black wants to bring the knight to help against the minority attack. } { [%csl Ge8,Gd6][%cal Ge8d6] } 15. Rac1 (15. b5 { This is actually the engine's top move. } 15... cxb5 { [%csl Rb5,Rd5,Rb7,Ra7] } (15... c5 { One of the rare cases black can play c5. White can continue the minority attack by reinforcing the position. } { [%cal Rd4c5,Ge7e5] } 16. a4 { [%csl Ga4,Gb5] } 16... c4 (16... cxd4 17. exd4 { White simply has a more active position. } { [%csl Be5,Bd3,Bc2,Bh7,Ba4,Bb5,Rf8,Re8,Rc8,Rd8,Ra8,Re7][%cal Bd4e5,Bc2h7] } 17... Nc7)) 16. Qb3 Be6 17. Bxb5 { Black has an isolated d pawn that will be under pressure. } { [%csl Rd5] }) *
+
+

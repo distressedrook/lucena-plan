@@ -1,5 +1,6 @@
-data/
+data/twic/
+data/lichess_elite_2023-01.pgn
+data/gm_classical.pgn
 __pycache__/
 *.pyc
-.DS_Store
-.venv/
+nohup.out

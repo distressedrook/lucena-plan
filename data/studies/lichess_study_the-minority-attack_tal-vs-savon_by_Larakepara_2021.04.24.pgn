@@ -1,0 +1,18 @@
+[Event "The Minority Attack: Tal vs Savon"]
+[Date "2021.04.24"]
+[White "Mikhail Tal"]
+[Black "Vladimir Savon"]
+[Result "*"]
+[Variant "Standard"]
+[ECO "D35"]
+[Opening "Queen's Gambit Declined: Exchange Variation, Positional Variation"]
+[StudyName "The Minority Attack"]
+[ChapterName "Tal vs Savon"]
+[ChapterURL "https://lichess.org/study/u7TU4WU0/q4jVLODc"]
+[Annotator "https://lichess.org/@/Larakepara"]
+[UTCDate "2021.04.24"]
+[UTCTime "14:51:28"]
+
+1. c4 e6 2. Nc3 d5 3. d4 Nf6 { This transposes into the Queen's Gambit declined. } 4. cxd5 exd5 { [%csl Rc2,Re7] } 5. Bg5 Be7 6. e3 O-O 7. Bd3 { This is still the main line. } 7... Nbd7 8. Nf3 Re8 9. O-O Nf8 { This is an older way of playing this opening - modern games would see b6 and development of the light bishop to b7. } { [%cal Bc8h3] } 10. Qc2 Be6 11. Ne5 { [%csl Be5] } 11... N6d7 12. Bf4 Nxe5 13. Bxe5 c6 { This is the standard minority attack position } { [%csl Bb7,Bc6,Bd5,Ba7,Bb2,Ba2] } 14. Na4 f6 15. Bg3 Bf7 { [%cal Be8e1] } 16. b4 { Tal begins the minority attack. } { [%cal Bb4b5] } 16... Bd6 (16... Bxb4 { This is inaccurate because it allows white to pick up the b pawn. } 17. Rfb1 { [%csl Bb7][%cal Bb1b7] } 17... Qe7 18. Qb2 { Black has no way to defend the b pawn. } { [%csl Gb7] } 18... a5 19. a3 Bd6 20. Qxb7 { White has already accomplished the goal of the minority attack - the isolated a pawn and backwards c pawn. Black has allowed white to open the position when several pieces are still not ready to get into the game. } { [%csl Rc6,Ra5,Rf7,Rf8] }) 17. Rab1 Bxg3 18. hxg3 a6 { black covers the b5 square again preventing Tal from advancing the pawn. } { [%cal Ga6b5] } 19. Nc5 { [%csl Gc5,Gb7][%cal Gc5b7] } 19... Re7 { [%cal Be7b7] } (19... b6 { This move cannot be played because Tal wins the a6 pawn. } { [%csl Bc5,Bd3][%cal Bd3a6,Bc5a6] }) 20. a4 { [%cal Ga4b5] } 20... Rc7 { black predicts the c file will open soon. } { [%cal Bc7c1] } 21. Rfc1 { [%cal Bc1c8] } 21... Qe7 22. Rb3 { Can you tell where the rook is going? } 22... g6 23. Rc3 { Tal has a lot of pressure on the c file. } { [%csl Bc1,Bc2,Bc3][%cal Bc1c8] } 23... Rac8 { black makes the fatal mistake. Tal punishes this immediately. } { [%csl Rc8,Rb7,Ra6][%cal Ra6c8] } 24. Nxb7 (24. Bxa6 { This move is good as well. } 24... bxa6 25. Nxa6 { White has the queenside majority now. Several of black's pieces cannot get in to defend. The c pawn is backwards and will fall quickly. } { [%csl Bb4,Ba4,Rf8,Rf7,Rc6,Gc7][%cal Ba4a5,Bb4b5,Ga6c7] } 25... Ra7 26. Rxc6 Rxc6 27. Qxc6 { Black will eventually have to lose material to stop the pawns. } { [%cal Ba4a8,Bb4b8] }) 24... Rxb7 25. Bxa6 Ra8 26. Bxb7 Qxb7 27. Qb3 Ra6 28. b5 cxb5 29. Rc7 { Inaccuracy, axb5 is better. } (29. axb5 { Tal would have won an extra tempo allowing him to keep the pawn. } 29... Rb6 30. Rc7 Qb8 31. Rc8 { [%cal Bc8h8,Bc8a8] } 31... Qd6 32. R1c6 Rxc6 33. bxc6 { [%cal Bc6c8] }) 29... Qb6 30. axb5 Ra5 31. R1c6 Qxb5 32. Qxb5 Rxb5 33. Rxf6 Be8 { Mistake. Tal's opponent did not calculate his next move. } { [%csl Re8,Rf8,Rg8][%cal Ra8h8] } 34. Rc8 Kg7 35. Rf3 Rb1+ 36. Kh2 Nd7 37. Rxe8 { [%cal Be8e7] } 37... Nf6 38. Re7+ { Tal's opponent resigned, because he would lose the knight soon. } { [%cal Bf3f6] } *
+
+
