@@ -167,10 +167,13 @@ are in the repo; scores below are the relevant side's points fraction.
     ValdemarOrn/Chess collections, in `data/annotated/` — now the permanent
     regression suite.) Wherever an annotator's comment names one of our
     concepts, the machinery independently finds it far above a shuffled
-    control: seventh rank 64% vs 14%, passed pawn 55% vs 16% (n=64), bad
-    bishop 33% vs 8%, open file 43% vs 21%, bishop pair 78% vs 43%, outpost
-    2.4x. Zero tuning toward this corpus; crude keyword matching means these
-    are floors. Two diagnostic failures: "weak pawn" INVERTED (24% vs 53% —
+    control — PHASE-MATCHED (same-ply windows in other games; the stricter
+    test): seventh rank 64% vs 14% (4.6x), bishop pair 78%/55% vs 30%/10%,
+    outpost 33% vs 10% (3.3x), bad bishop 33% vs 17%, passed pawn 55% vs 31%
+    (n=62; naive control 16% — phase explained part of the lift). Demoted by
+    phase-matching: open file (43% vs 39% — base rate too high for the test
+    at n=28). Zero tuning toward this corpus; crude keyword matching means
+    survivors are floors. Two diagnostic failures: "weak pawn" INVERTED (24% vs 53% —
     annotators speak prospectively; our strict presence-predicate is too
     common to discriminate — matching the corpus lesson that only HARVEST
     carries signal), and annotators' "blockade" is lexically broader than

@@ -114,8 +114,9 @@ if __name__ == "__main__":
         for attempt in range(20):
             gj = rng.randrange(len(parsed))
             bj, mj, _ = parsed[gj]
-            if gj != gi and len(bj) > WINDOW_BACK + WINDOW_FWD + 2:
-                pj = rng.randrange(WINDOW_BACK + 1, len(bj) - WINDOW_FWD - 1)
+            if gj != gi and len(bj) > max(ply + 2, WINDOW_BACK + WINDOW_FWD + 2):
+                # PHASE-MATCHED control: same ply in the other game
+                pj = min(max(ply, WINDOW_BACK + 1), len(bj) - WINDOW_FWD - 1)
                 break
         else:
             continue
