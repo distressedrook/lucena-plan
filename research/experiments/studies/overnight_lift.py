@@ -116,6 +116,9 @@ if __name__ == "__main__":
             print(f"shard {sid:04d}: {rows if rows >= 0 else 'skipped'} rows "
                   f"({done}/{len(shards)} shards)", flush=True)
     print("ALL SHARDS DONE", flush=True)
-    os.system(f"~/Development/chess-lab/.venv/bin/python "
-              f"/Users/avismara/Development/lucena/lucena-plans/research/experiments/"
-              f"studies/lift_report.py")
+    # lift_report.py is pure geometry (no engine, no grpc) — it doesn't need
+    # lucena-tactics' grpc-capable venv at all; the hardcoded chess-lab path
+    # here was never load-bearing and broke when that repo moved. Just reuse
+    # whichever interpreter is already running this script.
+    os.system(f"{sys.executable} "
+              f"{os.path.dirname(os.path.abspath(__file__))}/lift_report.py")

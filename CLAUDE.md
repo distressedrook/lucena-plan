@@ -6,7 +6,7 @@ minority attacks, storms, regroups, structural campaigns. End goal (sharpened
 reliability stats and witness games — not just name the plan in a finished
 game. The retrospective detectors are the LABELING MACHINE; the product is
 `position → ranked plans + reliability + witnesses`. This is the
-**positional** sibling of `~/Development/chess-lab` (tactical puzzle
+**positional** sibling of `lucena-tactics` (tactical puzzle
 explanations); it shares that project's method but none of its runtime.
 
 ## The founding result (2026-07-20, the three-tagged-games experiment)
@@ -54,7 +54,7 @@ are in the repo; scores below are the relevant side's points fraction.
 
 3. **Certified teaching sets exist.** Funnel: detector → static
    steady-rise/no-blunder filter → engine verification (fixed 100k nodes,
-   chess-lab probes). Lichess: 311k → 1,179 → 113 → **50 strict**
+   lucena-tactics probes). Lichess: 311k → 1,179 → 113 → **50 strict**
    (the Lichess dump was removed in the 2026-07-22 src/docs/research restructure — regenerable via detectors.py). GM: 33,769 → 127 → 8 → **3**
    (`research/minority-attack-gm/teaching-set/`: Nesterov–Lobanov, Petrosyan–Perez
    Mitjans, Plat–Heberla). Lessons: the static filter has a ~42% tactical
@@ -244,7 +244,7 @@ are in the repo; scores below are the relevant side's points fraction.
 14. **The loop is CLOSED (2026-07-22): suggest -> ROLL -> DIFF, per
    position.** VERIFY is not a new subsystem — it is the existing pipeline
    in a loop (the user's reframe). `verify.py::verify_plan(fen, side,
-   family)`: engine roll (MultiPV=4 @1M nodes, shelled to chess-lab's venv
+   family)`: engine roll (MultiPV=4 @1M nodes, shelled to lucena-tactics' venv
    via `research/experiments/tools/engine_roll_helper.py` for protobuf isolation) + Maia
    roll (K=9, the k-study K*, 40-60 policy gate) -> `plan_diff.labels()`
    diff -> graded verdict CONFIRMED-SOUND (in an eval-equal engine line) >
@@ -485,7 +485,7 @@ are in the repo; scores below are the relevant side's points fraction.
 | `research/experiments/studies/bishop_vs_knight_closed.py` | The B-vs-N study (finding 6): closedness x openness x entombment x pair/single. |
 | `research/experiments/studies/weakness_census.py` | The two-weaknesses experiment (finding 7); imports `weaknesses.py`, so the census grows as detectors are added. |
 | `verify.py` | **THE CLOSED LOOP** (finding 14, extended finding 16; contract ruling 2026-07-22): `verify_plan(fen, side, family, pvs, rolls, square=None, route_hops=None)` — **the (fen, pvs, rolls) contract: the library NEVER rolls, it only checks caller-supplied lines** (backend supplies its own engine/Maia lines; research harness rolls via `research/experiments/tools/rolls.py` or replays banked shards). Per-family horizons + random floors, tighter floor when square-scoped, route-scaled horizon for multi-hop journeys. TIMING (immediate/developing/long-term) split into `CONFIRMED-SOUND` vs `CONFIRMED-SOUND-LATER` with an `immediate_move` field. Graded verdict. Either leg may be None — degrades and says so. |
-| `research/experiments/tools/rolls.py` | **The research harness's live roll producers — the ONLY place in the repo that reaches an engine or Maia at runtime.** `roll_engine` (MultiPV=4 @1M nodes via `engine_roll_helper.py` under chess-lab's venv, protobuf isolation), `roll_maia` (K=9 docker-pipe gated rollouts), `roll_both` -> the `{"pvs", "rolls"}` bank shape the verify/fact_sheet/suggest CLIs read. |
+| `research/experiments/tools/rolls.py` | **The research harness's live roll producers — the ONLY place in the repo that reaches an engine or Maia at runtime.** `roll_engine` (MultiPV=4 @1M nodes via `engine_roll_helper.py` under lucena-tactics' venv, protobuf isolation), `roll_maia` (K=9 docker-pipe gated rollouts), `roll_both` -> the `{"pvs", "rolls"}` bank shape the verify/fact_sheet/suggest CLIs read. |
 | `hierarchy.py` | **The pedagogy layer** (finding 13): MECHANISM/PLAN/CAMPAIGN, `compose()`, `curriculum()`. 7 campaigns with role-tagged members, composition edges colift-evidenced. |
 | `research/experiments/studies/campaign_study.py` | Full-corpus campaign calibration (finding 13); the monotone absent<fragment<partial<full gradient + the material-at-start symptom control. Witnesses -> `campaign_study.jsonl`. |
 | `research/experiments/studies/composition_evidence.py` | Which mechanisms NEST in which plans, by colift-vs-random (the campaign edges). |
@@ -495,7 +495,7 @@ are in the repo; scores below are the relevant side's points fraction.
 | `research/gpu_benchmark/` | **The copy-ready benchmark kit** (finding 14, re-run finding 16): `benchmark_v1.jsonl` + `gpu_bench.py` (Maia/GPU) + `engine_bench.py` (engine/CPU) + `check_shards.py` + `reduce_agreement.py` + its own agent-facing `CLAUDE.md`. Self-contained; produces raw-UCI futures labeled back home. `reduce_agreement.py` is re-run whenever the grammar changes (banked `eng_shards`/`maia_shards` cover all 4,000 positions — no new engine/Maia calls needed to re-score under a new family). |
 | `research/experiments/reports/agreement_report_v6.txt` | The full 4,000-position engine-confirm/Maia-typical table (finding 16), post-`backward_push`/`pair_break` grammar. Per-plan: engine-confirm %, random floor %, Maia-typical %, n. `pair_break` 82%/4% (20.5x, cleanest in the vocabulary), `backward_push` 39%/10% (3.9x, production tier), `simplification` 91% (highest absolute confirm). |
 
-## Method (inherited from chess-lab, proven there 15 times)
+## Method (inherited from chess-lab/lucena-tactics, proven there 15 times)
 
 1. **Human supplies definitions, not labels.** A tagged game or a one-sentence
    ruling compiles into a rule/theorem; the theorem re-adjudicates the corpus.
@@ -569,19 +569,20 @@ Always proposer-only behind human ratification (the Maia-firewall pattern).
 - `trajectory_v1.py` additionally imports lucena-engine's static positional
   terms: `sys.path.insert(0, "/Users/avismara/Development/lucena/engine/python")`
   → `from lucena_engine import positional`. No engine server needed (static
-  eval only, no search). chess-lab's venv works:
-  `~/Development/chess-lab/.venv/bin/python`.
+  eval only, no search). lucena-tactics' venv works:
+  `~/Development/lucena/lucena-tactics/.venv/bin/python`
+  (computed relative to the superrepo root by rolls.py, not hardcoded).
 - Detection and census layers are engine-free and deterministic; corpus scans
   run at thousands of games/second. The TEACHING-SET certification layer uses
-  chess-lab's probes (lucena-engine gRPC on 127.0.0.1:50052, fixed 100k
+  lucena-tactics' probes (lucena-engine gRPC on 127.0.0.1:50052, fixed 100k
   nodes ≈ 1s/position, deterministic) — see finding 3; static screening alone
   passes ~42% tactical false positives.
 
-## Relation to chess-lab
+## Relation to lucena-tactics (formerly chess-lab)
 
-- chess-lab = tactical puzzle explanations (shipped product, 15 adjudicated
+- lucena-tactics = tactical puzzle explanations (shipped product, 15 adjudicated
   rulings, mechanism vocabulary). This repo = plans. Shared philosophy;
   independent code and data.
 - If plan detection ever needs engine counterfactuals (e.g., "was the storm
-  sound?"), chess-lab's `explainer/probes.py` pattern (lucena-engine gRPC on
-  127.0.0.1:50052, fixed nodes) is the reference.
+  sound?"), lucena-tactics' `src/probes.py` pattern (lucena-engine gRPC on
+  127.0.0.1:50052, fixed nodes) is the reference — now re-exported from the superrepo's `/common/engine_client` (2026-07-22), which both repos share instead of one reaching into the other's source tree.

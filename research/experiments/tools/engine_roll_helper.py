@@ -1,10 +1,10 @@
 """engine_roll_helper — MultiPV roll for one FEN, as JSON on stdout.
 
-Runs UNDER chess-lab's venv (gRPC/protobuf live there). rolls.py shells
+Runs UNDER lucena-tactics' venv (gRPC/protobuf live there). rolls.py shells
 out to this so the library itself stays in plain python3 and roll-free
 (the (fen, pvs, rolls) contract).
 
-    <chesslab-venv>/python engine_roll_helper.py "<FEN>" [multipv] [horizon]
+    <lucena-tactics>/.venv/bin/python engine_roll_helper.py "<FEN>" [multipv] [horizon]
 -> {"pvs":[{"cp":int,"ucis":[...]}, ...]}
 """
 from __future__ import annotations
@@ -14,11 +14,11 @@ import sys
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/chess-lab/explainer")
-sys.path.insert(0, "/Users/avismara/Development/chess-lab")
-from probes import Probes
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[4] / "common"))
+from engine_client.probes import Probes
 import grpc
-from lucena.engine.v1 import engine_pb2 as pb
+from engine_client._pb import engine_pb2 as pb
 
 MAIN_NODES = 1_000_000
 EXT_NODES = 250_000

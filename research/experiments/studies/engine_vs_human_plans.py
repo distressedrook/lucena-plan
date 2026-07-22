@@ -24,8 +24,8 @@ import chess.pgn
 
 sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
 sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/research/experiments")
-sys.path.insert(0, "/Users/avismara/Development/chess-lab/explainer")
-sys.path.insert(0, "/Users/avismara/Development/chess-lab")
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[4] / "common"))
 os.environ["EXPLAINER_NODES"] = "1000000"
 # gRPC channels do NOT survive fork(): every subprocess.Popen after channel
 # creation corrupts the poll set ("FD from fork parent still in poll list")
@@ -33,7 +33,7 @@ os.environ["EXPLAINER_NODES"] = "1000000"
 # AFTER the Maia subprocess exists, and recreated after any respawn.
 os.environ["GRPC_ENABLE_FORK_SUPPORT"] = "1"
 os.environ["GRPC_POLL_STRATEGY"] = "poll"
-from probes import Probes
+from engine_client.probes import Probes
 from plan_diff import labels as signature   # the snapshot/diff/parse namer
 
 PLY_AT = 28
@@ -44,7 +44,7 @@ TARGET = 120
 probes = None                      # created lazily, always after the last fork
 
 import grpc
-from lucena.engine.v1 import engine_pb2 as pb
+from engine_client._pb import engine_pb2 as pb
 
 
 def _probes():

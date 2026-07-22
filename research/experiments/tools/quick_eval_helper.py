@@ -1,5 +1,5 @@
 """quick_eval_helper — a single fixed-node engine eval for one FEN, as JSON
-on stdout. Runs UNDER chess-lab's venv (gRPC/protobuf live there) — same
+on stdout. Runs UNDER lucena-tactics' venv (gRPC/protobuf live there) — same
 pattern as engine_roll_helper.py, but far cheaper: single line, no PV
 extension, no rollout. This is for fact_sheet.py's ASSESSMENT line, which
 needs "who stands better, roughly how much" — not a full verified plan
@@ -8,7 +8,7 @@ roll (that's verify.py's job, at 1M nodes / ~57s).
 Fixed 100k nodes matches the teaching-set certification convention
 (finding 3): ~1-2s/position, deterministic, same input -> same output.
 
-    <chesslab-venv>/python quick_eval_helper.py "<FEN>"
+    <lucena-tactics>/.venv/bin/python quick_eval_helper.py "<FEN>"
 -> {"cp": int}   (White POV, centipawns)
 """
 from __future__ import annotations
@@ -18,11 +18,11 @@ import sys
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/chess-lab/explainer")
-sys.path.insert(0, "/Users/avismara/Development/chess-lab")
-from probes import Probes
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[4] / "common"))
+from engine_client.probes import Probes
 import grpc
-from lucena.engine.v1 import engine_pb2 as pb
+from engine_client._pb import engine_pb2 as pb
 
 NODES = 100_000
 probes = Probes()

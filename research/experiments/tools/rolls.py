@@ -7,9 +7,9 @@ entry point takes (fen, pvs, rolls) and only CHECKS lines. This module
 is how the research side produces those lines:
 
   roll_engine(fen, horizon)  MultiPV=4 @1M nodes via
-                             engine_roll_helper.py under chess-lab's venv
-                             (gRPC/protobuf isolation — the backend does
-                             NOT need this; it rolls with its own
+                             engine_roll_helper.py under lucena-tactics'
+                             venv (gRPC/protobuf isolation — the backend
+                             does NOT need this; it rolls with its own
                              in-process engine access).
   roll_maia(fen, horizon)    K=9 gated rollouts (K* from the k-study)
                              over the gpu_benchmark docker pipe.
@@ -31,9 +31,21 @@ import sys
 import chess
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.dirname(os.path.dirname(_HERE))          # lucena-plans/
+_ROOT = os.path.dirname(os.path.dirname(_HERE))          # lucena-plans/research/
+                                                          # (NOT lucena-plans/ itself —
+                                                          # this file sits 2 levels under
+                                                          # research/, not repo root; the
+                                                          # gpu_benchmark join below still
+                                                          # lands correctly since that dir
+                                                          # is also under research/ now)
+_SUPERREPO = os.path.dirname(os.path.dirname(_ROOT))      # lucena/ (4 dirnames up from _HERE)
 
-CHESSLAB_PY = "/Users/avismara/Development/chess-lab/.venv/bin/python"
+# 2026-07-22: was a hardcoded ~/Development/chess-lab absolute path — broke
+# outright when that repo was renamed/moved into the superrepo as
+# lucena-tactics. Computed relative to the superrepo root instead, so a
+# future move can't silently break this again; TACTICS_PY still overridable.
+TACTICS_PY = os.environ.get(
+    "TACTICS_PY", os.path.join(_SUPERREPO, "lucena-tactics", ".venv", "bin", "python"))
 ENGINE_HELPER = os.path.join(_HERE, "engine_roll_helper.py")
 K = 9                    # the k-study K* (settles at K*=9)
 
@@ -42,7 +54,7 @@ def roll_engine(fen: str, horizon: int, multipv: int = 4):
     """[{cp, ucis}] equal+unequal PVs, or None if the backend is down."""
     try:
         out = subprocess.run(
-            [CHESSLAB_PY, ENGINE_HELPER, fen, str(multipv), str(horizon)],
+            [TACTICS_PY, ENGINE_HELPER, fen, str(multipv), str(horizon)],
             capture_output=True, text=True, timeout=180)
         if out.returncode != 0:
             return None

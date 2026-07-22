@@ -112,7 +112,7 @@ python3 check_shards.py benchmark_v1.jsonl eng_shards/  --engine   # engine leg
 ```
 
 Then copy the shard folder(s) back to the analysis machine's
-`chess-plans/experiments/` directory. The reducers there label the raw
+`lucena-plans/research/experiments/` directory. The reducers there label the raw
 moves under the current grammar and produce: per-plan lift with tight CIs
 at 13× the current scale, per-structure-family K\*, the P(plan|structure)
 priors (Maia leg), and — with both legs — the per-plan agreeability table

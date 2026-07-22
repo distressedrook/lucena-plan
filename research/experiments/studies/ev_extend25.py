@@ -12,11 +12,11 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/chess-lab/explainer")
-sys.path.insert(0, "/Users/avismara/Development/chess-lab")
-from probes import Probes
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[4] / "common"))
+from engine_client.probes import Probes
 import grpc
-from lucena.engine.v1 import engine_pb2 as pb
+from engine_client._pb import engine_pb2 as pb
 
 HORIZON = 25
 PLY_AT = 28
