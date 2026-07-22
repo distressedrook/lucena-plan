@@ -52,16 +52,17 @@ suggest_verified(board, pvs, rolls)                # the closed loop, rendered
 
 Who produces the lines is the caller's business: the backend uses its own
 in-process engine/Maia access; the research harness rolls live via
-`experiments/tools/rolls.py` or replays the banked 4,000-position benchmark
+`research/experiments/tools/rolls.py` or replays the banked 4,000-position benchmark
 shards with zero new engine calls.
 
 ## Layout
 
 ```
-*.py                     THE LIBRARY (flat modules; only dep: python-chess)
+src/                     THE LIBRARY (only dep: python-chess)
   suggest.py               the front door: position → candidate plan menus
   verify.py                suggest → check rolled lines → graded verdict
   fact_sheet.py            natural-language fact sheet for LLM narration
+  dynamism.py              deterministic sharpness rating (DEAD…RAZOR)
   plan_diff.py             the plan grammar: labels plans executed in a line
   detectors.py             whole-game plan detection (the labeling machine)
   weaknesses.py            fixed-target vocabulary (weak pawns, entombed
@@ -71,30 +72,30 @@ shards with zero new engine calls.
   closed_v0.py             pawn-skeleton / closedness geometry
   tension.py               pawn-tension analysis over rolled lines
 
-experiments/             RESEARCH HARNESS (never shipped)
-  tools/rolls.py           the ONLY live engine/Maia rolling in the repo
-  tools/engine_roll_helper.py  MultiPV roll under chess-lab's venv
-  studies/                 corpus studies behind every calibrated number
-  reports/                 banked results (agreement tables, lift reports)
+docs/                    KNOWN_ISSUES.md (open, understood, not yet fixed)
 
-gpu_benchmark/           the frozen 4,000-position benchmark kit
-data/                    GM + elite corpora, annotated ground-truth games
-minority-attack*/        detected plan instances with evidence headers
+research/                RESEARCH HARNESS (never shipped)
+  research/experiments/tools/rolls.py   the ONLY live engine/Maia rolling in the repo
+  research/experiments/studies/         corpus studies behind every calibrated number
+  research/experiments/reports/         banked results (agreement tables, lift reports)
+  research/gpu_benchmark/               the frozen 4,000-position benchmark kit
+  data/                        GM + elite corpora, annotated ground truth
+  minority-attack-gm/          the certified GM teaching set
 ```
 
 ## Quick start
 
 ```bash
 # Candidate plans, pure geometry — instant, no engine anywhere:
-./suggest.py "r1bq1rk1/pp2bppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R w KQ - 0 8"
+./src/suggest.py "r1bq1rk1/pp2bppp/2n1pn2/2pp4/3P1B2/2P1PN2/PP1N1PPP/R2QKB1R w KQ - 0 8"
 
 # The closed loop (research harness rolls live, then the library checks):
-./suggest.py "<FEN>" --verify
+./src/suggest.py "<FEN>" --verify
 
 # Bank a position's rolled lines once, reuse everywhere:
-./experiments/tools/rolls.py "<FEN>" 25 > bank.json
-./verify.py "<FEN>" W outpost_occupation bank.json
-./fact_sheet.py "<FEN>" bank.json
+./research/experiments/tools/rolls.py "<FEN>" 25 > bank.json
+./src/verify.py "<FEN>" W outpost_occupation bank.json
+./src/fact_sheet.py "<FEN>" bank.json
 ```
 
 As a library (how the backend consumes it):
@@ -132,8 +133,8 @@ Vocabulary tiers (each with a distinct epistemic contract):
 
 - `CLAUDE.md` — the lab notebook: every finding, ruling, and study, with
   provenance. Read it before touching the grammar.
-- `KNOWN_ISSUES.md` — current caveats.
+- `docs/KNOWN_ISSUES.md` — current caveats.
 
 The grammar is calibrated against the frozen `benchmark_v1` (4,000
-sha-pinned positions, `gpu_benchmark/`); re-run `reduce_agreement.py` after
+sha-pinned positions, `research/gpu_benchmark/`); re-run `reduce_agreement.py` after
 any grammar change — the banked shards make re-scoring free.

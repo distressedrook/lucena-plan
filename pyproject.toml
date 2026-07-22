@@ -12,8 +12,9 @@ dependencies = [
 ]
 
 [tool.setuptools]
-# Flat layout: the library IS the root-level modules. Everything else in
-# the repo (experiments/, data/, gpu_benchmark/, the PGN banks) is the
+package-dir = {"" = "src"}
+# src layout: the library IS src/*.py. Everything else in
+# the repo (research/experiments/, research/data/, research/gpu_benchmark/, the PGN banks) is the
 # research harness and never ships. None of these modules roll an engine
 # or Maia — the (fen, pvs, rolls) contract; rolled lines are the caller's
 # to supply.

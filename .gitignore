@@ -1,11 +1,9 @@
-data/twic/
-data/lichess_elite_2023-01.pgn
-data/gm_classical.pgn
+research/data/twic/
+research/data/lichess_elite_2023-01.pgn
+research/data/gm_classical.pgn
 __pycache__/
 *.pyc
 nohup.out
 
 .DS_Store
 *.egg-info/
-# dead pre-restructure copy, read-only until deleted (flat root modules are the source of truth)
-chess_plans/

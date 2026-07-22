@@ -37,7 +37,7 @@ Two days of corpus work produced twelve validated results. All scripts and data
 are in the repo; scores below are the relevant side's points fraction.
 
 1. **The detector generalizes to GM classical play — and exposes an
-   online-only plan.** `data/gm_classical.pgn` (33,769 GM-vs-GM classical
+   online-only plan.** `research/data/gm_classical.pgn` (33,769 GM-vs-GM classical
    games, TWIC 1497–1653) yields 127 minority attacks at the same 0.38% rate
    as Lichess elite — but the side split flips from ~50/50 to **113 White /
    14 Black**. The Black-side minority attack (vs London) is largely an
@@ -55,15 +55,15 @@ are in the repo; scores below are the relevant side's points fraction.
 3. **Certified teaching sets exist.** Funnel: detector → static
    steady-rise/no-blunder filter → engine verification (fixed 100k nodes,
    chess-lab probes). Lichess: 311k → 1,179 → 113 → **50 strict**
-   (`minority-attack/teaching-set/`). GM: 33,769 → 127 → 8 → **3**
-   (`minority-attack-gm/teaching-set/`: Nesterov–Lobanov, Petrosyan–Perez
+   (the Lichess dump was removed in the 2026-07-22 src/docs/research restructure — regenerable via detectors.py). GM: 33,769 → 127 → 8 → **3**
+   (`research/minority-attack-gm/teaching-set/`: Nesterov–Lobanov, Petrosyan–Perez
    Mitjans, Plat–Heberla). Lessons: the static filter has a ~42% tactical
    false-positive rate — engine verification is not optional; and at GM level
    a steadily-rising STATIC trajectory can be an engine-flat illusion (GM
    defenders give the terms but keep the balance).
 
 4. **Bad bishop: the split that matters is entombed vs outside, and escape
-   beats trade.** (`experiments/studies/bad_bishop_escape.py`, 4,581 GM cases.)
+   beats trade.** (`research/experiments/studies/bad_bishop_escape.py`, 4,581 GM cases.)
    Outside-the-chain "bad" bishops cost NOTHING (0.517). Entombed ones carry
    the whole penalty (0.470), and the escape hierarchy is: activate/extract
    0.496 > trade 0.456 ≈ self-break 0.451 > stuck 0.436. **Escaping the
@@ -79,7 +79,7 @@ are in the repo; scores below are the relevant side's points fraction.
    rest: closure disables simplification, not winning.
 
 6. **B-vs-N folklore fails both ways; entombment dominates.**
-   (`experiments/studies/bishop_vs_knight_closed.py`, 11,015 imbalance games.)
+   (`research/experiments/studies/bishop_vs_knight_closed.py`, 11,015 imbalance games.)
    Single B = single N everywhere (truly open included). The bishop PAIR
    premium is largest in PAWN-FULL positions (+4.8pp) and vanishes when
    truly open (+0.9pp) — the folklore inverts. The one large effect: an
@@ -90,7 +90,7 @@ are in the repo; scores below are the relevant side's points fraction.
 
 7. **Two weaknesses, corrected: creation is flat, HARVEST is the gradient —
    and weaknesses split into rent-payers vs lump-sums.**
-   (`weaknesses.py` + `experiments/studies/weakness_census.py`, 1,249 minority-attack
+   (`weaknesses.py` + `research/experiments/studies/weakness_census.py`, 1,249 minority-attack
    games.) Attacker score by weak pawns harvested: 0 → 0.489, 1 → 0.577,
    2+ → 0.656; created-but-never-harvested = 0.453, WORSE than no weakness
    (tempi paid, nothing collected). Per-type by presence: occupied outposts
@@ -104,7 +104,7 @@ are in the repo; scores below are the relevant side's points fraction.
 
 8. **RULING (2026-07-22, adjudicated): the minority attack is "2 pawns vs 3,
    semi-open c-file" — not Carlsbad-specific.** The user overruled the
-   Carlsbad-only gate; `experiments/studies/minority_general.py` adjudicated over
+   Carlsbad-only gate; `research/experiments/studies/minority_general.py` adjudicated over
    both corpora (126k qualifying positions). Verdict: the DEFINITION stands —
    GMs launch at an identical 25% in non-Carlsbad instances. The PAYOFF is
    family-split: Carlsbad completed 0.547 vs 0.507 baseline, lever resolves
@@ -117,7 +117,7 @@ are in the repo; scores below are the relevant side's points fraction.
 
 9. **The four-way plan-agreement experiment (engine / Maia3-2400 / actual
    GMs / random; 120 equalish GM positions, 12-ply futures, plan_diff
-   naming).** (`experiments/ev_pass_[abc].py` → `engine_vs_human_plans.jsonl`.)
+   naming).** (`research/experiments/ev_pass_[abc].py` → `engine_vs_human_plans.jsonl`.)
    Results: engine and Maia are roughly TIED as GM-plan predictors (specific-
    plan Jaccard 0.135 / 0.156 vs ~0.065 random floor — each ≈2x chance; an
    n=30 preview showing Maia dominance did not replicate). The RANDOM CONTROL
@@ -147,7 +147,7 @@ are in the repo; scores below are the relevant side's points fraction.
    entomb family, open_king.
 
 10. **Corpus-scale namer calibration (88,159 GM anchors; actual vs seeded
-    random; both regimes; `experiments/studies/overnight_lift.py` → `lift_report.txt`;
+    random; both regimes; `research/experiments/studies/overnight_lift.py` → `lift_report.txt`;
     runtime ~2 min — geometry at corpus scale is free).** Production
     vocabulary (lift, CI clear of 1.5): outpost 2.85, harvest 2.77, rook
     2.59, king_march 2.27@slow (two-regime theory's cleanest confirmation:
@@ -160,11 +160,11 @@ are in the repo; scores below are the relevant side's points fraction.
     rollout vocabulary pending an intent condition. Structure->plan table at
     scale now exists (e.g. open_sicilian:B -> minority_general 35%;
     french_advance:W -> bad_bishop_escape 11%). Live run dashboard:
-    `experiments/tools/status_server.py` on 127.0.0.1:8899.
+    `research/experiments/tools/status_server.py` on 127.0.0.1:8899.
 
 11. **EXTERNAL VALIDATION — the machine agrees with human annotators.**
-    (`experiments/studies/annotator_validation.py`; 599 human-annotated games,
-    ValdemarOrn/Chess collections, in `data/annotated/` — now the permanent
+    (`research/experiments/studies/annotator_validation.py`; 599 human-annotated games,
+    ValdemarOrn/Chess collections, in `research/data/annotated/` — now the permanent
     regression suite.) Wherever an annotator's comment names one of our
     concepts, the machinery independently finds it far above a shuffled
     control — PHASE-MATCHED (same-ply windows in other games; the stricter
@@ -220,12 +220,12 @@ are in the repo; scores below are the relevant side's points fraction.
    MECHANISM (vocabulary, no reliability claim) / PLAN (audited, carries
    lift) / CAMPAIGN (composition of same-side plans within 30-ply chains,
    `hierarchy.py::compose`). Composition edges corpus-evidenced by colift
-   vs the random floor (`experiments/studies/composition_evidence.py`):
+   vs the random floor (`research/experiments/studies/composition_evidence.py`):
    deny_castling->center_break 14.9x@2.3r, storm_launch->pawn_storm
    28.4x@1.5r, entomb->chain_base 2.0x@1.9r, seventh->king_march 2.4x@1.5r;
    pair_acquisition/majority_roll/fix_then_attack compose with NOTHING
    above floor (states, confirmed). Full-corpus campaign study
-   (`experiments/studies/campaign_study.py`, 29,730 GM games): monotone
+   (`research/experiments/studies/campaign_study.py`, 29,730 GM games): monotone
    absent<fragment<partial<full gradient in EVERY campaign — PROMOTION
    0.458->0.626 (+17pp, the largest gradient in the book), KING HUNT
    ->0.634, CONVERSION ->0.567. REFUTED pre-registration: no campaign-level
@@ -245,7 +245,7 @@ are in the repo; scores below are the relevant side's points fraction.
    position.** VERIFY is not a new subsystem — it is the existing pipeline
    in a loop (the user's reframe). `verify.py::verify_plan(fen, side,
    family)`: engine roll (MultiPV=4 @1M nodes, shelled to chess-lab's venv
-   via `experiments/tools/engine_roll_helper.py` for protobuf isolation) + Maia
+   via `research/experiments/tools/engine_roll_helper.py` for protobuf isolation) + Maia
    roll (K=9, the k-study K*, 40-60 policy gate) -> `plan_diff.labels()`
    diff -> graded verdict CONFIRMED-SOUND (in an eval-equal engine line) >
    MAIA-TYPICAL (>=2 of 9 rolls, beats floor) > NOT-IN-BEST-LINES >
@@ -266,7 +266,7 @@ are in the repo; scores below are the relevant side's points fraction.
    under any future grammar.
 
    **MULTI-LINE AGREEABILITY (120 positions, engine leg; user's 2 gates:
-   eval-equal lines, 40-60 Maia band).** `experiments/ev_pass_*_multi.py`.
+   eval-equal lines, 40-60 Maia band).** `research/experiments/ev_pass_*_multi.py`.
    Equalish middlegames hold ~3.4 EQUAL-EVAL plans (mean; "one best plan"
    is empirically false -> the ranked-list format is vindicated by the
    engine). 55% of GM-engine agreement lives in PVs 2-4 (single-PV was
@@ -281,11 +281,11 @@ are in the repo; scores below are the relevant side's points fraction.
    downgrade to UNSUPPORTED, never REJECT. Maia distributional leg queued.
 
    **THE BENCHMARK: `benchmark_v1` (4,000 frozen positions).**
-   `experiments/studies/export_benchmark.py` — banked argmax anchors (NOT a
+   `research/experiments/studies/export_benchmark.py` — banked argmax anchors (NOT a
    load_anchors re-derivation, which the v5 grammar reshuffled; caught by a
    150/300 k-study-overlap check), sha256+git-pinned, 300 flagged kstudy.
    A standing EVAL SET: grammars/models/K vary against it, positions never
-   do. Copy-ready kit in `gpu_benchmark/` (self-contained, its own
+   do. Copy-ready kit in `research/gpu_benchmark/` (self-contained, its own
    CLAUDE.md written for the GPU box's agent): `gpu_bench.py` (Maia leg,
    GPU, K rollouts, reproducible cross-machine seeds), `engine_bench.py`
    (engine leg, CPU, MultiPV, UCI+gRPC backends), `check_shards.py`,
@@ -305,7 +305,7 @@ are in the repo; scores below are the relevant side's points fraction.
    rook_activation (production, lift 2.26-2.58) from rook_lift (retired
    mechanism) — they are different families.
 
-   **GROUNDING TEST: PASS** (`experiments/reports/grounding_test.md`). Fact-sheet
+   **GROUNDING TEST: PASS** (`research/experiments/reports/grounding_test.md`). Fact-sheet
    narration (Sonnet + Gemini Flash-Lite, no board/engine access, geometry-
    only fact sheet from `suggest.py`) tested in two rounds on the same
    position, the second adding exactly one new fact (the rook_activation
@@ -417,12 +417,12 @@ are in the repo; scores below are the relevant side's points fraction.
    unverified (the bare-push rule really is random-typical).
 
    **Full 4,000-position benchmark re-run** under the current grammar
-   (`gpu_benchmark/reduce_agreement.py`, both legs at 4000/4000
+   (`research/gpu_benchmark/reduce_agreement.py`, both legs at 4000/4000
    coverage, mean 3.1 eval-equal engine lines/position) confirmed the
    whole vocabulary is stable after adding two new families: `pair_break`
    82%/4%=20.5×, `simplification` 91% (highest absolute confirm in the
    book), retired families stayed low (`rook_lift` 11%/0%). Report banked
-   at `experiments/reports/agreement_report_v6.txt`.
+   at `research/experiments/reports/agreement_report_v6.txt`.
 
 17. **The product-integration wave (2026-07-22, evening): the layer went
    LIVE in the backend, and the lines became the source of every printed
@@ -454,44 +454,46 @@ are in the repo; scores below are the relevant side's points fraction.
    87% engine-confirm / 44% floor, 91% maia-typical (n=253); corpus
    lift 1.30/1.42 — a move-type plan (free_bad_bishop precedent):
    per-position engine presence is the admission ticket, never the
-   floor gate. Reports: `experiments/reports/agreement_report_v7.txt`
+   floor gate. Reports: `research/experiments/reports/agreement_report_v7.txt`
    + `lift_report_v7.txt` (94,289 anchors; whole vocabulary stable
    under the v7 grammar).
 
 ## What exists in this repo
 
+**Layout (2026-07-22 restructure): `src/` (the library, flat modules), `docs/` (KNOWN_ISSUES.md), `research/` (experiments + gpu_benchmark + data + minority-attack-gm). File names below are module names; they live in `src/`.**
+
 | file | what |
 |---|---|
 | `detectors.py` | `detect_minority_attack(game)` — both sides. Structure checks (`is_carlsbad`, `is_carlsbad_reversed`) + side-parameterized b-pawn choreography + lever + damaged-queenside post-condition. **Corpus-validated on FULL corpora: 1,179/311,327 Lichess elite (592 W / 587 B); 127/33,769 GM classical (113 W / 14 B)** — same 0.38% rate in both, side split flips at GM level (finding 1). Blind-tested on Arkell–de Wolf (detected, correctly). |
-| `experiments/studies/trajectory_v1.py` | Term-trajectory extractor: quiet-ply sampling (skip captures/checks ± 1 ply) + rolling-drift segmentation. 300 Carlsbad games → 602 episodes, median span 16 plies. **Finds accumulation plans and harvests; misses restructuring creation** (see founding result). Depends on lucena-engine's `positional` module via PYTHONPATH (see Environment). |
-| `experiments/studies/trajectory_v0.py` | First prototype (event-based; superseded — kept for the diagnostic history). |
-| `experiments/reports/episodes.jsonl` | The 602 drift episodes (term, dir, net cp, ply span, moves, start FEN, game URL). |
-| `experiments/reports/episode_audit.html` | Human audit UI: 100 stratified spans, verdict buttons (coherent / not / split) + naming box, localStorage + export. **Not yet audited.** Links open the Lichess game AT the span's ply. |
+| `research/experiments/studies/trajectory_v1.py` | Term-trajectory extractor: quiet-ply sampling (skip captures/checks ± 1 ply) + rolling-drift segmentation. 300 Carlsbad games → 602 episodes, median span 16 plies. **Finds accumulation plans and harvests; misses restructuring creation** (see founding result). Depends on lucena-engine's `positional` module via PYTHONPATH (see Environment). |
+| `research/experiments/studies/trajectory_v0.py` | First prototype (event-based; superseded — kept for the diagnostic history). |
+| `research/experiments/reports/episodes.jsonl` | The 602 drift episodes (term, dir, net cp, ply span, moves, start FEN, game URL). |
+| `research/experiments/reports/episode_audit.html` | Human audit UI: 100 stratified spans, verdict buttons (coherent / not / split) + naming box, localStorage + export. **Not yet audited.** Links open the Lichess game AT the span's ply. |
 | `weaknesses.py` | **The fixed-target vocabulary** (finding 7, completed finding 12, extended finding 16): `weak_pawns`, `entombed_bishops`, `occupied_outposts`, `exposed_king`, `passive_rooks`, `weak_color_complex`, `back_rank_weak`, `overextended_pawns`, `backward_half_open`, `census()` — plus the standalone literature-definition pair `backward_pawns()` (Kmoch: strictly-ahead neighbors + enemy-pawn-controlled stop-square) and `isolated_pawns()`, both used by the suggest.py weakness-plan matrix and fact_sheet.py's WEAKNESSES sections. Also `knight_route`/`knight_route_conditional` (pawn-aware BFS route annotations). Pure geometry. |
 | `suggest.py` | **THE FRONT DOOR — the position→plan suggester.** `./suggest.py "FEN"` or `./suggest.py game.pgn 24`; `--verify` for the closed loop. `build_menus(b)` builds the raw per-side candidate menus (shared by the numeric renderer `suggest_plans()` and `fact_sheet.py`'s prose renderer); PASS 1 state-triggered + the literature weakness-plan matrix (finding 16: isolani/backward/doubled/hanging-pawns, piece-gated) + PASS 2 situational (prophylaxis/simplify/avoid-trades/defense). OUTPOST and BREAK THE BISHOP PAIR candidates are per-square, each with a knight-route annotation. Effect-size ranking is corpus-derived where audited, prior otherwise. |
 | `fact_sheet.py` | **The natural-language fact-sheet + control-prompt generator** (finding 16), for grounding-tested LLM narration. `build_fact_sheet(fen, pvs, rolls)` (the (fen, pvs, rolls) contract — never rolls; ASSESSMENT cp comes from the supplied top PV, static term-sum + SEE correction as the no-engine fallback) → ASSESSMENT (words) / POSITION READ (prose) / STRUCTURE (named only) / WEAKNESSES FOR WHITE·BLACK (present-only, no negative lines) / PLAN FOR WHITE·BLACK (jargon-free). `build_control_prompt(fen)` — same framing, zero facts, isolates genuine grounding from free association. FEN redacted to an opaque `POSITION-<hash>` id throughout. |
-| `structures.py` | **The theory structure catalog**: 15 recognizers (carlsbad, isolani, hanging pawns, french advance, advance caro, mar del plata, benoni, maroczy, hedgehog, open sicilian, boleslavsky, stonewall, grünfeld center, spanish center, slav triangle), each written once White-owner and auto-mirrored; `classify(board)`. All ECO-validated (`experiments/studies/validate_structures.py`). |
-| `experiments/studies/evidence_table.py` | The structure→plan evidence row builder (roadmap 1). Carlsbad row done → `carlsbad_row.jsonl` (15,163 structure games, both corpora, stage = none/launched/advanced/completed). |
-| `experiments/studies/outpost_plan_v0.py` | **The hole/outpost plan** (plan-unit: concession → knight journey → anchored occupation → rent). 7,057 GM plan-units (20.9% of games!) → `outpost_plans.jsonl`. Laws: depth gradient 0.509/0.561/0.584 (4th/5th/6th rank); rim outposts worthless (0.496); f5 the best square in chess (0.630); self-conceded holes costliest (0.555 vs 0.540); median concession→occupation lag 14 plies; canonical route b1-c3-d5. Ready to graduate after review. |
-| `data/lichess_elite_2023-01.pgn` | 311k elite games (Jan 2023). More months at database.nikonoel.fr. |
-| `data/gm_classical.pgn` | **33,769 GM-vs-GM classical OTB games** (TWIC 1497–1653, Jul 2023–Jul 2026; both players titled GM; rapid/blitz/online excluded). Raw weeklies in `data/twic/`. |
-| `data/studies/*.pgn` | The ground-truth annotated games: 3 minority-attack chapters (Larakepara study) + Arkell–de Wolf blind-test game. |
-| `minority-attack/`, `minority-attack-gm/` | All detected minority-attack games, one PGN each with Plan* evidence headers + `index.jsonl`. Subfolders: `well-executed/` (static filter), `teaching-set/` (engine-certified; 50 Lichess / 3 GM). Verdicts in `engine_verified.jsonl`. |
-| `experiments/studies/bad_bishop_escape.py` | The escape study (finding 4). Cases in `bad_bishop_cases.jsonl` (4,581, with entombed/outside class, resolution, route, score). |
-| `experiments/studies/bishop_v0.py`, `bishop_v1.py` | Good-vs-bad-bishop exploitation theorem; v1 requires entombment. Honest negative: entombment requirement did NOT raise the good side's ~55% — conversion needs a second weakness (finding 7). |
+| `structures.py` | **The theory structure catalog**: 15 recognizers (carlsbad, isolani, hanging pawns, french advance, advance caro, mar del plata, benoni, maroczy, hedgehog, open sicilian, boleslavsky, stonewall, grünfeld center, spanish center, slav triangle), each written once White-owner and auto-mirrored; `classify(board)`. All ECO-validated (`research/experiments/studies/validate_structures.py`). |
+| `research/experiments/studies/evidence_table.py` | The structure→plan evidence row builder (roadmap 1). Carlsbad row done → `carlsbad_row.jsonl` (15,163 structure games, both corpora, stage = none/launched/advanced/completed). |
+| `research/experiments/studies/outpost_plan_v0.py` | **The hole/outpost plan** (plan-unit: concession → knight journey → anchored occupation → rent). 7,057 GM plan-units (20.9% of games!) → `outpost_plans.jsonl`. Laws: depth gradient 0.509/0.561/0.584 (4th/5th/6th rank); rim outposts worthless (0.496); f5 the best square in chess (0.630); self-conceded holes costliest (0.555 vs 0.540); median concession→occupation lag 14 plies; canonical route b1-c3-d5. Ready to graduate after review. |
+| `research/data/lichess_elite_2023-01.pgn` | 311k elite games (Jan 2023). More months at database.nikonoel.fr. |
+| `research/data/gm_classical.pgn` | **33,769 GM-vs-GM classical OTB games** (TWIC 1497–1653, Jul 2023–Jul 2026; both players titled GM; rapid/blitz/online excluded). Raw weeklies in `research/data/twic/`. |
+| `research/data/studies/*.pgn` | The ground-truth annotated games: 3 minority-attack chapters (Larakepara study) + Arkell–de Wolf blind-test game. |
+| `research/minority-attack-gm/` | The detected GM minority-attack games (PGN with Plan* evidence headers + `index.jsonl`; `teaching-set/` = the 3 engine-certified games). The 1,179-game Lichess dump was REMOVED in the 2026-07-22 restructure — regenerable by running `detectors.py` over the Lichess corpus. |
+| `research/experiments/studies/bad_bishop_escape.py` | The escape study (finding 4). Cases in `bad_bishop_cases.jsonl` (4,581, with entombed/outside class, resolution, route, score). |
+| `research/experiments/studies/bishop_v0.py`, `bishop_v1.py` | Good-vs-bad-bishop exploitation theorem; v1 requires entombment. Honest negative: entombment requirement did NOT raise the good side's ~55% — conversion needs a second weakness (finding 7). |
 | `closed_v0.py` | Closedness detector (finding 5): `skeleton()` (rams/central/tension/open files) + hermetic `is_closed`. |
-| `experiments/studies/bishop_vs_knight_closed.py` | The B-vs-N study (finding 6): closedness x openness x entombment x pair/single. |
-| `experiments/studies/weakness_census.py` | The two-weaknesses experiment (finding 7); imports `weaknesses.py`, so the census grows as detectors are added. |
-| `verify.py` | **THE CLOSED LOOP** (finding 14, extended finding 16; contract ruling 2026-07-22): `verify_plan(fen, side, family, pvs, rolls, square=None, route_hops=None)` — **the (fen, pvs, rolls) contract: the library NEVER rolls, it only checks caller-supplied lines** (backend supplies its own engine/Maia lines; research harness rolls via `experiments/tools/rolls.py` or replays banked shards). Per-family horizons + random floors, tighter floor when square-scoped, route-scaled horizon for multi-hop journeys. TIMING (immediate/developing/long-term) split into `CONFIRMED-SOUND` vs `CONFIRMED-SOUND-LATER` with an `immediate_move` field. Graded verdict. Either leg may be None — degrades and says so. |
-| `experiments/tools/rolls.py` | **The research harness's live roll producers — the ONLY place in the repo that reaches an engine or Maia at runtime.** `roll_engine` (MultiPV=4 @1M nodes via `engine_roll_helper.py` under chess-lab's venv, protobuf isolation), `roll_maia` (K=9 docker-pipe gated rollouts), `roll_both` -> the `{"pvs", "rolls"}` bank shape the verify/fact_sheet/suggest CLIs read. |
+| `research/experiments/studies/bishop_vs_knight_closed.py` | The B-vs-N study (finding 6): closedness x openness x entombment x pair/single. |
+| `research/experiments/studies/weakness_census.py` | The two-weaknesses experiment (finding 7); imports `weaknesses.py`, so the census grows as detectors are added. |
+| `verify.py` | **THE CLOSED LOOP** (finding 14, extended finding 16; contract ruling 2026-07-22): `verify_plan(fen, side, family, pvs, rolls, square=None, route_hops=None)` — **the (fen, pvs, rolls) contract: the library NEVER rolls, it only checks caller-supplied lines** (backend supplies its own engine/Maia lines; research harness rolls via `research/experiments/tools/rolls.py` or replays banked shards). Per-family horizons + random floors, tighter floor when square-scoped, route-scaled horizon for multi-hop journeys. TIMING (immediate/developing/long-term) split into `CONFIRMED-SOUND` vs `CONFIRMED-SOUND-LATER` with an `immediate_move` field. Graded verdict. Either leg may be None — degrades and says so. |
+| `research/experiments/tools/rolls.py` | **The research harness's live roll producers — the ONLY place in the repo that reaches an engine or Maia at runtime.** `roll_engine` (MultiPV=4 @1M nodes via `engine_roll_helper.py` under chess-lab's venv, protobuf isolation), `roll_maia` (K=9 docker-pipe gated rollouts), `roll_both` -> the `{"pvs", "rolls"}` bank shape the verify/fact_sheet/suggest CLIs read. |
 | `hierarchy.py` | **The pedagogy layer** (finding 13): MECHANISM/PLAN/CAMPAIGN, `compose()`, `curriculum()`. 7 campaigns with role-tagged members, composition edges colift-evidenced. |
-| `experiments/studies/campaign_study.py` | Full-corpus campaign calibration (finding 13); the monotone absent<fragment<partial<full gradient + the material-at-start symptom control. Witnesses -> `campaign_study.jsonl`. |
-| `experiments/studies/composition_evidence.py` | Which mechanisms NEST in which plans, by colift-vs-random (the campaign edges). |
-| `experiments/studies/export_benchmark.py` | Freezes `benchmark_v1.jsonl` (4,000 positions, sha+git-pinned) from the banked argmax anchors. |
-| `experiments/studies/ev_pass_a_multi.py`, `ev_pass_b_multi.py`, `ev_pass_c_multi.py` | Multi-line agreeability (finding 14): engine MultiPV=4 (eval-equal gate) + Maia K=16 (40-60 gate) + merged report. |
-| `experiments/studies/kstudy_reduce.py`, `kstudy_extend.py` | K-study reducer (convergence curve, K*=9) + the K=8->16 extension (raw UCIs banked). |
-| `gpu_benchmark/` | **The copy-ready benchmark kit** (finding 14, re-run finding 16): `benchmark_v1.jsonl` + `gpu_bench.py` (Maia/GPU) + `engine_bench.py` (engine/CPU) + `check_shards.py` + `reduce_agreement.py` + its own agent-facing `CLAUDE.md`. Self-contained; produces raw-UCI futures labeled back home. `reduce_agreement.py` is re-run whenever the grammar changes (banked `eng_shards`/`maia_shards` cover all 4,000 positions — no new engine/Maia calls needed to re-score under a new family). |
-| `experiments/reports/agreement_report_v6.txt` | The full 4,000-position engine-confirm/Maia-typical table (finding 16), post-`backward_push`/`pair_break` grammar. Per-plan: engine-confirm %, random floor %, Maia-typical %, n. `pair_break` 82%/4% (20.5x, cleanest in the vocabulary), `backward_push` 39%/10% (3.9x, production tier), `simplification` 91% (highest absolute confirm). |
+| `research/experiments/studies/campaign_study.py` | Full-corpus campaign calibration (finding 13); the monotone absent<fragment<partial<full gradient + the material-at-start symptom control. Witnesses -> `campaign_study.jsonl`. |
+| `research/experiments/studies/composition_evidence.py` | Which mechanisms NEST in which plans, by colift-vs-random (the campaign edges). |
+| `research/experiments/studies/export_benchmark.py` | Freezes `benchmark_v1.jsonl` (4,000 positions, sha+git-pinned) from the banked argmax anchors. |
+| `research/experiments/studies/ev_pass_a_multi.py`, `ev_pass_b_multi.py`, `ev_pass_c_multi.py` | Multi-line agreeability (finding 14): engine MultiPV=4 (eval-equal gate) + Maia K=16 (40-60 gate) + merged report. |
+| `research/experiments/studies/kstudy_reduce.py`, `kstudy_extend.py` | K-study reducer (convergence curve, K*=9) + the K=8->16 extension (raw UCIs banked). |
+| `research/gpu_benchmark/` | **The copy-ready benchmark kit** (finding 14, re-run finding 16): `benchmark_v1.jsonl` + `gpu_bench.py` (Maia/GPU) + `engine_bench.py` (engine/CPU) + `check_shards.py` + `reduce_agreement.py` + its own agent-facing `CLAUDE.md`. Self-contained; produces raw-UCI futures labeled back home. `reduce_agreement.py` is re-run whenever the grammar changes (banked `eng_shards`/`maia_shards` cover all 4,000 positions — no new engine/Maia calls needed to re-score under a new family). |
+| `research/experiments/reports/agreement_report_v6.txt` | The full 4,000-position engine-confirm/Maia-typical table (finding 16), post-`backward_push`/`pair_break` grammar. Per-plan: engine-confirm %, random floor %, Maia-typical %, n. `pair_break` 82%/4% (20.5x, cleanest in the vocabulary), `backward_push` 39%/10% (3.9x, production tier), `simplification` 91% (highest absolute confirm). |
 
 ## Method (inherited from chess-lab, proven there 15 times)
 
@@ -520,7 +522,7 @@ Always proposer-only behind human ratification (the Maia-firewall pattern).
 ## Roadmap (reordered 2026-07-21 for the prospective goal)
 
 1. **The structure→plan evidence table** — the product's backend. **Row 1
-   (Carlsbad/minority attack) BUILT** (`experiments/studies/evidence_table.py`,
+   (Carlsbad/minority attack) BUILT** (`research/experiments/studies/evidence_table.py`,
    `carlsbad_row.jsonl`): GM White-side — structure in 4.2% of games, launch
    24%, complete-given-launch 33%, score none 0.529 / launched 0.551 /
    completed 0.580. Stage scores re-confirm harvest-gating: Lichess
@@ -529,7 +531,7 @@ Always proposer-only behind human ratification (the Maia-firewall pattern).
    GM defenders; the plan is effectively refuted at GM level. The structure
    RECOGNIZER layer for the rest of the table is `structures.py` (15
    theory-catalog recognizers, all ECO-fingerprint-validated on the GM
-   corpus — see `experiments/studies/validate_structures.py`; notable: isolani most
+   corpus — see `research/experiments/studies/validate_structures.py`; notable: isolani most
    common at 16%, ownership asymmetry 0.538 W vs 0.428 B; space structures
    uniformly +2-4pp; hedgehog worst in book at 0.414). Next: stamp the
    launch/completion template across the other 14 rows as their plan
