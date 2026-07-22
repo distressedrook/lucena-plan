@@ -1,0 +1,11 @@
+{
+  "name": "benchmark_v1",
+  "positions": 4000,
+  "horizon": 25,
+  "source": "gm_classical.pgn (TWIC 1497-1653)",
+  "anchor_scheme": "banked argmax-leg rows (maia_shards/argmax_*), plies 20/30/40/50",
+  "kstudy_rows": 300,
+  "random_seed_scheme": "random.Random(n*1000+anchor)",
+  "sha256": "e69ab5efcb244e58df88ab8fe6b8b4ff7763fa29608ed6c00b4807b39afee8a5",
+  "exported_at_commit": "e48b6821d54dac3e58ede5d48823c94772fbad17"
+}

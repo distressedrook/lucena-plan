@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lucena-plans"
+version = "0.1.0"
+description = "Position -> plan suggester + fact sheet: geometry-based chess coaching."
+requires-python = ">=3.9"
+dependencies = [
+    "chess>=1.11",
+]
+
+[tool.setuptools]
+# Flat layout: the library IS the root-level modules. Everything else in
+# the repo (experiments/, data/, gpu_benchmark/, the PGN banks) is the
+# research harness and never ships. None of these modules roll an engine
+# or Maia — the (fen, pvs, rolls) contract; rolled lines are the caller's
+# to supply.
+py-modules = [
+    "closed_v0",
+    "detectors",
+    "fact_sheet",
+    "plan_diff",
+    "structures",
+    "suggest",
+    "tension",
+    "verify",
+    "weaknesses",
+]

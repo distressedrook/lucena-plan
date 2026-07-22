@@ -1,0 +1,40 @@
+scored positions: 4000 (K=16 Maia samples each)
+COVERAGE: 3745/4000 (94%)
+PREDICTION (Maia freq >= 50%): precision 0.41, recall 0.32, F1 0.36, Jaccard 0.234
+PREDICTION (Maia freq >= 30%): precision 0.33, recall 0.44, F1 0.38, Jaccard 0.238
+CALIBRATION:
+  0.0-0.2: GM played 10.7%, n=24294
+  0.2-0.4: GM played 19.4%, n=8531
+  0.4-0.6: GM played 28.2%, n=4754
+  0.6-0.8: GM played 36.3%, n=2722
+  0.8-1.0: GM played 52.4%, n=3797
+PER-PLAN (freq>=0.3 predictor; n>=30):
+              prepared_break: prec 0.47, rec 0.58, n=2334
+             rook_activation: prec 0.37, rec 0.55, n=2047
+            weakness_harvest: prec 0.32, rec 0.45, n=1408
+          outpost_occupation: prec 0.26, rec 0.36, n=736
+               heavy_battery: prec 0.25, rec 0.31, n=644
+             passer_creation: prec 0.24, rec 0.35, n=637
+              simplification: prec 0.63, rec 0.96, n=426
+            seventh_invasion: prec 0.22, rec 0.38, n=410
+                    blockade: prec 0.24, rec 0.28, n=372
+           chain_base_attack: prec 0.26, rec 0.36, n=351
+            pair_acquisition: prec 0.24, rec 0.28, n=350
+                storm_launch: prec 0.32, rec 0.37, n=331
+              wing_expansion: prec 0.15, rec 0.15, n=300
+               majority_roll: prec 0.21, rec 0.20, n=210
+           bad_bishop_escape: prec 0.22, rec 0.27, n=188
+             fix_then_attack: prec 0.21, rec 0.20, n=186
+                   open_king: prec 0.10, rec 0.10, n=133
+          trade_into_endgame: prec 0.24, rec 0.23, n=116
+                  king_march: prec 0.16, rec 0.33, n=112
+        center_break_vs_king: prec 0.34, rec 0.43, n=107
+             remove_defender: prec 0.27, rec 0.38, n=105
+                 passer_push: prec 0.19, rec 0.34, n=96
+              seal_to_entomb: prec 0.16, rec 0.16, n=87
+  minority_attack_general:launched: prec 0.25, rec 0.31, n=85
+                      entomb: prec 0.11, rec 0.13, n=82
+                   rook_lift: prec 0.11, rec 0.06, n=63
+                  pawn_storm: prec 0.16, rec 0.16, n=62
+  minority_attack_general:completed: prec 0.45, rec 0.53, n=40
+  minority_attack_general:advanced: prec 0.36, rec 0.47, n=30

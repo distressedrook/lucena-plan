@@ -1,0 +1,121 @@
+anchors: 94289
+
+== FAST h12/t2 ==
+                      plan | P(actual) | P(random) |  lift | lift 95% CI
+               alternation |     0.03% |     0.01% |  3.00 | [1.08, 8.30]
+         bad_bishop_escape |     1.43% |     1.17% |  1.23 | [1.10, 1.37]
+              bind_squeeze |     0.24% |     0.74% |  0.33 | [0.27, 0.40]
+                  blockade |     5.92% |     2.93% |  2.02 | [1.90, 2.15]
+      center_break_vs_king |     1.60% |     0.51% |  3.15 | [2.74, 3.62]
+         chain_base_attack |     4.02% |     0.93% |  4.30 | [3.90, 4.74]
+             deny_castling |     0.42% |     0.49% |  0.86 | [0.71, 1.04]
+                    entomb |     2.46% |     2.14% |  1.15 | [1.06, 1.25]
+           fix_then_attack |     2.44% |     2.22% |  1.10 | [1.01, 1.19]
+             heavy_battery |    11.11% |     5.75% |  1.93 | [1.85, 2.02]
+                king_march |     0.50% |     0.31% |  1.63 | [1.33, 2.00]
+             majority_roll |     2.68% |     2.93% |  0.91 | [0.85, 0.99]
+           minority_attack |     0.46% |     0.38% |  1.20 | [0.98, 1.46]
+   minority_attack_general |     2.37% |     2.84% |  0.84 | [0.77, 0.90]
+            minority_block |     0.01% |     0.01% |  0.89 | [0.24, 3.33]
+                 open_king |     1.90% |     2.16% |  0.88 | [0.81, 0.96]
+        outpost_occupation |    10.15% |     4.08% |  2.49 | [2.37, 2.62]
+          pair_acquisition |     8.02% |     5.82% |  1.38 | [1.31, 1.45]
+           passer_creation |     7.37% |     4.49% |  1.64 | [1.56, 1.73]
+               passer_push |     1.29% |     0.74% |  1.75 | [1.53, 1.99]
+                pawn_storm |     0.57% |     0.25% |  2.30 | [1.86, 2.85]
+              piece_attack |     0.00% |     0.01% |  0.57 | [0.11, 3.03]
+            prepared_break |    21.49% |     6.35% |  3.39 | [3.26, 3.51]
+           remove_defender |     1.56% |     0.22% |  7.11 | [5.90, 8.56]
+           rook_activation |    23.71% |     9.20% |  2.58 | [2.50, 2.66]
+                 rook_lift |     0.34% |     0.37% |  0.91 | [0.74, 1.13]
+            seal_to_entomb |     2.25% |     1.84% |  1.22 | [1.12, 1.34]
+          seventh_invasion |     6.22% |     5.28% |  1.18 | [1.12, 1.24]
+            simplification |     3.91% |     0.44% |  8.92 | [7.85, 10.13]
+              storm_launch |     4.60% |     5.68% |  0.81 | [0.77, 0.86]
+        trade_into_endgame |     0.72% |     0.00% | 339.50 | [86.38, 1334.30]
+          weakness_harvest |    13.74% |     5.02% |  2.74 | [2.62, 2.86]
+            wing_expansion |     4.25% |     3.96% |  1.07 | [1.01, 1.14]
+
+== SLOW h25/t6 ==
+                      plan | P(actual) | P(random) |  lift | lift 95% CI
+               alternation |     0.33% |     0.07% |  4.52 | [3.20, 6.39]
+         bad_bishop_escape |     4.09% |     3.34% |  1.22 | [1.15, 1.31]
+              bind_squeeze |     0.09% |     0.45% |  0.19 | [0.14, 0.27]
+                  blockade |     8.11% |     4.10% |  1.98 | [1.88, 2.09]
+      center_break_vs_king |     2.27% |     1.10% |  2.07 | [1.87, 2.30]
+         chain_base_attack |     7.87% |     2.73% |  2.88 | [2.72, 3.06]
+             deny_castling |     0.63% |     0.90% |  0.70 | [0.61, 0.81]
+                    entomb |     2.32% |     2.46% |  0.94 | [0.87, 1.02]
+           fix_then_attack |     4.15% |     3.98% |  1.04 | [0.98, 1.11]
+             heavy_battery |    13.66% |     5.81% |  2.35 | [2.26, 2.45]
+                king_march |     3.25% |     1.43% |  2.27 | [2.08, 2.48]
+             majority_roll |     5.13% |     8.10% |  0.63 | [0.60, 0.66]
+           minority_attack |     0.82% |     0.67% |  1.22 | [1.05, 1.41]
+   minority_attack_general |     4.03% |     4.99% |  0.81 | [0.76, 0.86]
+            minority_block |     0.01% |     0.02% |  0.55 | [0.20, 1.52]
+                 open_king |     3.06% |     3.90% |  0.78 | [0.73, 0.84]
+        outpost_occupation |    18.83% |     8.43% |  2.24 | [2.16, 2.31]
+          pair_acquisition |     7.74% |    10.97% |  0.71 | [0.68, 0.73]
+           passer_creation |    16.02% |    12.51% |  1.28 | [1.24, 1.32]
+               passer_push |     2.94% |     1.83% |  1.61 | [1.48, 1.75]
+                pawn_storm |     1.50% |     1.33% |  1.13 | [1.01, 1.25]
+              piece_attack |     0.00% |     0.01% |  0.38 | [0.06, 2.18]
+            prepared_break |    44.43% |    23.66% |  1.88 | [1.84, 1.91]
+           remove_defender |     2.76% |     0.52% |  5.36 | [4.72, 6.08]
+           rook_activation |    44.61% |    19.71% |  2.26 | [2.22, 2.31]
+                 rook_lift |     1.48% |     1.26% |  1.17 | [1.05, 1.31]
+            seal_to_entomb |     2.21% |     2.25% |  0.98 | [0.90, 1.07]
+          seventh_invasion |    10.35% |     7.22% |  1.43 | [1.38, 1.50]
+            simplification |    10.36% |     2.31% |  4.48 | [4.22, 4.76]
+              storm_launch |     8.17% |    10.56% |  0.77 | [0.74, 0.81]
+        trade_into_endgame |     2.85% |     0.08% | 33.54 | [25.97, 43.32]
+          weakness_harvest |    30.85% |    12.71% |  2.43 | [2.36, 2.49]
+            wing_expansion |     7.54% |    11.35% |  0.66 | [0.64, 0.69]
+
+== plan -> outcome (actual futures, h25; score of the plan's side) ==
+  baseline (White persp mean): 0.554
+                 alternation: 0.607 (n=312)
+           bad_bishop_escape: 0.528 (n=3960)
+                bind_squeeze: 0.579 (n=82)
+                    blockade: 0.508 (n=7874)
+        center_break_vs_king: 0.543 (n=2144)
+           chain_base_attack: 0.503 (n=7772)
+               deny_castling: 0.513 (n=598)
+                      entomb: 0.503 (n=2225)
+             fix_then_attack: 0.520 (n=3952)
+               heavy_battery: 0.525 (n=13797)
+                  king_march: 0.531 (n=3143)
+               majority_roll: 0.552 (n=4910)
+             minority_attack: 0.558 (n=770)
+     minority_attack_general: 0.491 (n=3797)
+                   open_king: 0.566 (n=2960)
+          outpost_occupation: 0.532 (n=19169)
+            pair_acquisition: 0.535 (n=7296)
+             passer_creation: 0.554 (n=16183)
+                 passer_push: 0.582 (n=2863)
+                  pawn_storm: 0.540 (n=1459)
+              prepared_break: 0.507 (n=51300)
+             remove_defender: 0.515 (n=2641)
+             rook_activation: 0.521 (n=49449)
+                   rook_lift: 0.545 (n=1398)
+              seal_to_entomb: 0.532 (n=2094)
+            seventh_invasion: 0.562 (n=10689)
+              simplification: 0.491 (n=9773)
+                storm_launch: 0.511 (n=8230)
+          trade_into_endgame: 0.510 (n=2683)
+            weakness_harvest: 0.532 (n=32178)
+              wing_expansion: 0.545 (n=7216)
+
+== structure -> plan rates (actual h25; owner-side plans only) ==
+        split_majorities:B (n=15564): prepared_break 26%, rook_activation 25%, weakness_harvest 16%, heavy_battery 9%
+        split_majorities:W (n=10007): rook_activation 30%, prepared_break 26%, weakness_harvest 19%, passer_creation 12%
+                 isolani:B (n= 4068): rook_activation 31%, weakness_harvest 17%, prepared_break 16%, outpost_occupation 8%
+       giuoco_pianissimo:B (n= 3004): prepared_break 47%, chain_base_attack 11%, rook_activation 11%, weakness_harvest 10%
+                carlsbad:W (n= 2903): prepared_break 34%, rook_activation 26%, minority_attack 18%, weakness_harvest 16%
+                 isolani:W (n= 2861): rook_activation 35%, weakness_harvest 22%, prepared_break 18%, passer_creation 10%
+       giuoco_pianissimo:W (n= 2789): prepared_break 58%, rook_activation 12%, weakness_harvest 11%, chain_base_attack 10%
+        boleslavsky_wall:B (n= 2109): prepared_break 33%, rook_activation 25%, minority_attack_general 21%, heavy_battery 13%
+          slav_formation:W (n= 2013): rook_activation 29%, prepared_break 28%, weakness_harvest 23%, heavy_battery 13%
+          catalan_closed:W (n= 1964): prepared_break 48%, rook_activation 22%, weakness_harvest 14%, chain_base_attack 13%
+           mar_del_plata:W (n= 1595): prepared_break 36%, rook_activation 19%, weakness_harvest 12%, outpost_occupation 10%
+           slav_triangle:B (n= 1591): prepared_break 47%, rook_activation 14%, chain_base_attack 13%, weakness_harvest 10%

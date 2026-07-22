@@ -1,0 +1,120 @@
+{"n": 5, "cp": 24, "engine": [], "actual": [], "random": ["B:prepared_break"], "maia": ["B:prepared_break"]}
+{"n": 10, "cp": 34, "engine": [], "actual": ["B:pair_acquisition"], "random": [], "maia": []}
+{"n": 16, "cp": 24, "engine": ["W:heavy_battery", "W:rook_activation"], "actual": ["W:heavy_battery", "W:rook_activation"], "random": [], "maia": ["B:prepared_break", "W:heavy_battery", "W:rook_activation"]}
+{"n": 25, "cp": 20, "engine": [], "actual": [], "random": [], "maia": ["W:prepared_break"]}
+{"n": 26, "cp": 35, "engine": ["W:chain_base_attack", "W:prepared_break", "W:weakness_harvest"], "actual": ["W:prepared_break"], "random": ["B:seal_to_entomb", "W:outpost_occupation", "W:pair_acquisition"], "maia": ["B:entomb", "W:entomb", "W:pair_acquisition"]}
+{"n": 29, "cp": -21, "engine": [], "actual": ["B:storm_launch", "B:weakness_harvest", "W:pair_acquisition"], "random": [], "maia": ["W:pair_acquisition"]}
+{"n": 30, "cp": 6, "engine": [], "actual": ["B:majority_roll"], "random": [], "maia": []}
+{"n": 32, "cp": 30, "engine": ["B:passer_creation"], "actual": ["B:passer_creation", "B:prepared_break", "W:weakness_harvest"], "random": ["W:open_king"], "maia": ["W:open_king"]}
+{"n": 36, "cp": 38, "engine": [], "actual": ["B:heavy_battery", "B:rook_activation"], "random": ["B:seal_to_entomb", "W:entomb"], "maia": ["B:heavy_battery", "B:rook_activation"]}
+{"n": 37, "cp": 26, "engine": ["W:passer_creation"], "actual": [], "random": ["W:blockade"], "maia": []}
+{"n": 38, "cp": 27, "engine": ["B:pair_acquisition"], "actual": ["B:remove_defender", "B:rook_activation"], "random": [], "maia": ["B:pair_acquisition"]}
+{"n": 44, "cp": 45, "engine": ["B:prepared_break", "W:chain_base_attack", "W:prepared_break"], "actual": ["B:prepared_break", "W:passer_creation", "W:pawn_storm", "W:storm_launch"], "random": [], "maia": ["B:prepared_break", "W:chain_base_attack"]}
+{"n": 50, "cp": 25, "engine": ["B:majority_roll", "B:wing_expansion", "W:entomb"], "actual": ["W:heavy_battery", "W:minority_attack:launched", "W:rook_activation"], "random": ["B:pair_acquisition", "W:entomb"], "maia": ["B:majority_roll", "B:wing_expansion", "W:heavy_battery", "W:rook_activation"]}
+{"n": 52, "cp": 28, "engine": [], "actual": ["B:prepared_break", "W:heavy_battery", "W:rook_activation"], "random": ["B:majority_roll"], "maia": ["W:heavy_battery", "W:rook_activation"]}
+{"n": 54, "cp": 24, "engine": ["W:prepared_break"], "actual": ["W:prepared_break"], "random": [], "maia": ["W:prepared_break"]}
+{"n": 57, "cp": -32, "engine": ["B:entomb", "W:seal_to_entomb"], "actual": ["B:entomb", "W:seal_to_entomb"], "random": ["B:seal_to_entomb", "W:entomb"], "maia": []}
+{"n": 59, "cp": -34, "engine": ["B:heavy_battery"], "actual": ["W:pawn_storm", "W:storm_launch"], "random": ["W:blockade", "W:outpost_occupation", "W:storm_launch"], "maia": ["B:heavy_battery", "W:storm_launch"]}
+{"n": 61, "cp": 8, "engine": ["W:prepared_break"], "actual": ["B:entomb", "W:seal_to_entomb"], "random": [], "maia": ["B:prepared_break", "B:seal_to_entomb", "W:chain_base_attack", "W:entomb", "W:prepared_break", "W:seventh_invasion"]}
+{"n": 62, "cp": 3, "engine": [], "actual": ["B:rook_activation"], "random": [], "maia": []}
+{"n": 63, "cp": -11, "engine": [], "actual": ["B:blockade"], "random": ["B:heavy_battery"], "maia": ["B:rook_activation", "W:pair_acquisition"]}
+{"n": 64, "cp": 8, "engine": [], "actual": [], "random": ["B:heavy_battery"], "maia": []}
+{"n": 73, "cp": -30, "engine": [], "actual": ["B:prepared_break", "W:weakness_harvest"], "random": ["W:prepared_break"], "maia": []}
+{"n": 79, "cp": -4, "engine": ["B:outpost_occupation"], "actual": [], "random": [], "maia": ["W:rook_activation"]}
+{"n": 81, "cp": 28, "engine": ["B:outpost_occupation", "B:remove_defender"], "actual": [], "random": ["B:prepared_break"], "maia": ["B:outpost_occupation", "B:remove_defender"]}
+{"n": 82, "cp": 12, "engine": ["W:chain_base_attack"], "actual": ["B:entomb", "B:outpost_occupation", "W:chain_base_attack", "W:seal_to_entomb"], "random": ["B:entomb", "W:seal_to_entomb"], "maia": ["B:entomb", "W:chain_base_attack", "W:seal_to_entomb"]}
+{"n": 89, "cp": 0, "engine": [], "actual": ["B:passer_creation", "B:passer_push", "B:weakness_harvest", "W:prepared_break", "W:rook_activation"], "random": [], "maia": ["W:prepared_break"]}
+{"n": 96, "cp": 24, "engine": ["B:prepared_break", "B:weakness_harvest", "W:heavy_battery", "W:rook_activation"], "actual": ["W:weakness_harvest"], "random": [], "maia": ["B:chain_base_attack", "B:passer_creation", "B:prepared_break", "B:weakness_harvest", "W:minority_attack:completed"]}
+{"n": 97, "cp": 19, "engine": ["B:heavy_battery", "W:prepared_break"], "actual": [], "random": ["W:pair_acquisition"], "maia": []}
+{"n": 101, "cp": 19, "engine": [], "actual": [], "random": [], "maia": ["W:rook_activation"]}
+{"n": 104, "cp": 33, "engine": ["B:bad_bishop_escape", "B:chain_base_attack", "B:prepared_break"], "actual": ["B:prepared_break", "W:bad_bishop_escape"], "random": [], "maia": ["B:prepared_break", "W:bad_bishop_escape"]}
+{"n": 106, "cp": 47, "engine": [], "actual": [], "random": [], "maia": ["B:rook_activation"]}
+{"n": 108, "cp": 13, "engine": ["W:rook_activation"], "actual": ["B:center_break_vs_king", "B:open_king"], "random": [], "maia": ["B:center_break_vs_king", "B:heavy_battery", "B:rook_activation"]}
+{"n": 114, "cp": 0, "engine": [], "actual": [], "random": [], "maia": ["B:rook_activation", "W:rook_activation"]}
+{"n": 115, "cp": 32, "engine": [], "actual": [], "random": [], "maia": ["W:prepared_break"]}
+{"n": 116, "cp": 29, "engine": ["B:majority_roll", "B:wing_expansion"], "actual": [], "random": ["W:minority_attack:launched"], "maia": ["B:passer_creation", "B:prepared_break", "W:chain_base_attack"]}
+{"n": 119, "cp": 25, "engine": ["B:heavy_battery", "B:rook_activation"], "actual": ["B:heavy_battery", "B:minority_attack_general:launched", "B:rook_activation"], "random": ["B:pair_acquisition"], "maia": ["B:heavy_battery", "B:rook_activation"]}
+{"n": 120, "cp": 0, "engine": ["B:weakness_harvest"], "actual": [], "random": [], "maia": ["B:passer_creation", "W:bad_bishop_escape", "W:chain_base_attack", "W:passer_creation", "W:prepared_break", "W:seventh_invasion"]}
+{"n": 121, "cp": -18, "engine": [], "actual": ["B:rook_activation"], "random": [], "maia": ["W:rook_activation"]}
+{"n": 130, "cp": -20, "engine": [], "actual": ["B:weakness_harvest", "W:prepared_break", "W:rook_activation"], "random": ["B:blockade", "B:outpost_occupation", "B:storm_launch", "W:open_king"], "maia": ["B:rook_activation"]}
+{"n": 137, "cp": 23, "engine": ["B:prepared_break"], "actual": ["B:pair_acquisition"], "random": ["W:prepared_break"], "maia": ["B:entomb", "W:seal_to_entomb"]}
+{"n": 140, "cp": 24, "engine": ["B:prepared_break", "W:prepared_break", "W:weakness_harvest"], "actual": ["B:prepared_break", "W:chain_base_attack", "W:outpost_occupation", "W:prepared_break"], "random": ["B:heavy_battery", "B:rook_activation"], "maia": ["B:prepared_break", "W:outpost_occupation"]}
+{"n": 142, "cp": 5, "engine": [], "actual": [], "random": ["W:weakness_harvest"], "maia": ["W:pair_acquisition"]}
+{"n": 145, "cp": 14, "engine": ["W:majority_roll"], "actual": [], "random": ["B:center_break_vs_king", "B:prepared_break", "W:passer_creation", "W:remove_defender", "W:seventh_invasion"], "maia": []}
+{"n": 149, "cp": 12, "engine": ["B:passer_creation"], "actual": ["B:weakness_harvest", "W:pair_acquisition"], "random": ["B:heavy_battery"], "maia": []}
+{"n": 152, "cp": 23, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 155, "cp": -16, "engine": ["B:rook_activation", "W:rook_activation", "W:weakness_harvest"], "actual": ["B:rook_activation", "W:rook_activation", "W:weakness_harvest"], "random": ["B:prepared_break", "W:weakness_harvest", "W:wing_expansion"], "maia": ["B:passer_creation", "W:rook_activation", "W:weakness_harvest"]}
+{"n": 160, "cp": 5, "engine": [], "actual": ["B:rook_activation", "W:rook_activation", "W:simplification"], "random": [], "maia": []}
+{"n": 169, "cp": 32, "engine": ["B:wing_expansion"], "actual": [], "random": [], "maia": ["B:prepared_break"]}
+{"n": 174, "cp": 16, "engine": [], "actual": [], "random": ["W:open_king"], "maia": []}
+{"n": 176, "cp": 34, "engine": [], "actual": ["B:heavy_battery", "W:heavy_battery", "W:outpost_occupation", "W:rook_activation"], "random": ["W:pair_acquisition"], "maia": ["W:outpost_occupation"]}
+{"n": 177, "cp": 30, "engine": ["B:majority_roll"], "actual": ["B:heavy_battery", "B:majority_roll", "B:rook_activation"], "random": ["B:majority_roll"], "maia": ["W:prepared_break"]}
+{"n": 180, "cp": -8, "engine": [], "actual": ["B:open_king"], "random": ["W:rook_activation"], "maia": ["B:passer_creation"]}
+{"n": 183, "cp": 12, "engine": [], "actual": ["W:blockade"], "random": ["W:blockade", "W:heavy_battery"], "maia": ["W:blockade", "W:weakness_harvest"]}
+{"n": 184, "cp": 10, "engine": [], "actual": [], "random": ["W:passer_creation"], "maia": ["W:prepared_break"]}
+{"n": 188, "cp": 6, "engine": ["W:outpost_occupation"], "actual": ["B:passer_creation", "W:passer_creation", "W:prepared_break", "W:weakness_harvest"], "random": [], "maia": ["B:heavy_battery", "W:prepared_break", "W:weakness_harvest"]}
+{"n": 190, "cp": 0, "engine": ["B:blockade", "W:passer_push"], "actual": ["B:blockade", "W:passer_push"], "random": ["B:weakness_harvest"], "maia": ["W:majority_roll", "W:passer_creation"]}
+{"n": 195, "cp": 8, "engine": [], "actual": ["W:chain_base_attack", "W:prepared_break"], "random": ["W:entomb"], "maia": ["B:prepared_break", "W:chain_base_attack", "W:prepared_break"]}
+{"n": 196, "cp": 31, "engine": [], "actual": [], "random": [], "maia": ["B:prepared_break", "B:weakness_harvest", "W:rook_activation"]}
+{"n": 198, "cp": 37, "engine": ["B:prepared_break"], "actual": ["B:prepared_break", "W:prepared_break", "W:rook_activation"], "random": ["B:passer_creation"], "maia": ["W:prepared_break"]}
+{"n": 201, "cp": 10, "engine": ["W:rook_activation"], "actual": ["W:majority_roll", "W:rook_activation", "W:wing_expansion"], "random": [], "maia": ["B:trade_into_endgame", "W:rook_activation"]}
+{"n": 202, "cp": 17, "engine": ["B:outpost_occupation", "W:fix_then_attack"], "actual": ["B:passer_creation", "B:prepared_break", "W:fix_then_attack", "W:open_king", "W:weakness_harvest"], "random": ["W:fix_then_attack", "W:storm_launch"], "maia": ["B:outpost_occupation", "B:weakness_harvest", "W:fix_then_attack"]}
+{"n": 204, "cp": 37, "engine": ["B:entomb", "B:weakness_harvest", "W:seal_to_entomb", "W:simplification"], "actual": ["B:pair_acquisition", "W:weakness_harvest"], "random": [], "maia": ["B:outpost_occupation", "B:rook_activation", "B:weakness_harvest"]}
+{"n": 205, "cp": 21, "engine": ["B:weakness_harvest", "W:prepared_break"], "actual": ["B:weakness_harvest", "W:prepared_break"], "random": ["B:entomb", "W:seal_to_entomb"], "maia": ["B:entomb", "W:seal_to_entomb", "W:wing_expansion"]}
+{"n": 209, "cp": -14, "engine": [], "actual": [], "random": ["W:prepared_break"], "maia": ["B:seal_to_entomb", "W:chain_base_attack", "W:entomb", "W:prepared_break"]}
+{"n": 210, "cp": 17, "engine": ["W:minority_attack_general:completed", "W:rook_activation"], "actual": ["B:chain_base_attack", "W:minority_attack_general:completed", "W:rook_activation"], "random": ["B:rook_activation", "B:weakness_harvest", "W:open_king"], "maia": []}
+{"n": 212, "cp": 3, "engine": [], "actual": [], "random": [], "maia": ["B:rook_activation"]}
+{"n": 214, "cp": -22, "engine": [], "actual": ["B:rook_activation"], "random": ["W:majority_roll"], "maia": ["B:blockade", "B:heavy_battery", "B:rook_activation"]}
+{"n": 215, "cp": -2, "engine": ["W:rook_activation"], "actual": [], "random": [], "maia": []}
+{"n": 217, "cp": 0, "engine": [], "actual": [], "random": [], "maia": ["B:rook_activation"]}
+{"n": 218, "cp": 26, "engine": [], "actual": ["B:prepared_break", "B:weakness_harvest", "W:center_break_vs_king"], "random": ["W:seal_to_entomb"], "maia": ["B:weakness_harvest", "W:center_break_vs_king"]}
+{"n": 222, "cp": 25, "engine": ["B:heavy_battery", "B:minority_attack_general:launched"], "actual": ["B:prepared_break", "W:weakness_harvest"], "random": [], "maia": ["W:pair_acquisition"]}
+{"n": 225, "cp": 13, "engine": [], "actual": ["B:heavy_battery"], "random": [], "maia": ["B:rook_activation", "B:seventh_invasion", "W:rook_activation"]}
+{"n": 228, "cp": 11, "engine": ["B:chain_base_attack", "B:minority_attack_general:launched", "W:prepared_break"], "actual": ["W:prepared_break"], "random": [], "maia": ["B:weakness_harvest", "W:heavy_battery", "W:prepared_break", "W:rook_activation", "W:weakness_harvest"]}
+{"n": 231, "cp": 4, "engine": [], "actual": ["W:prepared_break"], "random": ["W:rook_activation"], "maia": ["B:outpost_occupation", "W:prepared_break"]}
+{"n": 233, "cp": 32, "engine": [], "actual": ["W:wing_expansion"], "random": [], "maia": ["B:prepared_break", "W:bad_bishop_escape"]}
+{"n": 234, "cp": -49, "engine": [], "actual": ["B:entomb", "B:storm_launch", "W:minority_attack_general:advanced", "W:seal_to_entomb"], "random": ["B:entomb", "W:minority_attack_general:advanced", "W:seal_to_entomb"], "maia": ["B:prepared_break", "W:weakness_harvest"]}
+{"n": 237, "cp": 31, "engine": [], "actual": ["B:chain_base_attack", "B:prepared_break"], "random": [], "maia": ["B:heavy_battery", "B:rook_activation", "W:outpost_occupation"]}
+{"n": 242, "cp": 42, "engine": ["B:wing_expansion"], "actual": [], "random": [], "maia": ["B:entomb", "B:prepared_break", "W:passer_creation", "W:seal_to_entomb"]}
+{"n": 244, "cp": 45, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 248, "cp": 33, "engine": ["W:wing_expansion"], "actual": ["W:prepared_break"], "random": ["B:passer_creation", "B:prepared_break"], "maia": []}
+{"n": 251, "cp": 19, "engine": [], "actual": ["B:outpost_occupation"], "random": ["W:heavy_battery", "W:rook_activation"], "maia": ["W:rook_activation"]}
+{"n": 269, "cp": 42, "engine": [], "actual": ["B:outpost_occupation"], "random": [], "maia": ["B:blockade", "W:passer_creation", "W:prepared_break", "W:weakness_harvest"]}
+{"n": 274, "cp": 33, "engine": ["W:prepared_break"], "actual": ["B:rook_activation", "B:seventh_invasion"], "random": ["B:bad_bishop_escape"], "maia": ["W:open_king", "W:passer_creation", "W:seventh_invasion"]}
+{"n": 285, "cp": 29, "engine": ["B:prepared_break", "W:majority_roll", "W:wing_expansion"], "actual": ["B:prepared_break", "B:weakness_harvest", "W:heavy_battery"], "random": [], "maia": ["B:prepared_break"]}
+{"n": 286, "cp": -9, "engine": ["W:blockade", "W:outpost_occupation"], "actual": ["B:weakness_harvest", "W:blockade", "W:weakness_harvest"], "random": ["W:blockade", "W:outpost_occupation"], "maia": ["B:heavy_battery", "B:rook_activation", "W:blockade", "W:heavy_battery", "W:rook_activation"]}
+{"n": 287, "cp": 10, "engine": [], "actual": ["W:heavy_battery", "W:rook_activation"], "random": [], "maia": ["B:prepared_break", "W:weakness_harvest"]}
+{"n": 291, "cp": -7, "engine": ["W:heavy_battery"], "actual": ["B:prepared_break", "B:seal_to_entomb", "W:prepared_break"], "random": [], "maia": ["W:prepared_break"]}
+{"n": 297, "cp": 28, "engine": ["W:rook_activation"], "actual": ["B:heavy_battery", "B:passer_push", "B:rook_activation"], "random": [], "maia": ["B:heavy_battery", "B:rook_activation"]}
+{"n": 302, "cp": 33, "engine": ["B:rook_activation", "B:weakness_harvest"], "actual": ["B:rook_activation", "W:weakness_harvest"], "random": ["B:weakness_harvest", "B:wing_expansion"], "maia": ["B:entomb", "B:rook_activation", "W:seal_to_entomb"]}
+{"n": 306, "cp": 33, "engine": ["B:entomb", "W:seal_to_entomb"], "actual": ["B:entomb", "W:seal_to_entomb"], "random": ["B:entomb", "W:seal_to_entomb"], "maia": ["W:chain_base_attack", "W:prepared_break"]}
+{"n": 307, "cp": 21, "engine": ["B:rook_activation", "W:pair_acquisition"], "actual": ["W:rook_activation"], "random": [], "maia": ["B:blockade", "B:outpost_occupation", "B:rook_activation", "W:prepared_break", "W:weakness_harvest"]}
+{"n": 309, "cp": -3, "engine": [], "actual": ["W:wing_expansion"], "random": [], "maia": ["B:weakness_harvest", "W:outpost_occupation", "W:weakness_harvest"]}
+{"n": 310, "cp": 36, "engine": [], "actual": [], "random": [], "maia": ["B:heavy_battery"]}
+{"n": 311, "cp": 37, "engine": [], "actual": ["W:rook_activation", "W:trade_into_endgame"], "random": [], "maia": []}
+{"n": 312, "cp": 12, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 315, "cp": 31, "engine": ["W:wing_expansion"], "actual": ["B:prepared_break"], "random": ["B:center_break_vs_king"], "maia": ["B:prepared_break", "W:wing_expansion"]}
+{"n": 316, "cp": 40, "engine": ["W:fix_then_attack"], "actual": [], "random": [], "maia": ["W:fix_then_attack"]}
+{"n": 318, "cp": -6, "engine": [], "actual": [], "random": [], "maia": ["B:rook_activation", "W:heavy_battery", "W:prepared_break", "W:rook_activation"]}
+{"n": 321, "cp": -46, "engine": ["B:passer_creation", "B:prepared_break", "W:blockade"], "actual": [], "random": [], "maia": ["B:prepared_break", "W:rook_activation"]}
+{"n": 322, "cp": 12, "engine": ["B:pawn_storm", "B:storm_launch"], "actual": [], "random": ["W:minority_attack_general:launched"], "maia": ["B:rook_activation"]}
+{"n": 326, "cp": -7, "engine": ["B:prepared_break", "W:passer_creation", "W:weakness_harvest"], "actual": ["B:heavy_battery", "B:prepared_break", "W:passer_creation", "W:weakness_harvest"], "random": ["B:pair_acquisition"], "maia": ["W:outpost_occupation"]}
+{"n": 331, "cp": 3, "engine": [], "actual": ["B:trade_into_endgame"], "random": ["B:minority_attack_general:launched"], "maia": []}
+{"n": 338, "cp": -14, "engine": ["B:fix_then_attack", "W:bad_bishop_escape", "W:center_break_vs_king", "W:pair_acquisition", "W:prepared_break"], "actual": ["B:fix_then_attack", "W:center_break_vs_king", "W:pair_acquisition", "W:wing_expansion"], "random": ["B:weakness_harvest"], "maia": ["B:bad_bishop_escape", "W:open_king", "W:weakness_harvest"]}
+{"n": 340, "cp": 24, "engine": ["B:rook_activation", "W:pair_acquisition"], "actual": ["B:bad_bishop_escape"], "random": [], "maia": ["B:passer_creation", "W:pair_acquisition"]}
+{"n": 341, "cp": 43, "engine": ["B:prepared_break", "W:heavy_battery", "W:minority_attack_general:launched", "W:rook_activation"], "actual": ["B:passer_creation", "B:weakness_harvest"], "random": [], "maia": ["B:prepared_break", "W:heavy_battery", "W:outpost_occupation", "W:rook_activation"]}
+{"n": 343, "cp": -25, "engine": ["W:rook_activation"], "actual": ["B:weakness_harvest"], "random": [], "maia": ["B:outpost_occupation"]}
+{"n": 353, "cp": 22, "engine": ["W:entomb"], "actual": ["W:chain_base_attack", "W:outpost_occupation", "W:prepared_break"], "random": ["B:chain_base_attack", "W:entomb", "W:prepared_break", "W:wing_expansion"], "maia": ["B:prepared_break"]}
+{"n": 354, "cp": -17, "engine": ["W:bind_squeeze"], "actual": [], "random": ["B:prepared_break", "B:wing_expansion"], "maia": ["B:bad_bishop_escape", "W:prepared_break"]}
+{"n": 357, "cp": 17, "engine": [], "actual": [], "random": [], "maia": []}
+{"n": 358, "cp": -17, "engine": ["B:pair_acquisition", "W:fix_then_attack", "W:majority_roll", "W:wing_expansion"], "actual": ["W:rook_activation"], "random": ["W:blockade", "W:weakness_harvest"], "maia": ["W:blockade"]}
+{"n": 359, "cp": 9, "engine": [], "actual": [], "random": ["B:pair_acquisition", "B:remove_defender"], "maia": ["W:rook_activation"]}
+{"n": 363, "cp": 16, "engine": [], "actual": ["W:prepared_break", "W:wing_expansion"], "random": [], "maia": []}
+{"n": 364, "cp": 1, "engine": ["W:pair_acquisition"], "actual": ["W:pair_acquisition"], "random": [], "maia": ["W:pair_acquisition", "W:rook_activation"]}
+{"n": 366, "cp": 46, "engine": ["B:entomb"], "actual": [], "random": [], "maia": []}
+{"n": 368, "cp": 0, "engine": ["B:rook_activation", "W:simplification"], "actual": ["B:rook_activation", "W:blockade", "W:simplification"], "random": [], "maia": ["B:wing_expansion", "W:simplification"]}
+{"n": 369, "cp": 44, "engine": [], "actual": [], "random": [], "maia": ["B:bad_bishop_escape", "W:prepared_break"]}
+{"n": 373, "cp": 30, "engine": ["W:minority_attack:launched", "W:prepared_break"], "actual": ["B:chain_base_attack", "B:prepared_break"], "random": [], "maia": ["W:prepared_break"]}
+{"n": 375, "cp": 43, "engine": ["B:rook_activation"], "actual": ["B:prepared_break"], "random": [], "maia": ["B:rook_activation", "B:seventh_invasion", "W:heavy_battery", "W:outpost_occupation", "W:rook_activation", "W:weakness_harvest"]}
+{"n": 378, "cp": 23, "engine": ["B:passer_creation"], "actual": ["B:passer_creation"], "random": ["W:blockade"], "maia": ["B:passer_creation", "W:rook_activation"]}
+{"n": 379, "cp": 41, "engine": [], "actual": ["W:storm_launch"], "random": ["W:storm_launch"], "maia": ["W:rook_activation"]}

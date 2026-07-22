@@ -1,0 +1,4 @@
+python-chess>=1.9
+# The Maia backend is separate (see CLAUDE.md):
+#   - docker backend: the lucena image (docker + --gpus all), OR
+#   - lc0 backend: an lc0 binary + a maia-2400 weights file (UCI).

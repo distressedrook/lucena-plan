@@ -130,6 +130,115 @@ def slav_triangle(own, opp):
             and bool(file_of(opp, "c")))
 
 
+def dragon(own, opp):
+    """Owner = the fianchetto-Sicilian side (White form = reversed dragon):
+    d3+g3 crouch, no c-pawn, vs opp's e5 with d traded, no c5 bind."""
+    return (no_file(own, "c") and "d3" in own and "g3" in own
+            and "e5" in opp and no_file(opp, "d") and "c5" not in opp)
+
+
+def kid_exchange(own, opp):
+    """The exchange-KID center: e4 vs e5, d-file fully traded, own c4."""
+    return ("e4" in own and "c4" in own and "e5" in opp
+            and no_file(own, "d") and no_file(opp, "d"))
+
+
+def exchange_spanish(own, opp):
+    """Exchange Ruy family: opp's DOUBLED c-pawns against owner's e4 vs e5 —
+    the structural 4v3-kingside-majority promise."""
+    return ("e4" in own and "e5" in opp and len(file_of(opp, "c")) >= 2)
+
+
+def slav_formation(own, opp):
+    """Owner's d4 vs opp's c6+e6 wall (opp's d traded): the Slav/QGA-return
+    structure — owner space, opp solid with the c8-bishop problem."""
+    return ("d4" in own and "c6" in opp and "e6" in opp
+            and no_file(opp, "d"))
+
+
+def petroff_exchange(own, opp):
+    """The Petroff / Berlin-endgame / Exchange-French symmetric structure:
+    owner's d4 with c-pawn retained vs opp's c6-buttressed d5, e-pawns
+    traded. (Named by its ECO fingerprint C42/C67/C01 — originally misnamed
+    caro_formation; the corpus corrected the label.)"""
+    return ("d4" in own and bool(file_of(own, "c")) and no_file(own, "e")
+            and "c6" in opp and "d5" in opp and no_file(opp, "e"))
+
+
+def leningrad_dutch(own, opp):
+    """Owner = the Leningrad side (White form = Bird/reversed): d3+f4+g3
+    vs opp's d5."""
+    return ({"d3", "f4", "g3"} <= own and "d5" in opp)
+
+
+def kia_closed(own, opp):
+    """Closed Sicilian / KIA family: owner's e4+d3 vs opp's c5+d5."""
+    return ("e4" in own and "d3" in own and "c5" in opp and "d5" in opp)
+
+
+def qga_expansion(own, opp):
+    """QGA/Catalan queenside expansion: owner's d4 with c-pawn traded vs
+    opp's a6+b5 grip, opp's d traded."""
+    return ("d4" in own and no_file(own, "c")
+            and "a6" in opp and "b5" in opp and no_file(opp, "d"))
+
+
+def giuoco_pianissimo(own, opp):
+    """The slow-Italian structure: e4/e5 ram with owner's d3 behind it, both
+    c-pawns home-or-advanced, opponent's d-pawn NOT yet to d5 (that would be
+    the kia_closed family). The most-played structure in modern elite chess."""
+    return ("e4" in own and "d3" in own and "e5" in opp
+            and bool(file_of(own, "c")) and "c4" not in own
+            and bool(file_of(opp, "c")) and "c5" not in opp
+            and bool(file_of(opp, "d")) and "d5" not in opp)
+
+
+def catalan_closed(own, opp):
+    """Closed Catalan: owner's d4 + g3 fianchetto vs opp's d5+e6 wall."""
+    return ("d4" in own and "g3" in own and "d5" in opp and "e6" in opp)
+
+
+def botvinnik_system(own, opp):
+    """Botvinnik English: c4+d3+e4 clamp vs opp's c5+e5 mirror."""
+    return ({"c4", "d3", "e4"} <= own and "c5" in opp and "e5" in opp)
+
+
+def nimzo_samisch(own, opp):
+    """Nimzo-Indian doubled c-pawns (Saemisch/Botvinnik battleground):
+    owner took ...Bxc3 with the b-pawn — doubled c3+c4, no b-pawn, d4
+    center; opp hits the front c-pawn (d-pawn or ...c5)."""
+    return ({"c3", "c4"} <= own and no_file(own, "b") and "d4" in own)
+
+
+def winawer_chain(own, opp):
+    """French Winawer: the advance chain c3-d4-e5 with DOUBLED c-pawns and
+    no b-pawn (after ...Bxc3 bxc3) vs the d5+e6 French wall."""
+    return ({"c3", "d4", "e5"} <= own and len(file_of(own, "c")) >= 2
+            and no_file(own, "b") and "d5" in opp and "e6" in opp)
+
+
+def benko_structure(own, opp):
+    """Benko/Volga: owner = the gambiteer — a/b files GONE (given for the
+    open files), c+d chain pointing queenside, vs opp's d-wedge with its
+    queenside pawns still standing. (White-owner form of Black's ...c5/d6
+    vs d5: mirrored c4/d3 vs d4.)"""
+    return ("c4" in own and "d3" in own
+            and no_file(own, "a") and no_file(own, "b")
+            and "d4" in opp
+            and bool(file_of(opp, "a") or file_of(opp, "b")))
+
+
+def split_majorities(own, opp):
+    """Mutual wing majorities (Exchange-Spanish/Carlsbad duality substrate):
+    owner = the QUEENSIDE (outside) majority side; equal pawn totals, owner
+    outnumbers on files a-d, is outnumbered on e-h."""
+    if len(own) != len(opp) or len(own) < 4:
+        return False
+    oq = sum(1 for s in own if s[0] in "abcd")
+    pq = sum(1 for s in opp if s[0] in "abcd")
+    return oq > pq and (len(own) - oq) < (len(opp) - pq)
+
+
 STRUCTURES = {
     "carlsbad": carlsbad,
     "isolani": isolani,
@@ -146,6 +255,21 @@ STRUCTURES = {
     "grunfeld_center": grunfeld_center,
     "spanish_center": spanish_center,
     "slav_triangle": slav_triangle,
+    "dragon": dragon,
+    "kid_exchange": kid_exchange,
+    "exchange_spanish": exchange_spanish,
+    "slav_formation": slav_formation,
+    "petroff_exchange": petroff_exchange,
+    "leningrad_dutch": leningrad_dutch,
+    "kia_closed": kia_closed,
+    "qga_expansion": qga_expansion,
+    "giuoco_pianissimo": giuoco_pianissimo,
+    "catalan_closed": catalan_closed,
+    "botvinnik_system": botvinnik_system,
+    "nimzo_samisch": nimzo_samisch,
+    "winawer_chain": winawer_chain,
+    "benko_structure": benko_structure,
+    "split_majorities": split_majorities,
 }
 
 
