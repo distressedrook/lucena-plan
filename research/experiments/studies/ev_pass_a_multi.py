@@ -21,11 +21,9 @@ import sys
 
 import chess
 
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parents[4] / "common"))
-from engine_client.probes import Probes
+from lucena_core.engine_client.probes import Probes
 import grpc
-from engine_client._pb import engine_pb2 as pb
+from lucena_core.engine_client._pb import engine_pb2 as pb
 
 SRC = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions25.jsonl"
 OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_multi.jsonl"

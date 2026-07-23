@@ -21,8 +21,29 @@ import chess
 import chess.pgn
 
 sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-core/python")
 from plan_diff import labels, snapshot
 from weaknesses import weak_pawns, entombed_bishops
+
+
+def _max_king_danger(b) -> int:
+    """The worse side's composite danger from the king-safety term
+    (efficacy test 2, 2026-07-23 — the king-safety row)."""
+    from lucena_core.board import Board as _LB
+    from lucena_core import positional as _pos
+    ft = _pos.analyze_positional(_LB(b.fen()))["terms"]["king_safety"]["features"]
+    return max((ft[c]["danger"] for c in ("white", "black") if c in ft),
+               default=0)
+
+
+def _max_attack_viability(b) -> float:
+    """The better attacker's PROSPECTIVE viability norm (2026-07-23):
+    annotators announce attacks before the infrastructure exists — the
+    static danger term scored BELOW control on attack phrases; this is
+    the prospective re-test."""
+    from lucena_core import positional as _pos
+    v = _pos.attack_viability(b.fen())
+    return max(v["white"]["norm"], v["black"]["norm"])
 
 DIR = "/Users/avismara/Development/lucena/lucena-plans/research/data/annotated"
 
@@ -44,6 +65,24 @@ STATE_CONCEPTS = {
                              != (len(b.pieces(chess.BISHOP, chess.BLACK)) >= 2),
     "weak pawn": lambda b: bool(weak_pawns(b, chess.WHITE)
                                 or weak_pawns(b, chess.BLACK)),
+    # king-safety rows (efficacy test 2, 2026-07-23): does the danger score
+    # agree where the annotator names king exposure? Bar = 40, the term's
+    # own "a little exposed" threshold.
+    "exposed king": lambda b: _max_king_danger(b) >= 40,
+    "king is exposed": lambda b: _max_king_danger(b) >= 40,
+    "weak king": lambda b: _max_king_danger(b) >= 40,
+    "unsafe king": lambda b: _max_king_danger(b) >= 40,
+    "king in danger": lambda b: _max_king_danger(b) >= 40,
+    # attack phrases -> the PROSPECTIVE viability score (2026-07-23: these
+    # scored below control on the static danger term — annotators announce
+    # attacks before the infrastructure exists; "king's position" dropped
+    # as polarity-ambiguous). Bar 0.45 = the validated top bucket (11.1%
+    # built-rate, 14x over the bottom bucket).
+    "attack on the king": lambda b: _max_attack_viability(b) >= 0.45,
+    "attack against the king": lambda b: _max_attack_viability(b) >= 0.45,
+    "kingside attack": lambda b: _max_attack_viability(b) >= 0.45,
+    "attack on the kingside": lambda b: _max_attack_viability(b) >= 0.45,
+    "mating attack": lambda b: _max_attack_viability(b) >= 0.45,
 }
 WINDOW_BACK, WINDOW_FWD = 12, 13
 

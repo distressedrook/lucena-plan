@@ -24,8 +24,8 @@ import chess
 import chess.pgn
 
 sys.path.insert(0, "/Users/avismara/Development/lucena/engine/python")
-from lucena_engine import positional  # noqa: E402
-from lucena_engine.board import Board as LBoard  # noqa: E402
+from lucena_core import positional  # noqa: E402
+from lucena_core.board import Board as LBoard  # noqa: E402
 
 TERMS = ["material", "king_safety", "activity", "pawns", "center"]
 EXTRA = ["w_attack", "b_attack"]          # attack units on each king — v0's best channel

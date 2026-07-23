@@ -44,6 +44,13 @@ def skeleton(b: chess.Board):
     return rams, central, tension, open_files
 
 
+def center_locked(b: chess.Board) -> bool:
+    """Moved verbatim to lucena-core (2026-07-23 consolidation) —
+    re-exported for the KEEP_KING_UNCASTLED trigger and callers."""
+    from lucena_core.geometry import center_locked as _cl
+    return _cl(b)
+
+
 def is_closed(b: chess.Board) -> bool:
     rams, central, tension, open_files = skeleton(b)
     return central >= 2 and rams >= 4 and tension <= 1 and open_files == 0

@@ -12,11 +12,9 @@ import sys
 import chess
 import chess.pgn
 
-from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parents[4] / "common"))
-from engine_client.probes import Probes
+from lucena_core.engine_client.probes import Probes
 import grpc
-from engine_client._pb import engine_pb2 as pb
+from lucena_core.engine_client._pb import engine_pb2 as pb
 
 HORIZON = 25
 PLY_AT = 28

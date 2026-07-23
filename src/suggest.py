@@ -68,6 +68,9 @@ VERIFY = {
                       "an eval-equal line or the human rollouts",
     "castle_queenside": "engine/maia: the king actually castles queenside "
                         "in an eval-equal line or the human rollouts",
+    "keep_king_uncastled": "engine: the king is NOT castled within the next "
+                           "6 moves (12 plies) of EVERY eval-equal line — "
+                           "one equal line castling refutes the restraint",
     "strong_outpost": "engine/maia: a knight reaches the strong square in "
                       "an eval-equal line or the human rollouts",
     "free_bad_bishop": "engine/maia: a same-color-pawn push that relieves "
@@ -364,6 +367,25 @@ def build_menus(b: chess.Board) -> dict:
                  "castling is a dominant, near-mandatory plan"
                  + (": " + "; ".join(bits) if bits else " — path is clear"),
                  VERIFY[fam])
+
+        # KEEP THE KING UNCASTLED (2026-07-23, user-defined): fires ONLY when
+        # the center is locked (>= 2 central rams, zero central tension —
+        # closed_v0.center_locked) and this side's king hasn't castled. The
+        # engine contract is the NEGATIVE event: no castling by this side
+        # within 6 moves of any eval-equal line (verify.keep_king_uncastled).
+        # The CASTLE candidate above may fire in the same position — suggest
+        # proposes both, verify keeps at most one.
+        from closed_v0 import center_locked as _center_locked
+        if not s[f"{t}.castled"] and _center_locked(b):
+            cand(3.0, "center locked (rams, no central tension); own king "
+                 "still uncastled",
+                 "KEEP THE KING UNCASTLED: the locked center shelters it — "
+                 "spend the tempi on the wings instead",
+                 "AUDITED 2026-07-23 (2,079 GM anchors): blanket holding is "
+                 "corpus-ANTI (held 0.458 vs castled-anyway 0.495) — but the "
+                 "engine strictly endorses holding in 30% of triggered "
+                 "positions; engine-contract ONLY, Maia leg is data",
+                 VERIFY["keep_king_uncastled"])
 
         wp = _wp(b, enemy)
         if wp:
@@ -984,6 +1006,7 @@ CANDIDATE_FAMILIES = {
     "KNIGHT TO": {"strong_outpost"},
     "CASTLE KINGSIDE": {"castle_kingside"},
     "CASTLE QUEENSIDE": {"castle_queenside"},
+    "KEEP THE KING UNCASTLED": {"keep_king_uncastled"},
     "ATTACK THE OVEREXTENDED PAWN": {"harvest_overextended"},
     # 2026-07-22 breadth pass — reliability lines pending the v5 audit
     "ATTACK THE CHAIN BASE": {"chain_base_attack"},

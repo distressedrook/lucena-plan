@@ -48,9 +48,9 @@ import sys
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/engine/python")
-from lucena_engine import positional as _positional          # noqa: E402
-from lucena_engine.board import Board as _LBoard             # noqa: E402
+# lucena_core is pip-installed (editable) — no path hacks (2026-07-23 core migration)
+from lucena_core import positional as _positional          # noqa: E402
+from lucena_core.board import Board as _LBoard             # noqa: E402
 
 from structures import classify
 from weaknesses import (census, bishop_escape_route, backward_pawns,
@@ -483,7 +483,7 @@ def _space_words(b: chess.Board) -> str:
     return line
 
 
-_CONFIRMED = {"CONFIRMED-SOUND", "CONFIRMED-SOUND-LATER", "MAIA-TYPICAL"}
+_CONFIRMED = {"CONFIRMED-SOUND", "CONFIRMED-SOUND-LATER", "HUMAN-TYPICAL"}
 
 
 def _pair_break_words(d: str) -> str:
@@ -607,6 +607,21 @@ def _plan_lines(menus: dict, t: str, fen: str, pvs, rolls,
             # BFS clause (suggest proposes, verify filters; 2026-07-22).
             line = ("- " + _humanize(h) + " (route the engine plays: "
                     + " or ".join(v["routes"][:2]) + ")")
+        elif v["verdict"] == "HUMAN-TYPICAL":
+            # No engine leg fired (or it did but not within horizon) — only
+            # human/policy rollouts confirm this, so `routes`/`timing` are
+            # empty (both are engine-only fields; ply-level lag has no
+            # meaning for a Maia rollout). 2026-07-22: this used to fall
+            # through to the raw geometric BFS route with no signal that
+            # the claim is weaker evidence — indistinguishable from an
+            # engine-confirmed plan. Say the tier honestly instead; the
+            # geometric route is still useful context, so keep it, but
+            # never let it read as engine-verified.
+            frac = round((v.get("maia") or {}).get("frac", 0) * 100)
+            line = ("- " + _humanize(h) + _route_phrase(e)
+                    + f" — typical of strong human play here ({frac}% of "
+                      "rollouts), though the engine's own lines don't "
+                      "confirm it")
         else:
             line = "- " + _humanize(h) + _route_phrase(e)
         if v.get("timing") == "immediate":
@@ -711,7 +726,7 @@ def _verify_sentence(v: dict) -> str:
     fam = v["family"].replace("_", " ")
     if v["verdict"] in ("CONFIRMED-SOUND", "CONFIRMED-SOUND-LATER"):
         return f"{who}'s {fam} plan has been checked and holds up."
-    if v["verdict"] == "MAIA-TYPICAL":
+    if v["verdict"] == "HUMAN-TYPICAL":
         return f"{who}'s {fam} plan is typical of how strong players handle this."
     return f"{who}'s {fam} plan has not been confirmed as sound here."
 
@@ -753,3 +768,205 @@ if __name__ == "__main__":
     sheet, pid = build_fact_sheet(fen, bank.get("pvs"), bank.get("rolls"))
     print(sheet)
     print(f"\n[opaque id: {pid}]", file=sys.stderr)
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# JSON sheets (2026-07-24, owner ruling): the plans layer emits STRUCTURED
+# artifacts — a PRE-verify JSON (full sheet, every candidate from SUGGEST,
+# unverified) and a POST-verify JSON (same shape, verdict/timing filled,
+# unconfirmed candidates MARKED, never deleted). The text sheet is retired
+# from the product path (build_fact_sheet stays for research
+# reproducibility only). Standing rules carried into the schema:
+#   - timing is a PLAN-level fact; no immediate_move field exists, ever
+#     (user ruling 2026-07-22: plans, not move recommendations)
+#   - consumers may only SPEAK candidates with verified=true (or the
+#     advisory tier); unverified entries are data for research/UI-pending
+# ═══════════════════════════════════════════════════════════════════════
+
+SHEET_SCHEMA = "lucena-plans/sheet@1"
+
+
+def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
+                pvs, rolls, *, verify: bool) -> tuple[list[dict], list[dict]]:
+    """(plan_entries, advisory_entries) for side `t` ('W'/'B'). Mirrors
+    _plan_lines' candidate walk; emits data instead of sentences."""
+    from verify import verify_plan
+    from weaknesses import knight_route
+    side = chess.WHITE if t == "W" else chess.BLACK
+    plans, advisory = [], []
+    for eff, trig, head, ev, verify_note, tsq in sorted(menus[t], key=lambda x: -x[0]):
+        fams = candidate_family(head)
+        if not fams:
+            if "calibration pending" not in ev and "literature tier" \
+                    not in verify_note and "situational" not in ev:
+                advisory.append({"idea": _humanize(head), "evidence": ev})
+            continue
+        entry: dict = {
+            "idea": _humanize(head),
+            "families": list(fams),
+            "trigger": trig,
+            "target": tsq,
+            "effect": eff,
+            "route_note": _route_phrase(ev).strip(" ()") or None,
+            "verified": None,          # pre-verify: unknown
+            "verdict": None,
+            "timing": None,
+            "maia_frac": None,
+        }
+        if verify:
+            if pvs is None and rolls is None:
+                entry["verified"] = False
+                entry["verdict"] = "NO-ROLLED-DATA"
+            else:
+                hops = None
+                if tsq:
+                    r = knight_route(b, side, {chess.parse_square(tsq)})
+                    hops = len(r) - 1 if r else None
+                won = None
+                for fam in fams:
+                    track = None
+                    if fam in ("bad_bishop_escape", "bad_bishop_trade"):
+                        m = re.search(r"bishop ([a-h][1-8])", trig)
+                        track = m.group(1) if m else None
+                    v = verify_plan(fen, t, fam, square=tsq, route_hops=hops,
+                                    pvs=pvs, rolls=rolls, track=track)
+                    if v["verdict"] in _CONFIRMED:
+                        won = v
+                        break
+                if won:
+                    entry["verified"] = True
+                    entry["verdict"] = won["verdict"]
+                    entry["timing"] = won.get("timing")
+                    maia = won.get("maia") or {}
+                    if maia.get("frac") is not None:
+                        entry["maia_frac"] = round(maia["frac"], 3)
+                else:
+                    entry["verified"] = False
+                    entry["verdict"] = (v or {}).get("verdict") or "UNCONFIRMED"
+        plans.append(entry)
+    return plans, advisory
+
+
+def _game_phase_block(fen: str) -> dict:
+    """{'name': opening|middlegame|endgame, 'why': ...} from the core's
+    hybrid classifier; None-safe (the sheet must never die on a phase)."""
+    try:
+        from lucena_core.reads import game_phase
+        gp = game_phase(fen)
+        return {"name": gp["phase"], "why": gp["why"]}
+    except Exception:
+        return {"name": None, "why": "phase classifier unavailable"}
+
+
+def _activity_block(act: dict) -> dict:
+    """The sheet's ACTIVITY section from the positional activity term's
+    per-piece features (lucena_core.positional._activity_term). One entry
+    per minor/major piece; the side score is the same sum the term's cp
+    differential is built from."""
+    f = act.get("features", {})
+    out = {"diff_cp": act["cp"], "standing": act["standing"]}
+    for color in ("white", "black"):
+        pieces = [{"piece": e["piece"], "square": e["square"],
+                   "score": e["norm"], "cp": e["score"],
+                   "mobility": e["mobility"], "placement": e["placement"]}
+                  for e in f.get(f"pieces_{color}", [])]
+        # side score = mean of its pieces' normalized scores (0-1); the raw
+        # cp sum stays available as `cp`
+        out[color] = {
+            "score": round(sum(p["score"] for p in pieces)
+                           / len(pieces), 2) if pieces else None,
+            "cp": f.get(f"score_{color}", 0),
+            "worst": f.get(f"worst_piece_{color}"),   # the problem piece
+            "pieces": pieces,
+        }
+    return out
+
+
+def _metrics_block(fen: str) -> dict:
+    """Batch-2 deterministic metrics (owner work order 2026-07-23):
+    regions (control incl. wings/files/holes), space + exploitability,
+    development lag (side-conditioned, annoyance-gated `notable`), pawn
+    breaks, passers, color complex, trapped pieces. None-safe per metric —
+    the sheet must never die on a read."""
+    from lucena_core import positional as _pos
+    from lucena_core import metrics as _met
+    out = {}
+    for key, fn in (("regions", _pos.region_control),
+                    ("space", _met.space_report),
+                    ("development", _pos.development_lag),
+                    ("breaks", _met.pawn_breaks),
+                    ("passers", _met.passer_report),
+                    ("color_complex", _met.color_complex),
+                    ("trapped", _met.trapped_pieces)):
+        try:
+            out[key] = fn(fen)
+        except Exception:
+            out[key] = None
+    return out
+
+
+def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
+    b = chess.Board(fen)
+    pid = opaque_id(fen)
+    d = _positional.analyze_positional(_LBoard(fen))
+    terms, leads = d["terms"], d["leads"]
+    menus = build_menus(b)
+    ecp = pvs[0]["cp"] if pvs else None
+    total = ecp if ecp is not None else (
+        sum(v["cp"] for v in terms.values()) + _hanging_correction(b))
+    from dynamism import dynamism as _dyn
+    dy = _dyn(fen, pvs, rolls)
+    from tension import analyze as _tension, render as _trender
+    out: dict = {
+        "schema": SHEET_SCHEMA,
+        "phase": "post-verify" if verify else "pre-verify",
+        "id": pid,
+        "fen": fen,
+        "assessment": {
+            "total_cp": round(total) if total is not None else None,
+            "verdict": _assessment(total),
+            # game phase (2026-07-23): lucena_core.reads.game_phase — the
+            # hybrid classifier (endgame = material event, opening =
+            # development event). NOT the top-level "phase" key, which is
+            # the ARTIFACT stage (pre/post-verify).
+            "game_phase": _game_phase_block(fen),
+            "character": {"bucket": dy["bucket"], "score": dy["score"],
+                          "summary": dy["summary"],
+                          "components": [{"name": n, "pts": p, "why": w}
+                                         for n, p, w in dy["components"]]},
+        },
+        "reads": _position_read(b, terms, leads),
+        # ACTIVITY (2026-07-23, user request): the per-piece minor/major
+        # activity scores the positional term already computes — score is
+        # cp-flavored (PeSTO placement, phase-tapered, + weighted mobility
+        # above the piece's baseline), most-active first per side.
+        "activity": _activity_block(terms["activity"]),
+        # batch-2 metrics (2026-07-23): regions/space/development/breaks/
+        # passers/color_complex/trapped — deterministic geometry, data tier
+        "metrics": _metrics_block(fen),
+        "structure": [{"name": n, "owner": name_side(o)} for n, o in classify(b)],
+        "weaknesses": {
+            "white": _weakness_lines(b, terms, chess.WHITE, pvs, rolls),
+            "black": _weakness_lines(b, terms, chess.BLACK, pvs, rolls),
+        },
+        "tension": _trender(_tension(fen, pvs, rolls)) or [],
+        "plans": {},
+        "advisory": {},
+    }
+    for t, key in (("W", "white"), ("B", "black")):
+        plans, advisory = _candidates(b, menus, t, fen, pvs, rolls, verify=verify)
+        out["plans"][key] = plans
+        out["advisory"][key] = advisory
+    return out
+
+
+def pre_verify_json(fen: str, pvs: list | None, rolls: list | None) -> dict:
+    """The full sheet with EVERY candidate unverified — fast (no verify_plan
+    calls); the progressive first artifact."""
+    return _sheet_json(fen, pvs, rolls, verify=False)
+
+
+def post_verify_json(fen: str, pvs: list | None, rolls: list | None) -> dict:
+    """The same shape with verdict/timing/maia filled; unconfirmed
+    candidates are MARKED (verified=false), never deleted."""
+    return _sheet_json(fen, pvs, rolls, verify=True)

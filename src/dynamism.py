@@ -26,7 +26,7 @@ component is deterministic given the same lines:
                          passers on the 5th rank or beyond.
 
 Score = sum of component points (each capped, documented inline) ->
-bucket: DEAD / QUIET / LIVELY / SHARP / RAZOR. The bucket and the firing
+bucket: DEAD / QUIET / DYNAMIC / SHARP / RAZOR. The bucket and the firing
 components are returned so callers can SAY WHY ('sharp: only one move
 holds, and the best lines are 60% checks and captures'), never just a
 number.
@@ -228,10 +228,10 @@ def dynamism(fen: str, pvs: list | None, rolls: list | None) -> dict:
 
     score = sum(p for _, p, _ in comps)
     bucket = ("RAZOR" if score >= 9 else "SHARP" if score >= 6 else
-              "LIVELY" if score >= 3 else "QUIET" if score >= 1 else "DEAD")
+              "DYNAMIC" if score >= 3 else "QUIET" if score >= 1 else "DEAD")
     summary = {"RAZOR": "razor-sharp — one inaccuracy changes the verdict",
                "SHARP": "sharp — concrete and punishing despite the eval",
-               "LIVELY": "lively — real tension under the surface",
+               "DYNAMIC": "dynamic — real tension under the surface",
                "QUIET": "quiet — maneuvering, little forcing play",
                "DEAD": "placid — nothing forcing anywhere"}[bucket]
     return {"score": score, "bucket": bucket, "components": comps,

@@ -155,14 +155,9 @@ def _outposts_against(b: chess.Board, victim: bool) -> frozenset:
 
 
 def _passers(b: chess.Board, side: bool) -> list[int]:
-    enemy = b.pieces(chess.PAWN, not side)
-    out = []
-    for sq in b.pieces(chess.PAWN, side):
-        f, r = chess.square_file(sq), side_rank(sq, side)
-        if not any(abs(chess.square_file(s) - f) <= 1
-                   and side_rank(s, not side) < 7 - r for s in enemy):
-            out.append(sq)
-    return out
+    # moved verbatim to lucena-core (2026-07-23 consolidation)
+    from lucena_core.geometry import passers
+    return passers(b, side)
 
 
 def _chain_bases(owner_pawns: frozenset, enemy_pawns: frozenset,
@@ -1153,14 +1148,25 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
             # ---- strong_outpost (2026-07-22, user-defined): a knight lands
             #      on a STRONG SQUARE — not a permanent hole, but a square
             #      whose only pawn-challenger is an enemy king-shelter pawn
-            #      (the Ruy Lopez Nf5). Checked on the PRE-move board, held
-            #      for the tail. Distinct from outpost_occupation (permanent
-            #      holes) and knight_reroute (>= 3 hops).
+            #      (the Ruy Lopez Nf5). Checked on the PRE-move board.
+            #      HOLD requirement (2026-07-22, tightened): the generic
+            #      tail-ply check ("still there `tail` raw plies later")
+            #      only demands the knight survive the opponent's immediate
+            #      reply — satisfiable even if the position moves on
+            #      entirely and the knight is just incidentally un-kicked.
+            #      A real outpost is a fixture: it must still be there
+            #      after this side's OWN next 2 moves (4 plies from
+            #      landing — landing, +2 = this side's next move, +4 = the
+            #      move after that), not merely `tail` plies. Distinct from
+            #      outpost_occupation (permanent holes) and knight_reroute
+            #      (>= 3 hops), which keep the generic tail check.
             pre_strong = mvk.to_square in strong_squares(b2, side_m)
             b2.push(mvk)
-            if pre_strong and k + tail < len(snaps) \
-                    and all(mvk.to_square in snaps[j][2][f"{t_m}.knight_sqs"]
-                            for j in range(k, min(k + tail + 1, len(snaps)))):
+            MIN_HOLD_OWN_MOVES = 2
+            hold_plies = 2 * MIN_HOLD_OWN_MOVES
+            if pre_strong and k + hold_plies < len(snaps) \
+                    and all(mvk.to_square in snaps[k + 2 * i][2][f"{t_m}.knight_sqs"]
+                            for i in range(MIN_HOLD_OWN_MOVES + 1)):
                 plans.append({"name": "strong_outpost", "side": t_m,
                               "ply": ply, "stage": "completed",
                               "price": PRICES.get("strong_outpost", 0.0),

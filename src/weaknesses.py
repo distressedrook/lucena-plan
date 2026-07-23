@@ -32,10 +32,10 @@ from __future__ import annotations
 
 import chess
 
-
-def side_rank(sq: int, side: bool) -> int:
-    r = chess.square_rank(sq)
-    return r if side == chess.WHITE else 7 - r
+# side_rank + is_hole moved to lucena-core (2026-07-23 consolidation,
+# lucena-core/docs/METRICS_AUDIT.md) — verbatim; re-exported here so every
+# existing plans import keeps working.
+from lucena_core.geometry import side_rank, is_hole  # noqa: F401
 
 
 def sq_color(sq: int) -> bool:
@@ -318,13 +318,7 @@ def strong_squares(b: chess.Board, side: bool) -> list[int]:
     return out
 
 
-def is_hole(b: chess.Board, sq: int, side: bool) -> bool:
-    """No own pawn can EVER attack sq (own pawns attack toward higher
-    side-relative ranks): no own pawn on an adjacent file strictly behind."""
-    f, r = chess.square_file(sq), side_rank(sq, side)
-    return not any(chess.square_file(p) in (f - 1, f + 1)
-                   and side_rank(p, side) < r
-                   for p in b.pieces(chess.PAWN, side))
+# (is_hole re-exported above)
 
 
 def occupied_outposts(b: chess.Board, side: bool) -> list[int]:

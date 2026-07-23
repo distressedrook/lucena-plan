@@ -10,7 +10,7 @@ play executes it. Two rolls, one diff:
                 EVAL-EQUAL line (|cp - cp_best| <= 50): optimal play here
                 executes it.
   ROLL(maia)    K=9 gated rollouts (K* from the k-study; 40-60 policy band).
-                A candidate is MAIA-TYPICAL if it appears in a fraction of
+                A candidate is HUMAN-TYPICAL if it appears in a fraction of
                 rolls that beats its random floor (>= 2 hits AND frac >= 2x
                 the plan's P(random-per-roll)).
   DIFF          plan_diff.labels() on every rolled line; membership test on
@@ -32,7 +32,7 @@ which is usually NOT the plan's own characteristic move).
 
 Verdict per candidate: CONFIRMED-SOUND (engine, fires within 2 plies) >
 CONFIRMED-SOUND-LATER (engine, fires at ply 3+ — sound but not yet due;
-show `immediate_move` instead) > MAIA-TYPICAL (human) > UNSUPPORTED
+show `immediate_move` instead) > HUMAN-TYPICAL (human) > UNSUPPORTED
 (neither) > REFUTED (engine-equal lines exist and NONE contain it AND the
 forced-commit roll drops eval > 40cp — the counterfactual).
 
@@ -71,6 +71,8 @@ PLAN_HORIZON = {
     "free_bad_bishop": 20, "exchange_bad_bishop": 20, "strong_outpost": 18,
     "harvest_overextended": 14, "attack_passer": 16,
     "castle_kingside": 16, "castle_queenside": 16,
+    "keep_king_uncastled": 12,   # the rule (2026-07-23, user-defined): the
+                                 # king isn't castled in the next 6 MOVES
 }
 # P(random per single roll), slow regime, from the calibration report.
 # The Maia-typical bar; refreshed by the 4,000-position benchmark.
@@ -81,6 +83,9 @@ FLOOR_ROLL = {
     "remove_defender": 0.005, "minority_attack": 0.007,
     "passer_creation": 0.045, "passer_push": 0.007, "pawn_storm": 0.003,
     "king_march": 0.014, "trade_into_endgame": 0.001, "alternation": 0.001,
+    "keep_king_uncastled": 0.25,   # NEGATIVE-event plan (audited 2026-07-23,
+                                   # keep_king_uncastled_audit.md); verdict
+                                   # uses the pooled-70% rule, floor is data
 }
 DEFAULT_FLOOR = 0.03
 
@@ -255,6 +260,60 @@ def verify_plan(fen: str, side: str, family: str,
          "lag": None, "timing": None, "immediate_move": None, "details": [],
          "routes": []}
 
+    if family == "keep_king_uncastled":
+        # NEGATIVE-event plan (2026-07-23, user-defined): confirmed by the
+        # ABSENCE of castling — the side's king isn't castled within the
+        # horizon (12 plies = 6 moves) in EVERY eval-equal engine line (one
+        # equal line castling means the engine keeps castling on the table,
+        # so 'keep it uncastled' is not the endorsed plan). plan_diff has no
+        # emitter for a non-event; the lines are walked directly here.
+        white = side == "W"
+
+        def _castles_within(ucis) -> bool:
+            b0 = chess.Board(fen)
+            for u in ucis[:horizon]:
+                mv = chess.Move.from_uci(u)
+                if b0.turn == white and b0.is_castling(mv):
+                    return True
+                b0.push(mv)
+            return False
+
+        # RULING (2026-07-23, supersedes the audit's engine-only gate): the
+        # verdict pools BOTH legs — if the king remains uncastled in more
+        # than 70% of lines across the eval-equal engine PVs AND the Maia
+        # rollouts together, CONFIRMED-SOUND; otherwise HUMAN-TYPICAL.
+        # (Audit context on file: keep_king_uncastled_audit.md — blanket
+        # holding is corpus-anti; the pooled bar is the owner's call.)
+        held_e = held_m = 0
+        equal: list = []
+        if pvs is not None:
+            cp1 = pvs[0]["cp"] if pvs else 0
+            equal = [p for p in pvs if abs(p["cp"] - cp1) <= EQUAL_BAND]
+            held_e = sum(1 for p in equal
+                         if not _castles_within(p["ucis"]))
+            r["engine"] = {"equal_lines": len(equal),
+                           "in_equal_line": bool(equal)
+                           and held_e == len(equal),
+                           "held_lines": held_e}
+        if rolls is not None:
+            held_m = sum(1 for line in rolls
+                         if not _castles_within(line))
+            frac_m = held_m / len(rolls) if rolls else 0.0
+            r["maia"] = {"hits": held_m, "k": len(rolls),
+                         "frac": round(frac_m, 3), "floor": floor,
+                         "typical": held_m >= 2 and frac_m >= 2 * floor}
+        total = len(equal) + (len(rolls) if rolls is not None else 0)
+        if total:
+            pooled = (held_e + held_m) / total
+            r["pooled_held_frac"] = round(pooled, 3)
+            if pooled > 0.70:
+                r["verdict"] = "CONFIRMED-SOUND"
+                # a standing restraint, in force from move one of the line
+                r["lag"], r["timing"] = 0, "immediate"
+            else:
+                r["verdict"] = "HUMAN-TYPICAL"
+        return r
+
     if pvs is not None:
         cp1 = pvs[0]["cp"] if pvs else 0
         equal = [p for p in pvs if abs(p["cp"] - cp1) <= EQUAL_BAND]
@@ -314,7 +373,7 @@ def verify_plan(fen: str, side: str, family: str,
         r["verdict"] = ("CONFIRMED-SOUND" if r["timing"] == "immediate"
                         else "CONFIRMED-SOUND-LATER")
     elif r["maia"] and r["maia"]["typical"]:
-        r["verdict"] = "MAIA-TYPICAL"
+        r["verdict"] = "HUMAN-TYPICAL"
     elif r["engine"] and r["engine"]["equal_lines"] and \
             not r["engine"]["in_equal_line"] and \
             (not r["maia"] or r["maia"]["hits"] == 0):

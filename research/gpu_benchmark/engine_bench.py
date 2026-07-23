@@ -15,9 +15,9 @@ Backends (the analyze(fen, nodes, multipv) -> [(cp, [uci...])] seam):
         match the home run's numbers use the SAME engine we calibrate with;
         a different engine is a valid benchmark but not comparable to the
         120-position home result.
-  grpc  the lucena Truth service (exact parity with home). Needs the
-        superrepo's /common/engine_client on PYTHONPATH + the server up;
-        see GRPCBackend.
+  grpc  the lucena Truth service (exact parity with home). Needs
+        lucena-common installed (`pip install -e /path/to/common`) + the
+        server up; see GRPCBackend.
 
 CP is from the SIDE-TO-MOVE's perspective at the root, normalized to White
 so the eval-equal gate |cp - cp_best| is symmetric. Shards of 50, resume-
@@ -65,11 +65,8 @@ class GRPCBackend:
     """The lucena Truth service — exact parity with the home experiment."""
 
     def __init__(self):
-        import sys
-        from pathlib import Path
-        sys.path.append(str(Path(__file__).resolve().parents[3] / "common"))
-        from engine_client.probes import Probes
-        from engine_client._pb import engine_pb2 as pb
+        from lucena_core.engine_client.probes import Probes
+        from lucena_core.engine_client._pb import engine_pb2 as pb
         import grpc
         self.probes, self.pb, self.grpc = Probes(), pb, grpc
 
