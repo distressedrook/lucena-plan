@@ -1067,6 +1067,35 @@ def _decisive_badge(assessment: dict) -> str:
     return f"{leader} is winning"        # positional / attack / sacrifice
 
 
+def _winning_leader(a: dict) -> str:
+    """Which side is winning — the real eval when pvs are present, else the
+    settled-material leader (same precedence as _decisive_badge)."""
+    total = a.get("total_cp") or 0
+    ms = a.get("material_stability") or {}
+    if abs(total) > _DECISIVE_CP:
+        return "White" if total > 0 else "Black"
+    return ms.get("leader") or ("White" if (ms.get("adjusted_cp") or 0) > 0
+                                else "Black")
+
+
+def _winning_reason(a: dict) -> str:
+    """One sentence saying WHY the leader is winning — the only thing worth
+    showing once a side is outright winning (owner 2026-07-24: "don't show
+    anything, just say why"). Material first (settled), then a fatal king
+    attack, else a plain positional verdict. Never parrots a material count
+    that disagrees with the winner (the finding 26/27 decoy)."""
+    leader = _winning_leader(a)
+    loser = "Black" if leader == "White" else "White"
+    ms = a.get("material_stability") or {}
+    if ms.get("leader") == leader and ms.get("standing"):
+        phrase = ms["standing"].split(" is ", 1)[-1]      # "up a rook"
+        return f"{leader} is winning — {phrase}."
+    kr = a.get("king_risk") or {}
+    if ((kr.get(loser.lower()) or {}).get("danger_bounded") or 0) >= 0.4:
+        return f"{leader} is winning — {loser}'s king is fatally exposed."
+    return f"{leader} is winning."
+
+
 def _bars_block(out: dict) -> list[dict]:
     """Labeled 0-1 bars (owner 2026-07-24: 'reintroduce bars instead of
     labels'). Each is driven by a COMPARABLE, head-to-head quantity so the
@@ -1265,6 +1294,10 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
     out["sides"] = _sides_block(out)
     out["badges"] = _badges_block(out)
     out["bars"] = _bars_block(out)
+    # OUTRIGHT WINNING (owner): show nothing but WHY. When set, the client
+    # renders only this sentence — no bars, no side reports, no badges.
+    out["winning"] = (_winning_reason(out["assessment"])
+                      if _is_decisive(out["assessment"]) else None)
     # whole-sheet FEN redaction, last (2026-07-24): scrub any board string
     # embedded by a nested block (quiescence walks etc.) to its opaque id.
     return _redact_fens(out)

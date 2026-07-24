@@ -150,3 +150,36 @@ def test_bars_are_comparable_and_gated():
     out["assessment"]["total_cp"] = 900
     labels = {b["label"] for b in F._bars_block(out)}
     assert labels == {"Eval", "White king", "Black king"}
+
+
+def test_winning_reason():
+    """Outright winning shows only WHY (owner). Material first, sacrifice never
+    parrots material, equal -> no reason."""
+    A = _assess
+    # material win -> names the edge
+    r = F._winning_reason({"total_cp": 520, "material_stability":
+                           {"leader": "White", "standing": "White is up a rook",
+                            "adjusted_cp": 500}})
+    assert r == "White is winning — up a rook."
+    # sacrifice (material disagrees with the winner) -> plain, no material count
+    r = F._winning_reason({"total_cp": 300, "material_stability":
+                           {"leader": "Black", "standing": "Black is up a rook",
+                            "adjusted_cp": -1720}, "king_risk": {}})
+    assert r == "White is winning."
+    # material even but the loser's king is fatally exposed -> the attack
+    r = F._winning_reason({"total_cp": 400, "material_stability":
+                           {"leader": None, "standing": "material is even",
+                            "adjusted_cp": 0},
+                           "king_risk": {"black": {"danger_bounded": 0.6}}})
+    assert r == "White is winning — Black's king is fatally exposed."
+
+
+def test_winning_field_only_when_decisive():
+    """out['winning'] is set exactly when decisive; None otherwise."""
+    assert F._winning_reason  # exists
+    dec = F._sheet_json("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1",
+                        [{"cp": 520, "pv": [], "ucis": [], "san": []}], None, verify=False)
+    assert dec["winning"] and "winning" in dec["winning"]
+    eq = F._sheet_json("r1bqkbnr/ppp2ppp/2np4/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 1 4",
+                       None, None, verify=False)
+    assert eq["winning"] is None
