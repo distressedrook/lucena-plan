@@ -1,0 +1,305 @@
+{
+ "n": 77429,
+ "collinear": [
+  [
+   "stm",
+   "passer_running",
+   0.928
+  ],
+  [
+   "king_safety_cp",
+   "king_danger",
+   0.899
+  ],
+  [
+   "activity_cp",
+   "activity_mean",
+   0.883
+  ],
+  [
+   "center_cp",
+   "center_share",
+   0.801
+  ],
+  [
+   "passer_count",
+   "passer_best",
+   0.956
+  ]
+ ],
+ "buckets": [
+  {
+   "bucket": "all",
+   "ceiling": {
+    "r2": 0.134,
+    "mae": 56.8
+   },
+   "speaker": {
+    "r2": 0.14,
+    "mae": 57.2
+   },
+   "linear": {
+    "r2": 0.147,
+    "mae": 57.1
+   },
+   "n": 15430,
+   "sd": 89.0
+  },
+  {
+   "bucket": "quiet",
+   "ceiling": {
+    "r2": 0.127,
+    "mae": 44.3
+   },
+   "speaker": {
+    "r2": 0.141,
+    "mae": 44.6
+   },
+   "linear": {
+    "r2": 0.148,
+    "mae": 44.9
+   },
+   "n": 7723,
+   "sd": 67.0
+  },
+  {
+   "bucket": "tense",
+   "ceiling": {
+    "r2": 0.097,
+    "mae": 69.3
+   },
+   "speaker": {
+    "r2": 0.1,
+    "mae": 69.8
+   },
+   "linear": {
+    "r2": 0.108,
+    "mae": 69.3
+   },
+   "n": 7707,
+   "sd": 104.3
+  },
+  {
+   "bucket": "quiet+middlegame",
+   "ceiling": {
+    "r2": 0.135,
+    "mae": 44.7
+   },
+   "speaker": {
+    "r2": 0.135,
+    "mae": 45.3
+   },
+   "linear": {
+    "r2": 0.142,
+    "mae": 45.6
+   },
+   "n": 5845,
+   "sd": 68.3
+  },
+  {
+   "bucket": "quiet+endgame",
+   "ceiling": {
+    "r2": 0.031,
+    "mae": 44.2
+   },
+   "speaker": {
+    "r2": 0.241,
+    "mae": 41.4
+   },
+   "linear": {
+    "r2": 0.255,
+    "mae": 39.9
+   },
+   "n": 535,
+   "sd": 65.4
+  },
+  {
+   "bucket": "quiet+opening",
+   "ceiling": {
+    "r2": 0.125,
+    "mae": 42.4
+   },
+   "speaker": {
+    "r2": 0.132,
+    "mae": 42.9
+   },
+   "linear": {
+    "r2": 0.129,
+    "mae": 43.7
+   },
+   "n": 1343,
+   "sd": 61.9
+  }
+ ],
+ "resid_quiet": 44.6,
+ "resid_tense": 69.8,
+ "ablation_dr2": {
+  "stm": 0.0005,
+  "king_safety_cp": 0.0067,
+  "activity_cp": 0.0051,
+  "pawns_cp": -0.0021,
+  "center_cp": 0.0029,
+  "king_danger": 0.0005,
+  "king_center": 0.0005,
+  "attack_viability": 0.0066,
+  "activity_mean": 0.004,
+  "passive_pieces": -0.006,
+  "center_share": 0.0005,
+  "kingside_share": 0.0008,
+  "queenside_share": -0.0005,
+  "outposts": 0.0029,
+  "open_files_held": 0.0052,
+  "space": 0.0025,
+  "passer_count": 0.0005,
+  "passer_best": 0.0028,
+  "passer_running": 0.0005,
+  "isolated": 0.0005,
+  "doubled": 0.0007,
+  "islands": 0.0068,
+  "weak_complex": 0.0005,
+  "bishop_pair": 0.0103,
+  "trapped": 0.0015,
+  "restricted": 0.0033,
+  "breaks_playable": 0.0005
+ },
+ "examples": [
+  {
+   "fen": "r4rk1/p4pbp/1qp1p1p1/3pP3/2pP4/QPPbB3/P2N1PPP/R3R1K1 w - - 0 16",
+   "r": 52,
+   "pred": -26.2,
+   "top": [
+    [
+     "bishop_pair",
+     -19.9
+    ],
+    [
+     "activity_mean",
+     -14.6
+    ],
+    [
+     "doubled",
+     11.7
+    ],
+    [
+     "restricted",
+     -9.8
+    ]
+   ]
+  },
+  {
+   "fen": "r4rk1/p4pbp/1qp1p1p1/4P3/2pP4/Q1PbB3/P2N1PPP/R3R1K1 w - - 0 17",
+   "r": 52,
+   "pred": -11.9,
+   "top": [
+    [
+     "bishop_pair",
+     -19.9
+    ],
+    [
+     "activity_mean",
+     -19.5
+    ],
+    [
+     "attack_viability",
+     13.9
+    ],
+    [
+     "doubled",
+     11.7
+    ]
+   ]
+  },
+  {
+   "fen": "r2q1bk1/p6p/2pBp1p1/4Pr2/2p5/Q1Pb4/P2N1PPP/R3R1K1 w - - 4 21",
+   "r": 52,
+   "pred": 2.7,
+   "top": [
+    [
+     "bishop_pair",
+     -19.9
+    ],
+    [
+     "king_safety_cp",
+     13.5
+    ],
+    [
+     "doubled",
+     11.7
+    ],
+    [
+     "restricted",
+     -9.8
+    ]
+   ]
+  },
+  {
+   "fen": "r4rk1/qp3pp1/2pp1nnp/4p3/pP1PP3/2P1NN2/b1B2PPP/2RQR1K1 w - - 0 18",
+   "r": 97,
+   "pred": -5.2,
+   "top": [
+    [
+     "activity_cp",
+     11.9
+    ],
+    [
+     "restricted",
+     -9.8
+    ],
+    [
+     "passive_pieces",
+     8.7
+    ],
+    [
+     "passer_best",
+     -7.0
+    ]
+   ]
+  },
+  {
+   "fen": "3rr1k1/4qpb1/1np1n1pp/1p1p4/1P1PP3/1QN2P1P/4NBP1/3RR1K1 w - - 1 26",
+   "r": -47,
+   "pred": -27.2,
+   "top": [
+    [
+     "activity_mean",
+     -14.6
+    ],
+    [
+     "restricted",
+     -9.8
+    ],
+    [
+     "islands",
+     -5.0
+    ],
+    [
+     "attack_viability",
+     -4.5
+    ]
+   ]
+  },
+  {
+   "fen": "3rr1k1/4qpb1/4n1pp/1p1p4/1P1P4/1Q3P1P/4NBP1/3RR1K1 w - - 0 28",
+   "r": -47,
+   "pred": -35.1,
+   "top": [
+    [
+     "activity_mean",
+     -20.5
+    ],
+    [
+     "restricted",
+     -9.8
+    ],
+    [
+     "activity_cp",
+     -6.5
+    ],
+    [
+     "islands",
+     -5.0
+    ]
+   ]
+  }
+ ]
+}

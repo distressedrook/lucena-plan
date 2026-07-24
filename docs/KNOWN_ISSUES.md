@@ -53,8 +53,16 @@ piece-aware is a design change, not an obvious fix. Revisit if piece-
 defended routes surface on *real* (supported) outpost targets after #1 is
 fixed.
 
-## 3. EVERY weakness in the WEAKNESSES section states the fact but never
-   says whether it's currently being EXPLOITED (2026-07-22, generalized)
+## 3. MOST weaknesses in the WEAKNESSES section state the fact but don't
+   say whether it's currently being EXPLOITED (2026-07-22, generalized)
+
+**Partial update (2026-07-24):** the blanket "EVERY line is a flat geometric
+assertion" is now stale for entombed bishops — those ARE bank-checked
+(`fact_sheet._weakness_lines` runs `verify_plan` with extraction/trade
+tracking and prints the observed journey). The rest of the section (weak
+pawns, holes, isolated/backward/doubled/overextended pawns, passive rooks,
+back rank, weak color complex) is still unverified geometry. The generalized
+fix below still stands for those.
 
 **Where:** `fact_sheet.py::_weakness_lines`, ALL of it — not just
 `weak_color_complex`. Weak pawns, holes, isolated/backward/doubled/
@@ -194,6 +202,12 @@ weakness wording (the Carlsbad c1 case). The escape-route BFS here
 should reuse that same fixed-pawn test for its `walls` set instead of
 treating every pawn as permanent.
 
+**Note (2026-07-24):** the "lines-play-the-TRADE variant when
+`bad_bishop_trade` is what fires" mentioned in the resolution below was
+itself never reachable until 2026-07-24 — `plan_diff.bad_bishop_trade` had an
+unreachable emit condition (own bishop count dropping on own move). That
+detector bug is now fixed, so the trade variant can actually fire.
+
 **LARGELY RESOLVED 2026-07-22 (evening), at the REPORTING layer:** the
 sheet no longer prints the BFS route as fact anywhere. `verify_plan`
 gained `track=` (forward-follow a named piece through the firing
@@ -219,6 +233,13 @@ issues #3/#4 and the whole VERIFY-gate architecture.
 **Where:** missing entirely — no detector, no `plan_diff` family, no
 `suggest.py` candidate. Confirmed by grep: nothing in the codebase
 currently reasons about "pieces still on their home squares."
+
+**Partial update (2026-07-24):** the "nothing in the codebase reasons about
+pieces on home squares" claim is now stale — `lucena_core.development_lag`
+exists and is surfaced in the JSON sheet's `metrics.development` / per-side
+blocks. What remains unbuilt is the actual ask: a DEVELOPMENT *plan candidate*
+(an immediate-tier `suggest.py` cand + `plan_diff` family). The design sketch
+below still applies to that piece.
 
 **What's wrong:** in an opening/early-middlegame position with an
 undeveloped knight or bishop, the fact sheet has nothing to say about it
@@ -362,7 +383,21 @@ detail (protected/outside/connected, named per pawn like weaknesses name
 squares), majorities. Same "present-only, no negative lines" rule
 WEAKNESSES already follows (finding 16) should apply symmetrically here.
 
-## 10. `roll_maia()`'s Docker/gpu_bench import has no path wiring — likely
+## 10. ~~`roll_maia()`'s Docker/gpu_bench import has no path wiring~~ — RESOLVED-BY-ARCHITECTURE (2026-07-24)
+
+**Status: CLOSED.** `src/verify.py` no longer contains any roll function
+(`roll_maia`/`roll_engine`) — grep finds zero `gpu_bench` references in `src/`.
+The (fen, pvs, rolls) contract refactor moved all rolling out of the library:
+the research `roll_maia` lives in `research/experiments/tools/rolls.py` (which
+*does* wire the `gpu_benchmark` path), and the LIVE Maia leg is the backend's
+in-process `lucena_backend.plans.rolls.roll_maia`, which the contract allows to
+be None. The residual point — the backend's silent-None degradation — is a
+separate concern, now addressed in `service.PlansRollError` (engine leg) and the
+`_log.warning` in the backend rolls. Original text kept below for history.
+
+---
+
+*(historical)* `roll_maia()`'s Docker/gpu_bench import has no path wiring — likely
     silently returning None on every off-bank live query (2026-07-22,
     found while packaging)
 

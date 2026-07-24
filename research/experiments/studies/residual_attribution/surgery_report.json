@@ -1,0 +1,10 @@
+{
+ "bishop_pair": {
+  "n": 80,
+  "engine_mean": 24.4,
+  "engine_sd": 102.3,
+  "model_mean": 1.0,
+  "model_sd": 28.9,
+  "corr": 0.753
+ }
+}

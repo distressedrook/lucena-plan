@@ -1,4 +1,4 @@
-# chess-plans — positional pedagogy: naming long-term plans
+# lucena-plans — positional pedagogy: naming long-term plans
 
 **What this project is:** teach chess players the *plans* behind quiet moves —
 minority attacks, storms, regroups, structural campaigns. End goal (sharpened
@@ -248,7 +248,7 @@ are in the repo; scores below are the relevant side's points fraction.
    via `research/experiments/tools/engine_roll_helper.py` for protobuf isolation) + Maia
    roll (K=9, the k-study K*, 40-60 policy gate) -> `plan_diff.labels()`
    diff -> graded verdict CONFIRMED-SOUND (in an eval-equal engine line) >
-   MAIA-TYPICAL (>=2 of 9 rolls, beats floor) > NOT-IN-BEST-LINES >
+   HUMAN-TYPICAL (>=2 of 9 rolls, beats floor) > NOT-IN-BEST-LINES >
    UNSUPPORTED. Per-family horizons (harvest 14, minority 30, alternation
    40 — finding 9's timescales finally used). `suggest.py --verify` /
    `suggest_verified()` — the front door is end-to-end for the first time.
@@ -458,20 +458,383 @@ are in the repo; scores below are the relevant side's points fraction.
    + `lift_report_v7.txt` (94,289 anchors; whole vocabulary stable
    under the v7 grammar).
 
+18. **Residual attribution v0 (2026-07-24): static features cannot
+   decompose the engine's margin per-position — measured, not assumed.**
+   R = engine_cp − SEE-adjusted material (the anchor). 77,429 labeled
+   positions harvested from the benchmark roots + interiors of the banked
+   MultiPV lines (PV-inherited labels validated vs fresh 200k-node
+   Stockfish: MAE 8–12cp to ply 8, bias ≈ 0 — interiors are where
+   material imbalance with compensation lives; GM argmax positions never
+   contain it). Held-out, seed-grouped: the whole 27-feature deterministic
+   family explains **R² ≈ 0.15 of R on quiet positions** (0.10 tense,
+   0.26 quiet endgames); GBDT ≈ additive ≈ linear, so the bound is the
+   vocabulary, not the model. Board-surgery counterfactuals (pair→knight
+   swap, passer un-passed; 80 each, fresh engine labels) show attributions
+   are directionally causal (corr 0.75 / 0.55) with magnitudes compressed
+   3–4× — the engine prices the same concept −100..+150cp by context.
+   VERDICT for the product: static terms are salience + sign/ranking,
+   never a cp-decomposition of the eval; "the rest of the edge is
+   concrete" is now a measured sentence (mean |unexplained R| 45cp quiet).
+   The promising route to WHY remains the line-walking family
+   (settled_view/line_theories) — read the compensation where it cashes
+   out. Study + report: `research/experiments/studies/residual_attribution/`,
+   `research/experiments/reports/residual_attribution_v0.md`. Side
+   effect: the study's mirror-audit found and fixed a real lucena-core
+   bug (greedy SEE quiescence, order-dependent, ±10-pawn mirror
+   divergence → stand-pat capture negamax).
+
+19. **Sharpness audit (2026-07-24): the dynamism buckets are a VALIDATED
+   punishment predictor; one component fixed.** Gold-standarded against
+   fresh engine punishment (mean cp loss of alternatives, MultiPV=6) on
+   300 benchmark roots under the production contract (4pv + K=16 rolls):
+   monotone ladder DEAD 30 → QUIET 35 → DYNAMIC 53 → SHARP 118 → RAZOR
+   208cp, spearman 0.72. Measured caveats: DEAD/QUIET don't separate
+   (one speech register); sharpness ≠ Guid–Bratko depth-complexity
+   (anti-correlated −0.38 — RAZOR positions lock earliest; the bucket
+   means "punishing to misplay", never "hard to calculate"). FIX: the
+   compensation component fired on raw material — 44% of fires were
+   pending-recapture mirages; now gapped against SEE-adjusted material
+   (`material_stability.adjusted_cp`), demoting the mirages while the
+   ladder stays monotone. Parked: Maia-unanimity findability discount
+   (needs human-outcome data). Study: `research/experiments/studies/
+   sharpness_audit/`, report `reports/sharpness_audit_v0.md`.
+
+20. **Personal sharpness (2026-07-24): "sharp for YOU" is a real, second
+   axis — built and internally validated.** danger_L = Σ P_L(m)·loss(m)
+   with P_L read straight off the Maia policy head (rating-conditioned,
+   ~25ms, no rollouts) and loss from engine child evals; trap_mass_L =
+   policy mass on ≥100cp losers; trap_move_L = the speakable natural
+   blunder. `src/personal_sharpness.py` (pure check — caller supplies
+   policy + child evals). Study over the 300 audited roots @1300/1800/
+   2400: danger eases monotonically with rating in 89% of positions
+   (54→44→34cp mean); near-ORTHOGONAL to objective punishment (ρ≈0.05)
+   — a genuinely new dimension, not a rescale; 36 positions are
+   objectively calm yet TRAP@1300 (e.g. 51% of 1300-mass plays Nxd5
+   losing 185cp), 8/8 spot-checked traps confirmed @400k nodes. Bucket
+   thresholds are PRIOR-tier (not speakable) pending the external leg:
+   predicted trap_mass vs observed blunder rate in rating-banded Lichess
+   games. v1: horizon traps via the banked K=16 rollouts. Legs banked in
+   `studies/personal_sharpness/bank.jsonl`; report
+   `reports/personal_sharpness_v0.md`.
+
+21. **King-danger calibration (2026-07-24): "0=safe, 1=checkmated" is now
+   a real, validated number — and it required the RIGHT counterfactual.**
+   v1 walked the ENGINE's own best line for both sides: zero catastrophes
+   even at danger=239, because the engine never blunders into its own
+   mate — measures P(catastrophe | perfect defense), which is nearly
+   always ~0 and useless for a coaching product. v2 fix: attacker keeps
+   playing engine-best (also the free eval read), DEFENDER (the at-risk
+   side) plays Maia's top policy choice at 1500 — the personal_sharpness
+   pattern, reused on the other side of the board. Also fixed: root-only
+   benchmark sampling starved the dangerous end (2/300 above danger=200);
+   v2 sources from the residual-attribution study's interior dataset
+   instead. Result: n=278, isotonic fit, Brier 0.189 vs 0.214 baseline
+   (beats it), spearman +0.248 (p=3e-5) — 2-3x the correlation of this
+   project's other "validated"-tier metrics. Reliability: 8.6% @ danger
+   0-40 -> 41% @ 100-260 -> ~75% (n=10 only, flag as imprecise) above
+   264. Caught and fixed a REAL bug the same session: a hand-rolled
+   spearman via naive double-argsort mis-ranks a heavily-tied binary
+   target and leaked the array's bin-sorted build order into the
+   tie-break, silently reporting -0.098 for what scipy confirms is
+   +0.248 — a reminder to use library stats functions for tied data, not
+   hand-rolled rank correlation. Shipped: `positional.danger_bounded`
+   (uncalibrated, formula-normalized, ships in core) +
+   `src/king_danger_calibration.p_catastrophe()` (the calibrated,
+   level-conditioned one — lives in plans, not core, because it is
+   inherently about WHO is defending). One elo slice (1500) run so far;
+   per-level profile is future work. CONFOUND CHECKED same session (owner
+   question: "isn't 1500 just always getting mated by the engine
+   regardless of king safety?"): standardized logistic coefficients show
+   at-risk danger (+0.33) dwarfs the attacker's OWN king danger (+0.08,
+   rules out "both kings are just in chaos") controlling for material
+   (+0.28, real but separate); 8-sample replay of catastrophe lines shows
+   6/8 end in literal checkmate with attacker checks in every terminal
+   sequence — genuine king-hunts, not incidental. Study:
+   `research/experiments/studies/king_danger_calibration/`.
+
+22. **King-danger, three regimes (2026-07-24): "P(catastrophe)" isn't one
+   number — it depends on who's attacking, not just who's defending**
+   (owner: "if you make 1500 play against an engine, of course it will be
+   less [dangerous] [in real games] — the actual opponent isn't even
+   1500"). Validated externally against REAL games at two skill tiers:
+     - IF_PRESSED (Maia@1500 vs engine, finding 21): 30.9% positive,
+       validated, p=3e-5 — a ceiling/worst-case read.
+     - TYPICAL_1500 (real 1450-1550-vs-1450-1550, Lichess 2013-01, real
+       continuations): 6.9% positive, n=159, spearman +0.243 p=0.002 —
+       PROPERLY POWERED. A first pass that only matched ONE side's
+       rating (opponent unconstrained) diluted this to a
+       non-significant +0.107 — direct empirical confirmation of the
+       owner's point that attacker strength sets the base rate.
+     - TYPICAL_GM (real GM-vs-GM, TWIC corpus gm_classical.pgn, real
+       continuations): 1.2% positive, n=245 but only 3 events (one is
+       Gukesh-Ding Liren — real, not corpus noise), spearman +0.122
+       p=0.056 — DIRECTIONALLY consistent with both other regimes but
+       NOT independently significant; genuinely inconclusive on whether
+       correlation truly persists at GM strength or vanishes into noise
+       at this n. Owner hypothesis ("correlation should hold at all
+       levels if levels are matched") is SUPPORTED but not proven by
+       this run — same sign and rough magnitude (0.12-0.25) across all
+       three wildly different regimes, while base rate falls off a
+       cliff with skill (31%->6.9%->1.2%). Would need several more
+       corpus-months to power a hard GM-level claim (rare events).
+   Infra note: harvesting gm_classical.pgn via chess.pgn.read_game()
+   crashed on a real corrupt game (illegal SAN) 17 minutes into a
+   single-process run — fixed by isolating each game to its own parsed
+   text block (one corruption can't desync/crash a neighbor) +
+   parallelizing harvest and engine-labeling across a multiprocessing
+   pool (8 workers) + a 45s per-position watchdog (`apply_async` +
+   `.get(timeout=...)`) so a hung position can't hang the whole run.
+   Shipped: `src/king_danger_calibration.py` now holds all three tables
+   (`p_catastrophe(danger, regime=...)`, `p_catastrophe_profile()`),
+   each carrying its own confidence tier ("validated" vs "indicative").
+   Studies: `research/experiments/studies/king_danger_calibration/`
+   (`validate_real_games.py`, `validate_gm_games_fast.py`).
+
+23. **The clean isolated-variable test (2026-07-24, owner: "Stockfish vs
+   Stockfish — if the king's position is so bad, it should checkmate
+   itself, but the position must have no other issues"): 0/194,
+   confirmed, not an artifact.** v1 (finding 21) already suggested
+   engine-vs-engine gives ~0 catastrophes, but wasn't a clean test — it
+   never isolated "nothing else wrong" and was starved on real danger
+   (2/300 above 200). This version sourced from the interior dataset
+   (finding 18, real danger variance), required material dead-even
+   (|adjusted_cp| <= 30) AND the attacker's own king safe (danger < 40)
+   — truly isolating the one variable — then walked BOTH sides on the
+   SAME engine's own best line (true self-play) for 20 plies @150k
+   nodes. Result: **0 catastrophes across all 194 positions, spanning
+   danger 0 to ~300** (bins: 60/60/60/14/0 — the 350+ bin had literally
+   no qualifying position in 77k candidates: extreme unilateral danger
+   with an otherwise-clean position may just not occur much in real
+   chess). CONCLUSION: a weak king does not "checkmate itself" against
+   perfect defense — the danger score measures an opportunity for the
+   attacker, not a guaranteed conversion; realizing it requires the
+   DEFENDER to be imperfect. This is the cleanest possible empirical
+   confirmation of positional.py's pre-existing design claim ("never a
+   verdict") and the reason every regime that showed real risk in this
+   thread (findings 21-22) needed a non-perfect (Maia or real-human)
+   defender to exist at all. Gap: untested above danger~300 (no clean
+   examples existed to test). Study:
+   `research/experiments/studies/king_danger_calibration/validate_clean_engine.py`.
+
+24. **CORRECTION to finding 23 (2026-07-24, same session): "0/194
+   catastrophes" measures FAST collapse, not eventual outcome — the
+   horizon was the limiting factor, not the concept.** Owner picked the
+   single highest-danger example from finding 23 (danger=287, engine eval
+   confirmed -2.9 for Black) and had it played out with NO horizon cap
+   (real Stockfish-vs-Stockfish, 1s/move, both sides). Result: Black wins
+   by checkmate at ply 118 (move 59) — a real, confirmed, eventually
+   decisive advantage. But at the EXACT 20-ply mark finding 23's study
+   used, eval was still only -308cp (not yet the -700cp crash bar, no
+   mate in sight) — eval didn't cross -700 until ~ply 78, mate only
+   became forced around ply 90+. So the study's "held" label was correct
+   BY ITS OWN DEFINITION, but that definition only detects fast/tactical
+   collapse; a real king-safety-driven disadvantage that converts via a
+   slow technical squeeze (no immediate tactic) is invisible to a 16-24
+   ply window entirely. REVISED READING of finding 23: perfect defense
+   doesn't neutralize king danger — it can only DELAY its conversion,
+   and 0/194 mostly reflects horizon length, not safety. Same lesson as
+   lucena-plans' own finding 9 (per-family horizons: harvest ~12-16
+   plies, minority/passer ~25-40) recurring in a new context — a
+   catastrophe/conversion detector needs a horizon matched to how the
+   advantage actually cashes in, and "king danger -> slow squeeze" may
+   need a much longer one (60-90+ plies) than anything tested this
+   session. Not yet re-run at a longer horizon — flagged as the
+   immediate next step before trusting any "0%" king-danger-under-
+   perfect-play claim at face value.
+
+25. **THE DEFINITIVE ANSWER (2026-07-24, same session): a bad enough king
+   DOES checkmate itself under perfect play — finding 23's "0/194" is
+   RETIRED, it was purely a horizon artifact.** Owner: "play these games
+   out, aggressively parallelize, give me a final score." All 194
+   material-clean, isolated-variable positions from finding 23 replayed
+   to ACTUAL CONCLUSION (checkmate/draw/200-ply cap, 100k nodes/move, 9
+   parallel workers, 404s wall time — not the 16-24 ply horizon).
+   **FINAL SCORE: 35/194 (18.0%) outright loss, 116/194 (59.8%) draw,
+   16/194 (8.2%) held/won, 27/194 (13.9%) undecided at the 200-ply cap.**
+   Clean monotone gradient by danger bin: 0-40 -> 1.7% lost, 40-100 ->
+   23.3%, 100-200 -> 20.0%, 200-350 -> **57.1%** (over half, n=14).
+   Mean plies to resolution: 108-134 (vs the 16-24 tested before) —
+   confirms finding 24's diagnosis exactly: real conversions take ~100+
+   plies, not 20. Correlation (danger vs eventual loss): spearman +0.289
+   (p=4.2e-5), point-biserial +0.325 (p=3.8e-6) — the STRONGEST, cleanest
+   signal of the whole king-danger thread (findings 21-25), because this
+   is the purest test possible: isolated variable, real conclusion, no
+   truncation hiding the effect. Study:
+   `research/experiments/studies/king_danger_calibration/play_out_full.py`
+   (source positions/labels: `play_out_full_report.json`). Open item:
+   13.9% undecided at 200 plies — final eval not yet characterized,
+   likely a mix of genuine fortress draws and under-converted wins that
+   a longer cap would resolve.
+   **FINAL RESOLUTION (same session, owner rule): "positions with |cp| >
+   1, count them by sign"** — of the 27 undecided, 4 were mate-already-
+   forced-not-yet-delivered (an off-by-one in the ply-cap loop, resolved
+   with certainty), the rest called by the sign of the final eval
+   (a projection from an unconverted-but-trending position, not a
+   directly verified result — 13 sat at exactly 0 and stayed draws).
+   **CLOSED FINAL SCORE: 40/194 (20.6%) lost, 129/194 (66.5%) drew,
+   25/194 (12.9%) held/won.** Gradient, now fully monotone: 0-40 -> 3.3%,
+   40-100 -> 25.0%, 100-200 -> 23.3%, 200-350 -> **64.3%** (9/14). This
+   is the number to cite for "does an isolated, materially-clean weak
+   king eventually lose under perfect play" — it does, at a rate that
+   climbs from near-zero to roughly 2-in-3 across the tested danger
+   range.
+
+26. **THE SEE DISCOUNT (2026-07-24, owner-found bug + owner directive "add
+   SEE style discount across all dimensions"): every geometric read that
+   COUNTED ATTACKERS credited pieces that were not going to be on the
+   board.** Found by inspecting finding 25's highest-danger HELD position:
+   danger=254 was driven by a black queen on d3 that was simply hanging —
+   White was in check and Kxd3 (SEE +900) won it outright on move one. The
+   "siege" had a one-move lifespan. Fix: `geometry.loose_map(b)` — square
+   -> pressure weight, 0.0 if the owner is not to move (enemy just takes
+   it), 0.5 if the owner is to move (survives, but must spend its move
+   fleeing). Uses `see._see_move` directly, which derives the capturer
+   from the piece's own colour, so it needs NO null move and works in
+   check (exactly where the bug lived). Applied across: king-safety zone
+   units + the two-attacker gate + `heavy`/`has_q` gates, `_attack_maps`
+   control counts (-> center term), center occupation/`held`,
+   `geometry.control_share` (-> region_control, color_complex),
+   attack_viability latent-attacker mass + heavies, region_control
+   outposts + file heavies, trapped_pieces guard counts, space_report
+   wake, pawn_breaks playability. DELIBERATELY NOT applied to activity's
+   raw score: `_ACT_QUANTILES`/`_DEV_BASELINE` are corpus grids fitted
+   over 4.7M observations of the UNDISCOUNTED formula, so discounting the
+   input would silently invalidate every percentile and dev-lag baseline
+   — a `loose` flag is exposed per piece instead; recalibrating is a
+   corpus job. Verified: motivating position 254 -> 52 (queen dropped
+   from zone_attackers, units 39 -> 4) while the untouched black king
+   stays 35; mirror anti-symmetry still 0/297; 188/188 core tests
+   (one real contract break caught and fixed — `attack_units` must stay
+   int per its schema test). Cost ~0.5ms/position, negligible on the hot
+   path. **HONEST EMPIRICAL RESULT: the fix does NOT improve prediction.**
+   Re-scoring finding 25's 194 played-out positions: 18 changed, spearman
+   vs real outcome 0.312 -> 0.295 (bootstrap 95% CI on the delta
+   [-0.068, +0.025], straddles zero — indistinguishable from noise, but
+   the point estimate leans negative). WHY, and it is a real finding:
+   positions with a hanging piece in the king zone lost **33.3%** of the
+   time vs 19.3% for unchanged positions — "there is a loose piece near
+   the king" is ITSELF predictive (it proxies tactical chaos), and the
+   buggy score was accidentally folding that in. The discount is kept on
+   CORRECTNESS grounds (king_safety must mean persistent siege pressure,
+   not one-move ghosts), not predictive ones. FOLLOW-UP: capture
+   "loose pieces near the king / tactical chaos" as its OWN explicit
+   feature rather than as a bug side-effect — it is worth more than the
+   ghost-attacker signal it replaces.
+   **WHY, verified (owner: "if there's a hanging piece, doesn't SEE adjust
+   it?"): it does — for MATERIAL — and the residual signal survives that.**
+   The loose-piece positions carry raw -129cp vs adjusted -4.4cp (SEE
+   resolves ~125cp); the rest are raw -32.5 -> adjusted -2.0. So after
+   quiescence BOTH groups sit at material parity (-4.4 vs -2.0,
+   indistinguishable) — all 194 were material-clean by construction — yet
+   the loose group still loses 33.3% vs 19.3%. The 33% is therefore NOT
+   "about to be down material". Concrete mechanism visible in the
+   motivating position: the piece that had to capture the hanging queen
+   was the KING (Kxd3 dragged White's king d2 -> d3, further into the
+   open). The hanging piece was a LURE, not a siege — material comes out
+   even, the king ends up worse placed. That positional cost of a forced
+   recapture falls between our two instruments: geometry sees an attacker
+   that is leaving, material sees an even trade, and neither prices the
+   deflection. THAT is the feature to build (decoy/deflection onto the
+   king), not a vague "tactical chaos" proxy.
+
+27. **RULING (2026-07-24, owner): never show a raw/SEE-unsettled material
+   read to a user — always the QUIESCENCED one.** Prompted by the finding
+   26 position, where the coach's verbatim sentence was "Black is up a
+   queen for a bishop" about a queen White's KING captured for free on
+   the very next move. `material_stability`'s own docstring already said
+   "adjusted_cp ... is the number to READ, not raw_cp", but two things
+   did not follow it: `leader` was derived from `raw_cp` (so it said
+   "Black" at raw -570 while adjusted was 0), and `reads.material()
+   ['standing']` — the sentence the coach speaks VERBATIM — was a pure
+   piece count with no SEE at all. Fixes: `_quiesce(fen)` now returns
+   (settled value, SETTLED FEN) so callers can describe what survives
+   the exchanges; `leader` reads off `adjusted_cp`;
+   `material_stability` gained `standing` (settled, the speakable one),
+   `raw_standing` (diagnostics only) and `settled_fen`; and
+   `positional._material_term`'s standing is now read off the settled
+   board too. Bug position now says "material is even"; genuine
+   advantages ("White is up a rook") are unchanged. Cost +0.9ms on
+   analyze_positional (0.74 -> ~1.6ms) — free against the ~5s LLM call it
+   feeds. 188/188 core tests, mirror sweep 0/297. DELIBERATELY NOT
+   changed: the material TERM's `cp` is still the raw tapered PeSTO sum —
+   it is a decomposition term on its own scale and a fitted feature in
+   the residual studies (finding 18), so settling it is a separate,
+   deliberate change, not a drive-by.
+
+28. **THE LLM IS OUT OF THE POSITION-READ PATH (2026-07-24, owner: "none
+   of this goes to LLM. We must deterministically present this. Rip the
+   LLM part out.").** `freeform._plans_read` used to hand the post-verify
+   sheet to `PlansReadPrompt` for narration; it now calls
+   `plans.render_position_read` -> lucena-plans `position_read.render`.
+   `PlansReadPrompt` is DELETED (77 lines).
+   **The reason is correctness, not latency:** the reliability tier —
+   "NEVER mention an entry with verified=false or null" — was an
+   INSTRUCTION INSIDE A PROMPT. The only thing keeping an unconfirmed
+   plan candidate away from a student was a sentence a model could drift
+   from at temperature 1.0. It is now `if not p.get("verified"):
+   continue` in code.
+   NOT reused: `fact_sheet.build_fact_sheet` (owner: "build fact sheet
+   existed FOR the LLM") — it is a grounding artifact, exhaustive and
+   hedged so a narrator could select from it; a presentation must do the
+   selecting itself. `position_read.py` is purpose-built: verified plans
+   only (cap 2/side), weaknesses capped at 3/side, material spoken only
+   when it is doing something (and via the SETTLED standing, finding 27),
+   structure NAMED only.
+   DELIBERATELY DROPPED with the LLM: the THEORY paragraph — the one
+   sanctioned place a model spoke from its own knowledge (named
+   structures, LLD §9). Deterministic code cannot invent it and must not
+   fake it; authored per-structure blurbs are the honest way to bring it
+   back. Also gone from the user's text: the opaque POSITION-<hash> id (a
+   grounding-test device so a narrator could not cheat off the FEN) and
+   the "textbook theory may be drawn on" hint.
+   Verified: backend 521 passed / 4 failed, and those 4 were baselined as
+   PRE-EXISTING by stashing only the session's own backend edits and
+   re-running (2 test_margin — margin.py was already dirty when the
+   session opened; 1 test_mcp features-projection; 1 test_mcp needing
+   LUCENA_MAIA). `test_plans_read_gates` updated: its LLM stub is now an
+   `AssertionError`-raising `_gen_json`, so if a model is ever put back on
+   this path the suite says so.
+
+29. **/content wired into the margin (2026-07-24, owner: "look inside
+   /content, wire that up").** `lucena_core/content.py` (readers for 112
+   authored opening annotations + Socratic Q&A, 235 sourced quotes, 295
+   trivia) existed with its data synced but had ZERO callers, and
+   `httpserver` was already threading `seed=session_id` into
+   `margin.build` "so a session keeps its quote" — which `build` ignored.
+   The card builder had been stripped in the 2026-07-23 JSON-inspection
+   pass. Restored the three-stage margin: (1) plies 0-1 → the EPIGRAPH,
+   seeded by SESSION (fallback the DAY, never the fen — a fen seed
+   changed the quote between ply 0 and ply 1); (2) in book → the THEORY
+   card, masthead + authored annotation lead + labeled doors; (3) out of
+   book → the existing plans sheet/raw deep worker. Helpers
+   (`_plies_played`, `_lead_sentences`, `_doors`) restored VERBATIM from
+   backend fb4b2d7 — audited code, only `build()`'s staging rewired.
+   Stages 1-2 are engine-free, deterministic, and carry NO model output:
+   human-authored, source-checked prose, which is the honest answer to
+   finding 28's dropped THEORY paragraph on the IN-BOOK side (the plans
+   read is out-of-book by construction, so its structure-theory gap still
+   wants authored per-STRUCTURE blurbs — annotations are keyed by opening
+   NAME and cannot fill it). Side effect: the two long-standing
+   `test_margin` failures were the half-finished `_cache(str)` ->
+   `_cache(dict)` refactor and are now fixed; backend 526 passed / 2
+   failed (both pre-existing and unrelated: an mcp features-projection
+   assertion and one test needing LUCENA_MAIA). New coverage added for
+   the epigraph's seed-stability and the theory card.
+
 ## What exists in this repo
 
-**Layout (2026-07-22 restructure): `src/` (the library, flat modules), `docs/` (KNOWN_ISSUES.md), `research/` (experiments + gpu_benchmark + data + minority-attack-gm). File names below are module names; they live in `src/`.**
+**Layout (2026-07-22 restructure): `src/` (the library, flat modules), `docs/` (KNOWN_ISSUES.md), `research/` (experiments + gpu_benchmark + data + minority-attack-gm). Rows with a bare module name (`suggest.py`) live in `src/` and ship (see `pyproject.toml` py-modules); rows with a `research/...` path are the harness and never ship. The full shipped src surface is the 13 modules in py-modules — `closed_v0`, `detectors`, `dynamism`, `fact_sheet`, `king_danger_calibration`, `personal_sharpness`, `plan_diff`, `position_read`, `structures`, `suggest`, `tension`, `verify`, `weaknesses`.**
 
 | file | what |
 |---|---|
 | `detectors.py` | `detect_minority_attack(game)` — both sides. Structure checks (`is_carlsbad`, `is_carlsbad_reversed`) + side-parameterized b-pawn choreography + lever + damaged-queenside post-condition. **Corpus-validated on FULL corpora: 1,179/311,327 Lichess elite (592 W / 587 B); 127/33,769 GM classical (113 W / 14 B)** — same 0.38% rate in both, side split flips at GM level (finding 1). Blind-tested on Arkell–de Wolf (detected, correctly). |
-| `research/experiments/studies/trajectory_v1.py` | Term-trajectory extractor: quiet-ply sampling (skip captures/checks ± 1 ply) + rolling-drift segmentation. 300 Carlsbad games → 602 episodes, median span 16 plies. **Finds accumulation plans and harvests; misses restructuring creation** (see founding result). Depends on lucena-engine's `positional` module via PYTHONPATH (see Environment). |
+| `research/experiments/studies/trajectory_v1.py` | Term-trajectory extractor: quiet-ply sampling (skip captures/checks ± 1 ply) + rolling-drift segmentation. 300 Carlsbad games → 602 episodes, median span 16 plies. **Finds accumulation plans and harvests; misses restructuring creation** (see founding result). Depends on `lucena_core.positional` (moved out of lucena-engine in the 2026-07-23 consolidation; see Environment). |
 | `research/experiments/studies/trajectory_v0.py` | First prototype (event-based; superseded — kept for the diagnostic history). |
 | `research/experiments/reports/episodes.jsonl` | The 602 drift episodes (term, dir, net cp, ply span, moves, start FEN, game URL). |
 | `research/experiments/reports/episode_audit.html` | Human audit UI: 100 stratified spans, verdict buttons (coherent / not / split) + naming box, localStorage + export. **Not yet audited.** Links open the Lichess game AT the span's ply. |
 | `weaknesses.py` | **The fixed-target vocabulary** (finding 7, completed finding 12, extended finding 16): `weak_pawns`, `entombed_bishops`, `occupied_outposts`, `exposed_king`, `passive_rooks`, `weak_color_complex`, `back_rank_weak`, `overextended_pawns`, `backward_half_open`, `census()` — plus the standalone literature-definition pair `backward_pawns()` (Kmoch: strictly-ahead neighbors + enemy-pawn-controlled stop-square) and `isolated_pawns()`, both used by the suggest.py weakness-plan matrix and fact_sheet.py's WEAKNESSES sections. Also `knight_route`/`knight_route_conditional` (pawn-aware BFS route annotations). Pure geometry. |
 | `suggest.py` | **THE FRONT DOOR — the position→plan suggester.** `./suggest.py "FEN"` or `./suggest.py game.pgn 24`; `--verify` for the closed loop. `build_menus(b)` builds the raw per-side candidate menus (shared by the numeric renderer `suggest_plans()` and `fact_sheet.py`'s prose renderer); PASS 1 state-triggered + the literature weakness-plan matrix (finding 16: isolani/backward/doubled/hanging-pawns, piece-gated) + PASS 2 situational (prophylaxis/simplify/avoid-trades/defense). OUTPOST and BREAK THE BISHOP PAIR candidates are per-square, each with a knight-route annotation. Effect-size ranking is corpus-derived where audited, prior otherwise. |
-| `fact_sheet.py` | **The natural-language fact-sheet + control-prompt generator** (finding 16), for grounding-tested LLM narration. `build_fact_sheet(fen, pvs, rolls)` (the (fen, pvs, rolls) contract — never rolls; ASSESSMENT cp comes from the supplied top PV, static term-sum + SEE correction as the no-engine fallback) → ASSESSMENT (words) / POSITION READ (prose) / STRUCTURE (named only) / WEAKNESSES FOR WHITE·BLACK (present-only, no negative lines) / PLAN FOR WHITE·BLACK (jargon-free). `build_control_prompt(fen)` — same framing, zero facts, isolates genuine grounding from free association. FEN redacted to an opaque `POSITION-<hash>` id throughout. |
+| `fact_sheet.py` | **The fact-sheet generator.** PRODUCT SURFACE (since 2026-07-24): `pre_verify_json(fen, pvs, rolls)` / `post_verify_json(fen, pvs, rolls)` — the structured `lucena-plans/sheet@1` JSON the backend consumes (`suggest proposes, verify FILTERS`; each confirmed plan carries the firing lines' `details`/`routes`/`family`, not geometry). The prose `build_fact_sheet` + `build_control_prompt` are retired to research use. All emit the (fen, pvs, rolls) contract (never rolls; ASSESSMENT cp from the supplied top PV, static term-sum + SEE correction as the no-engine fallback). FEN redacted to an opaque `POSITION-<hash>` id throughout — including a whole-sheet `_redact_fens` scrub over nested quiescence FENs (2026-07-24 fix). |
 | `structures.py` | **The theory structure catalog**: 15 recognizers (carlsbad, isolani, hanging pawns, french advance, advance caro, mar del plata, benoni, maroczy, hedgehog, open sicilian, boleslavsky, stonewall, grünfeld center, spanish center, slav triangle), each written once White-owner and auto-mirrored; `classify(board)`. All ECO-validated (`research/experiments/studies/validate_structures.py`). |
 | `research/experiments/studies/evidence_table.py` | The structure→plan evidence row builder (roadmap 1). Carlsbad row done → `carlsbad_row.jsonl` (15,163 structure games, both corpora, stage = none/launched/advanced/completed). |
 | `research/experiments/studies/outpost_plan_v0.py` | **The hole/outpost plan** (plan-unit: concession → knight journey → anchored occupation → rent). 7,057 GM plan-units (20.9% of games!) → `outpost_plans.jsonl`. Laws: depth gradient 0.509/0.561/0.584 (4th/5th/6th rank); rim outposts worthless (0.496); f5 the best square in chess (0.630); self-conceded holes costliest (0.555 vs 0.540); median concession→occupation lag 14 plies; canonical route b1-c3-d5. Ready to graduate after review. |
@@ -486,7 +849,13 @@ are in the repo; scores below are the relevant side's points fraction.
 | `research/experiments/studies/weakness_census.py` | The two-weaknesses experiment (finding 7); imports `weaknesses.py`, so the census grows as detectors are added. |
 | `verify.py` | **THE CLOSED LOOP** (finding 14, extended finding 16; contract ruling 2026-07-22): `verify_plan(fen, side, family, pvs, rolls, square=None, route_hops=None)` — **the (fen, pvs, rolls) contract: the library NEVER rolls, it only checks caller-supplied lines** (backend supplies its own engine/Maia lines; research harness rolls via `research/experiments/tools/rolls.py` or replays banked shards). Per-family horizons + random floors, tighter floor when square-scoped, route-scaled horizon for multi-hop journeys. TIMING (immediate/developing/long-term) split into `CONFIRMED-SOUND` vs `CONFIRMED-SOUND-LATER` with an `immediate_move` field. Graded verdict. Either leg may be None — degrades and says so. |
 | `research/experiments/tools/rolls.py` | **The research harness's live roll producers — the ONLY place in the repo that reaches an engine or Maia at runtime.** `roll_engine` (MultiPV=4 @1M nodes via `engine_roll_helper.py` under lucena-tactics' venv, protobuf isolation), `roll_maia` (K=9 docker-pipe gated rollouts), `roll_both` -> the `{"pvs", "rolls"}` bank shape the verify/fact_sheet/suggest CLIs read. |
-| `hierarchy.py` | **The pedagogy layer** (finding 13): MECHANISM/PLAN/CAMPAIGN, `compose()`, `curriculum()`. 7 campaigns with role-tagged members, composition edges colift-evidenced. |
+| `research/experiments/studies/hierarchy.py` | **The pedagogy layer** (finding 13): MECHANISM/PLAN/CAMPAIGN, `compose()`, `curriculum()`. 7 campaigns with role-tagged members, composition edges colift-evidenced. (Research module — NOT in src/, not shipped.) |
+| `plan_diff.py` | **The plan grammar / retrospective namer** — `snapshot`/`delta_stream`/`parse_line`/`labels`: the hand-written, hand-mirrored event detectors for every plan family (castle, harvest, outpost, pair_break, trade_into_endgame, minority_*, ...). verify.py treats its emissions as ground truth. Pure geometry over move sequences. |
+| `tension.py` | Central-tension read: `central_tension` (cocked central levers), `classify_line` (how a banked line FIRST discharges the tension — keep/lock/resolve), `analyze`/`render` for the sheet's CENTRAL TENSION section. |
+| `dynamism.py` | Sharpness buckets (finding 19): DEAD/QUIET/DYNAMIC/SHARP/RAZOR from narrowness + forcingness + compensation (gapped against SEE-adjusted material). Consumed by `fact_sheet`'s `character` block. |
+| `position_read.py` | Deterministic renderer for the post-verify JSON sheet (`render(post)`) — the code-filter reliability gate (owner ruling 2026-07-24: no LLM in the read path). Consumed by the backend's `render_position_read`. |
+| `king_danger_calibration.py` | `p_catastrophe_profile(danger)` — calibrated P(catastrophe) in the three regimes (findings 21-25); consumed by `fact_sheet`'s king_risk block. |
+| `personal_sharpness.py` | Per-player sharpness read (research-facing; not yet consumed by the shipped sheet). |
 | `research/experiments/studies/campaign_study.py` | Full-corpus campaign calibration (finding 13); the monotone absent<fragment<partial<full gradient + the material-at-start symptom control. Witnesses -> `campaign_study.jsonl`. |
 | `research/experiments/studies/composition_evidence.py` | Which mechanisms NEST in which plans, by colift-vs-random (the campaign edges). |
 | `research/experiments/studies/export_benchmark.py` | Freezes `benchmark_v1.jsonl` (4,000 positions, sha+git-pinned) from the banked argmax anchors. |
@@ -566,9 +935,9 @@ Always proposer-only behind human ratification (the Maia-firewall pattern).
 ## Environment
 
 - Python venv with `python-chess` (detectors.py needs nothing else).
-- `trajectory_v1.py` additionally imports lucena-engine's static positional
-  terms: `sys.path.insert(0, "/Users/avismara/Development/lucena/engine/python")`
-  → `from lucena_engine import positional`. No engine server needed (static
+- `trajectory_v1.py` additionally imports the static positional terms from
+  `lucena_core` (2026-07-23 consolidation — they moved out of lucena-engine):
+  `from lucena_core import positional`. No engine server needed (static
   eval only, no search). lucena-tactics' venv works:
   `~/Development/lucena/lucena-tactics/.venv/bin/python`
   (computed relative to the superrepo root by rolls.py, not hardcoded).

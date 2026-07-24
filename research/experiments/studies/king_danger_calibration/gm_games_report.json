@@ -1,0 +1,3126 @@
+{
+ "n": 245,
+ "n_excluded": 61,
+ "positive_rate": 0.0122,
+ "rows": [
+  {
+   "fen": "r1b1k2r/1p2bppp/p2Q1n2/8/P1Bn4/2N5/1P3PPP/R1BR2K1 b kq - 0 14",
+   "color": "black",
+   "danger": 192,
+   "ply_idx": 27,
+   "white": "Savchenko,B",
+   "black": "Glek,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/1p2bppp/p4n2/4Q3/P1Bn4/2N5/1P3PPP/R1BR2K1 b kq - 1 13",
+   "color": "black",
+   "danger": 176,
+   "ply_idx": 25,
+   "white": "Savchenko,B",
+   "black": "Glek,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1k2r/pp3ppp/4pn2/2nq4/8/P1Q2N2/1P2PPPP/R1B1KB1R w KQkq - 0 10",
+   "color": "white",
+   "danger": 124,
+   "ply_idx": 18,
+   "white": "Stojanovic,Mih",
+   "black": "Venkatesh,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1k2r/pp3ppp/4pn2/3q4/4n3/P1Q1BN2/1P2PPPP/R3KB1R w KQkq - 2 11",
+   "color": "white",
+   "danger": 104,
+   "ply_idx": 20,
+   "white": "Stojanovic,Mih",
+   "black": "Venkatesh,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/1p3ppp/p3pn2/2P5/2B5/4PN2/PP3PPP/RNBQ1RK1 b kq - 0 7",
+   "color": "black",
+   "danger": 106,
+   "ply_idx": 13,
+   "white": "Komarov,Di",
+   "black": "Gomez Garrido,C",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1k2r/2q1nppp/p3p3/1pQ1n1P1/4P3/1NP1B3/P1P4P/2KR1B1R b kq - 2 16",
+   "color": "black",
+   "danger": 109,
+   "ply_idx": 31,
+   "white": "Flom,Gabriel",
+   "black": "Bauer,Ch",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2q1r1k/2pb3n/np1p1bQ1/p2Pp2p/1PP2p2/P1NBBP1P/3N2P1/1R3RK1 b - - 3 19",
+   "color": "black",
+   "danger": 108,
+   "ply_idx": 37,
+   "white": "Flom,Gabriel",
+   "black": "Yankelevich,L",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4r1k/2pbq2n/np1p1bQ1/p2Pp2p/1PP2p2/P1NB1P1P/3N1BP1/1R3RK1 b - - 5 20",
+   "color": "black",
+   "danger": 108,
+   "ply_idx": 39,
+   "white": "Flom,Gabriel",
+   "black": "Yankelevich,L",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6KQ/5R2/4k3/8/8/8/3r4/8 b - - 0 57",
+   "color": "black",
+   "danger": 116,
+   "ply_idx": 113,
+   "white": "Grigoryan,K2",
+   "black": "Sosa,T ARG",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "3r1RKQ/8/4k3/8/8/8/8/8 b - - 2 58",
+   "color": "black",
+   "danger": 101,
+   "ply_idx": 115,
+   "white": "Grigoryan,K2",
+   "black": "Sosa,T ARG",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r5k1/pp3p2/2p1r3/6q1/8/2Q1bBP1/PP4KP/R3R3 w - - 0 29",
+   "color": "white",
+   "danger": 118,
+   "ply_idx": 56,
+   "white": "Dudin,Gleb",
+   "black": "Hakobyan,Aram",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4r1k1/pp3p2/2p1r3/6q1/8/1Q2bBP1/PP4KP/R3R3 w - - 2 30",
+   "color": "white",
+   "danger": 118,
+   "ply_idx": 58,
+   "white": "Dudin,Gleb",
+   "black": "Hakobyan,Aram",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6k1/8/3p2p1/2PPb3/2Qn1q2/4p2P/4P1B1/4R1K1 w - - 1 41",
+   "color": "white",
+   "danger": 111,
+   "ply_idx": 80,
+   "white": "Batsuren,Dambasuren",
+   "black": "Rahul,Srivatshav P",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "6k1/8/3p2p1/2PPb3/3n4/4p2P/4P1Bq/2Q1R1K1 w - - 3 42",
+   "color": "white",
+   "danger": 104,
+   "ply_idx": 82,
+   "white": "Batsuren,Dambasuren",
+   "black": "Rahul,Srivatshav P",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "6k1/1ppq2pp/1pp3r1/8/3P1P1n/1NPQ2rP/PP2R1PK/6R1 w - - 1 27",
+   "color": "white",
+   "danger": 108,
+   "ply_idx": 52,
+   "white": "Balakrishnan,Praveen",
+   "black": "Antipov,M2",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6k1/1pp3pp/1pp5/5q2/3P1P1n/1NP3KP/PP2R1P1/6R1 w - - 1 29",
+   "color": "white",
+   "danger": 102,
+   "ply_idx": 56,
+   "white": "Balakrishnan,Praveen",
+   "black": "Antipov,M2",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3kr3/3q1p1p/Q7/2p5/P2N4/8/2r2PPP/3R1RK1 b - - 0 34",
+   "color": "black",
+   "danger": 146,
+   "ply_idx": 67,
+   "white": "Brodsky,David",
+   "black": "Dudin,Gleb",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "3k3r/r4p1p/p1pq1b2/5N2/3p4/2p5/P3QPPP/RN3RK1 b - - 2 22",
+   "color": "black",
+   "danger": 107,
+   "ply_idx": 43,
+   "white": "Brodsky,David",
+   "black": "Dudin,Gleb",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2r2k1/p2q2bp/3N4/3P1Qp1/P2p4/1P4B1/5PPP/5RK1 b - - 0 24",
+   "color": "black",
+   "danger": 121,
+   "ply_idx": 47,
+   "white": "Donchenko,Alexa",
+   "black": "Wei Yi",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/pp2bppp/5n2/2pP4/2P5/P1N5/1P4PP/R1BQKBNR w KQ - 1 10",
+   "color": "white",
+   "danger": 102,
+   "ply_idx": 18,
+   "white": "Vidit,S",
+   "black": "Ding Liren",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/1p2bppp/p4n2/2pP4/2P5/P1N5/1P2B1PP/R1BQK1NR w KQ - 0 11",
+   "color": "white",
+   "danger": 102,
+   "ply_idx": 20,
+   "white": "Vidit,S",
+   "black": "Ding Liren",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qnk2/ppp1N1pQ/3p1p2/2b5/2b2P1B/8/P1P3PP/4R2K b - - 1 24",
+   "color": "black",
+   "danger": 119,
+   "ply_idx": 47,
+   "white": "Firouzja,Alireza",
+   "black": "Maghsoodloo,Parham",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qnk2/ppp1NbpQ/3p1p2/2b5/2B2P1B/8/P1P3PP/1R5K b - - 0 23",
+   "color": "black",
+   "danger": 108,
+   "ply_idx": 45,
+   "white": "Firouzja,Alireza",
+   "black": "Maghsoodloo,Parham",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqr3/pp3pk1/5np1/2n3Q1/8/2N2B2/PPN3PP/R4R1K b - - 0 18",
+   "color": "black",
+   "danger": 147,
+   "ply_idx": 35,
+   "white": "Ding Liren",
+   "black": "Donchenko,Alexa",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqr3/pp3pk1/4nnp1/4Q3/8/2N2B2/PPN3PP/R4R1K b - - 2 19",
+   "color": "black",
+   "danger": 100,
+   "ply_idx": 37,
+   "white": "Ding Liren",
+   "black": "Donchenko,Alexa",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/p1p2p1p/1p1p2p1/6n1/2PN3P/2Q3Pq/PP2PPK1/R3R3 w - - 1 20",
+   "color": "white",
+   "danger": 129,
+   "ply_idx": 38,
+   "white": "Donchenko,Alexa",
+   "black": "Giri,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/p1p2p1p/1p1p2p1/8/2PNn2P/2Q3Pq/PP2PP2/R3R1K1 w - - 3 21",
+   "color": "white",
+   "danger": 129,
+   "ply_idx": 40,
+   "white": "Donchenko,Alexa",
+   "black": "Giri,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4r3/2p2pk1/3p3p/pQ1P4/Pn1K1Bp1/2R1P3/1P1q2PP/8 w - - 17 37",
+   "color": "white",
+   "danger": 166,
+   "ply_idx": 72,
+   "white": "Gukesh,D",
+   "black": "Ding Liren",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "4r3/2p2pk1/3p3p/pQ1P4/P4Bp1/4P3/nP1RK1PP/6q1 w - - 9 33",
+   "color": "white",
+   "danger": 153,
+   "ply_idx": 64,
+   "white": "Gukesh,D",
+   "black": "Ding Liren",
+   "label": 1,
+   "reason": "eval_crash"
+  },
+  {
+   "fen": "r4b1k/5Rp1/3p2Pp/7P/1P1QP3/q4P2/2R5/1K6 w - - 0 50",
+   "color": "white",
+   "danger": 174,
+   "ply_idx": 98,
+   "white": "Salem,AR",
+   "black": "Korobov,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4k1r/pp3p2/2pq2n1/3p1R2/3Q1Ppp/2N3P1/PP4PK/4R3 b - - 1 27",
+   "color": "black",
+   "danger": 114,
+   "ply_idx": 53,
+   "white": "Yilmaz,M",
+   "black": "Santos Latasa,J",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4k1r/pp3p2/2pq2n1/3p1R2/3Q1Pp1/2N3K1/PP4P1/4R3 b - - 0 28",
+   "color": "black",
+   "danger": 114,
+   "ply_idx": 55,
+   "white": "Yilmaz,M",
+   "black": "Santos Latasa,J",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1Q6/pp1r2k1/6rp/2qB4/4P1n1/P2p4/6PP/1R3R1K b - - 8 38",
+   "color": "black",
+   "danger": 170,
+   "ply_idx": 75,
+   "white": "Yilmaz,M",
+   "black": "Vrolijk,Liam",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/ppr3k1/7p/4P3/3q4/P4Q2/2Bp2PP/7K b - - 3 53",
+   "color": "black",
+   "danger": 119,
+   "ply_idx": 105,
+   "white": "Yilmaz,M",
+   "black": "Vrolijk,Liam",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3n1k1/ppp4Q/5p2/3qp3/7p/3B4/P1P3PP/1R4K1 b - - 0 23",
+   "color": "black",
+   "danger": 122,
+   "ply_idx": 45,
+   "white": "Salem,AR",
+   "black": "Niemann,Hans Moke",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1r3nk1/8/3q2pQ/3PpBN1/2Pb3P/6P1/1P3PK1/2B5 b - - 0 41",
+   "color": "black",
+   "danger": 149,
+   "ply_idx": 81,
+   "white": "Deepan,C",
+   "black": "Savchenko,B",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "1r3nk1/8/4BqpQ/3Pp1N1/2Pb3P/6P1/1P3PK1/2B5 b - - 2 42",
+   "color": "black",
+   "danger": 149,
+   "ply_idx": 83,
+   "white": "Deepan,C",
+   "black": "Savchenko,B",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1b2rk1/p1p2pp1/1p5p/3N4/3qn3/4P3/PP2BPPP/R3K2R w KQ - 0 15",
+   "color": "white",
+   "danger": 114,
+   "ply_idx": 28,
+   "white": "Iniyan,Pa",
+   "black": "Deepan,C",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbQk2r/1p3ppp/p3pn2/2b5/2B5/4PN2/PP3PPP/RNB2RK1 b kq - 0 8",
+   "color": "black",
+   "danger": 120,
+   "ply_idx": 15,
+   "white": "Berczes,D",
+   "black": "Neverov,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/1p3ppp/p3pn2/2P5/2B5/4PN2/PP3PPP/RNBQ1RK1 b kq - 0 7",
+   "color": "black",
+   "danger": 106,
+   "ply_idx": 13,
+   "white": "Berczes,D",
+   "black": "Neverov,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4r2k/1p4p1/7p/PP4q1/4pn2/3rR2P/2Q2P1K/4RN2 w - - 4 34",
+   "color": "white",
+   "danger": 132,
+   "ply_idx": 66,
+   "white": "Shimanov,A",
+   "black": "Drygalov,Andrey",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2k5/2p5/8/pPpP4/2n1N1p1/4qp2/7r/1B1Q1KR1 w - - 2 41",
+   "color": "white",
+   "danger": 199,
+   "ply_idx": 80,
+   "white": "Afanasiev,Nikita",
+   "black": "Drygalov,Sergey",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2k5/2p5/8/pPpP4/4N1p1/4qp2/3n3r/1B2QKR1 w - - 4 42",
+   "color": "white",
+   "danger": 199,
+   "ply_idx": 82,
+   "white": "Afanasiev,Nikita",
+   "black": "Drygalov,Sergey",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1bqk2r/1p3ppp/p3pn2/2b5/8/1Q4P1/PP2PPBP/RNB1K2R w KQkq - 1 12",
+   "color": "white",
+   "danger": 104,
+   "ply_idx": 22,
+   "white": "Bocharov,D",
+   "black": "Lobanov,Sergei",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r5k1/5p1p/p1brpb2/1p2n3/3B1P2/1B4q1/PP2N1PP/3R1RK1 w - - 0 22",
+   "color": "white",
+   "danger": 140,
+   "ply_idx": 42,
+   "white": "Khegay,D",
+   "black": "Afanasiev,Nikita",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qkb1r/1b3ppp/p1N1pn2/1p6/4P3/1BN5/PP3PPP/R1BQ1RK1 b kq - 0 11",
+   "color": "black",
+   "danger": 127,
+   "ply_idx": 21,
+   "white": "Khegay,D",
+   "black": "Afanasiev,Nikita",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/1pp3pk/p1nrpq1p/P3p3/1P2P3/2P1PN1P/2Q1K1P1/1R6 w - - 19 32",
+   "color": "white",
+   "danger": 116,
+   "ply_idx": 62,
+   "white": "Shevchenko,Kirill",
+   "black": "Grandelius,N",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3r4/1pp3pk/p1n1pq1p/P3p3/1PP1P3/4PN1P/2Q1K1P1/1R6 w - - 1 33",
+   "color": "white",
+   "danger": 116,
+   "ply_idx": 64,
+   "white": "Shevchenko,Kirill",
+   "black": "Grandelius,N",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4R3/5pkq/p2p4/2pP2Q1/8/6P1/5PK1/1q6 b - - 3 49",
+   "color": "black",
+   "danger": 170,
+   "ply_idx": 97,
+   "white": "Svane,R",
+   "black": "McShane,L",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2b2qk1/6b1/p3pR2/1p4Qp/6p1/1B6/PPP1KPPP/8 b - - 0 31",
+   "color": "black",
+   "danger": 140,
+   "ply_idx": 61,
+   "white": "Engel,Luis",
+   "black": "Cheng,Bo",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3kb1r/1b1q1p1p/p3N3/1p4p1/8/1B4n1/PPP2PPP/R2QR1K1 b kq - 0 16",
+   "color": "black",
+   "danger": 125,
+   "ply_idx": 31,
+   "white": "Engel,Luis",
+   "black": "Cheng,Bo",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/1p1r1pk1/p4pp1/3Nb3/1Pq5/P4QP1/r4PKP/3RR3 w - - 0 31",
+   "color": "white",
+   "danger": 118,
+   "ply_idx": 60,
+   "white": "Teclaf,Pawel",
+   "black": "Markus,Rob",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1Qk2r/1b3ppp/p3pn2/1pb5/8/P3PN2/BP3PPP/RNB2RK1 b kq - 0 10",
+   "color": "black",
+   "danger": 120,
+   "ply_idx": 19,
+   "white": "Dgebuadze,A",
+   "black": "Heimann,An",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qkb1r/1b3ppp/p3pn2/1pP5/8/P3PN2/BP3PPP/RNBQ1RK1 b kq - 0 9",
+   "color": "black",
+   "danger": 106,
+   "ply_idx": 17,
+   "white": "Dgebuadze,A",
+   "black": "Heimann,An",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5R2/4q1kp/1b1p2p1/pB1Pp3/P5Q1/6P1/1P4KP/8 b - - 0 33",
+   "color": "black",
+   "danger": 146,
+   "ply_idx": 65,
+   "white": "Cornette,M",
+   "black": "Alonso Rosell,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1r6/4q1kp/1b1p2p1/pB1Pp3/P5Q1/6P1/1P4KP/5R2 b - - 2 32",
+   "color": "black",
+   "danger": 142,
+   "ply_idx": 63,
+   "white": "Cornette,M",
+   "black": "Alonso Rosell,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5rk1/B4pb1/Q3p1p1/3N4/6nq/7B/PP2PPK1/2r2R2 w - - 0 23",
+   "color": "white",
+   "danger": 154,
+   "ply_idx": 44,
+   "white": "Eljanov,P",
+   "black": "Vachier Lagrave,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2R2rk1/B4pb1/Q5p1/3pn3/7q/7B/PP2PPK1/8 w - - 2 25",
+   "color": "white",
+   "danger": 150,
+   "ply_idx": 48,
+   "white": "Eljanov,P",
+   "black": "Vachier Lagrave,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqr1k1/pp3pbp/8/2p1n1PQ/2P1B3/2P5/P2PNP1P/R1B2RK1 b - - 0 14",
+   "color": "black",
+   "danger": 106,
+   "ply_idx": 27,
+   "white": "Navara,D",
+   "black": "Nisipeanu,LD",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3k2r/ppp2Np1/5q2/3Bp2p/4P1bb/2KP1n2/PPP1N3/R1BQ3R b kq - 1 15",
+   "color": "black",
+   "danger": 103,
+   "ply_idx": 29,
+   "white": "Cheparinov,I",
+   "black": "Shevchenko,Kirill",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qk2r/ppp1bNp1/8/3Bp2p/3nP1bn/2NP1P2/PPP3P1/R1BQK2R b KQkq - 0 11",
+   "color": "black",
+   "danger": 102,
+   "ply_idx": 21,
+   "white": "Cheparinov,I",
+   "black": "Shevchenko,Kirill",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4r1k1/2p3p1/1p5p/B1b1pq1P/4P3/P2r2P1/1P3PK1/2R2R2 w - - 0 32",
+   "color": "white",
+   "danger": 140,
+   "ply_idx": 62,
+   "white": "Yuffa,D",
+   "black": "Efimenko,Z",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3r1k1/pp1b1pp1/1b1qnn2/3p4/2pP2PQ/P1N1P3/1PBBN2P/5RRK b - - 0 21",
+   "color": "black",
+   "danger": 144,
+   "ply_idx": 41,
+   "white": "Babula,Vlastimil Sr",
+   "black": "Thybo,Jesper Sondergaard",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2nr1k1/pp1b1pp1/1b1q1n2/3p4/2pP2pQ/P1N1PP2/1PBBN2P/5RRK b - - 3 20",
+   "color": "black",
+   "danger": 114,
+   "ply_idx": 39,
+   "white": "Babula,Vlastimil Sr",
+   "black": "Thybo,Jesper Sondergaard",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3r3/ppqn1k1p/2pb1ppB/3p4/3P4/2P2NP1/PPQ1RPP1/4R1K1 b - - 3 20",
+   "color": "black",
+   "danger": 173,
+   "ply_idx": 39,
+   "white": "Zilka,S",
+   "black": "Polak,T",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3r3/p1qn1k1p/2pb1ppB/1p1p4/3P4/2PQ1NP1/PP2RPP1/4R1K1 b - - 1 21",
+   "color": "black",
+   "danger": 173,
+   "ply_idx": 41,
+   "white": "Zilka,S",
+   "black": "Polak,T",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4brk1/6pp/3qpr1P/2p1p1Q1/p1PpB2R/3P2P1/PP1R1P2/2K5 b - - 0 28",
+   "color": "black",
+   "danger": 116,
+   "ply_idx": 55,
+   "white": "Amin,B",
+   "black": "Cyborowski,L",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6r1/5pkR/4q3/p3P3/2P4Q/1P6/P3K3/r3B3 b - - 5 47",
+   "color": "black",
+   "danger": 182,
+   "ply_idx": 93,
+   "white": "Anton Guijarro,D",
+   "black": "Plat,V",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "4r3/5pk1/4q3/p3P2R/2P4Q/1P6/P7/3rBK2 b - - 1 45",
+   "color": "black",
+   "danger": 153,
+   "ply_idx": 89,
+   "white": "Anton Guijarro,D",
+   "black": "Plat,V",
+   "label": 1,
+   "reason": "eval_crash"
+  },
+  {
+   "fen": "2r4k/5pbp/6p1/8/PQ3P2/1P1R4/7q/1K1N4 w - - 0 34",
+   "color": "white",
+   "danger": 132,
+   "ply_idx": 66,
+   "white": "Nepomniachtchi,I",
+   "black": "Donchenko,Alexa",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/2p2pbp/pp2pnp1/4p3/P1BP4/2N1BN1P/1PP2PP1/R2QK2R w KQ - 0 10",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 18,
+   "white": "Vignesh,N R",
+   "black": "Chatalbashev,B",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1q1rk1/1bp2pbp/pp2pnp1/4N3/P1BP4/2N1B2P/1PP2PP1/R2QK2R w KQ - 1 11",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 20,
+   "white": "Vignesh,N R",
+   "black": "Chatalbashev,B",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqk2r/ppp2ppp/5n2/3p4/Qb1P4/2N2N2/PP2PPPP/R1B1KB1R b KQkq - 1 6",
+   "color": "black",
+   "danger": 73,
+   "ply_idx": 11,
+   "white": "Chatalbashev,B",
+   "black": "Visakh,N R",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/ppp2ppp/2n2n2/3p2B1/Qb1P4/2N2N2/PP2PPPP/R3KB1R b KQkq - 3 7",
+   "color": "black",
+   "danger": 73,
+   "ply_idx": 13,
+   "white": "Chatalbashev,B",
+   "black": "Visakh,N R",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/pp3ppp/4pn2/2p5/2BP4/4PN2/PP3PPP/RNBQ1RK1 b kq - 1 6",
+   "color": "black",
+   "danger": 65,
+   "ply_idx": 11,
+   "white": "Komarov,Di",
+   "black": "Gomez Garrido,C",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1k2r/1pqp1ppp/p1n1pn2/8/1b1NP3/2N1BP2/PPPQ2PP/R3KB1R w KQkq - 1 9",
+   "color": "white",
+   "danger": 79,
+   "ply_idx": 16,
+   "white": "Flom,Gabriel",
+   "black": "Bauer,Ch",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2r2k2/p7/1pn1pp2/3q4/Pb1P2Q1/3BB1P1/1P5P/5RK1 b - - 9 27",
+   "color": "black",
+   "danger": 99,
+   "ply_idx": 53,
+   "white": "Flom,Gabriel",
+   "black": "Visakh,N R",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2r5/p3k1Q1/1pn1pp2/3q4/Pb1P4/3BB1P1/1P5P/5RK1 b - - 11 28",
+   "color": "black",
+   "danger": 99,
+   "ply_idx": 55,
+   "white": "Flom,Gabriel",
+   "black": "Visakh,N R",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r2qk2r/pp1n1ppp/2pb2n1/4p3/4P3/2PP2QP/P3BPP1/RNB2RK1 b kq - 0 13",
+   "color": "black",
+   "danger": 67,
+   "ply_idx": 25,
+   "white": "Sosa,T ARG",
+   "black": "Bernadskiy,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qk2r/pp3ppp/2pb2n1/2n1p3/4P3/2PP2QP/P3BPP1/RNBR2K1 b kq - 2 14",
+   "color": "black",
+   "danger": 67,
+   "ply_idx": 27,
+   "white": "Sosa,T ARG",
+   "black": "Bernadskiy,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnb1kbnr/pp2pppp/8/8/2pqP3/5N2/PP3PPP/RNB1KB1R w KQkq - 0 6",
+   "color": "white",
+   "danger": 65,
+   "ply_idx": 10,
+   "white": "Stremavicius,T",
+   "black": "Grigoryan,K2",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/pp2bppp/5n2/8/1nPN4/6P1/P4PBP/RNBQ1RK1 b kq - 0 12",
+   "color": "black",
+   "danger": 93,
+   "ply_idx": 23,
+   "white": "Cuenca Jimenez,J",
+   "black": "Stremavicius,T",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/pp2bppp/2n2n2/8/1PPp4/5NP1/P4PBP/RNBQ1RK1 b kq - 0 11",
+   "color": "black",
+   "danger": 78,
+   "ply_idx": 21,
+   "white": "Cuenca Jimenez,J",
+   "black": "Stremavicius,T",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bq1rk1/1p3ppp/p1n2n2/8/1P1PpP2/P1N5/1B2B1PP/2RQK2R w K - 0 17",
+   "color": "white",
+   "danger": 80,
+   "ply_idx": 32,
+   "white": "Li,Ruifeng",
+   "black": "Gledura,B",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bq1rk1/1p2nppp/p4n2/3P4/1P2pP2/P1N5/1B2B1PP/2RQK2R w K - 1 18",
+   "color": "white",
+   "danger": 80,
+   "ply_idx": 34,
+   "white": "Li,Ruifeng",
+   "black": "Gledura,B",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkbnr/pp1p1ppp/4p3/4n3/2PN4/2N5/PP3PPP/R1BQKB1R w KQkq - 0 8",
+   "color": "white",
+   "danger": 83,
+   "ply_idx": 14,
+   "white": "Gledura,B",
+   "black": "Gazik,Viktor",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkbnr/1p1p1ppp/p3p3/1N2n3/2P5/2N5/PP3PPP/R1BQKB1R w KQkq - 0 9",
+   "color": "white",
+   "danger": 83,
+   "ply_idx": 16,
+   "white": "Gledura,B",
+   "black": "Gazik,Viktor",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/pp3p2/5n1p/2Pp2p1/1b5B/2N1PN2/PP3PPP/R2QKB1R w KQ - 0 10",
+   "color": "white",
+   "danger": 65,
+   "ply_idx": 18,
+   "white": "Oparin,G",
+   "black": "Liang,Awonder",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/pp3p2/7p/2Pp2p1/1b2n3/2N1PNB1/PP3PPP/R2QKB1R w KQ - 2 11",
+   "color": "white",
+   "danger": 65,
+   "ply_idx": 20,
+   "white": "Oparin,G",
+   "black": "Liang,Awonder",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2bq4/bp2N1pk/p4r1p/P6Q/3p1p2/2P5/1P3PPP/R3R1K1 b - - 2 34",
+   "color": "black",
+   "danger": 47,
+   "ply_idx": 67,
+   "white": "Antipov,M2",
+   "black": "Khanin,S",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2bq4/bp2N1pk/p4r1p/P6Q/5p2/2p5/1P3PPP/3RR1K1 b - - 1 35",
+   "color": "black",
+   "danger": 47,
+   "ply_idx": 69,
+   "white": "Antipov,M2",
+   "black": "Khanin,S",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "rnbq1rk1/p4pbp/5np1/1ppPp3/8/2N1BN1P/PP3PP1/R2QKB1R w KQ - 0 11",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 20,
+   "white": "Matviishen,Viktor",
+   "black": "Budisavljevic,Luka",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqr1k1/p4pbp/5np1/1pBPp3/8/2N2N1P/PP3PP1/R2QKB1R w KQ - 1 12",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 22,
+   "white": "Matviishen,Viktor",
+   "black": "Budisavljevic,Luka",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2q1rk1/4bppp/pn4b1/1p6/3pPpP1/1B1P3P/PP2Q3/R1B1RNK1 w - - 0 22",
+   "color": "white",
+   "danger": 40,
+   "ply_idx": 42,
+   "white": "Gazik,Viktor",
+   "black": "Koustav,Chatterjee",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2q1rk1/5ppp/pn4b1/1p4b1/3pPBP1/1B1P3P/PP2Q3/R3RNK1 w - - 1 23",
+   "color": "white",
+   "danger": 40,
+   "ply_idx": 44,
+   "white": "Gazik,Viktor",
+   "black": "Koustav,Chatterjee",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1k2r/pp1q1ppp/2nbpn2/8/3N4/2P1BN2/PP3PPP/R2QKB1R w KQkq - 1 10",
+   "color": "white",
+   "danger": 88,
+   "ply_idx": 18,
+   "white": "Raja,H",
+   "black": "Daggupati,Balaji",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1kb1r/pp3ppp/2n1pn2/3q4/3p4/N1P1BN2/PP3PPP/R2QKB1R w KQkq - 0 8",
+   "color": "white",
+   "danger": 83,
+   "ply_idx": 14,
+   "white": "Raja,H",
+   "black": "Daggupati,Balaji",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1R6/2r1kp2/5Rn1/1BppP1r1/3P3p/1P6/5KPP/8 b - - 3 44",
+   "color": "black",
+   "danger": 81,
+   "ply_idx": 87,
+   "white": "Sorokin,Aleksey",
+   "black": "Gledura,B",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "1R6/2r1kp2/5R2/1BppP1r1/7p/1P6/5KPP/8 b - - 0 45",
+   "color": "black",
+   "danger": 75,
+   "ply_idx": 89,
+   "white": "Sorokin,Aleksey",
+   "black": "Gledura,B",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r3b1k1/1p2r1pR/p1nR4/5pN1/4p3/1P2P1PP/PB4P1/6K1 b - - 2 23",
+   "color": "black",
+   "danger": 88,
+   "ply_idx": 45,
+   "white": "Hakobyan,Aram",
+   "black": "Khanin,S",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3b1k1/1p2r1pR/p2R4/4BpN1/4p3/1P2P1PP/P5P1/6K1 b - - 0 24",
+   "color": "black",
+   "danger": 83,
+   "ply_idx": 47,
+   "white": "Hakobyan,Aram",
+   "black": "Khanin,S",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkbnr/pp3ppp/2n5/2pp4/3P4/2N2NP1/PP2PP1P/R1BQKB1R b KQkq - 0 6",
+   "color": "black",
+   "danger": 73,
+   "ply_idx": 11,
+   "white": "Matviishen,Viktor",
+   "black": "Quesada Perez,Ya",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/pp3ppp/2n2n2/2pp4/3P4/2N2NP1/PP2PPBP/R1BQK2R b KQkq - 2 7",
+   "color": "black",
+   "danger": 73,
+   "ply_idx": 13,
+   "white": "Matviishen,Viktor",
+   "black": "Quesada Perez,Ya",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/2Q5/p3q1k1/1p3bB1/2p3pP/P7/6PK/8 b - - 9 60",
+   "color": "black",
+   "danger": 98,
+   "ply_idx": 119,
+   "white": "Liang,Awonder",
+   "black": "Koustav,Chatterjee",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/1ppnbppp/p1p5/8/3QP3/5N2/PPP2PPP/RNB1R1K1 b kq - 0 9",
+   "color": "black",
+   "danger": 81,
+   "ply_idx": 17,
+   "white": "Liang,Awonder",
+   "black": "Koustav,Chatterjee",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqk2r/ppp1bppp/4pn2/6B1/3PN3/8/PPP2PPP/R2QKBNR w KQkq - 1 6",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 10,
+   "white": "Van Foreest,Jorden",
+   "black": "Firouzja,Alireza",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2r2k1/ppp1nppp/4p1q1/4Q3/b2P4/2P2N2/PP3PPP/2K1RB1R w - - 5 15",
+   "color": "white",
+   "danger": 71,
+   "ply_idx": 28,
+   "white": "Van Foreest,Jorden",
+   "black": "Firouzja,Alireza",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5r1k/pp4pp/8/5P2/P2NB2q/3P4/1P4rN/3R3K w - - 0 26",
+   "color": "white",
+   "danger": 85,
+   "ply_idx": 50,
+   "white": "Gukesh,D",
+   "black": "Abdusattorov,Nodirbek",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5r1k/pp4pp/8/1N3P2/P2pB2q/3P4/1P3rRN/3R3K w - - 0 25",
+   "color": "white",
+   "danger": 60,
+   "ply_idx": 48,
+   "white": "Gukesh,D",
+   "black": "Abdusattorov,Nodirbek",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3k2r/pbpqb1pp/1n2pP2/n7/2pP4/P1N1BN2/1PQ1BPPP/3RK2R b Kkq - 0 14",
+   "color": "black",
+   "danger": 89,
+   "ply_idx": 27,
+   "white": "Warmerdam,Max",
+   "black": "Nepomniachtchi,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2kr3r/pbp4p/4pp2/n1Pn4/q1p5/P3BN2/1P2BPPP/1Q1RK2R w K - 1 19",
+   "color": "white",
+   "danger": 84,
+   "ply_idx": 36,
+   "white": "Warmerdam,Max",
+   "black": "Nepomniachtchi,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1k2r/1pq1b1p1/p3pp2/4n2p/5BnP/2N2NQ1/PPP1B3/2KR3R b kq - 1 20",
+   "color": "black",
+   "danger": 76,
+   "ply_idx": 39,
+   "white": "Praggnanandhaa,R",
+   "black": "Maghsoodloo,Parham",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 10,
+   "white": "Praggnanandhaa,R",
+   "black": "Maghsoodloo,Parham",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3rk2r/pBpqbppp/5n2/8/2Qn4/2N3P1/PP3P1P/R1B2RK1 b k - 0 14",
+   "color": "black",
+   "danger": 85,
+   "ply_idx": 27,
+   "white": "Abdusattorov,Nodirbek",
+   "black": "Praggnanandhaa,R",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3rk2r/pB1qbppp/2p2n2/8/2Qn4/2N3P1/PP3P1P/R1BR2K1 b k - 1 15",
+   "color": "black",
+   "danger": 85,
+   "ply_idx": 29,
+   "white": "Abdusattorov,Nodirbek",
+   "black": "Praggnanandhaa,R",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "qn3rk1/r1p1bppp/p3pn2/8/1p1P3N/4P1P1/PP1N1PbP/R1RQB1K1 w - - 0 18",
+   "color": "white",
+   "danger": 46,
+   "ply_idx": 34,
+   "white": "Nepomniachtchi,I",
+   "black": "Ju,Wenjun",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5k2/8/4pp2/p1r3p1/1p2PbP1/1P1K1P2/P2B4/7R w - - 26 53",
+   "color": "white",
+   "danger": 45,
+   "ply_idx": 104,
+   "white": "Nepomniachtchi,I",
+   "black": "Ju,Wenjun",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2rqk2r/pp1b2pp/3npp2/8/3PB3/2P2NP1/P1Q2PP1/R1R3K1 b k - 0 19",
+   "color": "black",
+   "danger": 59,
+   "ply_idx": 37,
+   "white": "Giri,A",
+   "black": "Vidit,S",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2rqk2r/pp1b2pp/4pp2/8/3PQ3/2P2NP1/P4PP1/R1R3K1 b k - 0 20",
+   "color": "black",
+   "danger": 53,
+   "ply_idx": 39,
+   "white": "Giri,A",
+   "black": "Vidit,S",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1k1r3r/ppp4p/1b2B1b1/2q1p3/5B2/P1Q2PP1/1P5P/2KR3R w - - 0 21",
+   "color": "white",
+   "danger": 92,
+   "ply_idx": 40,
+   "white": "Van Foreest,Jorden",
+   "black": "Warmerdam,Max",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qk2r/pppn1ppp/3bpn2/4Nb2/2BP1B2/4P3/PP1N1PPP/R2QK2R b KQkq - 2 8",
+   "color": "black",
+   "danger": 68,
+   "ply_idx": 15,
+   "white": "Van Foreest,Jorden",
+   "black": "Warmerdam,Max",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1r1k1/pp3p1p/2pp1QpB/4b2n/2B1P3/2N4P/PPP2PP1/R2R2K1 b - - 0 14",
+   "color": "black",
+   "danger": 94,
+   "ply_idx": 27,
+   "white": "Ju,Wenjun",
+   "black": "Van Foreest,Jorden",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/ppp2ppp/8/3p4/3Pn3/5N2/PPP2PPP/RNBQKB1R w KQkq - 0 6",
+   "color": "white",
+   "danger": 78,
+   "ply_idx": 10,
+   "white": "Vidit,S",
+   "black": "Nepomniachtchi,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/ppp2ppp/8/3p4/3Pn3/3B1N2/PPP2PPP/RNBQK2R b KQkq - 1 6",
+   "color": "black",
+   "danger": 78,
+   "ply_idx": 11,
+   "white": "Vidit,S",
+   "black": "Nepomniachtchi,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1q2rk1/p3b1pp/1n2p3/2pp4/2P1P1N1/2B3P1/PPQ1P2P/3R1RK1 b - - 0 19",
+   "color": "black",
+   "danger": 56,
+   "ply_idx": 37,
+   "white": "Warmerdam,Max",
+   "black": "Firouzja,Alireza",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1q2rk1/p3b1pp/4p3/2pp4/2n1P1N1/2B1P1P1/PPQ4P/3R1RK1 b - - 0 20",
+   "color": "black",
+   "danger": 56,
+   "ply_idx": 39,
+   "white": "Warmerdam,Max",
+   "black": "Firouzja,Alireza",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qk2r/1p2bpp1/p1np1n1p/4pP2/7P/2N5/PPPBQPP1/R3KB1R w KQkq - 1 12",
+   "color": "white",
+   "danger": 76,
+   "ply_idx": 22,
+   "white": "Praggnanandhaa,R",
+   "black": "Wei Yi",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/1p2pppp/p2p1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 0 6",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 10,
+   "white": "Praggnanandhaa,R",
+   "black": "Wei Yi",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/pp2pppp/2n2n2/3p4/2PP4/5N2/PP3PPP/RNBQKB1R w KQkq - 3 6",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 10,
+   "white": "Dardha,Daniel",
+   "black": "L'Ami,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/pp2pp1p/2n2np1/3p4/2PP4/5N1P/PP3PP1/RNBQKB1R w KQkq - 0 7",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 12,
+   "white": "Dardha,Daniel",
+   "black": "L'Ami,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4r1k/3n1Q1p/2p1bp2/p2ppN2/P3P2P/1P1B1R2/2P3P1/4R2K b - - 0 29",
+   "color": "black",
+   "danger": 84,
+   "ply_idx": 57,
+   "white": "Dronavalli,Harika",
+   "black": "Dardha,Daniel",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/pp2pppp/2np1n2/8/3NP3/2N5/PPP2PPP/R1BQKB1R w KQkq - 1 6",
+   "color": "white",
+   "danger": 73,
+   "ply_idx": 10,
+   "white": "Dronavalli,Harika",
+   "black": "Dardha,Daniel",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2NQ4/1p1n1kpp/p3qp2/8/1P2b2P/8/P3BPP1/6K1 b - - 2 34",
+   "color": "black",
+   "danger": 96,
+   "ply_idx": 67,
+   "white": "Niemann,Hans Moke",
+   "black": "Yilmaz,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2NQ4/1p1n1kpp/p3qp2/3b3P/1P6/8/P3BPP1/6K1 b - - 0 35",
+   "color": "black",
+   "danger": 96,
+   "ply_idx": 69,
+   "white": "Niemann,Hans Moke",
+   "black": "Yilmaz,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/pp3ppp/2p2n2/3p2B1/3P4/2N1P3/PP3PPP/R2QKBNR b KQkq - 0 6",
+   "color": "black",
+   "danger": 73,
+   "ply_idx": 11,
+   "white": "Santos Latasa,J",
+   "black": "Salem,AR",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/pp3pp1/2p2n1p/3p4/3P3B/2N1P3/PP3PPP/R2QKBNR b KQkq - 1 7",
+   "color": "black",
+   "danger": 73,
+   "ply_idx": 13,
+   "white": "Santos Latasa,J",
+   "black": "Salem,AR",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/ppp2ppp/2p2n2/2b1p3/4P3/3P1N2/PPPN1PPP/R1BQK2R b KQkq - 1 6",
+   "color": "black",
+   "danger": 67,
+   "ply_idx": 11,
+   "white": "Mendonca,Leon Luke",
+   "black": "Maurizzi,Marc'Andria",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qk2r/ppp2ppp/2p1bn2/2b1p3/4P3/3P1N1P/PPPN1PP1/R1BQK2R b KQkq - 0 7",
+   "color": "black",
+   "danger": 67,
+   "ply_idx": 13,
+   "white": "Mendonca,Leon Luke",
+   "black": "Maurizzi,Marc'Andria",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnb1kb1r/pp3pp1/2p1pq1p/8/2pP4/2N1PN2/PPQ2PPP/R3KB1R b KQkq - 0 8",
+   "color": "black",
+   "danger": 60,
+   "ply_idx": 15,
+   "white": "Dardha,Daniel",
+   "black": "Mendonca,Leon Luke",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnb1kb1r/p4pp1/2p1pq1p/1p6/P1pP4/2N1PN2/1PQ2PPP/R3KB1R b KQkq - 0 9",
+   "color": "black",
+   "danger": 60,
+   "ply_idx": 17,
+   "white": "Dardha,Daniel",
+   "black": "Mendonca,Leon Luke",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qk2r/pbppbppp/1p2pn2/8/2P5/5NP1/PP1PPPBP/RNBQ1RK1 w kq - 2 6",
+   "color": "white",
+   "danger": 6,
+   "ply_idx": 10,
+   "white": "Yankelevich,L",
+   "black": "David,Alb",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qk2r/pbppbppp/1p2pn2/8/2PP4/5NP1/PP2PPBP/RNBQ1RK1 b kq - 0 6",
+   "color": "black",
+   "danger": 6,
+   "ply_idx": 11,
+   "white": "Yankelevich,L",
+   "black": "David,Alb",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/pppnbppp/3p1n2/4p3/2BPP3/2N2N2/PPP2PPP/R1BQK2R w KQkq - 4 6",
+   "color": "white",
+   "danger": 28,
+   "ply_idx": 10,
+   "white": "Vignesh,N R",
+   "black": "Flom,Gabriel",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/pppnbppp/3p1n2/4p3/2BPP3/2N2N2/PPP2PPP/R1BQ1RK1 b kq - 5 6",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 11,
+   "white": "Vignesh,N R",
+   "black": "Flom,Gabriel",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/1p1npppp/p2p1n2/2p5/4P3/2PB1N2/PP1P1PPP/RNBQ1RK1 b kq - 0 6",
+   "color": "black",
+   "danger": 6,
+   "ply_idx": 11,
+   "white": "Safarli,E",
+   "black": "Iniyan,Pa",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/1p1npppp/p2p1n2/2p5/4P3/3B1N2/PPPP1PPP/RNBQ1RK1 w kq - 2 6",
+   "color": "white",
+   "danger": 0,
+   "ply_idx": 10,
+   "white": "Safarli,E",
+   "black": "Iniyan,Pa",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn2kbnr/pp1bpppp/8/8/2pNP3/8/PP3PPP/RNB1KB1R w KQkq - 1 7",
+   "color": "white",
+   "danger": 39,
+   "ply_idx": 12,
+   "white": "Stremavicius,T",
+   "black": "Grigoryan,K2",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqk2r/ppp1bppp/4pn2/3p4/2PP4/5NP1/PP1BPPBP/RN1QK2R b KQkq - 1 6",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 11,
+   "white": "Schitco,Ivan",
+   "black": "Bok,B",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bq1rk1/1p1nbpp1/2p1pn1p/p2p4/2PP1B2/2N2NP1/PPQ1PPBP/R2R2K1 b - - 1 11",
+   "color": "black",
+   "danger": 19,
+   "ply_idx": 21,
+   "white": "Schitco,Ivan",
+   "black": "Bok,B",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/1pp2ppp/p1np1n2/4p3/B3P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 1 6",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 11,
+   "white": "Kantor,G",
+   "black": "Schitco,Ivan",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qkb1r/1ppb1ppp/p1np1n2/4p3/B3P3/2P2N2/PP1P1PPP/RNBQR1K1 b kq - 0 7",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 13,
+   "white": "Kantor,G",
+   "black": "Schitco,Ivan",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1q2nk1/1pp1brpp/3p4/p2Pp3/P7/1P1Q1N2/2P1RPPP/2B1R1K1 b - - 6 18",
+   "color": "black",
+   "danger": 31,
+   "ply_idx": 35,
+   "white": "Oparin,G",
+   "black": "Schitco,Ivan",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5rk1/2p1nqp1/1p1p3p/p2Pp3/P1P5/1P1QBP2/6PP/4R1K1 b - - 0 28",
+   "color": "black",
+   "danger": 26,
+   "ply_idx": 55,
+   "white": "Oparin,G",
+   "black": "Schitco,Ivan",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qkb1r/pp2pppp/2p2n2/3p4/4P3/2N2Q1P/PPPP1PP1/R1B1KB1R w KQkq - 1 6",
+   "color": "white",
+   "danger": 13,
+   "ply_idx": 10,
+   "white": "Gazik,Viktor",
+   "black": "Oparin,G",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bq1rk1/ppppbppp/2n2n2/4p3/P1B1P3/3P1N2/1PP2PPP/RNBQK2R w KQ - 1 6",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 10,
+   "white": "Antipov,M2",
+   "black": "Dudin,Gleb",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bq1rk1/ppp1bppp/2np1n2/4p3/P1B1P3/2NP1N2/1PP2PPP/R1BQK2R w KQ - 0 7",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 12,
+   "white": "Antipov,M2",
+   "black": "Dudin,Gleb",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2r3k1/3r4/p2b4/6B1/P3N2p/1P1p3P/5PP1/5RK1 b - - 1 35",
+   "color": "black",
+   "danger": 25,
+   "ply_idx": 69,
+   "white": "Donchenko,Alexa",
+   "black": "Wei Yi",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/pp1pbppp/2n1pn2/2p5/4P3/3P1NP1/PPP2PBP/RNBQK2R w KQkq - 1 6",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 10,
+   "white": "Ju,Wenjun",
+   "black": "Giri,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/pp2bppp/2n1pn2/2pp4/4P3/3P1NP1/PPP1QPBP/RNB2RK1 b kq - 1 7",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 13,
+   "white": "Ju,Wenjun",
+   "black": "Giri,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1q2rk1/bpp1n1n1/3p1pb1/1B2p1pp/2PPP3/4NN1P/P4PPB/2RQR1K1 b - - 0 21",
+   "color": "black",
+   "danger": 34,
+   "ply_idx": 41,
+   "white": "Wei Yi",
+   "black": "Gukesh,D",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1q2rk1/bpp1n1n1/3p1pb1/1B1N2pp/2PpP3/5N1P/P4PPB/2RQR1K1 b - - 1 22",
+   "color": "black",
+   "danger": 34,
+   "ply_idx": 43,
+   "white": "Wei Yi",
+   "black": "Gukesh,D",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqr1k1/pp3p1p/2pp2pB/4b2n/2B1P3/2N2Q1P/PPP2PP1/R2R2K1 b - - 3 13",
+   "color": "black",
+   "danger": 34,
+   "ply_idx": 25,
+   "white": "Ju,Wenjun",
+   "black": "Van Foreest,Jorden",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5b2/5p2/6k1/3K1ppp/3P4/1rN3P1/1P1R3P/8 w - - 2 35",
+   "color": "white",
+   "danger": 22,
+   "ply_idx": 68,
+   "white": "Maurizzi,Marc'Andria",
+   "black": "Dronavalli,Harika",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/5pb1/6k1/5ppp/3PK3/1rN3P1/1P1R3P/8 w - - 0 34",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 66,
+   "white": "Maurizzi,Marc'Andria",
+   "black": "Dronavalli,Harika",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3r1rk1/1pQ3p1/6np/p2q4/3bNp1P/5N2/PP2RPP1/4R1K1 b - - 0 26",
+   "color": "black",
+   "danger": 28,
+   "ply_idx": 51,
+   "white": "Niemann,Hans Moke",
+   "black": "Vrolijk,Liam",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5rk1/1p1r2p1/2Q3np/p7/3bNp1P/5N2/PP2RPP1/4R1K1 b - - 0 28",
+   "color": "black",
+   "danger": 23,
+   "ply_idx": 55,
+   "white": "Niemann,Hans Moke",
+   "black": "Vrolijk,Liam",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r2q1rk1/pb1nbppp/1pp1pn2/3pN3/2PP1B2/6P1/PPQ1PPBP/RN1R2K1 b - - 3 11",
+   "color": "black",
+   "danger": 30,
+   "ply_idx": 21,
+   "white": "Vrolijk,Liam",
+   "black": "L'Ami,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2rq1rk1/pb1nbppp/1pp1pn2/3pN3/2PP1B2/2N3P1/PPQ1PPBP/R2R2K1 b - - 5 12",
+   "color": "black",
+   "danger": 30,
+   "ply_idx": 23,
+   "white": "Vrolijk,Liam",
+   "black": "L'Ami,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1r3rk1/2p2ppp/p4q2/n1b1p3/P3P1b1/2P5/B1Q2PPP/R1B1RNK1 w - - 5 19",
+   "color": "white",
+   "danger": 28,
+   "ply_idx": 36,
+   "white": "Ter Sahakyan,S",
+   "black": "Gharibyan,Mamikon",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1r3rk1/2p2ppp/p2b1q2/n3p3/P3P1b1/2P1B3/B1Q2PPP/R3RNK1 w - - 7 20",
+   "color": "white",
+   "danger": 19,
+   "ply_idx": 38,
+   "white": "Ter Sahakyan,S",
+   "black": "Gharibyan,Mamikon",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/4Pk2/2p5/3b4/3K1P1B/1r1R3P/8/8 w - - 5 55",
+   "color": "white",
+   "danger": 29,
+   "ply_idx": 108,
+   "white": "Nikitenko,M",
+   "black": "Gorovets,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/pp1pppbp/2p2np1/8/2PPP3/2N2N2/PP3PPP/R1BQKB1R w KQ - 0 6",
+   "color": "white",
+   "danger": 28,
+   "ply_idx": 10,
+   "white": "Nikitenko,M",
+   "black": "Gorovets,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/ppppp1bp/5np1/5p2/3P4/2P2NP1/PP2PPBP/RNBQ1RK1 b - - 0 6",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 11,
+   "white": "Aleksandrov,A",
+   "black": "Lazavik,Denis",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/1pppp1bp/5np1/p4p2/3P4/2P2NP1/PP1NPPBP/R1BQ1RK1 b - - 1 7",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 13,
+   "white": "Aleksandrov,A",
+   "black": "Lazavik,Denis",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqr1k1/pppp1ppp/4pn2/8/1bPP4/2NBP3/PP3PPP/R1BQK1NR w KQ - 3 6",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 10,
+   "white": "Lazavik,Denis",
+   "black": "Nikitenko,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqrbk1/pppp1ppp/4pn2/8/2PP4/2NBP3/PP2NPPP/R1BQK2R w KQ - 5 7",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 12,
+   "white": "Lazavik,Denis",
+   "black": "Nikitenko,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/1pppbppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 5 6",
+   "color": "black",
+   "danger": 14,
+   "ply_idx": 11,
+   "white": "Mista,A",
+   "black": "Dudin,Gleb",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/2ppbppp/p1n2n2/1p2p3/4P3/1B3N2/PPPP1PPP/RNBQR1K1 b kq - 1 7",
+   "color": "black",
+   "danger": 14,
+   "ply_idx": 13,
+   "white": "Mista,A",
+   "black": "Dudin,Gleb",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/ppp1ppbp/2np1np1/8/3PP3/2PB1N2/PP3PPP/RNBQK2R w KQkq - 2 6",
+   "color": "white",
+   "danger": 28,
+   "ply_idx": 10,
+   "white": "Schitco,Ivan",
+   "black": "Galyas,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4r3/2p1rkb1/1p6/pP3pPp/P2P4/2P1Rp2/3N1P2/4RK2 b - - 1 42",
+   "color": "black",
+   "danger": 25,
+   "ply_idx": 83,
+   "white": "Schitco,Ivan",
+   "black": "Galyas,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qk1nr/pp1bppbp/3p2p1/1Bp5/2P1P3/2N2N2/PP1P1PPP/R1BQ1RK1 b kq - 3 6",
+   "color": "black",
+   "danger": 6,
+   "ply_idx": 11,
+   "white": "Koustav,Chatterjee",
+   "black": "Paragua,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qk2r/pp1Bppbp/3p1np1/2p5/2P1P3/2N2N2/PP1P1PPP/R1BQ1RK1 b kq - 0 7",
+   "color": "black",
+   "danger": 6,
+   "ply_idx": 13,
+   "white": "Koustav,Chatterjee",
+   "black": "Paragua,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/2p1bppp/p1np1n2/1p2p3/4P3/1BP2N2/PP1P1PPP/RNBQR1K1 b kq - 0 8",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 15,
+   "white": "Rasulov,Vu",
+   "black": "Shanava,K",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/1pppbppp/p1n2n2/4p3/B3P3/5N2/PPPP1PPP/RNBQR1K1 b kq - 5 6",
+   "color": "black",
+   "danger": 14,
+   "ply_idx": 11,
+   "white": "Rasulov,Vu",
+   "black": "Shanava,K",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2r5/p3kppp/1R2b3/4p3/P3P3/2PB2P1/4P2P/5RK1 b - - 0 24",
+   "color": "black",
+   "danger": 34,
+   "ply_idx": 47,
+   "white": "Kourkoulos Arditis,Stamatis",
+   "black": "Nikolaidis,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1r1r2k1/pB1b1ppp/8/4p3/8/2P1q1P1/P3PP1P/1R3RK1 w - - 0 19",
+   "color": "white",
+   "danger": 28,
+   "ply_idx": 36,
+   "white": "Kourkoulos Arditis,Stamatis",
+   "black": "Nikolaidis,I",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qkb1r/pp3ppp/2n1pn2/3p1b2/3P1B2/2N1PN2/PP3PPP/R2QKB1R w KQkq - 0 8",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 14,
+   "white": "Berczes,D",
+   "black": "Jobava,Ba",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qkb1r/pp3ppp/2n1pn2/3p1b2/3P1B2/2NBPN2/PP3PPP/R2QK2R b KQkq - 1 8",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 15,
+   "white": "Berczes,D",
+   "black": "Jobava,Ba",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qkb1r/pp3ppp/2n1pn2/3p1b2/3P1B2/2N1PN2/PP3PPP/R2QKB1R w KQkq - 0 8",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 14,
+   "white": "Jobava,Ba",
+   "black": "Neverov,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2qkb1r/pp3ppp/2n1pn2/3p1b2/3P1B2/2NBPN2/PP3PPP/R2QK2R b KQkq - 1 8",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 15,
+   "white": "Jobava,Ba",
+   "black": "Neverov,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3r4/3R4/2P1k3/4Pp1B/2K4P/3p2P1/5n2/8 b - - 2 48",
+   "color": "black",
+   "danger": 29,
+   "ply_idx": 95,
+   "white": "Afanasiev,Nikita",
+   "black": "Pridorozhni,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bq1rk1/pp2b1pp/1nn1pP2/2pp4/2P5/1P1P1NP1/P3QPBP/RNB2RK1 b - - 0 11",
+   "color": "black",
+   "danger": 24,
+   "ply_idx": 21,
+   "white": "Afanasiev,Nikita",
+   "black": "Pridorozhni,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/pp2pppp/2n2n2/3p4/3P4/2N2N2/PP2PPPP/R1BQKB1R w KQkq - 4 6",
+   "color": "white",
+   "danger": 14,
+   "ply_idx": 10,
+   "white": "Ovetchkin,R",
+   "black": "Pridorozhni,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/pp2pppp/2n2n2/3p4/3P1B2/2N2N2/PP2PPPP/R2QKB1R b KQkq - 5 6",
+   "color": "black",
+   "danger": 14,
+   "ply_idx": 11,
+   "white": "Ovetchkin,R",
+   "black": "Pridorozhni,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/pp2pppp/2n2n2/3p4/3P1B2/4P3/PP3PPP/RN1QKBNR w KQkq - 1 6",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 10,
+   "white": "Khegay,D",
+   "black": "Drygalov,Sergey",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqkb1r/1p2pppp/p1n2n2/3p4/3P1B2/2N1P3/PP3PPP/R2QKBNR w KQkq - 0 7",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 12,
+   "white": "Khegay,D",
+   "black": "Drygalov,Sergey",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6k1/7p/3p1Bp1/2pP1n2/1pP2P2/1P2p1Pb/2q4P/4N1K1 w - - 0 40",
+   "color": "white",
+   "danger": 38,
+   "ply_idx": 78,
+   "white": "Shimanov,A",
+   "black": "Ovetchkin,R",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "rnbqk2r/ppp2ppp/4pn2/3p4/2PP4/2N2N2/PP1QPPPP/R3KB1R b KQkq - 1 6",
+   "color": "black",
+   "danger": 18,
+   "ply_idx": 11,
+   "white": "Ragger,M",
+   "black": "Bartel,Mat",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbq1rk1/p1p2ppp/1p2pn2/3p4/2PP4/2N1PN2/PP1Q1PPP/R3KB1R w KQ - 0 8",
+   "color": "white",
+   "danger": 18,
+   "ply_idx": 14,
+   "white": "Ragger,M",
+   "black": "Bartel,Mat",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3q1bk1/NpR2p1p/n3pnp1/p2p4/P2P1Q2/1P3BP1/1B2PP1P/6K1 b - - 0 25",
+   "color": "black",
+   "danger": 16,
+   "ply_idx": 49,
+   "white": "Van Wely,L",
+   "black": "Michalik,P",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqk2r/pp2ppbp/2p2np1/3p4/2P5/1P3NP1/PB1PPPBP/RN1QK2R b KQkq - 2 6",
+   "color": "black",
+   "danger": 14,
+   "ply_idx": 11,
+   "white": "Van Wely,L",
+   "black": "Michalik,P",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/2p2ppp/p1np1n2/1pb1p3/3PP3/1BP2N2/PP3PPP/RNBQ1RK1 b kq - 0 8",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 15,
+   "white": "Hracek,Z",
+   "black": "Lampert,J",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqk2r/b1p2ppp/p1np1n2/1p2p3/3PP3/1BP1BN2/PP3PPP/RN1Q1RK1 b kq - 2 9",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 17,
+   "white": "Hracek,Z",
+   "black": "Lampert,J",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qkb1r/pbp2ppp/1p2pn2/3p4/2PP4/3BPN2/PP3PPP/RNBQK2R w KQkq - 0 6",
+   "color": "white",
+   "danger": 20,
+   "ply_idx": 10,
+   "white": "Lubbe,N",
+   "black": "Babula,Vlastimil Sr",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qkb1r/pbp2ppp/1p2pn2/3p4/2PP4/1P1BPN2/P4PPP/RNBQK2R b KQkq - 0 6",
+   "color": "black",
+   "danger": 20,
+   "ply_idx": 11,
+   "white": "Lubbe,N",
+   "black": "Babula,Vlastimil Sr",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/4qp1p/2b2bp1/1p2p2n/2p1P3/2P1BPP1/1PBNQ2P/R3R1K1 w - - 1 20",
+   "color": "white",
+   "danger": 11,
+   "ply_idx": 38,
+   "white": "Predojevic,B",
+   "black": "Yuffa,D",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/4qp1p/2b2bp1/1p2p2n/4P3/1pP1BPP1/2BNQ2P/R3R1K1 w - - 0 21",
+   "color": "white",
+   "danger": 11,
+   "ply_idx": 40,
+   "white": "Predojevic,B",
+   "black": "Yuffa,D",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rnbqkb1r/pp3ppp/3pp3/3nP3/3P4/5N2/PP3PPP/RNBQKB1R w KQkq - 0 7",
+   "color": "white",
+   "danger": 28,
+   "ply_idx": 12,
+   "white": "Stevic,H",
+   "black": "Gavrilescu,David",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1qk2r/ppp1ppbp/3p1np1/8/2PPP1b1/2N2N2/PP3PPP/R1BQKB1R w KQkq - 1 6",
+   "color": "white",
+   "danger": 28,
+   "ply_idx": 10,
+   "white": "Thybo,Jesper Sondergaard",
+   "black": "Jovanovic,Zo CRO",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1Qbq1k2/R1nr4/3p2pp/2pPp1p1/4P1P1/1P1BB2P/5P2/6K1 b - - 15 45",
+   "color": "black",
+   "danger": 29,
+   "ply_idx": 89,
+   "white": "Kryvoruchko,Y",
+   "black": "Krejci,Jan2",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r5k1/p4pp1/1p1p4/1PpP1P2/2Pnr2q/P1N5/5PK1/R2Q2R1 w - - 0 28",
+   "color": "white",
+   "danger": 302,
+   "ply_idx": 54,
+   "white": "Sorokin,Aleksey",
+   "black": "Oparin,G",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6k1/p4pp1/1p1p4/1PpP4/2P1r2q/P7/5PK1/4R1Q1 w - - 6 37",
+   "color": "white",
+   "danger": 215,
+   "ply_idx": 72,
+   "white": "Sorokin,Aleksey",
+   "black": "Oparin,G",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "1rb3k1/p2p1pbp/2p3p1/2Bn2N1/1P4PP/q3r2R/2QKPN2/3R1B2 w - - 5 24",
+   "color": "white",
+   "danger": 335,
+   "ply_idx": 46,
+   "white": "Maghsoodloo,Parham",
+   "black": "Abdusattorov,Nodirbek",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1rb1r1k1/p2p1pbp/2p3p1/2Bn2N1/1P4PP/q7/2QKPN2/3R1B1R w - - 3 23",
+   "color": "white",
+   "danger": 306,
+   "ply_idx": 44,
+   "white": "Maghsoodloo,Parham",
+   "black": "Abdusattorov,Nodirbek",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4b1k/5Rpp/3p2P1/3Q3P/1P1nP3/q4P2/2R5/1K6 w - - 0 49",
+   "color": "white",
+   "danger": 213,
+   "ply_idx": 96,
+   "white": "Salem,AR",
+   "black": "Korobov,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/p2r1rk1/1p1PR1Qp/P1p4R/5p2/5P1P/5qP1/7K b - - 16 43",
+   "color": "black",
+   "danger": 288,
+   "ply_idx": 85,
+   "white": "Shimanov,A",
+   "black": "Smirnov,P",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "5k2/p2r2r1/1p1PR2Q/P1p2R2/5p2/5P1P/5qP1/7K b - - 2 45",
+   "color": "black",
+   "danger": 217,
+   "ply_idx": 89,
+   "white": "Shimanov,A",
+   "black": "Smirnov,P",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "4R3/5pk1/p2p2q1/2pP4/7Q/6P1/5PK1/1q6 b - - 1 48",
+   "color": "black",
+   "danger": 204,
+   "ply_idx": 95,
+   "white": "Svane,R",
+   "black": "McShane,L",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6k1/3n3p/p3qp2/1b1p2pN/1p1P4/1P3PP1/PBQR1KBP/4r3 w - - 3 40",
+   "color": "white",
+   "danger": 247,
+   "ply_idx": 78,
+   "white": "Dautov,R",
+   "black": "Jaracz,P",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6k1/3n3p/p7/1b1p1PpN/1p1P4/1P2qP2/PBQR1KBP/4r3 w - - 1 42",
+   "color": "white",
+   "danger": 241,
+   "ply_idx": 82,
+   "white": "Dautov,R",
+   "black": "Jaracz,P",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqr1k1/ppp2p2/3p1n1Q/3n4/3P4/P2B1N1P/1P3PP1/R4RK1 b - - 0 16",
+   "color": "black",
+   "danger": 214,
+   "ply_idx": 31,
+   "white": "Bartel,Mat",
+   "black": "Nguyen,Thai Dai Van",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1bqr1k1/ppp2p2/3p3Q/3n4/3PB3/P4N1P/1P3PP1/R4RK1 b - - 0 17",
+   "color": "black",
+   "danger": 206,
+   "ply_idx": 33,
+   "white": "Bartel,Mat",
+   "black": "Nguyen,Thai Dai Van",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2kr3r/ppp2ppp/5n2/2b5/6N1/3P1N2/PPP1qPPP/R1B1K2R w KQ - 0 14",
+   "color": "white",
+   "danger": 261,
+   "ply_idx": 26,
+   "white": "Van Foreest,Jorden",
+   "black": "Vidit,S",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5rkr/bpp3Q1/2bp1p2/p6p/P2p3B/2PBR3/1P3PPP/1R5K b - - 0 26",
+   "color": "black",
+   "danger": 224,
+   "ply_idx": 51,
+   "white": "Maghsoodloo,Parham",
+   "black": "Ding Liren",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4kb1r/1p3ppp/p2pbn2/4p3/q3P3/P1rKBQ1P/1P1N1PP1/3R1B1R w k - 0 16",
+   "color": "white",
+   "danger": 287,
+   "ply_idx": 30,
+   "white": "Vidit,S",
+   "black": "Firouzja,Alireza",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2r1kb1r/1p3ppp/p2pbn2/4p3/q3P3/P1N1BQ1P/1PKN1PP1/3R1B1R w k - 3 15",
+   "color": "white",
+   "danger": 210,
+   "ply_idx": 28,
+   "white": "Vidit,S",
+   "black": "Firouzja,Alireza",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1q4k1/5p2/2P3p1/B1Q1b3/2K1Np1p/3P2P1/7P/1r6 w - - 5 39",
+   "color": "white",
+   "danger": 210,
+   "ply_idx": 76,
+   "white": "Cruz,Cr",
+   "black": "Brodsky,David",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "5rk1/p2qr1p1/3Nbn1Q/5p2/8/PPB2P2/2PP4/2K1R1R1 b - - 0 32",
+   "color": "black",
+   "danger": 211,
+   "ply_idx": 63,
+   "white": "Praggnanandhaa,R",
+   "black": "Ju,Wenjun",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "1r5k/6p1/5q1p/8/1KB5/1Q1NR3/5P2/r7 w - - 17 70",
+   "color": "white",
+   "danger": 230,
+   "ply_idx": 138,
+   "white": "Warmerdam,Max",
+   "black": "Abdusattorov,Nodirbek",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "1r5k/6p1/7p/1B6/1K1q4/1Q1NR3/5P2/r7 w - - 19 71",
+   "color": "white",
+   "danger": 230,
+   "ply_idx": 140,
+   "white": "Warmerdam,Max",
+   "black": "Abdusattorov,Nodirbek",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2b1rn2/4n3/pq2k1p1/3p4/1rpPPQP1/2N2P2/1PK1B3/1R5R b - - 6 30",
+   "color": "black",
+   "danger": 245,
+   "ply_idx": 59,
+   "white": "Maghsoodloo,Parham",
+   "black": "Gukesh,D",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1r3n1R/3knQ2/p5p1/3q4/1rp3P1/5P2/1PK1B3/1R6 w - - 0 37",
+   "color": "white",
+   "danger": 239,
+   "ply_idx": 72,
+   "white": "Maghsoodloo,Parham",
+   "black": "Gukesh,D",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1b1r1k1/ppq3b1/6Q1/2p3P1/2p2P1R/1PP5/PB6/2KR4 b - - 0 21",
+   "color": "black",
+   "danger": 221,
+   "ply_idx": 41,
+   "white": "Giri,A",
+   "black": "Warmerdam,Max",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6r1/p1BbR3/1pp4k/3P3q/2P5/6r1/PP6/3R1QK1 w - - 0 42",
+   "color": "white",
+   "danger": 220,
+   "ply_idx": 82,
+   "white": "Abdusattorov,Nodirbek",
+   "black": "Wei Yi",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "8/5ppk/1Q2p1bp/p1Bq4/1p6/4K1P1/4B2P/8 w - - 8 41",
+   "color": "white",
+   "danger": 206,
+   "ply_idx": 80,
+   "white": "Vrolijk,Liam",
+   "black": "Korobov,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3r4/1p3kb1/4Q2p/p1qn4/Pn5P/1Pp3P1/5PB1/R3R1K1 b - - 0 25",
+   "color": "black",
+   "danger": 228,
+   "ply_idx": 49,
+   "white": "Niemann,Hans Moke",
+   "black": "Korobov,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/ppp1b1pp/3p1n2/4pPNq/1nP1P3/2NP4/P4PK1/R1BQ1R2 w - - 0 15",
+   "color": "white",
+   "danger": 216,
+   "ply_idx": 28,
+   "white": "Mitrabha,G",
+   "black": "Shyam,SM",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/1pp1b1pp/3p1n2/p3pPNq/1nP1P3/2NP4/P4PK1/1RBQ1R2 w - - 0 16",
+   "color": "white",
+   "danger": 216,
+   "ply_idx": 30,
+   "white": "Mitrabha,G",
+   "black": "Shyam,SM",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2R2bk1/p5pp/1p6/5r2/8/1K2BN2/n4PPP/2q5 w - - 0 35",
+   "color": "white",
+   "danger": 251,
+   "ply_idx": 68,
+   "white": "Savchenko,B",
+   "black": "Das,Say",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r6k/p6p/4Rr2/2R3p1/2B3n1/1P3q2/1Q4K1/8 w - - 12 46",
+   "color": "white",
+   "danger": 261,
+   "ply_idx": 90,
+   "white": "Markus,Rob",
+   "black": "Burg,T",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r6k/p6p/3R1r2/2R2np1/2B4q/1P2P3/2Q3K1/8 w - - 7 38",
+   "color": "white",
+   "danger": 253,
+   "ply_idx": 74,
+   "white": "Markus,Rob",
+   "black": "Burg,T",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "4r1r1/1bBnb1k1/p1q5/P1p2p2/N1Pp1Q2/6RR/1P3PPP/6K1 b - - 5 32",
+   "color": "black",
+   "danger": 210,
+   "ply_idx": 63,
+   "white": "Saltaev,M",
+   "black": "Ftacnik,L",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5r2/1p1k4/1QR1pr2/p2p4/q2P2p1/3B2P1/1P3P1R/6K1 b - - 0 48",
+   "color": "black",
+   "danger": 206,
+   "ply_idx": 95,
+   "white": "Maiwald,JU",
+   "black": "Cornette,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5r2/1p1k4/1QR1pr2/p2p4/3P2p1/6P1/1P3P1R/3q1BK1 b - - 2 49",
+   "color": "black",
+   "danger": 206,
+   "ply_idx": 97,
+   "white": "Maiwald,JU",
+   "black": "Cornette,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn1k3r/pp3Qpp/2p1p3/4N3/Pbpqn3/2N5/1P4PP/R1B1KB1R w KQ - 1 12",
+   "color": "white",
+   "danger": 248,
+   "ply_idx": 22,
+   "white": "Almeida Quintana,O",
+   "black": "Espinosa Veloz,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "rn2k2r/pp3ppp/2p1p3/4N3/Pbpqn3/2N2Q2/1P4PP/R1B1KB1R w KQkq - 0 11",
+   "color": "white",
+   "danger": 243,
+   "ply_idx": 20,
+   "white": "Almeida Quintana,O",
+   "black": "Espinosa Veloz,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4k3/1b2bpp1/p3p3/1p4P1/8/P2QBq2/1PP4r/R3K1R1 w Q - 1 23",
+   "color": "white",
+   "danger": 243,
+   "ply_idx": 44,
+   "white": "Atabayev,M",
+   "black": "Darini,P",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4k3/1b2bpp1/p3p3/1p4P1/3B1q2/P2Q4/1PP4r/R3K1R1 w Q - 3 24",
+   "color": "white",
+   "danger": 243,
+   "ply_idx": 46,
+   "white": "Atabayev,M",
+   "black": "Darini,P",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r3k2r/1bqnb1pp/p3Qn2/1B2p1B1/5P2/2N5/PPP3PP/2KR3R b kq - 0 14",
+   "color": "black",
+   "danger": 292,
+   "ply_idx": 27,
+   "white": "Iljiushenok,I",
+   "black": "Kokarev,Dm",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3k2r/1bqnb1pp/4Qn2/1N2p1B1/5P2/8/PPP3PP/2KR3R b kq - 0 15",
+   "color": "black",
+   "danger": 281,
+   "ply_idx": 29,
+   "white": "Iljiushenok,I",
+   "black": "Kokarev,Dm",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/ppp1nRbn/8/4p2Q/4q2P/1PP1N1P1/1P1B3N/5RK1 b - - 0 23",
+   "color": "black",
+   "danger": 258,
+   "ply_idx": 45,
+   "white": "Alekseev,Evgeny",
+   "black": "Zanan,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4Rk1/ppp1n1b1/5n2/4p2Q/4q2P/1PP1N1P1/1P1B3N/5RK1 b - - 0 24",
+   "color": "black",
+   "danger": 230,
+   "ply_idx": 47,
+   "white": "Alekseev,Evgeny",
+   "black": "Zanan,E",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "3q4/2pkb1pp/2n2r2/1p1Q2N1/RP4P1/2Pp3P/5P2/4R1K1 b - - 7 31",
+   "color": "black",
+   "danger": 229,
+   "ply_idx": 61,
+   "white": "Vignesh,N R",
+   "black": "Lalith,B",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2rk4/5rp1/P1n1pn1b/1Q1p4/1q5P/1N2pBB1/1P2K3/R4R2 w - - 1 31",
+   "color": "white",
+   "danger": 271,
+   "ply_idx": 60,
+   "white": "Savchenko,B",
+   "black": "Afanasiev,Nikita",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3rnk1/p1pb1pQ1/2p3p1/3p2P1/7R/2PBB3/PP5P/4R1K1 b - - 0 22",
+   "color": "black",
+   "danger": 252,
+   "ply_idx": 43,
+   "white": "Velten,P",
+   "black": "Kollars,Dmitrij",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "8/kp6/2p4P/4b3/2Q2R2/6N1/4KP2/3q2r1 w - - 3 62",
+   "color": "white",
+   "danger": 221,
+   "ply_idx": 122,
+   "white": "Niemann,Hans Moke",
+   "black": "Maurizzi,Marc'Andria",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "8/kp6/2p4P/4b3/2Q2R2/4K1N1/5P2/3qr3 w - - 5 63",
+   "color": "white",
+   "danger": 214,
+   "ply_idx": 124,
+   "white": "Niemann,Hans Moke",
+   "black": "Maurizzi,Marc'Andria",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "7R/6k1/1pqBp3/3p1p1Q/3b4/6P1/7P/2r1R2K b - - 2 44",
+   "color": "black",
+   "danger": 313,
+   "ply_idx": 87,
+   "white": "Idani,P",
+   "black": "Kindermann,S",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "7R/6k1/1pqBp3/3p1p1Q/3b4/6P1/6KP/4r3 b - - 1 45",
+   "color": "black",
+   "danger": 286,
+   "ply_idx": 89,
+   "white": "Idani,P",
+   "black": "Kindermann,S",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "6Q1/1q1kr2p/p7/2R2p2/P7/1P5P/5n2/R3BK2 b - - 0 35",
+   "color": "black",
+   "danger": 269,
+   "ply_idx": 69,
+   "white": "Kempinski,R",
+   "black": "Yuffa,D",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2r3k1/p5p1/7p/2N5/PPpPp1n1/4q3/4K1B1/R3Q3 w - - 2 40",
+   "color": "white",
+   "danger": 231,
+   "ply_idx": 78,
+   "white": "Vrolijk,Liam",
+   "black": "Burg,T",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2r3k1/p4rp1/7p/1pN2p2/PPbPp1n1/2R1P1qN/3Q2B1/R5K1 w - - 2 34",
+   "color": "white",
+   "danger": 208,
+   "ply_idx": 66,
+   "white": "Vrolijk,Liam",
+   "black": "Burg,T",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2q5/2p3kp/r3rRp1/2Q5/p1P5/6P1/PP5P/5RK1 b - - 0 30",
+   "color": "black",
+   "danger": 201,
+   "ply_idx": 59,
+   "white": "Saric,A",
+   "black": "Velten,P",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r2nrBk1/1q5p/p4Qb1/1p2p1N1/2p1P1P1/7P/1P4B1/R2R3K b - - 2 30",
+   "color": "black",
+   "danger": 210,
+   "ply_idx": 59,
+   "white": "Mons,L",
+   "black": "Fodor,T jr",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1rr4q/5k2/p2p1b2/2pNp3/1pPnPpQP/3P1P1R/PP6/1K1N1R2 b - - 1 35",
+   "color": "black",
+   "danger": 207,
+   "ply_idx": 69,
+   "white": "Zifroni,D",
+   "black": "Baron,Ta",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1r2r3/1q6/p2kpQ2/1p1bNp2/1P6/P7/5PPP/3RR1K1 b - - 0 36",
+   "color": "black",
+   "danger": 226,
+   "ply_idx": 71,
+   "white": "Movsesian,S",
+   "black": "Cvek,R",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1bq1r2/bpp2p2/p1np1nk1/4p3/P1BPP2B/2P2Q1P/1P3PP1/RN2R1K1 b - - 4 16",
+   "color": "black",
+   "danger": 214,
+   "ply_idx": 31,
+   "white": "Praggnanandhaa,R",
+   "black": "Keymer,Vincent",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "1br2rk1/p4ppp/Pp2p3/4P3/2P4q/N2B4/1BQ2Pb1/4RRK1 w - - 0 21",
+   "color": "white",
+   "danger": 205,
+   "ply_idx": 40,
+   "white": "Jacobson,Brandon",
+   "black": "Mikaelyan,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4r3/p1k5/3p4/1ppP2QP/7P/2q2r2/P1K3R1/3R4 w - - 0 33",
+   "color": "white",
+   "danger": 236,
+   "ply_idx": 64,
+   "white": "Budisavljevic,Luka",
+   "black": "Jacobson,Brandon",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1k2r/1p3ppp/p1p1p3/4P3/1bPq1Pn1/2N5/PPQ3PP/R1B1KB1R w KQkq - 1 11",
+   "color": "white",
+   "danger": 216,
+   "ply_idx": 20,
+   "white": "Bellahcene,B",
+   "black": "Schlosser,P",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3qrk1/pp2b2p/2p1p2Q/3pBn2/6N1/8/PPP2PP1/R3R1K1 b - - 2 22",
+   "color": "black",
+   "danger": 215,
+   "ply_idx": 43,
+   "white": "Maghsoodloo,Parham",
+   "black": "Duda,J",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5rk1/8/1Bbpp1p1/p6p/P1P5/1P1r2q1/4QN2/2R1K3 w - - 0 36",
+   "color": "white",
+   "danger": 275,
+   "ply_idx": 70,
+   "white": "Nepomniachtchi,I",
+   "black": "Nihal,Sarin",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5rk1/7p/2bpp1p1/p7/P1P5/1P1RBrq1/4QN2/2R2K2 w - - 2 34",
+   "color": "white",
+   "danger": 221,
+   "ply_idx": 66,
+   "white": "Nepomniachtchi,I",
+   "black": "Nihal,Sarin",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6r1/3r2k1/1p1pq3/p1nRp2Q/2P3R1/5P2/1P3BP1/6K1 b - - 4 41",
+   "color": "black",
+   "danger": 269,
+   "ply_idx": 81,
+   "white": "Ivanchuk,V",
+   "black": "Sanal,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "8/3r2k1/1p1pq3/p1n1p2Q/2P3P1/4B3/1P4P1/3R2K1 b - - 2 44",
+   "color": "black",
+   "danger": 213,
+   "ply_idx": 87,
+   "white": "Ivanchuk,V",
+   "black": "Sanal,V",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "4rr1k/p5pp/8/3R4/PbB5/1P1KP1Q1/1q5P/3R4 w - - 7 33",
+   "color": "white",
+   "danger": 324,
+   "ply_idx": 64,
+   "white": "Koneru,H",
+   "black": "Khotenashvili,B",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "4rr1k/p5pp/8/1B1R4/Pb6/1q1KP1Q1/7P/3R4 w - - 0 34",
+   "color": "white",
+   "danger": 243,
+   "ply_idx": 66,
+   "white": "Koneru,H",
+   "black": "Khotenashvili,B",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r4rk1/5p1n/3p2pQ/p2np1P1/8/PPq3NP/2B1KP2/2R4R w - - 0 26",
+   "color": "white",
+   "danger": 247,
+   "ply_idx": 50,
+   "white": "Khotenashvili,B",
+   "black": "Koneru,H",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4rk1/5p1n/3p2pQ/p3p1P1/5n2/PPq3NP/2B1KP2/2RR4 w - - 2 27",
+   "color": "white",
+   "danger": 230,
+   "ply_idx": 52,
+   "white": "Khotenashvili,B",
+   "black": "Koneru,H",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3k2r/ppp1Q1pp/1n1p1b2/1P6/5P2/8/1PP3PP/RNB1R1K1 b kq - 0 16",
+   "color": "black",
+   "danger": 258,
+   "ply_idx": 31,
+   "white": "Dronavalli,Harika",
+   "black": "Goryachkina,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r3rn1R/p5k1/2pb1pQ1/1p1p2p1/3P2P1/2N1PN2/PP3P2/1K5R b - - 0 27",
+   "color": "black",
+   "danger": 391,
+   "ply_idx": 53,
+   "white": "Antipov,M2",
+   "black": "Koustav,Chatterjee",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5bk1/1r4p1/2b3r1/p4B1R/3P1B2/ppP1Qq2/5K2/7R w - - 0 35",
+   "color": "white",
+   "danger": 383,
+   "ply_idx": 68,
+   "white": "Gupta,Ab",
+   "black": "Saltaev,M",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "2R5/p2kr1p1/7p/2Q5/4q2P/1P4B1/2Pr1PP1/6K1 b - - 0 36",
+   "color": "black",
+   "danger": 368,
+   "ply_idx": 71,
+   "white": "Fawzy,Adham",
+   "black": "Iturrizaga Bonelli,Eduardo",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2r5/3nk1r1/2b1Q2R/pqp3p1/N2pP3/8/PPB3P1/1K3R2 b - - 11 40",
+   "color": "black",
+   "danger": 418,
+   "ply_idx": 79,
+   "white": "Rios,Cr",
+   "black": "Delgado Ramirez,N",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "1r4k1/3R1pb1/7p/Q4B2/5RP1/2r1q3/p1K1p2P/N3B3 w - - 0 33",
+   "color": "white",
+   "danger": 379,
+   "ply_idx": 64,
+   "white": "Nikitenko,M",
+   "black": "Aditya,Mittal",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "3r1r1k/p6p/1p1PB1p1/2p1b3/P5bq/1PN5/1BQ3K1/4R3 w - - 0 34",
+   "color": "white",
+   "danger": 373,
+   "ply_idx": 66,
+   "white": "Jakubowski,K",
+   "black": "Tomczak,J",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "5r2/pb1qr1k1/np4Q1/bNpP2Rp/8/PP4R1/4B1PP/6K1 b - - 0 29",
+   "color": "black",
+   "danger": 360,
+   "ply_idx": 57,
+   "white": "Peralta,Fe",
+   "black": "Krzyzanowski,M",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1q3r1/1R2Q3/2k1p3/p2pp3/2P5/5pP1/P3bP1P/1R4K1 b - - 4 35",
+   "color": "black",
+   "danger": 366,
+   "ply_idx": 69,
+   "white": "Peng,Li Min",
+   "black": "Tilicheev,V",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "6k1/1p3pp1/3pb2p/4n1B1/1pP4n/7r/5Qq1/2NBR1K1 w - - 0 37",
+   "color": "white",
+   "danger": 379,
+   "ply_idx": 72,
+   "white": "Oparin,G",
+   "black": "Liang,Awonder",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1b1k2r/pp2ppp1/1b3n2/3pP3/1n1P1P1p/3qBB2/PP1KNQPP/RN1R4 w kq - 3 14",
+   "color": "white",
+   "danger": 364,
+   "ply_idx": 26,
+   "white": "Saric,A",
+   "black": "Fridman,D",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "5b1r/pq1k1p1p/3nr1p1/Q7/5B2/5P2/PP3P1P/2RR2K1 b - - 3 21",
+   "color": "black",
+   "danger": 367,
+   "ply_idx": 41,
+   "white": "Gledura,B",
+   "black": "Nasuta,G",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "5b1r/pq1k1p1p/3nr3/Q5p1/8/5PB1/PP3P1P/2RR2K1 b - - 1 22",
+   "color": "black",
+   "danger": 367,
+   "ply_idx": 43,
+   "white": "Gledura,B",
+   "black": "Nasuta,G",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1bq3r/4bnk1/p2pB3/1ppPnQ2/5BP1/2N2P2/PP6/1K1R3R b - - 3 26",
+   "color": "black",
+   "danger": 413,
+   "ply_idx": 51,
+   "white": "So,W",
+   "black": "Aronian,L",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5rk1/5p2/7R/Pp4p1/4r1q1/3Q2P1/1P4K1/5q1R w - - 0 37",
+   "color": "white",
+   "danger": 403,
+   "ply_idx": 72,
+   "white": "Vachier Lagrave,M",
+   "black": "Duda,J",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "5Q2/8/4k3/p7/5Q1p/7P/P3qbPK/8 b - - 0 51",
+   "color": "black",
+   "danger": 394,
+   "ply_idx": 101,
+   "white": "Raja,Rithvik R",
+   "black": "Salem,AR",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1r1n3/2qb1kpp/5b2/3p3P/1P1NPp2/1PP2P2/1K1Q4/q2R1B1R w - - 0 28",
+   "color": "white",
+   "danger": 369,
+   "ply_idx": 54,
+   "white": "Kacharava,Nikolozi",
+   "black": "Ivic,Velimir",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "3r1b1r/pp1k1p1p/1qn3bp/1B1Q1p2/3N4/1NP5/PP4PP/R3R1K1 b - - 0 18",
+   "color": "black",
+   "danger": 388,
+   "ply_idx": 35,
+   "white": "Lopez Martinez,Josep",
+   "black": "Gines Esteo,Pedro Antonio",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r1b1kq1r/2p4p/1n1R1Q2/p1p1p3/4N2N/1P4P1/P1P2P1P/2K4R b - - 0 23",
+   "color": "black",
+   "danger": 356,
+   "ply_idx": 45,
+   "white": "Benjamin,Joe",
+   "black": "Goldin,A",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6k1/6p1/2p3Np/3r1R2/2Q3P1/p6q/4K3/4bq2 w - - 0 51",
+   "color": "white",
+   "danger": 425,
+   "ply_idx": 100,
+   "white": "Movahed,Sina",
+   "black": "Pichot,A",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "2r1qr2/1p1b2k1/pB3Rn1/3Pp2Q/P7/2N3P1/1P2B1Nn/4R2K b - - 0 28",
+   "color": "black",
+   "danger": 360,
+   "ply_idx": 55,
+   "white": "Bjerre,Jonas Buhl",
+   "black": "Naiditsch,A",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "4Q3/1k6/1qp5/2Rp1P2/1P2p3/Q3P3/1r5r/K1R5 b - - 0 53",
+   "color": "black",
+   "danger": 368,
+   "ply_idx": 105,
+   "white": "Caruana,F",
+   "black": "Erigaisi,Arjun",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "4r3/pb1kn2B/1p1Qp3/nP1q3p/6p1/B7/P2PN1PP/2R1N1K1 b - - 0 23",
+   "color": "black",
+   "danger": 373,
+   "ply_idx": 45,
+   "white": "Bartel,Mat",
+   "black": "Moranda,W",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "r4r1k/1pp3pp/1b1p2n1/pP5n/P1BPP3/5Nq1/6K1/R1BQR1N1 w - - 0 24",
+   "color": "white",
+   "danger": 403,
+   "ply_idx": 46,
+   "white": "Dominguez Perez,L",
+   "black": "Liang,Awonder",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r1b2rk1/1p2n1n1/p4ppQ/8/2pPP1q1/5NK1/PPBB4/R4R2 w - - 0 23",
+   "color": "white",
+   "danger": 352,
+   "ply_idx": 44,
+   "white": "Dardha,Daniel",
+   "black": "Pechac,Jergus",
+   "label": 0,
+   "reason": "held"
+  },
+  {
+   "fen": "6r1/5b1k/2PR1p1p/1P2q3/p7/P1N2r2/3Q1K2/2R5 w - - 0 46",
+   "color": "white",
+   "danger": 354,
+   "ply_idx": 90,
+   "white": "Praggnanandhaa,R",
+   "black": "Gukesh,D",
+   "label": 0,
+   "reason": "already_lost_excluded"
+  },
+  {
+   "fen": "r2q1r2/1p3pp1/4p3/pbbp1kN1/8/2PR2Q1/PP3PPP/R1B3K1 b - - 0 20",
+   "color": "black",
+   "danger": 350,
+   "ply_idx": 39,
+   "white": "Idani,P",
+   "black": "Marcelin,C",
+   "label": 1,
+   "reason": "eval_crash"
+  }
+ ],
+ "reliability": [
+  {
+   "bin": [
+    0,
+    40
+   ],
+   "n": 68,
+   "mean_danger": 20.9,
+   "obs_rate": 0.0,
+   "iso_pred": 0.0
+  },
+  {
+   "bin": [
+    40,
+    100
+   ],
+   "n": 64,
+   "mean_danger": 73.5,
+   "obs_rate": 0.0,
+   "iso_pred": 0.0
+  },
+  {
+   "bin": [
+    100,
+    200
+   ],
+   "n": 59,
+   "mean_danger": 127.2,
+   "obs_rate": 0.034,
+   "iso_pred": 0.0
+  },
+  {
+   "bin": [
+    200,
+    350
+   ],
+   "n": 45,
+   "mean_danger": 237.5,
+   "obs_rate": 0.0,
+   "iso_pred": 0.036
+  },
+  {
+   "bin": [
+    350,
+    773
+   ],
+   "n": 9,
+   "mean_danger": 378.8,
+   "obs_rate": 0.111,
+   "iso_pred": 0.111
+  }
+ ],
+ "brier": 0.0115,
+ "baseline_brier": 0.0121,
+ "spearman": 0.1224,
+ "spearman_p": 0.05581,
+ "point_biserial": 0.1263,
+ "point_biserial_p": 0.0483,
+ "status": "fit"
+}

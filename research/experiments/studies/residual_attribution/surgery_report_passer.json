@@ -1,0 +1,10 @@
+{
+ "passer": {
+  "n": 80,
+  "engine_mean": 42.2,
+  "engine_sd": 87.2,
+  "model_mean": 1.5,
+  "model_sd": 19.8,
+  "corr": 0.55
+ }
+}

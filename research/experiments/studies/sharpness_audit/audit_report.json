@@ -1,0 +1,4539 @@
+{
+ "per_bucket": {
+  "DEAD": {
+   "n": 60,
+   "punish": 29.8,
+   "breadth": 5.42,
+   "gb": 5.5
+  },
+  "QUIET": {
+   "n": 60,
+   "punish": 34.9,
+   "breadth": 5.23,
+   "gb": 5.2
+  },
+  "DYNAMIC": {
+   "n": 60,
+   "punish": 53.2,
+   "breadth": 4.25,
+   "gb": 6.0
+  },
+  "SHARP": {
+   "n": 60,
+   "punish": 117.7,
+   "breadth": 2.57,
+   "gb": 5.5
+  },
+  "RAZOR": {
+   "n": 60,
+   "punish": 208.4,
+   "breadth": 1.73,
+   "gb": 2.6
+  }
+ },
+ "rows": [
+  {
+   "fen": "rnbr2k1/2q1bppp/p3pn2/1pppN3/2P2P2/2NP2P1/PP2P1BP/R1B1QRK1 w - - 0 11",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 36.0,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 40,
+   "comp_adj": 60,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1r3k1/1pq1bppp/p1bpp3/2n5/2PNP2P/2B2P2/PP2B1P1/1KRQ3R w - - 5 21",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 40.8,
+   "breadth": 5,
+   "gb": 17.0,
+   "comp_raw": 11,
+   "comp_adj": 11,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1q1rk1/1p2ppbp/5np1/p1pp1bN1/P1PP4/1P4P1/3NPPBP/R1BQ1RK1 w - - 0 11",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 76.8,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 21,
+   "comp_adj": 121,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r1q1rk1/2p2pbp/ppn2np1/2Pp4/3P4/1QN2B1P/PP3PP1/R1BR2K1 w - - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 52.6,
+   "breadth": 4,
+   "gb": 12.0,
+   "comp_raw": 43,
+   "comp_adj": 57,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/bpp2p1n/3p2n1/p3p1Pp/2B1P1b1/P1PP1NB1/1P1N1PP1/R3QR1K w - - 3 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "narrowness",
+    "forcing lines"
+   ],
+   "punish": 78.6,
+   "breadth": 2,
+   "gb": 17.0,
+   "comp_raw": 24,
+   "comp_adj": 24,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rqrbk1/1b1n1p2/p1ppn1pp/1p2p3/PP1PP3/2P2N1P/1BQN1PP1/R3RBK1 w - - 1 21",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 14.6,
+   "breadth": 6,
+   "gb": 4.0,
+   "comp_raw": 69,
+   "comp_adj": 69,
+   "best_is_grab": false
+  },
+  {
+   "fen": "4r1k1/5ppp/p7/8/3R4/1b6/5PPP/R5K1 w - - 4 26",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 22.8,
+   "breadth": 6,
+   "gb": 29.0,
+   "comp_raw": 10,
+   "comp_adj": 90,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/2pb1ppp/p1nbpn2/1p6/3P4/1P2PNP1/4QPBP/RNB2RK1 w kq - 1 11",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 17.8,
+   "breadth": 6,
+   "gb": 1.0,
+   "comp_raw": 161,
+   "comp_adj": 161,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/3bn1b1/1pn4p/pNPppp1P/5P1N/2P4R/PP2B1P1/R1BQK3 w Q - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 78.4,
+   "breadth": 3,
+   "gb": 38.0,
+   "comp_raw": 70,
+   "comp_adj": 70,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3k2r/1bqnbp1p/p3p1p1/1p1nN1P1/P1pPNP2/8/1P4BP/R1BQ1RK1 w kq - 1 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines",
+    "human divergence"
+   ],
+   "punish": 35.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 14,
+   "comp_adj": 14,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qkb1r/1b3ppp/p1n1pn2/1p6/3NP3/1BN5/PP3PPP/R1BQ1RK1 w kq - 1 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "forcing lines"
+   ],
+   "punish": 74.8,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 13,
+   "comp_adj": 13,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/pb1nbppp/1p2pn2/2ppN3/2PP4/1P4P1/PB1NPPBP/R2Q1RK1 w - - 2 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 17.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 34,
+   "comp_adj": 34,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rbb1k2r/pp1nn2p/2p1pq2/3p1pp1/2PP4/BPN1PN2/P3BPPP/2RQ1RK1 w kq - 0 11",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 15.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 105,
+   "comp_adj": 105,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qkb1r/pp1npp2/5np1/3P2B1/6P1/2N2P2/PP5P/R2QKB1R w KQq - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 16.4,
+   "breadth": 6,
+   "gb": 17.0,
+   "comp_raw": 122,
+   "comp_adj": 122,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3r2k1/2p1qpp1/Q4n1p/3P1R2/1P6/P1r4P/3N2P1/5R1K w - - 3 26",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 20.2,
+   "breadth": 6,
+   "gb": 9.0,
+   "comp_raw": 100,
+   "comp_adj": 100,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1qk1nr/1b3ppp/4p3/pp6/2pP4/1PB1PN2/5PPP/R2QKB1R w KQkq - 1 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 125.0,
+   "breadth": 2,
+   "gb": 20.0,
+   "comp_raw": 137,
+   "comp_adj": 37,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3r2k1/2pr2pp/1pnqpb2/p2pp3/P3P2P/1QPP2P1/1P1NRPKN/3R4 w - - 11 26",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 6.8,
+   "breadth": 6,
+   "gb": 34.0,
+   "comp_raw": 103,
+   "comp_adj": 103,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1k2r/pp1n1pb1/2p1pqpp/8/2pPP3/2N2N2/PP2BPPP/R2Q1RK1 w kq - 0 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 50.6,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 137,
+   "comp_adj": 37,
+   "best_is_grab": false
+  },
+  {
+   "fen": "q1nrn1k1/rp2bpp1/2p1p2p/8/pPNPP3/P2N4/1BR1QPPP/3R2K1 w - - 13 26",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 25.0,
+   "breadth": 6,
+   "gb": 3.0,
+   "comp_raw": 195,
+   "comp_adj": 195,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn3rk1/p4ppp/bp2pn2/2pq4/3P4/P1P1PN2/2Q1BPPP/R1B1K2R w KQ - 2 11",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 91.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 43,
+   "comp_adj": 43,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3rr3/1pq2kbp/n1p1p1p1/p3Pp2/PnNP1P2/1P1N1BP1/6KP/2RQ2B1 w - - 11 21",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 27.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 75,
+   "comp_adj": 75,
+   "best_is_grab": false
+  },
+  {
+   "fen": "4r1k1/p4pp1/2qQ2p1/P7/8/B6P/4nPP1/R5K1 w - - 3 26",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 49.5,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 24,
+   "comp_adj": 24,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqnrk1/ppp1nppp/3p4/3Pp3/2P1P3/2B2N2/PPQ1BPPP/R3K2R w KQ - 3 11",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "human divergence",
+    "imbalance",
+    "activity"
+   ],
+   "punish": 11.8,
+   "breadth": 6,
+   "gb": 9.0,
+   "comp_raw": 39,
+   "comp_adj": 39,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rqr1k1/1p2b2p/3p2pB/2nPppn1/p1P5/N6Q/PP2BPPP/2R2RK1 w - - 2 21",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 184.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 116,
+   "comp_adj": 116,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r3k1/4bppp/bB2p3/3p4/3P2n1/1p1nPNP1/P2N1P1P/1R3BK1 w - - 0 26",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "activity",
+    "board tension"
+   ],
+   "punish": 48.4,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 11,
+   "comp_adj": 11,
+   "best_is_grab": true
+  },
+  {
+   "fen": "q2rr1k1/1bb2ppp/pp1ppn2/4n3/2P1P1P1/1PN1NP2/P2QBB1P/2RR2K1 w - - 1 21",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "narrowness",
+    "human divergence"
+   ],
+   "punish": 55.6,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 84,
+   "comp_adj": 84,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3r1k1/3nqpbp/1pn3p1/8/p2pPB2/3N2P1/PP2QP1P/RN1R2K1 w - - 4 21",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "narrowness",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 56.6,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 136,
+   "comp_adj": 136,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1q6/R4pkp/4pnp1/1P1nr1R1/7P/3B1Q2/5PK1/8 w - - 6 26",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 126.8,
+   "breadth": 2,
+   "gb": 20.0,
+   "comp_raw": 72,
+   "comp_adj": 72,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1k1b1r/pp4pp/4pn2/8/4p3/2N5/PP3PPP/R1B1KB1R w KQ - 0 11",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "imbalance",
+    "king exposure"
+   ],
+   "punish": 24.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 119,
+   "comp_adj": 119,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/pp1n2bp/3q2p1/PP1ppp2/4n3/2P1B1P1/2N1PPBP/RNQ2RK1 w - - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "narrowness",
+    "forcing lines"
+   ],
+   "punish": 72.8,
+   "breadth": 2,
+   "gb": 9.0,
+   "comp_raw": 14,
+   "comp_adj": 14,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1r3k1/1pb1qbp1/2pp2np/3Pp1p1/PP2P3/1Q2B1PP/3N1P1K/3RRB2 w - - 0 26",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 23.4,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 153,
+   "comp_adj": 153,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r4k1/5pp1/3n3p/p2B4/P1p5/4P1P1/5P1P/2R3K1 w - - 0 26",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 52.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 65,
+   "comp_adj": 35,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r4k1/2r1ppbp/2Pp1np1/q5B1/p7/4QB2/PP3PPP/2RR2K1 w - - 1 21",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 13.2,
+   "breadth": 6,
+   "gb": 39.0,
+   "comp_raw": 53,
+   "comp_adj": 53,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/1p1n2pp/p4q2/3pp3/3N1P2/P7/1PPQ2PP/2KR1B1R w - - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 141.4,
+   "breadth": 4,
+   "gb": 2.0,
+   "comp_raw": 83,
+   "comp_adj": 83,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4k1r/1bq1ppbp/6p1/pBp5/P7/4B3/1P1Q1PPP/R4RK1 w - - 2 21",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 51.4,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 224,
+   "comp_adj": 224,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r2rk1/p2nqpp1/2p1p2p/2Nn4/3P4/1B6/PP3PPP/2RQ1RK1 w - - 4 21",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 10.6,
+   "breadth": 6,
+   "gb": 4.0,
+   "comp_raw": 15,
+   "comp_adj": 15,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r3r2/1pp1q1pk/p1nppn1p/P7/3pP3/1QP1PN2/1P1N2PP/R4RK1 w - - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 126.0,
+   "breadth": 2,
+   "gb": 11.0,
+   "comp_raw": 128,
+   "comp_adj": 28,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1bq1rk1/p3pnbp/2pp2p1/2p1Pp2/5P2/2NP1N1P/PPP3P1/R1BQ1RK1 w - - 1 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 42.4,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 42,
+   "comp_adj": 42,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2r2k1/pp3ppp/2n2n2/q2p2Bb/N7/P2B1P2/1PP2RPP/R2Q2K1 w - - 7 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 75.0,
+   "breadth": 4,
+   "gb": 17.0,
+   "comp_raw": 45,
+   "comp_adj": 45,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3k2r/bppbqp2/2np3p/p3p1p1/PPBPPn2/2P2N1P/3N1PPB/R2Q1RK1 w kq - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 90.6,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 148,
+   "comp_adj": 148,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/ppq1bppp/2pp1nn1/4p3/1PPPP3/2N2N2/P1Q1BPPP/R1BR2K1 w - - 1 11",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 19.6,
+   "breadth": 6,
+   "gb": 7.0,
+   "comp_raw": 91,
+   "comp_adj": 91,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/pp4bp/2n1b1p1/1NPpPn2/8/4BN2/PP2B1PP/R2Q1RK1 w - - 3 16",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 74.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 15,
+   "comp_adj": 15,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1qk2r/1b2bppp/p3p3/1ppnP3/3P4/5N2/PP3PPP/RNBQRBK1 w kq - 1 11",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "narrowness",
+    "forcing lines"
+   ],
+   "punish": 24.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 31,
+   "comp_adj": 31,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/1p2bpp1/p1p2n1p/1n2p3/2N5/2N3P1/PP2PPBP/R1BR2K1 w - - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 29.8,
+   "breadth": 6,
+   "gb": 3.0,
+   "comp_raw": 66,
+   "comp_adj": 34,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3q1rk1/p1p1bppp/br2p3/3n4/2pPN3/2N1P1P1/nB2QPBP/1R3RK1 w - - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 5,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 30.2,
+   "breadth": 5,
+   "gb": 24.0,
+   "comp_raw": 36,
+   "comp_adj": 284,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3qr2/pp2b1pk/2p2n1p/1P2p3/2b1P3/2N1B1PP/PQ3PB1/R2R2K1 w - - 3 21",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 84.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 114,
+   "comp_adj": 114,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3kb1r/1p1b1p1p/pqnppp2/8/B2NP3/2N5/PPP2PPP/R2Q1RK1 w kq - 2 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 39.8,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 58,
+   "comp_adj": 58,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/1bp2pp1/1p1p4/p1n1n2p/2P1P3/P1N2P2/1PQBB1PP/R3K2R w KQkq - 1 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 34.2,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 123,
+   "comp_adj": 123,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r4nr/p1pk1ppp/1n6/1p1B3b/1P1P1P2/2P5/P2N1K1P/R1B4R w - - 3 21",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "imbalance",
+    "king exposure"
+   ],
+   "punish": 136.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 47,
+   "comp_adj": 47,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rr2k1/1b3ppp/1q2pb2/2p1n3/1p2P3/3PB1PP/1PQ1NPB1/R2R2K1 w - - 0 21",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "human divergence"
+   ],
+   "punish": 95.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 22,
+   "comp_adj": 22,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r3k1/5pp1/5n1p/1NqpNb2/8/1R2P2P/5PP1/Q5K1 w - - 0 26",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 24.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 60,
+   "comp_adj": 60,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2b2r2/2q1p1kp/3p1pp1/p1n5/N3P1B1/1P2Q2P/2PR1PP1/6K1 w - - 4 26",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 32.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 27,
+   "comp_adj": 27,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/ppqn1pp1/2pbpn1p/4N2P/3P4/6N1/PPPBQPP1/2KRR3 w - - 1 16",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 22.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 38,
+   "comp_adj": 38,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/1b2qppp/p1n2n2/1p1p4/8/1P1B4/PBQ1NPPP/R4RK1 w - - 2 16",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 21.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 140,
+   "comp_adj": 140,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2kr3r/1pp1qpp1/p1pbbn1p/4p3/1P2P3/P1NPBN1P/2P2PP1/R2QK2R w KQ - 0 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 18.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 7,
+   "comp_adj": 7,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2bq1rk1/r4pbp/2p1p1p1/p4n2/2BP4/1P2BN2/P4PPP/2RQ1RK1 w - - 1 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines",
+    "human divergence"
+   ],
+   "punish": 8.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 20,
+   "comp_adj": 20,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r3rk1/pppq2pn/2np3p/5b2/2P2P1N/P1PP4/6BP/1RBQ1RK1 w - - 0 16",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 42.8,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 51,
+   "comp_adj": 51,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rq2k1/4nr1p/5pp1/1Q1b4/2pP1B1P/P4NP1/1P3PB1/4R1K1 w - - 1 26",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "human divergence",
+    "imbalance",
+    "activity"
+   ],
+   "punish": 16.6,
+   "breadth": 6,
+   "gb": 4.0,
+   "comp_raw": 65,
+   "comp_adj": 65,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqk2r/4bppp/p1np1n2/1p1Np1B1/4P3/N7/PPP2PPP/R2QKB1R w KQkq - 2 11",
+   "bucket": "DYNAMIC",
+   "score": 4,
+   "comps": [
+    "narrowness",
+    "forcing lines"
+   ],
+   "punish": 68.4,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 35,
+   "comp_adj": 35,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2brr1k1/1pq3p1/pQp1n2p/5p2/1P3P1P/PN1PR1P1/R5B1/6K1 w - - 1 26",
+   "bucket": "DYNAMIC",
+   "score": 3,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 189.8,
+   "breadth": 3,
+   "gb": 3.0,
+   "comp_raw": 7,
+   "comp_adj": 7,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1q1rk1/1bp1bppp/p2p1n2/1p2p3/P3P3/1BPP1N1P/1P3PP1/RNBQ1RK1 w - - 1 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 18.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 36,
+   "comp_adj": 36,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3r1k1/pp2qpp1/2p1bn1p/3p4/3P4/P1QBP1N1/1P3PPP/2R2RK1 w - - 10 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 11.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 15,
+   "comp_adj": 15,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/1pp1ppb1/2np1npp/p7/2PPP2B/2N5/PP1NBPPP/R2QK2R w KQ - 4 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 68.4,
+   "breadth": 4,
+   "gb": 10.0,
+   "comp_raw": 11,
+   "comp_adj": 11,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/1ppnbppp/p1b1pn2/6B1/P1QP4/5NP1/1P2PPBP/RN3RK1 w - - 3 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 12.4,
+   "breadth": 6,
+   "gb": 11.0,
+   "comp_raw": 26,
+   "comp_adj": 26,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/3nppbp/1pnp2p1/p7/N1P1P3/1N2BP2/PP1QB1PP/R4RK1 w - - 0 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 14.0,
+   "breadth": 6,
+   "gb": 1.0,
+   "comp_raw": 57,
+   "comp_adj": 57,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/p4ppp/2p2n2/3p2B1/1b6/2NB4/PPP2PPP/R2Q1RK1 w - - 0 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 6.8,
+   "breadth": 6,
+   "gb": 3.0,
+   "comp_raw": 5,
+   "comp_adj": 5,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3kb1r/p2p1p1p/1pn1pqp1/8/2P1Q3/P3PNP1/1P3PP1/1R2KB1R w Kkq - 5 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 26.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 16,
+   "comp_adj": 16,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqr1k1/bpp2pp1/p1np1n1p/4p3/P1B1P3/2PP1N1P/1P1N1PP1/R1BQR1K1 w - - 1 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 6.0,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 24,
+   "comp_adj": 24,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qr1k1/1ppb1pbp/p1np1np1/4p3/3PP3/2P2N1P/PPB2PP1/RNBQR1K1 w - - 3 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 20.2,
+   "breadth": 6,
+   "gb": 1.0,
+   "comp_raw": 58,
+   "comp_adj": 58,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/pp2bppp/2nqpn2/8/3P4/2N1BN2/PP2BPPP/R2Q1RK1 w - - 5 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 17.6,
+   "breadth": 6,
+   "gb": 5.0,
+   "comp_raw": 9,
+   "comp_adj": 9,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rq1rk1/1p2bppp/p5b1/3pP3/Pn1B4/6NP/1P3PP1/RB1QR1K1 w - - 1 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 28.0,
+   "breadth": 6,
+   "gb": 10.0,
+   "comp_raw": 33,
+   "comp_adj": 33,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1q1rk1/pb3ppp/1p2pn2/8/1bBP4/2N2N2/PP2QPPP/R1B2RK1 w - - 2 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 28.0,
+   "breadth": 6,
+   "gb": 11.0,
+   "comp_raw": 17,
+   "comp_adj": 17,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r2rk1/p1nq1nbp/1p2R1p1/3p4/3N4/1NP3PP/P4PB1/2RQ2K1 w - - 5 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 145.0,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 50,
+   "comp_adj": 50,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp1nbppp/2n1p3/8/2Pp4/1P1P1NP1/P3QPBP/RNB2RK1 w - - 3 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 27.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 14,
+   "comp_adj": 14,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r2rk1/1bqnbppp/pp1p4/4p3/P3P3/2N3P1/1PP1QPBP/R1B2RK1 w - - 11 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 17.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 56,
+   "comp_adj": 56,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp3ppp/2pbpn2/4N3/2BP1Q2/8/PPP2PPP/R1B1K2R w KQ - 1 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 33.8,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 44,
+   "comp_adj": 44,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/1p2ppbp/p4np1/2p1p3/B1P1P3/2NP3P/PP3PP1/R1BQ1RK1 w - - 0 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 30.0,
+   "breadth": 5,
+   "gb": 22.0,
+   "comp_raw": 62,
+   "comp_adj": 62,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3r1k1/p2b1p1p/3q1np1/1p1pR3/3P1P2/2N4P/PPBQ2P1/5RK1 w - - 0 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 30.6,
+   "breadth": 6,
+   "gb": 33.0,
+   "comp_raw": 35,
+   "comp_adj": 35,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3r1rnk/pp3pp1/2b1pn1p/4N3/1q1P4/2N4R/PP1Q1PPP/1B1R2K1 w - - 18 26",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 27.4,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 89,
+   "comp_adj": 89,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4r2/pp2ppkp/6p1/5b2/4n3/5NP1/PP2PPBP/R2R2K1 w - - 0 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 11.2,
+   "breadth": 6,
+   "gb": 15.0,
+   "comp_raw": 9,
+   "comp_adj": 9,
+   "best_is_grab": false
+  },
+  {
+   "fen": "5rk1/pp3ppp/4pn2/5P2/1br2B2/2N3P1/PP3PKP/1R1R4 w - - 0 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 16.6,
+   "breadth": 6,
+   "gb": 1.0,
+   "comp_raw": 16,
+   "comp_adj": 16,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1rbq1rk1/4bpp1/p2p1n1p/P1p5/3PP3/1B5P/5PP1/RNBQR1K1 w - - 0 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 24.4,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 31,
+   "comp_adj": 31,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp2ppb1/2n2np1/2p3N1/8/2N3P1/PP1PPPB1/R1BQK2R w KQ - 2 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 48.2,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 16,
+   "comp_adj": 16,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/1p2bpp1/p4nbp/2pp4/Pn3PP1/2NP3P/1PP3N1/RBBQ1RK1 w - - 6 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 26.4,
+   "breadth": 6,
+   "gb": 25.0,
+   "comp_raw": 24,
+   "comp_adj": 24,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/1p1n1pp1/2pbpn1p/q2p4/p1PP4/P3BNPP/1PQNPPB1/R2R2K1 w - - 1 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 18.0,
+   "breadth": 6,
+   "gb": 5.0,
+   "comp_raw": 47,
+   "comp_adj": 47,
+   "best_is_grab": false
+  },
+  {
+   "fen": "4r1k1/3b1ppp/5nn1/2bpq3/1p1N2P1/1B2PPN1/1P3Q1P/r1BR1R1K w - - 4 26",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 16.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 22,
+   "comp_adj": 22,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rr2k1/5pp1/1p1pqn1p/p1n1p3/2P4Q/2N3P1/PP1NPP1P/2RR2K1 w - - 5 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 9.4,
+   "breadth": 6,
+   "gb": 19.0,
+   "comp_raw": 25,
+   "comp_adj": 25,
+   "best_is_grab": false
+  },
+  {
+   "fen": "8/5ppp/1pbk1n2/p2pr3/P7/1B3P2/1PP1NKPP/3R4 w - - 7 26",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 13.0,
+   "breadth": 6,
+   "gb": 8.0,
+   "comp_raw": 28,
+   "comp_adj": 28,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/pb1nbppp/1pp1p3/3p3n/2PP1B2/2NQ1NP1/PP2PPBP/R2R2K1 w - - 4 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 57.8,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 37,
+   "comp_adj": 37,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r1k2r/2qbbp2/p2p2p1/4p1Pn/1n2P3/1NN1Q3/1PP2B1P/1K1R1BR1 w k - 0 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 47.6,
+   "breadth": 3,
+   "gb": 25.0,
+   "comp_raw": 24,
+   "comp_adj": 24,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rr2k1/1p2bpp1/1p3nnp/3p4/8/1NN1PP2/PP4PP/3R1RBK w - - 2 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 15.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 74,
+   "comp_adj": 74,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rq1rk1/p3np1p/bpn2bp1/3p4/3P4/PP3NP1/1B1N1PBP/RQ2R1K1 w - - 0 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 29.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 37,
+   "comp_adj": 37,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqr1k1/bpp2pp1/p1np1n1p/4p3/P1B1P3/2PP1N1P/1P1N1PP1/R1BQR1K1 w - - 1 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 5.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 25,
+   "comp_adj": 25,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r1qr1k/2pb1pbp/ppn3p1/4p2n/P1N1P3/2P1BN1P/1PB2PP1/R2QR1K1 w - - 0 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 13.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 76,
+   "comp_adj": 76,
+   "best_is_grab": false
+  },
+  {
+   "fen": "6k1/p3pp1p/n2rb1p1/2p1q3/8/QP2NBP1/3PPP1P/4R1K1 w - - 5 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 12.6,
+   "breadth": 6,
+   "gb": 1.0,
+   "comp_raw": 56,
+   "comp_adj": 56,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rnb1k2r/pp1p1ppp/4p3/2P5/2P1Q3/6P1/Pq1NPP1P/R3KB1R w KQkq - 0 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 172.6,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 38,
+   "comp_adj": 38,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rr2k1/3n1pp1/pp1p3p/3Pp1b1/PPP1q3/4B2P/2N1QPP1/2RR2K1 w - - 1 26",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 17.0,
+   "breadth": 6,
+   "gb": 17.0,
+   "comp_raw": 43,
+   "comp_adj": 43,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4k2/1p2rpp1/p6p/3p1b2/3P1n2/2P4P/1P1R1PPN/R4BK1 w - - 9 26",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 16.8,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 15,
+   "comp_adj": 15,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r3k1/pp1q1pp1/5n2/3p3p/3N4/1P1Q1PPb/P3P1BP/3R2K1 w - - 0 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 63.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 60,
+   "comp_adj": 60,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqk2r/4bppp/p1nppn2/1p6/4PP2/1NNBB3/PPP1Q1PP/R3K2R w KQkq - 0 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 34.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 72,
+   "comp_adj": 72,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3k2r/pbqnbpp1/1p1ppn1p/2p5/2NP4/3BPNBP/PPP2PP1/R2QK2R w KQkq - 2 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 20.6,
+   "breadth": 6,
+   "gb": 5.0,
+   "comp_raw": 2,
+   "comp_adj": 2,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/pp1n1ppb/2p2n1p/3p4/1b1P1B1P/2N1P1N1/PP3PP1/R2QKB1R w KQkq - 1 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 31.8,
+   "breadth": 6,
+   "gb": 16.0,
+   "comp_raw": 27,
+   "comp_adj": 27,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qrbk1/2pb1p2/p2p1npp/1p2p3/2nPP3/2P2NNP/PPB2PP1/R1BQR1K1 w - - 4 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 13.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 65,
+   "comp_adj": 65,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b4r/pp2kppp/2n1p3/8/2B5/P1R1P3/1P3PPP/4K1NR w K - 1 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 15.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 26,
+   "comp_adj": 26,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqr1k1/pp1n1pp1/2pb1p2/7p/3P4/2PBB3/PPQ1NPPP/R3K2R w KQ - 2 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 6.2,
+   "breadth": 6,
+   "gb": 10.0,
+   "comp_raw": 35,
+   "comp_adj": 35,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp4bp/n1pp1pp1/3Pp1B1/2P1P1n1/2N2N2/PP2BPPP/R2Q1RK1 w - - 0 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 70.2,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 57,
+   "comp_adj": 57,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rq1rk1/pp1nbppp/3ppn2/8/3PP3/5N2/PP2QPPP/RNBR2K1 w - - 1 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 15.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 33,
+   "comp_adj": 33,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/bpp2ppp/p2p1nn1/4p3/B3P3/2PP1N1P/PP1N1PP1/R1BQR1K1 w - - 5 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 11.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 34,
+   "comp_adj": 34,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp2bppp/4pn2/n7/2BP4/2N2N2/PP2QPPP/R1BR2K1 w - - 3 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 49.8,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 50,
+   "comp_adj": 50,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1r3k1/2q2pb1/b1pp1np1/2nPp1Bp/p1P1P3/6NP/P2N1PP1/1R1QRBK1 w - - 0 26",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 23.0,
+   "breadth": 6,
+   "gb": 4.0,
+   "comp_raw": 15,
+   "comp_adj": 15,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3r1k1/pp2nppp/2p2q2/3p4/PPnP4/2NNP3/2Q2PPP/R4RK1 w - - 1 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 15.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 8,
+   "comp_adj": 8,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1qr1k1/pp2bpp1/2p2n1p/3p4/3P2b1/2NBPNB1/PP3PPP/R2QK2R w KQ - 2 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 6.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 32,
+   "comp_adj": 32,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/1pp1npp1/p1n1bb1p/2Pp4/1P1P2P1/P1N1BN1P/4BP2/R2QK2R w KQkq - 0 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 18.4,
+   "breadth": 6,
+   "gb": 12.0,
+   "comp_raw": 42,
+   "comp_adj": 42,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rq1rk1/1p3pbp/p2pbnp1/P3p3/4P3/1PN1BP2/1P4PP/R2QRBK1 w - - 0 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 16.4,
+   "breadth": 6,
+   "gb": 10.0,
+   "comp_raw": 46,
+   "comp_adj": 46,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3kbnr/1b1p1ppp/p3p3/1p6/3BP3/2N3P1/PPP2PP1/R3KB1R w KQkq - 1 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 17.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 43,
+   "comp_adj": 43,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp2bppp/4p3/2nn4/3N4/1Q4P1/PP2PPBP/RNBR2K1 w - - 4 11",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 103.4,
+   "breadth": 4,
+   "gb": 11.0,
+   "comp_raw": 81,
+   "comp_adj": 81,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/1p1q2bp/p2p2p1/3Pp3/P2n4/1R2N3/1P1B1PPP/3Q1RK1 w - - 4 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 63.2,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 13,
+   "comp_adj": 13,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rr2k1/1b3p2/pn4p1/2p4p/5q2/2N4P/PPQ1RPP1/2R2BK1 w - - 4 26",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 9.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 32,
+   "comp_adj": 32,
+   "best_is_grab": false
+  },
+  {
+   "fen": "4r1k1/pb1rqppp/1p3n2/2pp4/3P4/2N3P1/PPQ1PPBP/3RR1K1 w - - 2 16",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 14.4,
+   "breadth": 6,
+   "gb": 16.0,
+   "comp_raw": 26,
+   "comp_adj": 26,
+   "best_is_grab": false
+  },
+  {
+   "fen": "6k1/pq1nbppp/4p3/1Np5/4P3/4BP2/PP2Q1PP/6K1 w - - 3 21",
+   "bucket": "DEAD",
+   "score": 0,
+   "comps": [],
+   "punish": 27.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 5,
+   "comp_adj": 5,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2r2/pp1nbpkp/2p3p1/8/2BPN3/5N1P/PP3PP1/R3R1K1 w - - 1 16",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 7.2,
+   "breadth": 6,
+   "gb": 3.0,
+   "comp_raw": 12,
+   "comp_adj": 12,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/1p2ppbp/p2pbnp1/q7/2PBP3/2N2P2/PP2B1PP/R2Q1RK1 w - - 1 16",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 16.0,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 46,
+   "comp_adj": 46,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/ppp1bppp/2nq4/1B1nN3/3P4/8/PP3PPP/RNBQ1RK1 w - - 2 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 58.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 16,
+   "comp_adj": 16,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1k2r/2q1bppp/p1nppn2/1p6/3NPB2/PBN2Q2/1PP2PPP/R3K2R w KQkq - 5 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "narrowness"
+   ],
+   "punish": 99.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 5,
+   "comp_adj": 5,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1k2r/pp3pp1/2nbpq1p/8/2Pp4/3P1NP1/PP3PBP/RN1Q1RK1 w kq - 0 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 24.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 40,
+   "comp_adj": 40,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/1p2bpp1/p1n4p/1N2p3/6P1/8/PPPBBP1P/2KR2R1 w - - 0 16",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "narrowness",
+    "board tension"
+   ],
+   "punish": 208.4,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 2,
+   "comp_adj": 2,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1r1k1/ppp2pp1/2pq1n1p/2b1p3/4P3/2BP1N1P/PPP2PP1/RN1Q1RK1 w - - 4 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 30.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 21,
+   "comp_adj": 21,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3r1k1/p2q1ppp/1pn5/3p1n2/2pP1B2/P1P1PN2/2Q2PPP/R3R1K1 w - - 4 16",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 9.2,
+   "breadth": 6,
+   "gb": 16.0,
+   "comp_raw": 35,
+   "comp_adj": 35,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1r3k1/1p3pp1/1qn2n2/p2p3p/3N2b1/P2QPNP1/1P3PBP/R4RK1 w - - 0 16",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 7.6,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 19,
+   "comp_adj": 19,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/4n2p/p2p1pp1/1ppP4/4P3/1QN2N1P/PP3PP1/R4RK1 w - - 0 16",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 11.6,
+   "breadth": 6,
+   "gb": 24.0,
+   "comp_raw": 56,
+   "comp_adj": 56,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqkb1r/1p1n1p2/p4npp/4p3/3NP2B/2N5/PPP1Q1PP/R3KB1R w KQkq - 0 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "human divergence",
+    "king exposure"
+   ],
+   "punish": 95.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 40,
+   "comp_adj": 40,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/pp1nnppp/2pb4/4p3/3pP3/3P2PP/PPP1BPQ1/RNB1K2R w KQkq - 0 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 12.0,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 28,
+   "comp_adj": 28,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qr1k1/pb1n1ppp/1ppbpn2/3p4/2PP4/1PN1PN2/PBQ1BPPP/R4RK1 w - - 2 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 15.6,
+   "breadth": 6,
+   "gb": 2.0,
+   "comp_raw": 23,
+   "comp_adj": 23,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3rr1k1/p1qnbppp/P1pp4/1p2p3/1PQPP3/2P1BN2/5PPP/R2R2K1 w - - 0 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 71.0,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 49,
+   "comp_adj": 49,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qr1k1/1pp2pp1/2npbn1p/p1b1p3/4P3/1BPP1N1P/PP1N1PP1/R1BQR1K1 w - - 2 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 34.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 16,
+   "comp_adj": 16,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r2r1k/2pnq1np/1p1p1pp1/p2Qp3/P2PP3/N3PN2/1PP2RPP/5RK1 w - - 5 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 15.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 55,
+   "comp_adj": 55,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/p1pnppbp/1p1p2p1/8/2PPbB2/4PN1P/PP2BPP1/R2Q1RK1 w - - 0 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 7.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 1,
+   "comp_adj": 1,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/pppb1pbp/3p1np1/4p1N1/3nP3/2NPB1PP/PPP2PB1/R2Q1RK1 w - - 5 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 15.0,
+   "breadth": 6,
+   "gb": 4.0,
+   "comp_raw": 24,
+   "comp_adj": 24,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r2r1k1/pb2qppp/1pp2n2/3p4/3Pn3/1PN3P1/PBQ1PPBP/2R2RK1 w - - 0 16",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 43.6,
+   "breadth": 4,
+   "gb": 8.0,
+   "comp_raw": 25,
+   "comp_adj": 25,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqnrk1/pppp1ppp/3b4/3NR3/8/8/PPPP1PPP/R1BQ1BK1 w - - 5 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "narrowness",
+    "activity"
+   ],
+   "punish": 94.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 23,
+   "comp_adj": 23,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r1rn1k1/pp2qp2/2n3p1/P1p1p2p/2NpP2P/1QPP2P1/1P2BPK1/R1R5 w - - 5 21",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 10.2,
+   "breadth": 6,
+   "gb": 3.0,
+   "comp_raw": 50,
+   "comp_adj": 50,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qkb1r/1b1n1pp1/p2ppn1p/1p6/3NP1P1/P1N1B3/1PPQBP1P/R3K2R w KQkq - 1 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 62.0,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 16,
+   "comp_adj": 16,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1r1k1/ppqnbpp1/2pp1n1p/P3p3/2BPP3/2N2N1P/1PP2PP1/R1BQR1K1 w - - 1 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 8.0,
+   "breadth": 6,
+   "gb": 5.0,
+   "comp_raw": 56,
+   "comp_adj": 56,
+   "best_is_grab": false
+  },
+  {
+   "fen": "4rbk1/p4p1p/6p1/8/1p1p4/1P1N1P1P/P2P1P2/2R3K1 w - - 0 26",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 10.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 15,
+   "comp_adj": 15,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3qrk1/2pnb1pp/1pnp4/p3p3/P1P5/2PP1NN1/5PPP/1RBQR1K1 w - - 2 16",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 15.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 28,
+   "comp_adj": 28,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1q1rk1/1bp2ppp/p2bpn2/1p6/3P4/5NP1/PPQBPPBP/RN3RK1 w - - 4 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 6.4,
+   "breadth": 6,
+   "gb": 14.0,
+   "comp_raw": 28,
+   "comp_adj": 28,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/1p3p1p/p1np1bp1/2p1p3/2N1P3/3P2P1/PPP2PBP/RN1Q1RK1 w - - 0 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 37.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 21,
+   "comp_adj": 21,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp1nbpp1/2p4p/3p3n/3P3B/2NBP3/PP2NPPP/R2Q1RK1 w - - 8 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "narrowness"
+   ],
+   "punish": 96.4,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 36,
+   "comp_adj": 36,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r3k1/p1r1b1p1/Pp1pp2p/1Pn1p2q/1BP1P3/4RN1P/2R1QPP1/6K1 w - - 0 26",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 11.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 63,
+   "comp_adj": 63,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3rbk1/1p1np2p/3p1pp1/P2P4/2P2P2/4R3/P3B1PP/4BR1K w - - 1 26",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 14.2,
+   "breadth": 6,
+   "gb": 13.0,
+   "comp_raw": 14,
+   "comp_adj": 14,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp1nbppp/2n1p3/3pP3/5P2/P1N1BN2/1PP1B1PP/R2QK2R w KQ - 2 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 12.8,
+   "breadth": 6,
+   "gb": 7.0,
+   "comp_raw": 50,
+   "comp_adj": 50,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/1p2bppp/p1n1p3/2npP3/5P2/P1N1BN2/1PPQ2PP/R3KB1R w KQ - 2 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 27.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 48,
+   "comp_adj": 48,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r7/qpp1rpk1/3p1np1/p1nPp2p/2P1P2P/2N3PB/PP2QP2/1KR4R w - - 13 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 20.4,
+   "breadth": 6,
+   "gb": 9.0,
+   "comp_raw": 44,
+   "comp_adj": 44,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqr1k1/2p3bn/pp1p2pp/3Ppp2/2P1P1n1/1PN2NP1/P2B1P1P/1R1QRBK1 w - - 0 16",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 18.4,
+   "breadth": 6,
+   "gb": 5.0,
+   "comp_raw": 59,
+   "comp_adj": 59,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1r3rk1/3nqnp1/3pp2p/1pp1p3/3PP1N1/2P1P2P/1P1N1RP1/3Q1RK1 w - - 0 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 7.6,
+   "breadth": 6,
+   "gb": 1.0,
+   "comp_raw": 12,
+   "comp_adj": 12,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn3rk1/1p2nppp/2pq4/p2p1b2/3P4/2NBPN1P/PP3PP1/R2QK2R w KQ - 2 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 10.2,
+   "breadth": 6,
+   "gb": 10.0,
+   "comp_raw": 7,
+   "comp_adj": 7,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r3k1/p1q1npp1/Qp2p2p/3nN3/1PBP4/P7/5PPP/4R1K1 w - - 7 26",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 18.2,
+   "breadth": 6,
+   "gb": 20.0,
+   "comp_raw": 74,
+   "comp_adj": 74,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/p4ppp/1qpR1n2/4p3/2B1P3/4Q2P/1P2NPP1/2R3K1 w - - 2 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 22.4,
+   "breadth": 6,
+   "gb": 3.0,
+   "comp_raw": 137,
+   "comp_adj": 137,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rnb2rk1/p1q2ppp/4pn2/1pp5/3P4/P1PBP3/1B3PPP/R2QK1NR w KQ - 0 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 20.6,
+   "breadth": 6,
+   "gb": 10.0,
+   "comp_raw": 8,
+   "comp_adj": 92,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r7/3p1rkp/bp3q2/p3Qpp1/4n3/P4NP1/1P2PPBP/2R2RK1 w - - 5 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 33.0,
+   "breadth": 5,
+   "gb": 6.0,
+   "comp_raw": 68,
+   "comp_adj": 68,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1k2r/pp2bppp/2pp1n2/q3p3/3PP3/2N2NP1/PPPQBPP1/2KR3R w kq - 1 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 26.0,
+   "breadth": 6,
+   "gb": 29.0,
+   "comp_raw": 7,
+   "comp_adj": 7,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rqr1k1/1b1n1p1p/1p1p1np1/p3p3/1pPPP3/3B1NN1/PP1Q1PPP/3RR1K1 w - - 2 16",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 30.6,
+   "breadth": 6,
+   "gb": 4.0,
+   "comp_raw": 61,
+   "comp_adj": 61,
+   "best_is_grab": false
+  },
+  {
+   "fen": "5rk1/1p1r2p1/2p1pq1p/p3R3/Pb1P4/1P1Q2NP/5PP1/5RK1 w - - 1 26",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 39.6,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 10,
+   "comp_adj": 10,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3rb1k1/p1r2p1p/3q1bp1/1p1pNB2/3P3P/PQ4P1/1P3P2/R3R1K1 w - - 0 26",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 84.4,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 30,
+   "comp_adj": 30,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqk2r/3nbpp1/pp1p1n1p/4p3/P3P3/1NN1B1P1/1PP2P1P/R2QKB1R w KQkq - 0 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "activity"
+   ],
+   "punish": 11.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 57,
+   "comp_adj": 57,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/1ppnb1pp/8/2P2p2/p1NPp3/4PBP1/PP1B3P/R2Q1RK1 w - - 0 16",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "narrowness"
+   ],
+   "punish": 143.6,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 0,
+   "comp_adj": 0,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3k2r/1p1bbppp/p1n1pn2/8/PP6/4P3/N2NBPPP/1RBR2K1 w kq - 1 16",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "narrowness"
+   ],
+   "punish": 73.6,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 85,
+   "comp_adj": 85,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/1b1nbppp/pq1ppn2/1P6/3NP3/2N5/2P2PPP/R1BQRBK1 w - - 1 16",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 50.6,
+   "breadth": 4,
+   "gb": 30.0,
+   "comp_raw": 8,
+   "comp_adj": 8,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r1kb1r/pp1bnpp1/1qn1p2p/3pP2P/3p4/2PB1N2/PP3PP1/RNBQR1K1 w k - 0 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "imbalance"
+   ],
+   "punish": 22.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 134,
+   "comp_adj": 134,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2rr2k1/4qpp1/1p3n1p/p1bp4/P2N4/1PNQP1P1/5PKP/R2R4 w - - 3 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 19.8,
+   "breadth": 6,
+   "gb": 6.0,
+   "comp_raw": 6,
+   "comp_adj": 6,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/p1q2ppp/np1bpn2/2ppN3/3P1B1P/2P1P3/PP1N1PP1/R2QK2R w KQ - 1 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 20.4,
+   "breadth": 6,
+   "gb": 14.0,
+   "comp_raw": 6,
+   "comp_adj": 6,
+   "best_is_grab": false
+  },
+  {
+   "fen": "4rk2/1p1nqppp/p3pnb1/4N3/8/Q3P1P1/PP2BPP1/2RN2K1 w - - 1 21",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 28.2,
+   "breadth": 6,
+   "gb": 11.0,
+   "comp_raw": 38,
+   "comp_adj": 38,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/2pbbpp1/p1np1n1p/1p2p3/P2PP3/1BP2N2/1P3PPP/RNBQR1K1 w - - 0 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "board tension"
+   ],
+   "punish": 12.8,
+   "breadth": 6,
+   "gb": 8.0,
+   "comp_raw": 30,
+   "comp_adj": 30,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqk2r/1p2npb1/p2pp1p1/2p4p/3nPP1P/2NPBNP1/PPP3B1/R2Q1RK1 w kq - 2 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 36.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 14,
+   "comp_adj": 14,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qkb1r/pp3ppp/2p1p3/3p3b/1nPPn2N/NP4P1/PB2PPBP/R2Q1RK1 w kq - 3 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "activity"
+   ],
+   "punish": 23.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 38,
+   "comp_adj": 38,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1br2k1/pp2ppbp/2n2np1/2qp4/4P3/2PB1N2/PP1N1PPP/R1BQR1K1 w - - 1 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 26.8,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 26,
+   "comp_adj": 26,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/qpp2ppp/2npbn2/pBb1p3/4P3/2PP1N2/PP3PPP/R1BQRNK1 w - - 8 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "forcing lines"
+   ],
+   "punish": 25.6,
+   "breadth": 6,
+   "gb": 9.0,
+   "comp_raw": 17,
+   "comp_adj": 17,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp4pp/2nbpp2/3p3n/3P4/2P1BNP1/PP1N1P1P/R2QKB1R w KQ - 1 11",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 18.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 4,
+   "comp_adj": 4,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp1nbppp/4p3/2p5/3PN3/3B1N2/PPPQ1PPP/2KR3R w - - 0 11",
+   "bucket": "QUIET",
+   "score": 2,
+   "comps": [
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 40.8,
+   "breadth": 4,
+   "gb": 10.0,
+   "comp_raw": 46,
+   "comp_adj": 46,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/ppq2ppp/2p5/5n2/4R3/1BN5/PPP2PPP/R2Q2K1 w - - 2 16",
+   "bucket": "QUIET",
+   "score": 1,
+   "comps": [
+    "human divergence"
+   ],
+   "punish": 15.4,
+   "breadth": 6,
+   "gb": 16.0,
+   "comp_raw": 82,
+   "comp_adj": 82,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qnrk1/pp1nbppp/3pp3/4P3/3p4/2P2N2/PP1NQPPP/R1B2RK1 w - - 0 11",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 114.4,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 80,
+   "comp_adj": 20,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3r1rk1/2N3p1/p1b2p1p/5q2/n2Bp3/P3P3/5PPP/QR3RK1 w - - 2 26",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 77.4,
+   "breadth": 2,
+   "gb": 9.0,
+   "comp_raw": 154,
+   "comp_adj": 54,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3k2r/ppqnn1pp/2p5/4p3/4p3/2Q3PP/PPP2PB1/R1B2RK1 w kq - 0 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 17.4,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 224,
+   "comp_adj": 124,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r3r1kb/pp1b1p1p/6pB/3q4/3p3Q/5NP1/PP2PP1P/3RR1K1 w - - 6 21",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 66.8,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 22,
+   "comp_adj": 22,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1bq1k1r/1p3p2/2n1p2p/2b2p2/2Pp4/Pp1P2P1/2NN1PBP/R2Q1RK1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 178.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 111,
+   "comp_adj": 11,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r3k2r/pp1nbppp/2p1p3/2q5/5PP1/P1B3QP/1PP5/2KR1B1R w kq - 1 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 42.8,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 322,
+   "comp_adj": 222,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r3k2r/pp3pp1/2pnbb1p/q2p4/3P3P/2NBP1N1/PP2QPP1/R4RK1 w kq - 0 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 84.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 37,
+   "comp_adj": 37,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rn1q1rk1/ppp2ppp/3b4/3p4/3P4/2Pb1N2/P1P2PPP/R1BQR1K1 w - - 0 11",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 240.8,
+   "breadth": 2,
+   "gb": 16.0,
+   "comp_raw": 343,
+   "comp_adj": 13,
+   "best_is_grab": true
+  },
+  {
+   "fen": "1r2k3/5pb1/pq2p1p1/1p1bn1Br/3N3P/PP3P2/2PQB3/1K1RR3 w - - 1 21",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 47.6,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 107,
+   "comp_adj": 107,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1r1k1/2q3b1/1p2n1p1/p3pp1p/1nPpP3/B2P1N1B/P4PPP/1RNQR1K1 w - - 0 21",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "board tension"
+   ],
+   "punish": 54.0,
+   "breadth": 4,
+   "gb": 8.0,
+   "comp_raw": 82,
+   "comp_adj": 182,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r7/pp3pkp/2pn2p1/2Nq4/PP6/3Pr1P1/2Q2P1P/4R1K1 w - - 0 26",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 146.4,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 500,
+   "comp_adj": 0,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1b2rk1/pppqbppp/2n5/6B1/3pN3/5N2/PPP2PPP/R2QR1K1 w - - 3 11",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 109.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 100,
+   "comp_adj": 100,
+   "best_is_grab": false
+  },
+  {
+   "fen": "1rbq1rk1/4bpp1/p1np1n1p/2p1p3/P1NPP3/2p2N1P/BP3PP1/R1BQR1K1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 143.8,
+   "breadth": 3,
+   "gb": 33.0,
+   "comp_raw": 138,
+   "comp_adj": 38,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2q1r1k/pp2bp2/2pn2p1/3p4/3P1PpP/2NBP3/PP3KQ1/R4R2 w - - 0 21",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 235.8,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 53,
+   "comp_adj": 53,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r3k2r/3n1ppp/p3p3/1pq1P3/6n1/2N2N2/PPP1Q1PP/R3K2R w KQkq - 0 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "king exposure"
+   ],
+   "punish": 139.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 33,
+   "comp_adj": 33,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3nrk1/6pp/2pqpp2/p1NpNb2/3P4/2P2P2/PP4PP/R2Q1RK1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 165.2,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 47,
+   "comp_adj": 47,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/p4ppp/2p1p3/3n4/3Pn3/1B6/PP2QPPP/3RK2R w Kkq - 0 16",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 271,
+   "comp_adj": 49,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2qkb1r/2p2ppp/p1n1b3/1pn1P3/3p4/1BP2N2/PP1N1PPP/R1BQ1RK1 w kq - 0 11",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "activity"
+   ],
+   "punish": 37.4,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 46,
+   "comp_adj": 46,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/Nbnnbppp/1p2p3/2ppP3/P1PP4/1P1Q1NP1/5PBP/R1B1R1K1 w - - 1 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 258.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 67,
+   "comp_adj": 67,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qr1k1/1ppn1pp1/3p1n1p/p3p3/P3P3/1PPPbN1P/5PP1/R1BQR1K1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 191.8,
+   "breadth": 2,
+   "gb": 1.0,
+   "comp_raw": 313,
+   "comp_adj": 17,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2q1rk1/2p1nppp/p1p3b1/b2p4/3PP1P1/P1N1B2P/1P1N1P2/2RQ1RK1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 95.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 145,
+   "comp_adj": 145,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1nqbrk1/4bppp/2p1pn2/2PpN3/p3P3/1P4P1/PBQN1PBP/R3R1K1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 14.0,
+   "breadth": 6,
+   "gb": 23.0,
+   "comp_raw": 172,
+   "comp_adj": 72,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/1p2nppp/1qp1p3/2b4b/p3p1P1/P2P1N1P/1PP1QPB1/R1B1R1K1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 134.4,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 174,
+   "comp_adj": 64,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r1k2r/1bqp1ppp/p3p3/1p4Pn/4P3/P1N1bP2/1PPQ3P/1K1R1B1R w k - 0 16",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 329,
+   "comp_adj": 1,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2rq1rk1/5pnp/1np1b1p1/pp4b1/3PpN2/2NBBP2/PPQ3PP/3R1R1K w - - 0 21",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 198.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 151,
+   "comp_adj": 51,
+   "best_is_grab": true
+  },
+  {
+   "fen": "1r1rn1k1/5p2/p1bpp2p/6p1/2PRPP2/1PN3PP/PB3KB1/8 w - - 2 26",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 28.6,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 128,
+   "comp_adj": 128,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2qr1rk1/1p3pb1/pnn1p1pp/8/P1B5/2P2NPP/1P1BQPK1/3RR3 w - - 2 21",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 46.8,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 11,
+   "comp_adj": 11,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r2rk1/1pq1ppbp/p2p1np1/3P4/2P5/4QN1P/nP3PP1/1RBR1BK1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 119.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 90,
+   "comp_adj": 90,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/1p4pp/p1nPp3/3nPp2/4Q3/5P2/PPN3PP/R1B1KB1R w KQ f6 0 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 145.8,
+   "breadth": 2,
+   "gb": 13.0,
+   "comp_raw": 118,
+   "comp_adj": 118,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2b1nrk1/2r1np1p/p2pp1pP/q7/Np1NP2Q/1P6/P1P2PP1/1K1R1B1R w - - 4 21",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 40.8,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 136,
+   "comp_adj": 136,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3r4/pp1k1p1p/2pb4/8/3P1P2/3BP3/PP1B3q/2KQ4 w - - 0 21",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "human divergence",
+    "imbalance",
+    "king exposure"
+   ],
+   "punish": 85.4,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 102,
+   "comp_adj": 102,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/2pnbppp/p2p4/3Pp3/PPp5/3P1N2/R2B1PPP/3Q1RK1 w - - 0 21",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 97.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 97,
+   "comp_adj": 3,
+   "best_is_grab": true
+  },
+  {
+   "fen": "rb1q1rk1/1p2npp1/4bn1p/pN1p4/P2Pp2B/1BP5/1P3PPP/R2QKN1R w KQ - 4 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 141.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 93,
+   "comp_adj": 93,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4bk1/1p2qppp/4b3/pB1R4/7P/P1P1PP2/2Q2P2/2K4R w - - 1 21",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 74.2,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 228,
+   "comp_adj": 228,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rr6/2q1b3/3p2k1/1bpPp1p1/4P1Pp/PpN1BP2/3Q4/RR4K1 w - - 0 26",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 137.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 10,
+   "comp_adj": 110,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1b2rk1/ppq2ppp/8/8/3pP1n1/P2B4/3B1PPP/R2Q1RK1 w - - 2 16",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 234.8,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 101,
+   "comp_adj": 101,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/pp1nBpp1/2p1p2p/3p4/2PP4/2nBPN2/PP3PPP/2RQK2R w K - 0 11",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 40.2,
+   "breadth": 6,
+   "gb": 13.0,
+   "comp_raw": 29,
+   "comp_adj": 29,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r1k2r/1p1bbppp/p2ppn2/8/nq1NP3/2N1BP2/BPPQ2PP/RR4K1 w k - 0 16",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 79.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 95,
+   "comp_adj": 95,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2k2rnr/pp1b4/2n1pP1p/q2p2pP/2pP2N1/P1P5/2PB1PP1/R2QKB1R w KQ - 1 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 27.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 120,
+   "comp_adj": 120,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rr6/p2knppp/N1n1p3/3pP3/3P2P1/5N2/qP2BP1P/2Q2K1R w - - 3 21",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 92.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 46,
+   "comp_adj": 134,
+   "best_is_grab": false
+  },
+  {
+   "fen": "rnbq1rk1/pp3pbp/3p2p1/8/3N1B2/4PN1P/P1PQnPP1/4RRK1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 163.2,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 395,
+   "comp_adj": 75,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2k5/pp4pp/4Pp2/2p5/q7/2P1QPPb/2P2R1P/3r1BK1 w - - 0 26",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "activity",
+    "board tension"
+   ],
+   "punish": 209.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 61,
+   "comp_adj": 39,
+   "best_is_grab": false
+  },
+  {
+   "fen": "5q1k/1p2p2p/1rpnPrpb/p3p1Bn/P3P2P/1BN2PP1/1P2Q1K1/3R3R w - - 9 26",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 126.4,
+   "breadth": 2,
+   "gb": 51.0,
+   "comp_raw": 189,
+   "comp_adj": 19,
+   "best_is_grab": false
+  },
+  {
+   "fen": "4n1k1/pp3pp1/2p4p/8/1PPQ2b1/P5P1/1B5P/3q1BK1 w - - 2 26",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 32.2,
+   "breadth": 6,
+   "gb": 0.0,
+   "comp_raw": 97,
+   "comp_adj": 3,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/p4pp1/bp1p3p/n1pPp3/2P1PnPP/P1PB4/4NP2/1RBQK2R w K - 1 16",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 99.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 13,
+   "comp_adj": 13,
+   "best_is_grab": true
+  },
+  {
+   "fen": "rn6/pb2qk1p/5p2/1N1p4/1b6/1p6/5PPP/R2Q1RK1 w - - 0 21",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 31.0,
+   "breadth": 4,
+   "gb": 64.0,
+   "comp_raw": 166,
+   "comp_adj": 66,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1bq1rk1/ppppbppp/2n1n3/3BP3/1P6/2PpBN2/P4PPP/RN1Q1RK1 w - - 1 11",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 34.4,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 126,
+   "comp_adj": 26,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bqr1k1/1ppn2bp/4p1p1/p3p3/P4P2/BPN3P1/2P3BP/R2QR1K1 w - - 0 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "activity"
+   ],
+   "punish": 45.6,
+   "breadth": 4,
+   "gb": 39.0,
+   "comp_raw": 210,
+   "comp_adj": 210,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3r1k1/p4pp1/B1p1pn1p/Q1Pp4/3P1B2/1q2P3/2b2PPP/R4RK1 w - - 6 21",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 26.0,
+   "breadth": 6,
+   "gb": 16.0,
+   "comp_raw": 347,
+   "comp_adj": 347,
+   "best_is_grab": false
+  },
+  {
+   "fen": "6k1/3n1ppp/4pn2/2q5/QpP5/4PbP1/3N1PBP/6K1 w - - 0 26",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 264.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 288,
+   "comp_adj": 42,
+   "best_is_grab": true
+  },
+  {
+   "fen": "b1r2rk1/p4pbp/2p1pnp1/2n5/1qNPp3/1P4PP/PBQ2P2/R1R2BK1 w - - 2 21",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 183.2,
+   "breadth": 2,
+   "gb": 27.0,
+   "comp_raw": 489,
+   "comp_adj": 269,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/pp2bppp/2n1b3/3np3/8/1N4P1/PP1NPPBP/R1BQ1RK1 w kq - 2 11",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "activity"
+   ],
+   "punish": 98.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 18,
+   "comp_adj": 18,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r3k1/1pq2pbp/3r2p1/pPNp1p2/P2Pn3/2P4P/1B3PP1/2RQR1K1 w - - 1 26",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence"
+   ],
+   "punish": 86.4,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 0,
+   "comp_adj": 0,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3rr1k1/p5p1/1p5p/P3pn2/4N3/5P2/1PR2nPP/R5K1 w - - 0 26",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 181.4,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 332,
+   "comp_adj": 12,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3n1rk1/1q2bppp/pNp3b1/Pr1p4/3PP1P1/5N1P/5P2/R1B1RQK1 w - - 2 26",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 73.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 93,
+   "comp_adj": 93,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r5k1/5ppp/p2p1n2/4p3/Pp2P3/1P2PN2/1P4PP/3R2K1 w - - 1 21",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 130.8,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 24,
+   "comp_adj": 24,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1b1k2r/pp1n1ppp/1q2p3/1NbpP3/3n1P2/P3B3/1PP3PP/R2QKB1R w KQkq - 0 11",
+   "bucket": "SHARP",
+   "score": 8,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 246.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 348,
+   "comp_adj": 28,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1b2rk1/pp3nbp/4p1p1/4P3/8/1Bp2N1P/PP3PP1/R1BR2K1 w - - 1 16",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 95.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 198,
+   "comp_adj": 198,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r3kb1r/pp3ppp/2n1b3/1Bp5/3PNq2/5N2/PP3PPP/R2QK2R w KQkq - 3 11",
+   "bucket": "SHARP",
+   "score": 6,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 32.6,
+   "breadth": 5,
+   "gb": 19.0,
+   "comp_raw": 48,
+   "comp_adj": 52,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r2k1r/1pp2pb1/p1n1p3/2Pp2q1/1P1P2np/P2BP3/1BQ2PPR/R3K1N1 w Q - 5 21",
+   "bucket": "SHARP",
+   "score": 7,
+   "comps": [
+    "narrowness",
+    "imbalance"
+   ],
+   "punish": 118.6,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 151,
+   "comp_adj": 151,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r3k1/1q3pp1/pn2p2p/1p2P3/1Q6/4PP1P/1P1BbKP1/2R5 w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 221.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 261,
+   "comp_adj": 69,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/3qbpp1/p2p3p/1n1bp3/4P3/P4N1P/1P3PP1/R1BQR1K1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 239.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 325,
+   "comp_adj": 5,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r2rk1/1q2bp2/4b1pP/QN2p2n/P3p2P/3BBP2/1P6/1KR4R w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 196.6,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 99,
+   "comp_adj": 1,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3rr1k1/1ppqnpb1/2n3pp/p2pp3/PP2P3/B1PP1NP1/2QN1PbP/3RR1K1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 13,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 331,
+   "comp_adj": 1,
+   "best_is_grab": true
+  },
+  {
+   "fen": "1r2k1r1/pQppq3/2n1pp1p/2p5/3PPp2/P1P2P2/5BPP/1R3R1K w - - 2 21",
+   "bucket": "RAZOR",
+   "score": 13,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 269.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 324,
+   "comp_adj": 224,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2qr1k1/p1pbb1pp/2p1p3/5P2/3Np3/8/PPP3PP/R1BQ1RK1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 108.8,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 103,
+   "comp_adj": 3,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r5k1/1bpq1ppp/p2b4/1p6/Pn5N/1N1P3P/1PPB1PP1/R2Qr1K1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 14,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 414,
+   "comp_adj": 14,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r4rk1/pp1b3p/3pn1p1/3Q4/2P1PP1q/4Bp2/PP5P/RN3R1K w - - 4 21",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 158.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 112,
+   "comp_adj": 12,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qk2r/pp1bbpp1/3ppn1p/1B6/3nP2B/2NQ4/PPP2PPP/2KR3R w kq - 0 11",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 240.6,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 370,
+   "comp_adj": 50,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r1r1k1/p4pbp/b1Np1np1/2qPp3/4P3/1p2N1P1/P1Q2PBP/R3R1K1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 94.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 334,
+   "comp_adj": 234,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3r1k1/5p1p/bppq1Pp1/p1n5/2P1P3/1PN5/P3B1PP/3R1R1K w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 12,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 924,
+   "comp_adj": 124,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r1r1k1/2qn1pb1/p1Np1np1/1p1P3p/1QPB4/4pP2/PP4PP/1K2RBR1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 38.4,
+   "breadth": 6,
+   "gb": 15.0,
+   "comp_raw": 23,
+   "comp_adj": 77,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b1k2r/1pq1bppp/p2ppn2/8/3nPP2/2N1B3/PPPQB1PP/2KR3R w kq - 0 11",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 246.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 442,
+   "comp_adj": 122,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1b2rk1/2q2ppp/p1p5/n3p1bQ/Pp2P3/8/BPP2PPP/R1B1K2R w KQ - 0 16",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 249.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 320,
+   "comp_adj": 10,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3r1rk1/4q2p/p1R1p1p1/P4p1n/1p1pPPQ1/3B2b1/1P1B2P1/5RK1 w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 14,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 244.6,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 294,
+   "comp_adj": 294,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2qr1k1/pp3pbp/3p2p1/8/3pPPn1/1PN3P1/PBPQ3P/2KR3R w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 242.8,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 103,
+   "comp_adj": 103,
+   "best_is_grab": false
+  },
+  {
+   "fen": "6k1/ppb3p1/7p/3p4/1B3pb1/P5P1/1PP2R1P/2K1r3 w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 14,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 431,
+   "comp_adj": 31,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2rq1rk1/3b1pbp/3Qp1p1/6Pn/1p2P3/1P2BP2/P1P1N2P/1K1R3R w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 12,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 291.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 272,
+   "comp_adj": 58,
+   "best_is_grab": true
+  },
+  {
+   "fen": "4rqk1/1p3rbp/p2R1np1/P1PP1p1n/N7/4Bp2/1P4PP/3QRBK1 w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 164.2,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 177,
+   "comp_adj": 77,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2rq1k1/1pp3pp/8/p1p1pb2/P2nP2N/3PQ1P1/1PP2R1P/R6K w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 233.4,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 418,
+   "comp_adj": 88,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r4rk1/4bppp/ppn1pq2/2P5/2P5/1N2nQ1P/PP3PP1/R3RBK1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 110.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 295,
+   "comp_adj": 25,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2bk1r1/1n1b1p2/p2p3p/3Pp3/2P1P1n1/P4N2/5PP1/1RB1RBK1 w q - 0 26",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 444,
+   "comp_adj": 124,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1b4r/ppp2k1p/6n1/4np1N/8/6B1/PPP3P1/R3KB1R w KQ - 0 21",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "king exposure"
+   ],
+   "punish": 41.0,
+   "breadth": 5,
+   "gb": 0.0,
+   "comp_raw": 208,
+   "comp_adj": 208,
+   "best_is_grab": false
+  },
+  {
+   "fen": "3qr1k1/1ppn1pb1/2bpn1p1/rN5p/2P1PP2/1pN1B1PP/P1Q3B1/3R1RK1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 243.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 206,
+   "comp_adj": 106,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r3k1/pp3pp1/2n1r2p/3p4/8/2Pq2P1/PP3PBP/1K1R3R w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 15,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 904,
+   "comp_adj": 4,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r3n1/1p1r1pkp/pQ4p1/3pq3/8/P3P1P1/1P3P1P/2R2BK1 w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 512,
+   "comp_adj": 12,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2qk2r/p3npp1/1n1p4/2pP2Pp/1bp1PpbP/2N3N1/PP2B3/R1BQK2R w KQkq - 0 16",
+   "bucket": "RAZOR",
+   "score": 12,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 190.2,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 233,
+   "comp_adj": 133,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r1k2r/1b2ppb1/pq1p1np1/1p4Bp/2nNPP2/P1N5/1PPQB1PP/1K1RR3 w k - 1 16",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 298.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 142,
+   "comp_adj": 142,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/6q1/bpn1p2p/p1p5/3P4/P4N2/1PQ2PP1/RB2K2R w KQ - 0 21",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 144.0,
+   "breadth": 1,
+   "gb": 27.0,
+   "comp_raw": 101,
+   "comp_adj": 101,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq1rk1/4ppbp/pp3np1/2ppn1B1/P2P4/2P1P3/1P1NBPPP/R2Q1RK1 w - - 0 11",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 289.8,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 365,
+   "comp_adj": 45,
+   "best_is_grab": true
+  },
+  {
+   "fen": "rn2kb1r/ppq2ppp/2pp2N1/4p1P1/3P4/1QP4P/PP1nPP2/R1B1KB1R w KQkq - 0 11",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 66.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 107,
+   "comp_adj": 107,
+   "best_is_grab": true
+  },
+  {
+   "fen": "1n2kb1r/4pppp/1q1p1n2/1p1b4/1PpNB3/8/1BPN1PPP/3QR1K1 w k - 0 16",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance"
+   ],
+   "punish": 146.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 368,
+   "comp_adj": 368,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3k2r/3n1ppp/1p3n2/q1p3B1/p1bP4/P3PN2/2Q2PPP/R4RK1 w kq - 0 16",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 243.8,
+   "breadth": 2,
+   "gb": 10.0,
+   "comp_raw": 372,
+   "comp_adj": 42,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3rb1k/p1q4p/bp2pp2/4n2Q/1Pp2N1P/P1NnB1R1/5PP1/3RKB2 w - - 1 21",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "king exposure",
+    "activity",
+    "board tension"
+   ],
+   "punish": 140.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 89,
+   "comp_adj": 89,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4r1k/1p2Npbp/3pbnp1/8/p1P1P3/4BP2/PP1qB1PP/2R2RK1 w - - 1 16",
+   "bucket": "RAZOR",
+   "score": 13,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 795,
+   "comp_adj": 105,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1bqk2r/pp3ppp/2n1p3/8/4n3/P2B4/1PP2PPP/R1BQK2R w KQkq - 0 11",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 336,
+   "comp_adj": 16,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3r1k2/1p2b1pp/r3B3/3p2P1/1p2n3/1P3P2/1BP4P/1K1RR3 w - - 1 26",
+   "bucket": "RAZOR",
+   "score": 12,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 51.2,
+   "breadth": 3,
+   "gb": 0.0,
+   "comp_raw": 115,
+   "comp_adj": 15,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2r2k1/p3pp1p/2p3p1/q3b3/P2PP1b1/B7/2Q2PPP/R4RK1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 362,
+   "comp_adj": 32,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r2rk1/1p3ppp/pn1qpb2/5P2/3nB3/2N4P/PP2QBP1/3R1RK1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 38.2,
+   "breadth": 4,
+   "gb": 0.0,
+   "comp_raw": 192,
+   "comp_adj": 192,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1bq2k1/p1r3p1/1p1b3p/3Ppp1P/4P1PN/3QBP2/P4K2/1R4R1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 14,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 262.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 146,
+   "comp_adj": 46,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2q1rk1/3nbppp/p2p4/3NpP2/1Q6/1P2B1nP/PP4P1/2KR1B1R w - - 1 16",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "king exposure",
+    "activity",
+    "board tension"
+   ],
+   "punish": 86.4,
+   "breadth": 2,
+   "gb": 17.0,
+   "comp_raw": 21,
+   "comp_adj": 21,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2q1rk1/pp2ppb1/2p1b1pp/N2n2B1/3P4/8/PPPQBPPP/R3R1K1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 174.2,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 93,
+   "comp_adj": 7,
+   "best_is_grab": true
+  },
+  {
+   "fen": "4k2r/p2npp1p/br3n2/2pPP1p1/2p4R/2N1KN2/PP2BPP1/1R6 w k - 0 21",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 223.2,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 117,
+   "comp_adj": 117,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r1b1k2r/1p1nbp2/p2pqnpp/4p3/7N/2N1B1P1/PP1QPPBP/2RR2K1 w kq - 2 16",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 23.6,
+   "breadth": 6,
+   "gb": 25.0,
+   "comp_raw": 336,
+   "comp_adj": 236,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r4rk1/pp1b1ppp/2n1p3/8/3PP3/3B1N2/Pq3PPP/RR4K1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 13,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 900,
+   "comp_adj": 0,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r5k1/p4ppp/bp1p1n2/r7/2PqP2B/PR3P2/4B1PP/3R2K1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 997,
+   "comp_adj": 97,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3q1rk1/pp2pp1p/3p2p1/P1PP4/2n5/6P1/R1PB1PBP/1R4K1 w - - 3 21",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 64.4,
+   "breadth": 3,
+   "gb": 31.0,
+   "comp_raw": 58,
+   "comp_adj": 58,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r3k2r/pp2ppbp/1nn3p1/1B6/2N2B2/1R2P3/P4PPP/3q1RK1 w kq - 0 16",
+   "bucket": "RAZOR",
+   "score": 14,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 990,
+   "comp_adj": 90,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r2r4/pp2kppp/2p5/P3P3/4pP2/4q1PP/1P2PK2/R4R2 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 13,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 1019,
+   "comp_adj": 119,
+   "best_is_grab": true
+  },
+  {
+   "fen": "1r1q1rk1/2p1bppp/p3b3/P2nn3/2BP4/2N5/1P3PPP/R1BQR1K1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 12,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 235.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 237,
+   "comp_adj": 83,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1b2rk1/6pp/2p1p3/p2pq2P/8/3B2P1/PPP2P2/4RRK1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 960,
+   "comp_adj": 60,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r3k2r/1bp2ppp/pp1bp3/3n4/1PNP4/P2BP1Pq/1BQ2P1P/R4RK1 w kq - 1 16",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance"
+   ],
+   "punish": 47.6,
+   "breadth": 3,
+   "gb": 20.0,
+   "comp_raw": 130,
+   "comp_adj": 130,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2k4r/pp6/2n3pr/3pP1b1/3P1Pq1/2N3B1/PP4Q1/R4RK1 w - - 1 26",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "forcing lines",
+    "imbalance",
+    "king exposure",
+    "board tension"
+   ],
+   "punish": 40.4,
+   "breadth": 4,
+   "gb": 14.0,
+   "comp_raw": 218,
+   "comp_adj": 448,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r1q2rk1/3n1ppp/bpp1pb2/2Pp4/1p1P1P2/P2B1N2/4NPPP/1R1QR1K1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 216.0,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 148,
+   "comp_adj": 48,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2k5/pp1nqr2/2pb2Rr/3p1p2/3Pn3/2NBPQ2/PP1B1P2/2K5 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 490,
+   "comp_adj": 10,
+   "best_is_grab": true
+  },
+  {
+   "fen": "3R1rk1/5p1p/pQB1bnp1/4p3/2p4P/2N3P1/PPq1PP2/6K1 w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 10,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "human divergence",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 68.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 181,
+   "comp_adj": 181,
+   "best_is_grab": false
+  },
+  {
+   "fen": "2r1r1k1/1pq3bp/p3b1p1/5p2/2PpP3/2N2P2/PPN1Q1PP/R2R2K1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 12,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 285.4,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 117,
+   "comp_adj": 117,
+   "best_is_grab": true
+  },
+  {
+   "fen": "2r2k2/pb3B1p/1p4p1/3P2Nn/5n2/1Pb3P1/PB3P1P/R5K1 w - - 0 26",
+   "bucket": "RAZOR",
+   "score": 9,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "board tension"
+   ],
+   "punish": 137.8,
+   "breadth": 2,
+   "gb": 0.0,
+   "comp_raw": 43,
+   "comp_adj": 43,
+   "best_is_grab": false
+  },
+  {
+   "fen": "r2r2k1/p1q1bppp/3p1n2/1bpPp1B1/1P2P3/3Q1N2/1PP2PPP/R2R2K1 w - - 0 16",
+   "bucket": "RAZOR",
+   "score": 12,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 334,
+   "comp_adj": 104,
+   "best_is_grab": true
+  },
+  {
+   "fen": "r4rk1/1p3pp1/1bqp1n1p/4p3/1P2P3/p1PQBnN1/P4PPP/R3R1K1 w - - 0 21",
+   "bucket": "RAZOR",
+   "score": 11,
+   "comps": [
+    "narrowness",
+    "forcing lines",
+    "imbalance",
+    "activity",
+    "board tension"
+   ],
+   "punish": 300.0,
+   "breadth": 1,
+   "gb": 0.0,
+   "comp_raw": 221,
+   "comp_adj": 99,
+   "best_is_grab": true
+  }
+ ]
+}

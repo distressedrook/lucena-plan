@@ -74,7 +74,7 @@ def chunk(offsets):
                         continue
                     sp = met.space_report(fen)
                     acc["space"].append(sum(
-                        sp[r]["white"]["space"] - sp[r]["black"]["space"]
+                        sp[r]["white"]["raw"] - sp[r]["black"]["raw"]
                         for r in sp))
                     acc["wake_w"].append(sum(
                         len(sp[r]["white"]["exploitable"]) for r in sp))
