@@ -30,15 +30,19 @@ def central_tension(b: chess.Board) -> list[tuple[int, int]]:
     contact — the cocked levers."""
     out = []
     for wp in b.pieces(chess.PAWN, chess.WHITE):
-        if chess.square_file(wp) not in CENTRAL_FILES:
-            continue
         for df in (-1, 1):
             bp = wp + 8 + df           # the square a white pawn attacks
             if 0 <= bp < 64 and abs(chess.square_file(bp)
                                     - chess.square_file(wp)) == 1:
                 pc = b.piece_at(bp)
                 if pc and pc.piece_type == chess.PAWN and pc.color == chess.BLACK:
-                    out.append((wp, bp))
+                    # central iff EITHER pawn is on a central file (2026-07-24
+                    # fix): gating on the White pawn's file alone missed the
+                    # color-mirror (White b4 vs Black c5) while including a
+                    # non-central Black pawn (White c4 vs Black b5).
+                    if (chess.square_file(wp) in CENTRAL_FILES
+                            or chess.square_file(bp) in CENTRAL_FILES):
+                        out.append((wp, bp))
     return out
 
 
@@ -58,18 +62,21 @@ def classify_line(fen: str, ucis: list[str],
     pairs0 = central_tension(b)
     if not pairs0:
         return None
-    # Track the ORIGINAL pair(s) by SQUARE IDENTITY, not "any tension
+    # Track ALL the ORIGINAL pair(s) by SQUARE IDENTITY, not "any tension
     # exists on the board": pushing d5-d4 dissolves e4-vs-d5 correctly
     # even though it immediately creates a fresh c3-vs-d4 contact
     # elsewhere — checking "is there ANY tension left" missed the real
     # resolution and mislabeled a later, unrelated capture instead
     # (2026-07-22 finding). A pair is intact iff its white square still
     # holds a White pawn AND its black square still holds a Black pawn.
-    w0, bl0 = pairs0[0]
+    # 2026-07-24 fix: track EVERY original pair, not just pairs0[0] — a line
+    # discharging any OTHER central tension was mislabeled "keep".
+    tracked = list(pairs0)
+    tracked_sqs = {sq for pr in tracked for sq in pr}
 
-    def intact(bd):
-        pw = bd.piece_at(w0)
-        pb = bd.piece_at(bl0)
+    def intact(bd, w, bl):
+        pw = bd.piece_at(w)
+        pb = bd.piece_at(bl)
         return (pw is not None and pw.piece_type == chess.PAWN
                 and pw.color == chess.WHITE
                 and pb is not None and pb.piece_type == chess.PAWN
@@ -77,16 +84,19 @@ def classify_line(fen: str, ucis: list[str],
 
     for i, u in enumerate(ucis[:horizon]):
         mv = chess.Move.from_uci(u)
-        pc = b.piece_at(mv.from_square)
         san = b.san(mv)
         is_cap = b.is_capture(mv)
         mover = "White" if b.turn == chess.WHITE else "Black"
-        touches = mv.from_square in (w0, bl0) or mv.to_square in (w0, bl0)
+        touches = mv.from_square in tracked_sqs or mv.to_square in tracked_sqs
         b.push(mv)
-        if touches and not intact(b):
-            mode = "resolve" if is_cap else "lock"
-            return {"mode": mode, "move": san, "mover": mover,
-                    "res_fen": b.fen()}
+        if touches:
+            # the FIRST original pair this move breaks is the discharge
+            for w, bl in tracked:
+                if (mv.from_square in (w, bl) or mv.to_square in (w, bl)) \
+                        and not intact(b, w, bl):
+                    mode = "resolve" if is_cap else "lock"
+                    return {"mode": mode, "move": san, "mover": mover,
+                            "res_fen": b.fen()}
     return {"mode": "keep", "move": None, "mover": None, "res_fen": b.fen()}
 
 
@@ -168,7 +178,14 @@ def render(a: dict) -> list[str]:
     L = [f"CENTRAL TENSION ({a['tension']}) — {a['side']} to move must "
          "choose how to handle it:"]
     em = a["eng_modes"]
-    n = len(em) or 1
+    if not em:
+        # no engine lines supplied (Maia-only bank): do NOT fabricate an
+        # engine recommendation from zero lines (2026-07-24 fix — the old
+        # `n = len(em) or 1` printed "engine's best lines KEEP (0/1)").
+        L.append("  (No engine lines supplied for this position — the "
+                 "engine's tension preference is unavailable here.)")
+        return L
+    n = len(em)
     tally = {m: em.count(m) for m in ("keep", "lock", "resolve")}
     best = max(tally, key=tally.get)
     verb = {"keep": "KEEP the tension (maintain the flexibility)",

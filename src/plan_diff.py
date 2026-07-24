@@ -23,8 +23,6 @@ Prices: corpus-measured where available; NEW rules carry prior guesses
 """
 from __future__ import annotations
 
-import sys
-
 import chess
 
 from weaknesses import (weak_pawns, entombed_bishops, exposed_king, is_hole,
@@ -372,25 +370,25 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
         if pre_plies and (len(pre_plies) >= MINORITY_HELD
                           or (lever_done and pre_plies[0] <= 2)):
             ranks = [snaps[k][2][f"{t}.b_rel_rank"] for k in pre_plies]
-            in_carlsbad = any(("carlsbad", t == "W") in snaps[k][2]["structures"]
-                              or ("carlsbad", chess.WHITE if t == "W" else chess.BLACK)
+            in_carlsbad = any(("carlsbad", chess.WHITE if t == "W" else chess.BLACK)
                               in snaps[k][2]["structures"] for k in pre_plies)
             name = "minority_attack" if in_carlsbad else "minority_attack_general"
             reached5 = any(r >= 4 for r in ranks)
-            full = [sn[f"{t}.b_rel_rank"] for _, _, sn in snaps]
             # v3 lever fix: the b-pawn must vanish IN a capture on rel b5/c6
             # (random lines get their b-pawn eaten anywhere -> false levers)
-            side_c = side_c0
             vanished_after5 = lever_done
             enemy_c_weak = any(any(chess.square_file(sq) == 2
                                    for sq in snaps[k][2][f"{o}.weak"])
                                for k in pre_plies)
+            # emit the MOVE index (snaps[k][0]), not the snapshot index k, so
+            # verify's lag/timing matches every other emitter (2026-07-24 fix).
+            evt_ply = snaps[pre_plies[-1]][0]
             if vanished_after5 or (reached5 and enemy_c_weak):
-                emit(name, t, pre_plies[-1], "completed")
+                emit(name, t, evt_ply, "completed")
             elif reached5:
-                emit(name, t, pre_plies[-1], "advanced", "lever unresolved")
+                emit(name, t, evt_ply, "advanced", "lever unresolved")
             elif any(r >= 3 for r in ranks) and ranks[0] < 3:
-                emit(name, t, pre_plies[-1], "launched")
+                emit(name, t, evt_ply, "launched")
 
         for k in range(1, len(snaps)):
             ply, mover, s = snaps[k]
@@ -398,7 +396,13 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
             mv = moves[ply]
             mover_pawn = mv.to_square in (s[f"{mover}.pawns"] - p[f"{mover}.pawns"]) \
                 if mover else False
-            was_capture = mv.to_square in p[f"{'B' if mover == 'W' else 'W'}.occ"] \
+            was_capture = (mv.to_square in p[f"{'B' if mover == 'W' else 'W'}.occ"]
+                           # en passant: the captured pawn is not on to_square,
+                           # so the occupancy test misses it — but a pawn that
+                           # changes file is always a capture (2026-07-24 fix).
+                           or (mover_pawn
+                               and chess.square_file(mv.from_square)
+                               != chess.square_file(mv.to_square))) \
                 if mover else False
             verifiable = k + tail < len(snaps)   # v3: room to observe consequences
 
@@ -409,10 +413,17 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
             #      — so no live board object is needed here. One-shot,
             #      irreversible, no persistence check required.
             home = chess.E1 if t == "W" else chess.E8
-            if mover == t and mv.from_square == home:
-                if mv.to_square == (chess.G1 if t == "W" else chess.G8):
+            # the piece that moved must be the KING (2026-07-24 fix): gating
+            # on from_square == e1/e8 alone accepts a rook/queen redeployment
+            # Re1-c1 as a "castle". The snapshot's king_file makes it exact —
+            # king on the e-file before (file 4), on the castle file after.
+            if mover == t and mv.from_square == home \
+                    and p[f"{t}.king_file"] == 4:
+                if mv.to_square == (chess.G1 if t == "W" else chess.G8) \
+                        and s[f"{t}.king_file"] == 6:
                     emit("castle_kingside", t, ply, "completed")
-                elif mv.to_square == (chess.C1 if t == "W" else chess.C8):
+                elif mv.to_square == (chess.C1 if t == "W" else chess.C8) \
+                        and s[f"{t}.king_file"] == 2:
                     emit("castle_queenside", t, ply, "completed")
 
             # ---- outpost occupation (unchanged: passed)
@@ -451,10 +462,12 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
 
             # ---- own bishop escape / trade (unchanged: passed)
             ent_lost = p[f"{t}.entombed"] - s[f"{t}.entombed"]
-            if ent_lost and mover == t:
-                if s[f"{t}.bishops"] == p[f"{t}.bishops"]:
-                    # v3 consequence: the freed bishop must then DO something —
-                    # move again within the tail (random frees leave it sitting)
+            if ent_lost:
+                if mover == t and s[f"{t}.bishops"] == p[f"{t}.bishops"]:
+                    # ESCAPE: t moved and its bishop count is unchanged — the
+                    # entombed bishop walked out. v3 consequence: the freed
+                    # bishop must then DO something — move again within the
+                    # tail (random frees leave it sitting).
                     if verifiable \
                             and _holds_to_end(snaps, k, lambda sn: not sn[f"{t}.entombed"]) \
                             and any(snaps[j][2][f"{t}.bishop_sqs"]
@@ -462,8 +475,14 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
                                     and snaps[j][1] == t
                                     for j in range(k + 1, min(k + tail + 3, len(snaps)))):
                         emit("bad_bishop_escape", t, ply)
-                else:
-                    emit("bad_bishop_trade", t, ply)
+                elif s[f"{t}.bishops"] < p[f"{t}.bishops"]:
+                    # TRADE: the entombed bishop left the board via a capture
+                    # (2026-07-24 fix). The natural execution is the OPPONENT
+                    # capturing it (mover == o) or t's bishop being captured
+                    # and recaptured — either way t's own bishop count drops,
+                    # which can never happen on t's own move, so the old
+                    # `mover == t and count-dropped` branch was unreachable.
+                    emit("bad_bishop_trade", t, ply, "completed")
 
             # ---- free_bad_bishop (2026-07-22, user-defined): with a bad
             #      bishop on the board, PUSH one of the bishop's-color pawns
@@ -487,8 +506,13 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
                 # next(iter()) (that silently missed the case where a
                 # push frees bishop #2 but iteration order picked #1).
                 from_color = sq_color(mv.from_square)
-                if any(sq_color(bbsq) == from_color
-                      for bbsq in p[f"{t}.badbishop"]):
+                # the push must actually flip the pawn OFF the bishop's color
+                # (2026-07-24 fix): a single push flips color, but a two-square
+                # push (d2-d4) keeps the pawn on-color and still blocks the
+                # bishop — it is not a freeing move.
+                if sq_color(mv.to_square) != from_color \
+                        and any(sq_color(bbsq) == from_color
+                                for bbsq in p[f"{t}.badbishop"]):
                     emit("free_bad_bishop", t, ply, "completed",
                          f"{chess.square_name(mv.from_square)}-"
                          f"{chess.square_name(mv.to_square)}")
@@ -838,8 +862,17 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
                 asset = (p[f"{t}.n_passers"] > p[f"{o}.n_passers"]
                          or len(p[f"{o}.weak"]) - len(p[f"{t}.weak"]) >= 2
                          or (p[f"{t}.has_pair"] and not p[f"{o}.has_pair"]))
-                q_off = _holds_to_end(
-                    snaps, k, lambda sn: not sn[f"{t}.queens"]
+                # both queens off, held to window end — but allow a <=2-ply
+                # grace for the recapture (2026-07-24 fix): when t INITIATES
+                # QxQ, t's own queen stands on the capture square at snap k, so
+                # measuring q_off from k made the trade-initiator case (the
+                # canonical execution) impossible to confirm. Start the hold
+                # from the first snap in [k, k+2] where both queens are gone.
+                q_start = next((j for j in range(k, min(k + 3, len(snaps)))
+                                if not snaps[j][2][f"{t}.queens"]
+                                and not snaps[j][2][f"{o}.queens"]), None)
+                q_off = q_start is not None and _holds_to_end(
+                    snaps, q_start, lambda sn: not sn[f"{t}.queens"]
                     and not sn[f"{o}.queens"])
                 further = (send[f"{t}.npieces"] + send[f"{o}.npieces"]
                            <= s[f"{t}.npieces"] + s[f"{o}.npieces"] - 2)
@@ -874,10 +907,14 @@ def parse_line(start: chess.Board, moves: list[chess.Move],
             if mover == t and mover_pawn and verifiable \
                     and p[f"{o}.minority_pre"]:
                 bfl = chess.square_file(mv.to_square)
-                ahead_o = -ahead_t
-                behind = mv.to_square + ahead_o
-                if bfl in (0, 1) and 0 <= behind < 64 \
-                        and behind in s[f"{o}.pawns"]:
+                # the rammed enemy pawn sits one rank AHEAD of the defender's
+                # ram pawn, toward the enemy (2026-07-24 fix): the old
+                # `to_square + (-ahead_t)` pointed at the square the ram pawn
+                # just vacated (necessarily empty), so the family never fired
+                # on a real ram.
+                rammed = mv.to_square + ahead_t
+                if bfl in (0, 1) and 0 <= rammed < 64 \
+                        and rammed in s[f"{o}.pawns"]:
                     lvl = s[f"{o}.b_rel_rank"]
                     if _holds_to_end(
                             snaps, k,

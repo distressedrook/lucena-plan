@@ -142,10 +142,17 @@ def dynamism(fen: str, pvs: list | None, rolls: list | None) -> dict:
         imb += 2
         why_i.append("a queen imbalance")
     if pvs:
-        comp_gap = abs(mat - pvs[0]["cp"])
+        # compensation off ADJUSTED material (2026-07-24 sharpness audit):
+        # raw material reads a pending recapture as "compensation" — 51 of
+        # 117 raw-gap fires on the benchmark were exactly that mirage, and
+        # the SEE-quiescent count closes them. Only a gap that SURVIVES
+        # the captures is initiative paying for material.
+        from lucena_core.metrics import material_stability
+        adj = material_stability(fen)["adjusted_cp"]
+        comp_gap = abs(adj - pvs[0]["cp"])
         if comp_gap >= 160:
             imb += 3
-            down = "White" if mat < pvs[0]["cp"] else "Black"
+            down = "White" if adj < pvs[0]["cp"] else "Black"
             why_i.append(f"{down} is materially behind yet the engine "
                          "calls it level — the deficit is paid for by "
                          "initiative, which must be used before it decays")

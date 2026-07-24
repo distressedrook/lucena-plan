@@ -32,9 +32,11 @@ which is usually NOT the plan's own characteristic move).
 
 Verdict per candidate: CONFIRMED-SOUND (engine, fires within 2 plies) >
 CONFIRMED-SOUND-LATER (engine, fires at ply 3+ — sound but not yet due;
-show `immediate_move` instead) > HUMAN-TYPICAL (human) > UNSUPPORTED
-(neither) > REFUTED (engine-equal lines exist and NONE contain it AND the
-forced-commit roll drops eval > 40cp — the counterfactual).
+show `immediate_move` instead) > HUMAN-TYPICAL (human) > NOT-IN-BEST-LINES
+(engine-equal lines exist and NONE contain it) > UNSUPPORTED (neither leg
+saw it). Confirmation is ONE-SIDED: a true REFUTED verdict would need a
+forced-commit counterfactual roll one move deeper, which this module does
+NOT do (the contract is check-only). It is deliberately not implemented.
 
 THE CONTRACT (2026-07-22 ruling): (fen, pvs, rolls). This module NEVER
 rolls — it only checks lines. `pvs` are engine MultiPV lines
@@ -56,7 +58,6 @@ import chess
 from plan_diff import labels, parse_line
 
 EQUAL_BAND = 50          # |cp - cp_best| <= this -> an equal (sound) line
-REFUTE_DROP = 40         # forced-commit eval drop that REFUTES a candidate
 
 # per-family natural horizon (finding 9: harvest/outpost fast, minority/
 # passer slow). Default 25.
@@ -71,6 +72,11 @@ PLAN_HORIZON = {
     "free_bad_bishop": 20, "exchange_bad_bishop": 20, "strong_outpost": 18,
     "harvest_overextended": 14, "attack_passer": 16,
     "castle_kingside": 16, "castle_queenside": 16,
+    # 2026-07-24: production families that were silently falling to the
+    # default 25 — pinned to their measured natural timescale.
+    "pair_break": 16, "bad_bishop_escape": 20, "bad_bishop_trade": 20,
+    "seventh_invasion": 16, "simplification": 14, "deny_castling": 16,
+    "prepared_break": 14,
     "keep_king_uncastled": 12,   # the rule (2026-07-23, user-defined): the
                                  # king isn't castled in the next 6 MOVES
 }
@@ -83,9 +89,17 @@ FLOOR_ROLL = {
     "remove_defender": 0.005, "minority_attack": 0.007,
     "passer_creation": 0.045, "passer_push": 0.007, "pawn_storm": 0.003,
     "king_march": 0.014, "trade_into_endgame": 0.001, "alternation": 0.001,
+    "pair_break": 0.04,   # benchmark_v1: 82% engine-confirm / 4% floor (20.5x,
+                          # the cleanest in the vocabulary) — was silently on
+                          # DEFAULT_FLOOR (2026-07-24 fix)
     "keep_king_uncastled": 0.25,   # NEGATIVE-event plan (audited 2026-07-23,
                                    # keep_king_uncastled_audit.md); verdict
                                    # uses the pooled-70% rule, floor is data
+    # DELIBERATELY floorless (move-type plans, per-position engine presence is
+    # the admission ticket, not a random-floor gate — free_bad_bishop/
+    # attack_passer precedent): backward_push, attack_passer, castle_kingside,
+    # castle_queenside, strong_outpost, free_bad_bishop, exchange_bad_bishop.
+    # These use DEFAULT_FLOOR only for the Maia-typical gate; that is intended.
 }
 DEFAULT_FLOOR = 0.03
 
@@ -310,8 +324,12 @@ def verify_plan(fen: str, side: str, family: str,
                 r["verdict"] = "CONFIRMED-SOUND"
                 # a standing restraint, in force from move one of the line
                 r["lag"], r["timing"] = 0, "immediate"
-            else:
+            elif r["maia"] and r["maia"]["typical"]:
                 r["verdict"] = "HUMAN-TYPICAL"
+            # else: leave the default UNSUPPORTED (2026-07-24 fix). The old
+            # unconditional `else HUMAN-TYPICAL` graded a plan that EVERY
+            # strong and human line rejects (pooled 0.0) one notch above
+            # UNSUPPORTED, contradicting the module's own verdict semantics.
         return r
 
     if pvs is not None:

@@ -417,15 +417,22 @@ def build_menus(b: chess.Board) -> dict:
         ahead_t = 8 if side == chess.WHITE else -8
         fname = lambda q: chess.FILE_NAMES[chess.square_file(q)]
 
+        own_bishop_colors = {bool(chess.BB_LIGHT_SQUARES & chess.BB_SQUARES[bs])
+                             for bs in b.pieces(chess.BISHOP, side)}
         for q, half in isolated_pawns(b, enemy)[:2]:
             stop = q + ahead_o
+            # only claim a MINOR-piece blockade if a piece can actually reach
+            # the stop-square (2026-07-24 fix, mirrors the outpost gate below):
+            # a knight can, a bishop only if its color matches the square; a
+            # wrong-colored bishop with no knight can never blockade it.
+            stop_light = bool(chess.BB_LIGHT_SQUARES & chess.BB_SQUARES[stop])
             cl = []
             if knights_t:
                 cl.append(f"blockade {chess.square_name(stop)} — ideally "
                           "with a knight")
-            elif minors_t:
-                cl.append(f"blockade {chess.square_name(stop)} with a "
-                          "minor piece")
+            elif stop_light in own_bishop_colors:
+                cl.append(f"blockade {chess.square_name(stop)} with the "
+                          f"{'light' if stop_light else 'dark'}-squared bishop")
             if heavies_t and half:
                 cl.append(f"pile rooks/queen onto the {fname(q)}-file")
             if minors_t or heavies_t:
@@ -458,11 +465,17 @@ def build_menus(b: chess.Board) -> dict:
 
         for q, half in backward_pawns(b, enemy)[:2]:
             stop = q + ahead_o
+            stop_light = bool(chess.BB_LIGHT_SQUARES & chess.BB_SQUARES[stop])
             cl = []
-            if minors_t:
+            # occupy the stop-square only with a piece that can reach it
+            # (2026-07-24 fix): a knight always, a bishop only on its color.
+            if knights_t or (stop_light in own_bishop_colors):
+                occupier = ("a knight" if knights_t
+                            else f"the {'light' if stop_light else 'dark'}-"
+                                 "squared bishop")
                 cl.append(f"fix it: control or occupy "
-                          f"{chess.square_name(stop)} (its stop-square is "
-                          "a hole by construction)")
+                          f"{chess.square_name(stop)} with {occupier} (its "
+                          "stop-square is a hole by construction)")
             if heavies_t and half:
                 cl.append(f"pile on the half-open {fname(q)}-file")
             if minors_t or heavies_t:
@@ -720,22 +733,31 @@ def build_menus(b: chess.Board) -> dict:
             # simply won't confirm against the banked/live lines below —
             # verify handles that, this candidate only needs to be honest
             # about the geometry.
-            lever_pawn = next((q for q in own_qs if chess.square_file(q) == 1),
-                              max(own_qs, key=chess.square_file))
-            lf = chess.square_file(lever_pawn)
-            lever_rank = 4 if side == chess.WHITE else 3     # b5 / b4
-            cap_rank = 5 if side == chess.WHITE else 2       # c6 / c3
-            lever_sq = chess.square_name(chess.square(lf, lever_rank))
-            cap_sq = chess.square_name(chess.square(2, cap_rank))
-            lfile = chess.FILE_NAMES[lf]
-            cand(4.0 if in_c else 1.8, "2v3 queenside minority + semi-open c-file",
-                 f"MINORITY ATTACK: push the {lfile}-pawn (currently "
-                 f"{chess.square_name(lever_pawn)}) to {lever_sq}, then "
-                 f"lever {lfile}x{cap_sq}",
-                 ("Carlsbad: completed 0.547 vs 0.507; lever lands 22%"
-                  if in_c else "generalized: lever lands 13%; launched 0.472")
-                 + "; stalling at b5 is WORSE than not starting (0.446)",
-                 VERIFY["minority"])
+            # The lever pawn is the b-file pawn (it captures onto the semi-open
+            # c-file). If the side has NO b-pawn — e.g. doubled a-pawns — the
+            # c-file lever is geometrically impossible, so the plan does not
+            # apply (2026-07-24 fix: the old `max(own_qs, key=file)` fallback
+            # picked an a-pawn and printed the impossible "push a-pawn ... lever
+            # axc6").
+            lever_pawn = next((q for q in own_qs
+                               if chess.square_file(q) == 1), None)
+            if lever_pawn is not None:
+                lf = chess.square_file(lever_pawn)
+                lever_rank = 4 if side == chess.WHITE else 3     # b5 / b4
+                cap_rank = 5 if side == chess.WHITE else 2       # c6 / c3
+                lever_sq = chess.square_name(chess.square(lf, lever_rank))
+                cap_sq = chess.square_name(chess.square(2, cap_rank))
+                lfile = chess.FILE_NAMES[lf]
+                cand(4.0 if in_c else 1.8,
+                     "2v3 queenside minority + semi-open c-file",
+                     f"MINORITY ATTACK: push the {lfile}-pawn (currently "
+                     f"{chess.square_name(lever_pawn)}) to {lever_sq}, then "
+                     f"lever {lfile}x{cap_sq}",
+                     ("Carlsbad: completed 0.547 vs 0.507; lever lands 22%"
+                      if in_c else
+                      "generalized: lever lands 13%; launched 0.472")
+                     + "; stalling at b5 is WORSE than not starting (0.446)",
+                     VERIFY["minority"])
         if s[f"{t}.castled"] and not s[f"{o}.castled"] \
                 and (s[f"{o}.can_castle"] or s[f"{o}.king_central"]):
             cand(5.0, f"own king castled; {name_side(o)}'s king uncommitted",
@@ -802,10 +824,17 @@ def build_menus(b: chess.Board) -> dict:
                      VERIFY["heavy_battery"])
 
     # ---- PASS 2: situation layer over completed menus
+    # Snapshot the PASS-1 menus first (2026-07-24 fix): PASS 2 appends into
+    # menus[t] as it goes, so reading the LIVE menus[o] let White's just-added
+    # PASS-2 items (SIMPLIFY/AVOID-TRADES) leak into Black's opp_hot, and let
+    # White's PROPHYLAXIS text (which quotes Black's candidate) match the
+    # UNDER-ATTACK "STORM"/"BREAK OPEN" string scan. Reading the frozen PASS-1
+    # menus makes PASS 2 order-independent.
+    base = {k: list(v) for k, v in menus.items()}
     for t, side in (("W", chess.WHITE), ("B", chess.BLACK)):
         o = "B" if t == "W" else "W"
         plans = menus[t]
-        opp_hot = [pl for pl in menus[o] if pl[0] >= 4.0]
+        opp_hot = [pl for pl in base[o] if pl[0] >= 4.0]
         if not opp_hot:
             tgt = max(menus[o], key=lambda pl: pl[0], default=None)
             plans.append((3.0, "QUIET: opponent's menu is "
@@ -850,7 +879,7 @@ def build_menus(b: chess.Board) -> dict:
                           "advisory — no engine contract; decline trades "
                           "that don't win material or fix a concrete "
                           "problem", None))
-        if any("STORM" in pl[2] or "BREAK OPEN" in pl[2] for pl in menus[o]) \
+        if any("STORM" in pl[2] or "BREAK OPEN" in pl[2] for pl in base[o]) \
                 or census(b, side)["exposed_king"]:
             plans.append((3.5, "UNDER ATTACK: opponent holds attacking "
                           "candidates",
@@ -873,8 +902,10 @@ def build_menus(b: chess.Board) -> dict:
                 plans.append((4.5, "UNDER WING ATTACK + central lever available",
                               "COUNTER IN THE CENTER: " + ", ".join(levers)
                               + " — the classical answer to a wing attack",
-                              "maxim, corpus test pending; lever named from "
-                              "THIS position's Kmoch enumeration",
+                              "situational maxim, corpus test pending; lever "
+                              "named from THIS position's Kmoch enumeration "
+                              "(uncalibrated — dropped from the rendered sheet "
+                              "until it earns a number, like DEFEND/PROPHYLAXIS)",
                               "engine: the central break within 25cp of best; "
                               "opening the center must outscore defending",
                               None))
@@ -915,40 +946,39 @@ def suggest_verified(b: chess.Board, pvs: list | None,
     rolled lines (one engine MultiPV roll + K Maia rollouts covers every
     job; verify truncates each family to its own horizon). This function
     never rolls."""
-    import os
-    import sys
-    sys.path.insert(0, os.path.join(
-        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-        "research"))
     from verify import verify_plan
-    from experiments.tools.plan_trace import triggers
+    from weaknesses import knight_route
     out = describe(b) + suggest_plans(b)
     out.append("")
     out.append("== VERIFY (suggest -> roll -> diff, per position) ==")
-    trig = triggers(b)
-    fams = sorted({(t, f) for (t, lab) in trig
-                   for f in CANDIDATE_FAMILIES.get(lab, ())})
-    # SQUARE-BEARING families: verify each target square SEPARATELY. A
-    # bundled label like "prime holes c5,d6,f6" must never let a confirmed
-    # d5 lend credibility to an unconfirmed f6 — each square gets its own
-    # roll-and-diff and its own verdict.
-    SQUARE_FAMILIES = {"outpost_occupation"}
-    from weaknesses import knight_route
+    # Derive the verify jobs from the SAME source the renderers use —
+    # build_menus -> candidate_family (2026-07-24 fix). The old path read
+    # research/experiments/tools/plan_trace.triggers, which had drifted from
+    # the live menus (missed ~10 proposed families, included retired ANTI
+    # ones) and reached into research/, which never ships. build_menus
+    # already emits per-square outpost candidates as separate entries, so no
+    # special-casing is needed — each carries its own target square (tsq).
+    menus = build_menus(b)
     jobs = []   # (t, fam, square_or_None, display_label, route_hops)
-    for t, fam in fams:
-        if fam in SQUARE_FAMILIES and fam == "outpost_occupation":
-            side_t = chess.WHITE if t == "W" else chess.BLACK
-            enemy = not side_t
-            holes = [h for h, tag in holes_in(b, enemy) if not tag]
-            if holes:
-                for h in holes[:4]:
-                    # route length scales the verify horizon: convoluted
-                    # real-game journeys must not time out the check
-                    r = knight_route(b, side_t, {chess.parse_square(h)})
-                    hops = len(r) - 1 if r else None
-                    jobs.append((t, fam, h, f"{fam}@{h}", hops))
+    seen = set()
+    for t in ("W", "B"):
+        side_t = chess.WHITE if t == "W" else chess.BLACK
+        for eff, trig, head, ev, vnote, tsq in menus[t]:
+            fams = candidate_family(head)
+            if not fams:
                 continue
-        jobs.append((t, fam, None, fam, None))
+            hops = None
+            if tsq:
+                # route length scales the verify horizon: convoluted
+                # real-game journeys must not time out the check
+                r = knight_route(b, side_t, {chess.parse_square(tsq)})
+                hops = len(r) - 1 if r else None
+            for fam in sorted(fams):
+                key = (t, fam, tsq)
+                if key in seen:
+                    continue
+                seen.add(key)
+                jobs.append((t, fam, tsq, f"{fam}@{tsq}" if tsq else fam, hops))
     if not jobs:
         out.append("  (no state-triggered candidates to verify)")
     for t, fam, sq, label, hops in jobs:

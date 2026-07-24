@@ -53,6 +53,10 @@ def _detect(game, side: bool):
     sans = []
     for i, mv in enumerate(game.mainline_moves()):
         san = b.san(mv)
+        # the lever SAN may carry a check/mate suffix (bxc6+, cxb5#) — strip
+        # it before matching, else a lever delivered with check is silently
+        # missed and the whole minority attack goes undetected (2026-07-24 fix).
+        san_bare = san.rstrip("+#")
         mover_is_side = b.turn == side
         if struct_check(b):
             struct += 1
@@ -63,10 +67,10 @@ def _detect(game, side: bool):
                     p1 = i
                 if to == adv2 and p1 is not None:
                     p2 = i
-            if mover_is_side and san == lever_own and p2 is not None:
+            if mover_is_side and san_bare == lever_own and p2 is not None:
                 lever = i
         if not mover_is_side and p2 is not None and lever is None \
-                and san in lever_opp:
+                and san_bare in lever_opp:
             lever = i
         b.push(mv)
         sans.append(san)

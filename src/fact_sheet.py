@@ -43,10 +43,13 @@ here use an opaque id ("POSITION-<hash>") instead of the FEN.
 from __future__ import annotations
 
 import hashlib
+import logging
 import re
 import sys
 
 import chess
+
+_log = logging.getLogger(__name__)
 
 # lucena_core is pip-installed (editable) — no path hacks (2026-07-23 core migration)
 from lucena_core import positional as _positional          # noqa: E402
@@ -89,6 +92,34 @@ TERMS = ["material", "king_safety", "activity", "pawns", "center"]
 
 def opaque_id(fen: str) -> str:
     return "POSITION-" + hashlib.sha256(fen.encode()).hexdigest()[:10]
+
+
+def _looks_like_fen(s: str) -> bool:
+    """A board string (first field has 8 ranks) — the piece placement that
+    hands a FEN-literate reader the position."""
+    if not isinstance(s, str) or " " not in s:
+        return False
+    first = s.split(" ", 1)[0]
+    return first.count("/") == 7 and any(c.isalpha() for c in first)
+
+
+def _redact_fens(obj):
+    """Recursively replace every FEN-valued field in the assembled sheet
+    with its opaque POSITION-<hash> id (2026-07-24 fix). The redaction
+    invariant is whole-sheet, not just the root: quiescence walks in
+    `settled`/`material_stability`/`line_theories` (from lucena_core.metrics)
+    embed walked-out FENs under keys like `fen`/`settled_fen`, each just as
+    board-revealing as the root. A consumer keeps a stable position handle;
+    the board itself never reaches the narrating model."""
+    if isinstance(obj, dict):
+        return {k: (opaque_id(v) if isinstance(v, str) and _looks_like_fen(v)
+                    else _redact_fens(v))
+                for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_redact_fens(v) for v in obj]
+    if isinstance(obj, str) and _looks_like_fen(obj):
+        return opaque_id(obj)
+    return obj
 
 
 def _humanize(s: str) -> str:
@@ -539,7 +570,9 @@ def _plan_lines(menus: dict, t: str, fen: str, pvs, rolls,
             r = knight_route(b, side, {chess.parse_square(tsq)})
             hops = len(r) - 1 if r else None
         won = None
-        for fam in fams:
+        for fam in sorted(fams):   # deterministic order (2026-07-24 fix): a
+            # set iteration let the same (fen,pvs,rolls) confirm via a
+            # different family run-to-run under hash randomization
             # EXTRACTION plans (2026-07-22): the emitter names no square, so
             # the observed route comes from forward-tracking the bishop
             # itself (its square is in the trigger text) — the printed
@@ -643,6 +676,12 @@ def build_fact_sheet(fen: str, pvs: list | None, rolls: list | None,
                      ) -> tuple[str, str]:
     """Returns (sheet, opaque_id) — the fact sheet text ONLY, no PREAMBLE
     and no LLM-prompt wrapper.
+
+    THIS IS A GROUNDING ARTIFACT, FOR A MODEL — exhaustive, redundant and
+    hedged by design, so a narrator could select from it. It is NOT the
+    user-facing presentation (owner 2026-07-24: "build fact sheet existed
+    FOR the LLM"); that is `position_read.render`, which selects and
+    orders instead of dumping.
 
     THE CONTRACT: (fen, pvs, rolls). This module never rolls — the caller
     supplies the position's engine PVs and Maia rollouts (a horizon-25
@@ -812,6 +851,9 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
             "verdict": None,
             "timing": None,
             "maia_frac": None,
+            "family": None,            # the confirming arm (set on win)
+            "details": [],             # line-derived specifics (set on win)
+            "routes": [],              # observed journeys (set on win)
         }
         if verify:
             if pvs is None and rolls is None:
@@ -823,7 +865,7 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
                     r = knight_route(b, side, {chess.parse_square(tsq)})
                     hops = len(r) - 1 if r else None
                 won = None
-                for fam in fams:
+                for fam in sorted(fams):   # deterministic (2026-07-24 fix)
                     track = None
                     if fam in ("bad_bishop_escape", "bad_bishop_trade"):
                         m = re.search(r"bishop ([a-h][1-8])", trig)
@@ -837,6 +879,22 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
                     entry["verified"] = True
                     entry["verdict"] = won["verdict"]
                     entry["timing"] = won.get("timing")
+                    # which arm of a clubbed candidate actually confirmed
+                    # (e.g. families [passer_push, passer_creation] but only
+                    # passer_creation fired) — the JSON consumer needs this to
+                    # phrase the plan correctly (2026-07-24 fix).
+                    entry["family"] = won.get("family")
+                    # SPECIFICS COME FROM THE FIRING LINES, NEVER GEOMETRY
+                    # (2026-07-24 fix, the ruling the text renderer already
+                    # follows): carry the emitter's own details + the observed
+                    # journeys, and DROP the geometric route_note when the
+                    # lines produced their own — this un-does the phantom
+                    # knight-route (a pair_break confirmed via BxB@f4 must not
+                    # print a d7-b8-a6-b4-d3 route the lines never played).
+                    entry["details"] = won.get("details") or []
+                    entry["routes"] = won.get("routes") or []
+                    if entry["details"] or entry["routes"]:
+                        entry["route_note"] = None
                     maia = won.get("maia") or {}
                     if maia.get("frac") is not None:
                         entry["maia_frac"] = round(maia["frac"], 3)
@@ -847,6 +905,33 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
     return plans, advisory
 
 
+def _material_stability_block(fen: str) -> dict | None:
+    try:
+        from lucena_core.metrics import material_stability
+        return material_stability(fen)
+    except Exception:
+        _log.warning("material_stability block failed", exc_info=True)
+        return None
+
+
+def _settled_block(fen: str, pvs) -> dict | None:
+    try:
+        from lucena_core.metrics import settled_view
+        return settled_view(fen, pvs)
+    except Exception:
+        _log.warning("settled_view block failed", exc_info=True)
+        return None
+
+
+def _line_theories_block(fen: str, pvs, rolls) -> dict | None:
+    try:
+        from lucena_core.metrics import line_theories
+        return line_theories(fen, pvs, rolls)
+    except Exception:
+        _log.warning("line_theories block failed", exc_info=True)
+        return None
+
+
 def _game_phase_block(fen: str) -> dict:
     """{'name': opening|middlegame|endgame, 'why': ...} from the core's
     hybrid classifier; None-safe (the sheet must never die on a phase)."""
@@ -855,6 +940,7 @@ def _game_phase_block(fen: str) -> dict:
         gp = game_phase(fen)
         return {"name": gp["phase"], "why": gp["why"]}
     except Exception:
+        _log.warning("game_phase block failed", exc_info=True)
         return {"name": None, "why": "phase classifier unavailable"}
 
 
@@ -864,7 +950,9 @@ def _activity_block(act: dict) -> dict:
     per minor/major piece; the side score is the same sum the term's cp
     differential is built from."""
     f = act.get("features", {})
-    out = {"diff_cp": act["cp"], "standing": act["standing"]}
+    out = {"diff_cp": act["cp"], "standing": act["standing"],
+           # the structured verdict the UI badges (never the 0-1 number)
+           "leader": f.get("leader")}
     for color in ("white", "black"):
         pieces = [{"piece": e["piece"], "square": e["square"],
                    "score": e["norm"], "cp": e["score"],
@@ -901,8 +989,123 @@ def _metrics_block(fen: str) -> dict:
         try:
             out[key] = fn(fen)
         except Exception:
+            _log.warning("metrics block %r failed", key, exc_info=True)
             out[key] = None
     return out
+
+
+def _king_risk_block(fen: str) -> dict | None:
+    """Per-side king risk: the raw danger composite, its bounded form, and
+    the CALIBRATED P(catastrophe) in all three regimes (findings 21-25).
+
+    The three regimes are the point — "P(catastrophe)" is not one number,
+    it depends on who is ATTACKING as much as who is defending:
+    `if_pressed` (engine-strength pressure — the ceiling), `typical_1500`
+    (real rating-matched club games), `typical_gm` (real GM-vs-GM, carried
+    as INDICATIVE only, n_pos=3). Each entry carries its own confidence
+    tier so a consumer can never present the indicative one as settled."""
+    try:
+        from lucena_core.board import Board as _LB
+        from lucena_core.positional import analyze_positional as _ap
+        from king_danger_calibration import p_catastrophe_profile
+        ks = _ap(_LB(fen))["terms"]["king_safety"]["features"]
+    except Exception:
+        _log.warning("king_risk block failed", exc_info=True)
+        return None
+    out = {}
+    for side in ("white", "black"):
+        f = ks.get(side)
+        if not f:
+            continue
+        d = f.get("danger", 0)
+        out[side] = {
+            "danger": d,
+            "danger_bounded": f.get("danger_bounded"),
+            "attack_units": f.get("attack_units"),
+            "shield_pawns": f.get("shield_pawns"),
+            "zone_attackers": f.get("zone_attackers"),
+            "p_catastrophe": p_catastrophe_profile(d),
+        }
+    return out or None
+
+
+def _badges_block(out: dict) -> list[str]:
+    """The sheet's VERDICTS, as short badge strings (owner 2026-07-24:
+    "all the 0-1 values share this problem — show them as badges").
+
+    Every 0-1 on this sheet was false precision on screen. A control share
+    is complementary by construction, so at balance both sides read ~0.50
+    and look identical; a space percentile of 0.57 tells a reader nothing;
+    an activity 0.681-vs-0.527 hid that the raw sum ordered the sides the
+    other way. Each of these ALREADY had a computed verdict server-side
+    (`regions[r].leader`, `space[r].edge`, `color_complex.weak_for`,
+    `activity.leader`) — the UI was just drawing the number instead. The
+    numbers stay in the JSON as data; this is what gets displayed.
+
+    A badge appears only when there IS a verdict — a near-tie prints
+    nothing rather than a meaningless bar."""
+    m = out.get("metrics") or {}
+    badges: list[str] = []
+    who = (out.get("activity") or {}).get("leader")
+    if who:
+        badges.append(f"{who} more active")
+    regions = m.get("regions") or {}
+    for r, label in (("center", "the centre"), ("kingside", "the kingside"),
+                     ("queenside", "the queenside")):
+        lead = (regions.get(r) or {}).get("leader")
+        if lead:
+            badges.append(f"{lead} controls {label}")
+    space = m.get("space") or {}
+    for r, label in (("center", "centre"), ("kingside", "kingside"),
+                     ("queenside", "queenside")):
+        edge = (space.get(r) or {}).get("edge")
+        if edge:
+            badges.append(f"{edge} more space ({label})")
+    cc = m.get("color_complex") or {}
+    for tone in ("light", "dark"):
+        weak = (cc.get(tone) or {}).get("weak_for")
+        if weak:
+            badges.append(f"{weak}'s {tone} squares are weak")
+    return badges
+
+
+def _sides_block(out: dict) -> dict:
+    """TEMPORARY per-side reprojection (owner 2026-07-23): 'two sections,
+    White and Black, under which the JSON lives'. Derived entirely from the
+    blocks already assembled in `out` — a VIEW, not a new computation, so it
+    can be dropped or promoted without touching any producer. Everything
+    with a natural owner is filed under its side; whole-board facts
+    (assessment, reads, structure, tension) stay at top level."""
+    m = out.get("metrics") or {}
+    regions = m.get("regions") or {}
+    space = m.get("space") or {}
+    cc = m.get("color_complex") or {}
+    sides = {}
+    for side, Side in (("white", "White"), ("black", "Black")):
+        enemy = "black" if side == "white" else "white"
+        sides[side] = {
+            "activity": (out.get("activity") or {}).get(side),
+            "weaknesses": (out.get("weaknesses") or {}).get(side, []),
+            "plans": (out.get("plans") or {}).get(side, []),
+            "advisory": (out.get("advisory") or {}).get(side, []),
+            "control": {r: regions[r][side] for r in
+                        ("center", "kingside", "queenside") if r in regions},
+            # outposts/holes THIS side controls (in the enemy camp)
+            "outposts": [h for h in regions.get("holes", [])
+                         if h.get("controller") == Side],
+            "space": {r: space[r][side] for r in
+                      ("center", "kingside", "queenside") if r in space},
+            "development": (m.get("development") or {}).get(side, []),
+            "breaks": (m.get("breaks") or {}).get(side, []),
+            "passers": (m.get("passers") or {}).get(side, []),
+            "trapped": (m.get("trapped") or {}).get(side, []),
+            "color_control": {c: cc[c][side] for c in ("light", "dark")
+                              if c in cc},
+            # files this side's heavies control
+            "files": [f for f in regions.get("files", [])
+                      if f.get("controller") == Side],
+        }
+    return sides
 
 
 def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
@@ -921,7 +1124,11 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
         "schema": SHEET_SCHEMA,
         "phase": "post-verify" if verify else "pre-verify",
         "id": pid,
-        "fen": fen,
+        # NO raw FEN in the artifact (2026-07-24 fix): the opaque `id` hash is
+        # the only position handle. The backend json.dumps this whole dict into
+        # the narrating LLM's prompt; embedding the FEN handed a FEN-literate
+        # model full board access and defeated the POSITION-<hash> redaction
+        # the grounding architecture exists to enforce.
         "assessment": {
             "total_cp": round(total) if total is not None else None,
             "verdict": _assessment(total),
@@ -930,6 +1137,23 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
             # development event). NOT the top-level "phase" key, which is
             # the ARTIFACT stage (pre/post-verify).
             "game_phase": _game_phase_block(fen),
+            # material stability (2026-07-23): the tension/structure-aware
+            # read — WHY an edge holds or dissolves ("up a pawn now, won't
+            # be soon"). Validated: soft edges lose 2/3 of the lead in 12
+            # plies (125k GM anchors).
+            "material_stability": _material_stability_block(fen),
+            # SETTLED read (2026-07-23): walk the engine's top line to a
+            # quiet position and re-read it — quiescence. The static terms
+            # are blind to tension; the settled position tells the truth
+            # ("up a doubled pawn now" -> "up a clean pawn"). Needs pvs.
+            "settled": _settled_block(fen, pvs),
+            # LINE THEORIES (2026-07-23): the eval's decomposition — walk
+            # each engine PV + Maia roll to quiescence, measure the settled
+            # terms, keep the reason that survives across every line.
+            "line_theories": _line_theories_block(fen, pvs, rolls),
+            # KING RISK (2026-07-24, findings 21-25): the danger composite
+            # plus its calibrated P(catastrophe) in all three regimes.
+            "king_risk": _king_risk_block(fen),
             "character": {"bucket": dy["bucket"], "score": dy["score"],
                           "summary": dy["summary"],
                           "components": [{"name": n, "pts": p, "why": w}
@@ -957,12 +1181,21 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
         plans, advisory = _candidates(b, menus, t, fen, pvs, rolls, verify=verify)
         out["plans"][key] = plans
         out["advisory"][key] = advisory
-    return out
+    # TEMPORARY: the per-side White/Black view, projected from the blocks
+    # above (owner 2026-07-23). Producers are unchanged; this is additive.
+    out["sides"] = _sides_block(out)
+    out["badges"] = _badges_block(out)
+    # whole-sheet FEN redaction, last (2026-07-24): scrub any board string
+    # embedded by a nested block (quiescence walks etc.) to its opaque id.
+    return _redact_fens(out)
 
 
 def pre_verify_json(fen: str, pvs: list | None, rolls: list | None) -> dict:
-    """The full sheet with EVERY candidate unverified — fast (no verify_plan
-    calls); the progressive first artifact."""
+    """The full sheet with every PLAN candidate left unverified — the
+    progressive first artifact. NOTE: not verify-free — the WEAKNESSES
+    section still runs verify_plan for entombed bishops (extraction/trade
+    tracking) regardless of this flag; it is only the PLAN candidates that
+    skip verification here."""
     return _sheet_json(fen, pvs, rolls, verify=False)
 
 

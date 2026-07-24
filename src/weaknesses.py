@@ -432,6 +432,14 @@ def weak_color_complex(b: chess.Board, side: bool) -> list[int]:
     if 3 <= kf <= 4:
         return []                        # uncastled: not this weakness
     own_bishop_colors = {sq_color(s) for s in b.pieces(chess.BISHOP, side)}
+    # consider BOTH uncovered colors and pick the more dangerous complex by
+    # HOLE COUNT (2026-07-24 fix): the old `for color in (True, False)` early-
+    # returned the light complex, silently dropping a qualifying dark one and
+    # making the detector mirror-asymmetric (square color flips under a rank
+    # mirror, but a count-based choice is mirror-invariant). Tie broken by the
+    # complex closer to the king.
+    best = []
+    best_key = None
     for color in (True, False):
         if color in own_bishop_colors:
             continue
@@ -441,9 +449,13 @@ def weak_color_complex(b: chess.Board, side: bool) -> list[int]:
                  and side_rank(sq, side) >= 1
                  and not b.piece_at(sq)
                  and is_hole(b, sq, side)]
-        if len(holes) >= 2:
-            return holes
-    return []
+        if len(holes) < 2:
+            continue
+        # rank by (count desc, total king-distance asc)
+        key = (len(holes), -sum(chess.square_distance(sq, ksq) for sq in holes))
+        if best_key is None or key > best_key:
+            best, best_key = holes, key
+    return best
 
 
 def back_rank_weak(b: chess.Board, side: bool) -> bool:

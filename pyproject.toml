@@ -9,20 +9,35 @@ description = "Position -> plan suggester + fact sheet: geometry-based chess coa
 requires-python = ">=3.9"
 dependencies = [
     "chess>=1.11",
+    # HARD dependency, NOT declarable here: fact_sheet/weaknesses/plan_diff
+    # import `lucena_core` (board truth, geometry, metrics) at module top
+    # level. lucena_core is a PRIVATE, unpublished sibling repo, so it cannot
+    # be a PyPI dependency — which is why `pip install lucena-plans` into a
+    # clean env FAILS at first import. This package is not meant to be
+    # pip-installed: the ONE supported consumption mode is path-appending the
+    # superrepo checkout's src/ dir (see the backend's
+    # lucena_backend.plans.service._bootstrap), with lucena_core already on
+    # the path. The metadata below exists for build tooling, not for install.
 ]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-# src layout: the library IS src/*.py. Everything else in
-# the repo (research/experiments/, research/data/, research/gpu_benchmark/, the PGN banks) is the
-# research harness and never ships. None of these modules roll an engine
-# or Maia — the (fen, pvs, rolls) contract; rolled lines are the caller's
-# to supply.
+# src layout: the library IS src/*.py — this list must match the actual
+# src surface (an omission breaks every consumer of the missing module:
+# `dynamism` was long absent and broke every sheet build). Everything else
+# in the repo (research/experiments/, research/data/, research/gpu_benchmark/,
+# the PGN banks) is the research harness and never ships. None of these
+# modules roll an engine or Maia — the (fen, pvs, rolls) contract; rolled
+# lines are the caller's to supply.
 py-modules = [
     "closed_v0",
     "detectors",
+    "dynamism",
     "fact_sheet",
+    "king_danger_calibration",
+    "personal_sharpness",
     "plan_diff",
+    "position_read",
     "structures",
     "suggest",
     "tension",
