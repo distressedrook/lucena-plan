@@ -1,6 +1,13 @@
 research/data/twic/
 research/data/lichess_elite_2023-01.pgn
 research/data/gm_classical.pgn
+
+# Raw corpora + regenerable generated datasets under studies/ never ship —
+# same policy as research/data/ above, extended to where studies download
+# and dump them (these triggered GitHub's large-file warning 2026-07-24).
+research/experiments/**/*.pgn
+research/experiments/**/*.pgn.zst
+research/experiments/studies/residual_attribution/dataset*.jsonl
 __pycache__/
 *.pyc
 nohup.out
