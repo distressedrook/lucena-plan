@@ -174,12 +174,43 @@ def test_winning_reason():
     assert r == "White is winning — Black's king is fatally exposed."
 
 
+def test_winning_advice():
+    """Hardcoded advice (owner): conversion tips ONLY when material up, the
+    king-safety reminder ALWAYS, addressed to the leader."""
+    # White up material -> conversion tips + king safety, all to "White"
+    tips = F._winning_advice({"total_cp": 520, "material_stability":
+                              {"leader": "White", "standing": "White is up a rook",
+                               "adjusted_cp": 500}})
+    assert any("trade pieces" in t.lower() for t in tips)
+    assert tips[-1].startswith("Keep White's king safe")
+    assert all("White" in t or "your" not in t for t in tips)   # addressed to White
+    # Black up material -> mirrored to "Black"
+    tips = F._winning_advice({"total_cp": -520, "material_stability":
+                              {"leader": "Black", "standing": "Black is up a rook",
+                               "adjusted_cp": -500}})
+    assert tips[0].startswith("Black should trade")
+    assert tips[-1].startswith("Keep Black's king safe")
+    # winning by ATTACK (not material up) -> only the king-safety reminder
+    tips = F._winning_advice({"total_cp": 400, "material_stability":
+                              {"leader": None, "standing": "material is even",
+                               "adjusted_cp": 0}})
+    assert tips == ["Keep White's king safe and shut down counterplay — a "
+                    "material lead is worthless if the king gets mated."]
+    # SACRIFICE: White is winning but BLACK is the material leader -> no
+    # conversion tips (material_up False), only the king-safety reminder to White
+    tips = F._winning_advice({"total_cp": 300, "material_stability":
+                              {"leader": "Black", "standing": "Black is up a rook",
+                               "adjusted_cp": -1720}})
+    assert tips == ["Keep White's king safe and shut down counterplay — a "
+                    "material lead is worthless if the king gets mated."]
+
+
 def test_winning_field_only_when_decisive():
-    """out['winning'] is set exactly when decisive; None otherwise."""
-    assert F._winning_reason  # exists
+    """out['winning'] = {reason, advice} when decisive; None otherwise."""
     dec = F._sheet_json("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1",
                         [{"cp": 520, "pv": [], "ucis": [], "san": []}], None, verify=False)
-    assert dec["winning"] and "winning" in dec["winning"]
+    assert dec["winning"] and "winning" in dec["winning"]["reason"]
+    assert isinstance(dec["winning"]["advice"], list) and dec["winning"]["advice"]
     eq = F._sheet_json("r1bqkbnr/ppp2ppp/2np4/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 1 4",
                        None, None, verify=False)
     assert eq["winning"] is None

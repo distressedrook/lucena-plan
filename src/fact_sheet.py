@@ -1096,6 +1096,27 @@ def _winning_reason(a: dict) -> str:
     return f"{leader} is winning."
 
 
+def _winning_advice(a: dict) -> list[str]:
+    """Hardcoded generic advice for the WINNING side (owner 2026-07-24).
+    Conversion technique ONLY when actually material up; a king-safety
+    reminder ALWAYS rides along ("even king safety") — the one way to throw a
+    material lead is to get mated or hand over counterplay. Addressed to the
+    leader by name, so it reads right whether White or Black is ahead."""
+    leader = _winning_leader(a)
+    ms = a.get("material_stability") or {}
+    material_up = (ms.get("leader") == leader
+                   and "up" in (ms.get("standing") or ""))
+    tips: list[str] = []
+    if material_up:
+        tips.append(f"{leader} should trade pieces, not pawns — steer into an "
+                    "endgame where the extra material wins on its own.")
+        tips.append("No need to rush: convert with simple, safe moves and "
+                    "avoid unnecessary complications.")
+    tips.append(f"Keep {leader}'s king safe and shut down counterplay — a "
+                "material lead is worthless if the king gets mated.")
+    return tips
+
+
 def _bars_block(out: dict) -> list[dict]:
     """Labeled 0-1 bars (owner 2026-07-24: 'reintroduce bars instead of
     labels'). Each is driven by a COMPARABLE, head-to-head quantity so the
@@ -1294,10 +1315,11 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
     out["sides"] = _sides_block(out)
     out["badges"] = _badges_block(out)
     out["bars"] = _bars_block(out)
-    # OUTRIGHT WINNING (owner): show nothing but WHY. When set, the client
-    # renders only this sentence — no bars, no side reports, no badges.
-    out["winning"] = (_winning_reason(out["assessment"])
-                      if _is_decisive(out["assessment"]) else None)
+    # OUTRIGHT WINNING (owner): show nothing but WHY + generic advice. When
+    # set, the client renders only this — no bars, no side reports, no badges.
+    _a = out["assessment"]
+    out["winning"] = ({"reason": _winning_reason(_a), "advice": _winning_advice(_a)}
+                      if _is_decisive(_a) else None)
     # whole-sheet FEN redaction, last (2026-07-24): scrub any board string
     # embedded by a nested block (quiescence walks etc.) to its opaque id.
     return _redact_fens(out)
