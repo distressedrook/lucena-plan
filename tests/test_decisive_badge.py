@@ -133,7 +133,10 @@ def test_bars_are_comparable_and_gated():
             "king_risk": {"white": {"danger_bounded": 0.0},
                           "black": {"danger_bounded": 0.2}},
         },
-        "activity": {"diff_cp": 40},
+        # activity bar off the per-side scores (material-neutral), only when
+        # comparable (equal queen counts)
+        "activity": {"diff_cp": 40, "comparable": True,
+                     "white": {"score": 0.60}, "black": {"score": 0.50}},
         "metrics": {"space": {
             "center": {"white": {"raw": 2}, "black": {"raw": 1}},
             "kingside": {"white": {"raw": 0}, "black": {"raw": 0}},
@@ -268,3 +271,25 @@ def test_winning_shows_king_bars():
     kb = dec["winning"]["king_bars"]
     assert [b["label"] for b in kb] == ["White king", "Black king"]
     assert all(0.0 <= b["value"] <= 1.0 and "mid" not in b for b in kb)
+
+
+def test_activity_bar_withheld_under_queen_imbalance():
+    """Activity is queen-skewed across a material imbalance (Bobotsov-Tal move
+    18: mobility read White '+31' while Black dominated). When not comparable
+    (unequal queens), the activity bar is WITHHELD; when comparable it fires
+    off the material-neutral per-side scores, NOT diff_cp."""
+    base = {
+        "assessment": {"total_cp": 20,
+                       "material_stability": {"leader": None, "standing": None, "adjusted_cp": 0},
+                       "king_risk": {}},
+        "metrics": {"space": {}},
+    }
+    # NOT comparable -> no Activity bar (even though the raw diff_cp is large)
+    out = {**base, "activity": {"diff_cp": 300, "comparable": False,
+                                "white": {"score": 0.9}, "black": {"score": 0.4}}}
+    assert "Activity" not in {b["label"] for b in F._bars_block(out)}
+    # comparable -> bar from the per-side scores, not diff_cp
+    out = {**base, "activity": {"diff_cp": 300, "comparable": True,
+                                "white": {"score": 0.55}, "black": {"score": 0.60}}}
+    bar = next(b for b in F._bars_block(out) if b["label"] == "Activity")
+    assert bar["value"] < 0.5     # Black edge from the scores, despite +300 diff_cp
