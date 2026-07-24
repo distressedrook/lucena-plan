@@ -240,3 +240,21 @@ def test_winning_field_only_when_decisive():
     eq = F._sheet_json("r1bqkbnr/ppp2ppp/2np4/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 1 4",
                        None, None, verify=False)
     assert eq["winning"] is None
+
+
+def test_engine_eval_beats_material_backstop():
+    """A SOUND SACRIFICE: engine eval ~equal but raw material lopsided. With
+    the engine eval present, decisiveness trusts it — the material backstop
+    must NOT override (Bobotsov-Tal 11...Nxd5!: eval ~0, settled 'White is up a
+    queen for two minors', is EQUAL, not 'White is winning'). Found by walking
+    the game against our eval, 2026-07-24."""
+    comp = {"total_cp": -39, "eval_source": "engine",
+            "material_stability": {"leader": "White",
+                                   "standing": "White is up a queen for a bishop and a knight",
+                                   "adjusted_cp": 250}}
+    assert F._is_decisive(comp) is False          # trust the engine eval
+    assert F._winning_reason(comp)                # (still callable, but unused)
+    # the SAME imbalance with NO engine eval (static fallback) keeps the
+    # material backstop, so a real material win isn't missed offline
+    static = {**comp, "eval_source": "static", "total_cp": 10}
+    assert F._is_decisive(static) is True

@@ -1037,11 +1037,16 @@ _DECISIVE_CP = 150
 
 
 def _is_decisive(assessment: dict) -> bool:
-    """|eval| past the band. `total_cp` is the real engine eval when pvs were
-    supplied (production always does); when only the positional-fallback cp is
-    available it misses a clean material win, so settled material
-    (`adjusted_cp`, SEE-quiescenced) is the backstop."""
+    """|eval| past the band. When we HAVE the engine eval (pvs supplied, which
+    the backend always does), trust it OUTRIGHT — it already prices sacrificial
+    compensation, so the material count must NOT override it (else a sound sac
+    like Bobotsov-Tal 11...Nxd5, eval ~0 but 'White up a queen for two minors',
+    wrongly reads as 'White is winning'). The settled-material backstop applies
+    ONLY to the static, no-engine fallback, where total_cp is positional-only
+    and would miss a clean material win."""
     total = assessment.get("total_cp")
+    if assessment.get("eval_source") == "engine":
+        return total is not None and abs(total) > _DECISIVE_CP
     adj = ((assessment.get("material_stability") or {}).get("adjusted_cp"))
     return (total is not None and abs(total) > _DECISIVE_CP) or \
            (adj is not None and abs(adj) > _DECISIVE_CP)
@@ -1279,6 +1284,13 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
         # the grounding architecture exists to enforce.
         "assessment": {
             "total_cp": round(total) if total is not None else None,
+            # whether total_cp is the real ENGINE eval (pvs supplied, which the
+            # backend always does) or the STATIC term-sum fallback. Decisiveness
+            # trusts an engine eval outright — it already prices compensation,
+            # so a sound sacrifice (Bobotsov-Tal 11...Nxd5!) reads as EQUAL, not
+            # "White is up a queen". The material backstop is for the static
+            # case only. See _is_decisive.
+            "eval_source": "engine" if ecp is not None else "static",
             "verdict": _assessment(total),
             # game phase (2026-07-23): lucena_core.reads.game_phase — the
             # hybrid classifier (endgame = material event, opening =
