@@ -1029,9 +1029,53 @@ def _king_risk_block(fen: str) -> dict | None:
     return out or None
 
 
+# Above this eval magnitude the position is DECISIVE, not a probing
+# middlegame: positional verdicts ("more space kingside") are noise or
+# actively misleading next to "a queen up". Matches the backend's
+# PLANS_CP_BAND (±1.5 pawns) that gates the equal-position plans read.
+_DECISIVE_CP = 150
+
+
+def _is_decisive(assessment: dict) -> bool:
+    """|eval| past the band. `total_cp` is the real engine eval when pvs were
+    supplied (production always does); when only the positional-fallback cp is
+    available it misses a clean material win, so settled material
+    (`adjusted_cp`, SEE-quiescenced) is the backstop."""
+    total = assessment.get("total_cp")
+    adj = ((assessment.get("material_stability") or {}).get("adjusted_cp"))
+    return (total is not None and abs(total) > _DECISIVE_CP) or \
+           (adj is not None and abs(adj) > _DECISIVE_CP)
+
+
+def _decisive_badge(assessment: dict) -> str:
+    """The single honest verdict for a decisive position: name the winning
+    side, and the material edge ONLY when settled material actually explains
+    it. If the material leader disagrees with the winning side (a sacrifice —
+    winning while nominally down), parroting the material count would mislead
+    exactly as finding 26/27's decoy did, so we say only 'X is winning'."""
+    total = assessment.get("total_cp") or 0
+    ms = assessment.get("material_stability") or {}
+    adj = ms.get("adjusted_cp") or 0
+    # Prefer the real eval (present when pvs were supplied); fall back to the
+    # settled-material leader when only the positional fallback cp exists.
+    if abs(total) > _DECISIVE_CP:
+        leader = "White" if total > 0 else "Black"
+    else:
+        leader = ms.get("leader") or ("White" if adj > 0 else "Black")
+    if ms.get("leader") == leader and ms.get("standing"):
+        return ms["standing"]           # e.g. "White is up a rook"
+    return f"{leader} is winning"        # positional / attack / sacrifice
+
+
 def _badges_block(out: dict) -> list[str]:
     """The sheet's VERDICTS, as short badge strings (owner 2026-07-24:
     "all the 0-1 values share this problem — show them as badges").
+
+    DECISIVE guardrail (2026-07-24): once |eval| > _DECISIVE_CP the
+    positional chips below stop meaning anything a reader can use — a "more
+    space kingside" badge next to "a queen up" is noise at best. Above the
+    band the only badge is the decisive verdict; the equal-position chips are
+    suppressed. (The full conversion/resistance read is separate work.)
 
     Every 0-1 on this sheet was false precision on screen. A control share
     is complementary by construction, so at balance both sides read ~0.50
@@ -1044,6 +1088,9 @@ def _badges_block(out: dict) -> list[str]:
 
     A badge appears only when there IS a verdict — a near-tie prints
     nothing rather than a meaningless bar."""
+    assessment = out.get("assessment") or {}
+    if _is_decisive(assessment):
+        return [_decisive_badge(assessment)]
     m = out.get("metrics") or {}
     badges: list[str] = []
     who = (out.get("activity") or {}).get("leader")
