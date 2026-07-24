@@ -273,23 +273,27 @@ def test_winning_shows_king_bars():
     assert all(0.0 <= b["value"] <= 1.0 and "mid" not in b for b in kb)
 
 
-def test_activity_bar_withheld_under_queen_imbalance():
-    """Activity is queen-skewed across a material imbalance (Bobotsov-Tal move
-    18: mobility read White '+31' while Black dominated). When not comparable
-    (unequal queens), the activity bar is WITHHELD; when comparable it fires
-    off the material-neutral per-side scores, NOT diff_cp."""
+def test_activity_bar_uses_per_side_scores_not_diff_cp():
+    """The activity bar is driven by the MATERIAL-NEUTRAL per-side scores, not
+    the queen-skewed diff_cp sum — so it stays honest across a material
+    imbalance in BOTH directions:
+      * near-even scores -> near-even bar, even when diff_cp is large
+        (Bobotsov-Tal move 18: mobility read +31 White, but scores ~0.65/0.63);
+      * a big score gap SHOWS a sacrifice's positional comp
+        (Harikrishna 10.Kxf2: down a queen, White 0.62 vs Black 0.30)."""
     base = {
         "assessment": {"total_cp": 20,
                        "material_stability": {"leader": None, "standing": None, "adjusted_cp": 0},
                        "king_risk": {}},
         "metrics": {"space": {}},
     }
-    # NOT comparable -> no Activity bar (even though the raw diff_cp is large)
-    out = {**base, "activity": {"diff_cp": 300, "comparable": False,
-                                "white": {"score": 0.9}, "black": {"score": 0.4}}}
-    assert "Activity" not in {b["label"] for b in F._bars_block(out)}
-    # comparable -> bar from the per-side scores, not diff_cp
-    out = {**base, "activity": {"diff_cp": 300, "comparable": True,
-                                "white": {"score": 0.55}, "black": {"score": 0.60}}}
+    # large diff_cp but near-even scores -> bar stays near 0.5 (not skewed)
+    out = {**base, "activity": {"diff_cp": 300,
+                                "white": {"score": 0.65}, "black": {"score": 0.63}}}
     bar = next(b for b in F._bars_block(out) if b["label"] == "Activity")
-    assert bar["value"] < 0.5     # Black edge from the scores, despite +300 diff_cp
+    assert abs(bar["value"] - 0.5) < 0.1
+    # a real activity edge (the compensation) SHOWS, even down material
+    out = {**base, "activity": {"diff_cp": -300,   # down material -> negative sum
+                                "white": {"score": 0.62}, "black": {"score": 0.30}}}
+    bar = next(b for b in F._bars_block(out) if b["label"] == "Activity")
+    assert bar["value"] > 0.6      # White clearly more active despite the sum

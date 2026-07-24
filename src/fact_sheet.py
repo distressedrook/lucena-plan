@@ -952,10 +952,7 @@ def _activity_block(act: dict) -> dict:
     f = act.get("features", {})
     out = {"diff_cp": act["cp"], "standing": act["standing"],
            # the structured verdict the UI badges (never the 0-1 number)
-           "leader": f.get("leader"),
-           # False under a queen-for-pieces imbalance, where cross-side
-           # mobility comparison is unreliable (the bar is then withheld).
-           "comparable": f.get("comparable", True)}
+           "leader": f.get("leader")}
     for color in ("white", "black"):
         pieces = [{"piece": e["piece"], "square": e["square"],
                    "score": e["norm"], "cp": e["score"],
@@ -1167,14 +1164,15 @@ def _bars_block(out: dict) -> list[dict]:
                      "mid": 0.5})
     if not _is_decisive(a):
         # Activity bar off the MATERIAL-NEUTRAL per-side scores (mean per-piece
-        # 0-1 mobility), consistent with the leader verdict — NOT the raw
-        # diff_cp sum, which a queen's mobility skews (Bobotsov-Tal move 18 read
-        # +31 White while Black dominated). Withheld under a queen imbalance,
-        # where the cross-side comparison isn't reliable at all.
+        # 0-1 mobility) — NOT the raw diff_cp sum, which a queen's mobility
+        # skews (Bobotsov-Tal move 18 read +31 White on square-count alone).
+        # The per-side scores self-correct: near-even there (0.65 vs 0.63), yet
+        # they SHOW a sacrifice's positional comp (Harikrishna 10.Kxf2: White
+        # 0.62 vs Black 0.30, down a queen but far more active).
         act = out.get("activity") or {}
         aw = (act.get("white") or {}).get("score")
         ab = (act.get("black") or {}).get("score")
-        if act.get("comparable", True) and aw is not None and ab is not None:
+        if aw is not None and ab is not None:
             bars.append({"label": "Activity",
                          "value": c01(0.5 + (aw - ab) * 1.5), "mid": 0.5})
         sp = (out.get("metrics") or {}).get("space") or {}
