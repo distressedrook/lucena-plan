@@ -107,3 +107,17 @@ def test_decisive_suppresses_positional_badges_end_to_end():
     only = sheet["badges"][0].lower()
     for noise in ("space", "active", "controls", "squares are weak"):
         assert noise not in only
+
+
+def test_region_control_never_badges():
+    """region_control is too noisy to be a verdict (owner 2026-07-24: 'Black
+    controls the kingside' after 4.O-O is misleading) — it produces NO badge
+    even with region leaders set in a non-decisive position."""
+    out = {
+        "assessment": _assess(20),                       # non-decisive
+        "metrics": {"regions": {"center": {"leader": "Black"},
+                                "kingside": {"leader": "White"},
+                                "queenside": {"leader": "Black"}}},
+    }
+    badges = F._badges_block(out)
+    assert not any("controls" in b for b in badges), badges

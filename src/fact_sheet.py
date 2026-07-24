@@ -1096,12 +1096,14 @@ def _badges_block(out: dict) -> list[str]:
     who = (out.get("activity") or {}).get("leader")
     if who:
         badges.append(f"{who} more active")
-    regions = m.get("regions") or {}
-    for r, label in (("center", "the centre"), ("kingside", "the kingside"),
-                     ("queenside", "the queenside")):
-        lead = (regions.get(r) or {}).get("leader")
-        if lead:
-            badges.append(f"{lead} controls {label}")
+    # NO region-control badge (owner 2026-07-24: "Black controls the kingside"
+    # after 4.O-O is misleading). region_control is a raw attacker-count share,
+    # and in normal openings incidental piece geometry produces large lopsided
+    # shares that DON'T reflect real control — measured: a quiet Italian reads
+    # kingside 0.62, the Ruy reads centre 0.85 for Black, both FALSE, and both
+    # exceed a genuine White kingside storm (0.74). No threshold separates
+    # signal from noise, so the verdict is dropped (regions stays in the JSON
+    # as data). A real wing grip is better told via space, not attacker count.
     space = m.get("space") or {}
     for r, label in (("center", "centre"), ("kingside", "kingside"),
                      ("queenside", "queenside")):
