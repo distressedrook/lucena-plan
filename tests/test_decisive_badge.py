@@ -205,12 +205,38 @@ def test_winning_advice():
                     "material lead is worthless if the king gets mated."]
 
 
+def test_defender_advice():
+    """The loser's mirror (owner: 'what about defender's tips?'): keep-pieces-on
+    only when down material, always make-it-messy + guard-your-king, to the
+    loser by name."""
+    # White up material -> Black is the defender, down material
+    tips = F._defender_advice({"total_cp": 520, "material_stability":
+                               {"leader": "White", "standing": "White is up a rook",
+                                "adjusted_cp": 500}})
+    assert tips[0].startswith("Black should keep pieces on")   # avoid trades
+    assert any("swindle" in t or "counterplay" in t for t in tips)
+    assert tips[-1].startswith("Black should still guard their own king")
+    # Black up material -> White is the defender (mirror)
+    tips = F._defender_advice({"total_cp": -520, "material_stability":
+                               {"leader": "Black", "standing": "Black is up a rook",
+                                "adjusted_cp": -500}})
+    assert tips[0].startswith("White should keep pieces on")
+    # winning by attack (defender not down material) -> no keep-pieces-on tip
+    tips = F._defender_advice({"total_cp": 400, "material_stability":
+                               {"leader": None, "standing": "material is even",
+                                "adjusted_cp": 0}})
+    assert not any("keep pieces on" in t for t in tips)
+    assert any("messy" in t for t in tips)
+
+
 def test_winning_field_only_when_decisive():
-    """out['winning'] = {reason, advice} when decisive; None otherwise."""
+    """out['winning'] = {reason, advice, defense} when decisive; None else."""
     dec = F._sheet_json("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1",
                         [{"cp": 520, "pv": [], "ucis": [], "san": []}], None, verify=False)
-    assert dec["winning"] and "winning" in dec["winning"]["reason"]
-    assert isinstance(dec["winning"]["advice"], list) and dec["winning"]["advice"]
+    w = dec["winning"]
+    assert w and "winning" in w["reason"]
+    assert isinstance(w["advice"], list) and w["advice"]
+    assert isinstance(w["defense"], list) and w["defense"]
     eq = F._sheet_json("r1bqkbnr/ppp2ppp/2np4/4p3/2B1P3/5N2/PPPP1PPP/RNBQ1RK1 b kq - 1 4",
                        None, None, verify=False)
     assert eq["winning"] is None

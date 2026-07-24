@@ -1117,6 +1117,25 @@ def _winning_advice(a: dict) -> list[str]:
     return tips
 
 
+def _defender_advice(a: dict) -> list[str]:
+    """Hardcoded advice for the LOSING side (owner: 'what about defender's
+    tips?'). The mirror of conversion: keep pieces on when down material, make
+    it messy, and mind your own king. Addressed to the loser by name."""
+    leader = _winning_leader(a)
+    loser = "Black" if leader == "White" else "White"
+    ms = a.get("material_stability") or {}
+    down = (ms.get("leader") == leader and "up" in (ms.get("standing") or ""))
+    tips: list[str] = []
+    if down:
+        tips.append(f"{loser} should keep pieces on and avoid trades — every "
+                    "swap helps the side that's ahead.")
+    tips.append(f"{loser} must make it messy: seek complications, counterplay "
+                "and traps — a practical swindle is the best chance.")
+    tips.append(f"{loser} should still guard their own king — down material, a "
+                "second weakness loses on the spot.")
+    return tips
+
+
 def _bars_block(out: dict) -> list[dict]:
     """Labeled 0-1 bars (owner 2026-07-24: 'reintroduce bars instead of
     labels'). Each is driven by a COMPARABLE, head-to-head quantity so the
@@ -1318,7 +1337,9 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
     # OUTRIGHT WINNING (owner): show nothing but WHY + generic advice. When
     # set, the client renders only this — no bars, no side reports, no badges.
     _a = out["assessment"]
-    out["winning"] = ({"reason": _winning_reason(_a), "advice": _winning_advice(_a)}
+    out["winning"] = ({"reason": _winning_reason(_a),
+                       "advice": _winning_advice(_a),
+                       "defense": _defender_advice(_a)}
                       if _is_decisive(_a) else None)
     # whole-sheet FEN redaction, last (2026-07-24): scrub any board string
     # embedded by a nested block (quiescence walks etc.) to its opaque id.
