@@ -258,3 +258,13 @@ def test_engine_eval_beats_material_backstop():
     # material backstop, so a real material win isn't missed offline
     static = {**comp, "eval_source": "static", "total_cp": 10}
     assert F._is_decisive(static) is True
+
+
+def test_winning_shows_king_bars():
+    """King numbers are shown even when winning (owner: 'run the numbers even
+    when winning') — out['winning'].king_bars carries both kings' danger."""
+    dec = F._sheet_json("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1",
+                        [{"cp": 520, "pv": [], "ucis": [], "san": []}], None, verify=False)
+    kb = dec["winning"]["king_bars"]
+    assert [b["label"] for b in kb] == ["White king", "Black king"]
+    assert all(0.0 <= b["value"] <= 1.0 and "mid" not in b for b in kb)

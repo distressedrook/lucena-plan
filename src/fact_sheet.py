@@ -1174,12 +1174,21 @@ def _bars_block(out: dict) -> list[dict]:
                 for r in ("center", "kingside", "queenside"))
         if w + b > 0:
             bars.append({"label": "Space", "value": w / (w + b), "mid": 0.5})
+    bars.extend(_king_bars(a))
+    return bars
+
+
+def _king_bars(a: dict) -> list[dict]:
+    """The two king-safety bars — absolute 0=safe..1=exposed (danger_bounded,
+    now storm-aware). Shown always, INCLUDING when winning (owner: 'run the
+    numbers even when winning' — the diagnostic view)."""
     kr = a.get("king_risk") or {}
+    out: list[dict] = []
     for side, lbl in (("white", "White king"), ("black", "Black king")):
         db = (kr.get(side) or {}).get("danger_bounded")
         if db is not None:
-            bars.append({"label": lbl, "value": c01(db)})   # absolute, no mid
-    return bars
+            out.append({"label": lbl, "value": max(0.0, min(1.0, db))})
+    return out
 
 
 def _badges_block(out: dict) -> list[str]:
@@ -1351,7 +1360,10 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
     _a = out["assessment"]
     out["winning"] = ({"reason": _winning_reason(_a),
                        "advice": _winning_advice(_a),
-                       "defense": _defender_advice(_a)}
+                       "defense": _defender_advice(_a),
+                       # the king numbers even when winning (owner's diagnostic
+                       # view — and the storm term makes them worth watching)
+                       "king_bars": _king_bars(_a)}
                       if _is_decisive(_a) else None)
     # whole-sheet FEN redaction, last (2026-07-24): scrub any board string
     # embedded by a nested block (quiescence walks etc.) to its opaque id.
