@@ -121,3 +121,32 @@ def test_region_control_never_badges():
     }
     badges = F._badges_block(out)
     assert not any("controls" in b for b in badges), badges
+
+
+def test_bars_are_comparable_and_gated():
+    """Bars (owner: 'bars instead of labels'): Eval + king bars always, and
+    Activity/Space (centered, comparable) only when NOT decisive."""
+    out = {
+        "assessment": {
+            "total_cp": 80,                        # ~equal
+            "material_stability": {"leader": None, "standing": None, "adjusted_cp": 0},
+            "king_risk": {"white": {"danger_bounded": 0.0},
+                          "black": {"danger_bounded": 0.2}},
+        },
+        "activity": {"diff_cp": 40},
+        "metrics": {"space": {
+            "center": {"white": {"raw": 2}, "black": {"raw": 1}},
+            "kingside": {"white": {"raw": 0}, "black": {"raw": 0}},
+            "queenside": {"white": {"raw": 0}, "black": {"raw": 0}}}},
+    }
+    bars = {b["label"]: b for b in F._bars_block(out)}
+    assert set(bars) == {"Eval", "Activity", "Space", "White king", "Black king"}
+    assert bars["Eval"]["mid"] == 0.5 and 0.5 < bars["Eval"]["value"] < 0.6   # slight White
+    assert bars["Activity"]["mid"] == 0.5 and bars["Activity"]["value"] > 0.5  # White edge
+    assert bars["Space"]["value"] == 2 / 3 and bars["Space"]["mid"] == 0.5     # 2 vs 1 raw
+    assert "mid" not in bars["Black king"] and bars["Black king"]["value"] == 0.2  # absolute
+
+    # decisive: Activity/Space drop, Eval + kings remain
+    out["assessment"]["total_cp"] = 900
+    labels = {b["label"] for b in F._bars_block(out)}
+    assert labels == {"Eval", "White king", "Black king"}

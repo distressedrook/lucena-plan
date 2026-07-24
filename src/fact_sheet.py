@@ -1067,6 +1067,47 @@ def _decisive_badge(assessment: dict) -> str:
     return f"{leader} is winning"        # positional / attack / sacrifice
 
 
+def _bars_block(out: dict) -> list[dict]:
+    """Labeled 0-1 bars (owner 2026-07-24: 'reintroduce bars instead of
+    labels'). Each is driven by a COMPARABLE, head-to-head quantity so the
+    per-side-normalization trap that made us switch to badges can't recur:
+
+      * Eval / Activity / Space are CENTERED (mid=0.5) off White-minus-Black
+        differentials — 0.5 is dead even, fill past the midline is White's
+        edge. (Activity uses diff_cp, the raw Stockfish mobility differential,
+        NOT the per-side 0-1 norm; Space uses raw counts.)
+      * King safety uses its true ABSOLUTE scale (danger_bounded, 0=safe..
+        1=lost), one bar per king — the two ARE comparable there.
+
+    NO control bar (owner: dropped as noise). Activity/Space are shown only in
+    an equalish position (decisive -> the Eval bar tells the story)."""
+    a = out.get("assessment") or {}
+    def c01(x): return max(0.0, min(1.0, x))
+    bars: list[dict] = []
+    total = a.get("total_cp")
+    if total is not None:
+        bars.append({"label": "Eval", "value": c01(0.5 + total / 1000.0),
+                     "mid": 0.5})
+    if not _is_decisive(a):
+        diff = (out.get("activity") or {}).get("diff_cp")
+        if diff is not None:
+            bars.append({"label": "Activity", "value": c01(0.5 + diff / 400.0),
+                         "mid": 0.5})
+        sp = (out.get("metrics") or {}).get("space") or {}
+        w = sum((sp.get(r) or {}).get("white", {}).get("raw", 0)
+                for r in ("center", "kingside", "queenside"))
+        b = sum((sp.get(r) or {}).get("black", {}).get("raw", 0)
+                for r in ("center", "kingside", "queenside"))
+        if w + b > 0:
+            bars.append({"label": "Space", "value": w / (w + b), "mid": 0.5})
+    kr = a.get("king_risk") or {}
+    for side, lbl in (("white", "White king"), ("black", "Black king")):
+        db = (kr.get(side) or {}).get("danger_bounded")
+        if db is not None:
+            bars.append({"label": lbl, "value": c01(db)})   # absolute, no mid
+    return bars
+
+
 def _badges_block(out: dict) -> list[str]:
     """The sheet's VERDICTS, as short badge strings (owner 2026-07-24:
     "all the 0-1 values share this problem — show them as badges").
@@ -1093,23 +1134,12 @@ def _badges_block(out: dict) -> list[str]:
         return [_decisive_badge(assessment)]
     m = out.get("metrics") or {}
     badges: list[str] = []
-    who = (out.get("activity") or {}).get("leader")
-    if who:
-        badges.append(f"{who} more active")
-    # NO region-control badge (owner 2026-07-24: "Black controls the kingside"
-    # after 4.O-O is misleading). region_control is a raw attacker-count share,
-    # and in normal openings incidental piece geometry produces large lopsided
-    # shares that DON'T reflect real control — measured: a quiet Italian reads
-    # kingside 0.62, the Ruy reads centre 0.85 for Black, both FALSE, and both
-    # exceed a genuine White kingside storm (0.74). No threshold separates
-    # signal from noise, so the verdict is dropped (regions stays in the JSON
-    # as data). A real wing grip is better told via space, not attacker count.
-    space = m.get("space") or {}
-    for r, label in (("center", "centre"), ("kingside", "kingside"),
-                     ("queenside", "queenside")):
-        edge = (space.get(r) or {}).get("edge")
-        if edge:
-            badges.append(f"{edge} more space ({label})")
+    # Activity and Space are now BARS, not labels (owner 2026-07-24: "bars
+    # instead of labels") — see _bars_block. Region-control stays dropped
+    # (raw attacker-count share; a quiet Italian reads kingside 0.62 Black and
+    # the Ruy centre 0.85 Black, both false and both above a genuine storm at
+    # 0.74 — no threshold separates signal from noise). Only the categorical
+    # weak-colour-complex flag remains a label here.
     cc = m.get("color_complex") or {}
     for tone in ("light", "dark"):
         weak = (cc.get(tone) or {}).get("weak_for")
@@ -1234,6 +1264,7 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
     # above (owner 2026-07-23). Producers are unchanged; this is additive.
     out["sides"] = _sides_block(out)
     out["badges"] = _badges_block(out)
+    out["bars"] = _bars_block(out)
     # whole-sheet FEN redaction, last (2026-07-24): scrub any board string
     # embedded by a nested block (quiescence walks etc.) to its opaque id.
     return _redact_fens(out)
