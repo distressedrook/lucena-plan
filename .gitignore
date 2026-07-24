@@ -8,6 +8,16 @@ research/data/gm_classical.pgn
 research/experiments/**/*.pgn
 research/experiments/**/*.pgn.zst
 research/experiments/studies/residual_attribution/dataset*.jsonl
+
+# Large regenerable research banks/reports (purged from history 2026-07-24,
+# owner: "don't want to commit large files"). Regenerable from the studies
+# that emit them. The git-pinned eval set (benchmark_v1.jsonl) is KEPT on
+# purpose — it must stay reproducible in git.
+research/experiments/reports/campaign_study.jsonl
+research/experiments/reports/benchmark_sheets.html
+research/experiments/reports/bad_bishop_cases.jsonl
+research/experiments/reports/outpost_plans.jsonl
+research/experiments/reports/carlsbad_row.jsonl
 __pycache__/
 *.pyc
 nohup.out
