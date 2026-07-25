@@ -804,8 +804,12 @@ if __name__ == "__main__":
 # reproducibility only). Standing rules carried into the schema:
 #   - timing is a PLAN-level fact; no immediate_move field exists, ever
 #     (user ruling 2026-07-22: plans, not move recommendations)
-#   - consumers may only SPEAK candidates with verified=true (or the
-#     advisory tier); unverified entries are data for research/UI-pending
+#   - consumers must SPEAK the evidence tier with the candidate (owner
+#     2026-07-25): engine-confirmed / strong-human / structural, read off
+#     `verdict`, never merged. Unverified entries are no longer hidden —
+#     position_read.render labels them (dropping them cost real plans; see
+#     that module's docstring) — but a structural candidate must never be
+#     presented as though an engine line confirmed it
 # ═══════════════════════════════════════════════════════════════════════
 
 SHEET_SCHEMA = "lucena-plans/sheet@1"
@@ -824,7 +828,13 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
         if not fams:
             if "calibration pending" not in ev and "literature tier" \
                     not in verify_note and "situational" not in ev:
-                advisory.append({"idea": _humanize(head), "evidence": ev})
+                # `effect` travels with the advisory entry too (2026-07-25):
+                # it and the unconfirmed family plans share ONE tier in the
+                # read, so they have to be rankable against each other —
+                # without it every advisory idea sorted below every
+                # structural plan regardless of its corpus effect.
+                advisory.append({"idea": _humanize(head), "evidence": ev,
+                                 "effect": eff})
             continue
         entry: dict = {
             "idea": _humanize(head),
@@ -919,12 +929,17 @@ def _line_theories_block(fen: str, pvs, rolls) -> dict | None:
 
 
 def _game_phase_block(fen: str) -> dict:
-    """{'name': opening|middlegame|endgame, 'why': ...} from the core's
-    hybrid classifier; None-safe (the sheet must never die on a phase)."""
+    """{'name': opening|middlegame|endgame, 'why': ..., 'developed': {...}}
+    from the core's hybrid classifier; None-safe (the sheet must never die on
+    a phase). `developed` is PER SIDE (2026-07-25): the game is a middlegame
+    once EITHER side finishes developing, so the phase name alone no longer
+    tells you whether the side to move still owes development — this is where
+    that survives into the sheet."""
     try:
         from lucena_core.reads import game_phase
         gp = game_phase(fen)
-        return {"name": gp["phase"], "why": gp["why"]}
+        return {"name": gp["phase"], "why": gp["why"],
+                "developed": gp.get("developed")}
     except Exception:
         _log.warning("game_phase block failed", exc_info=True)
         return {"name": None, "why": "phase classifier unavailable"}
@@ -998,7 +1013,12 @@ def _metrics_block(fen: str, pvs=None, rolls=None) -> dict:
     out = {}
     for key, fn in (("regions", _pos.region_control),
                     ("space", _met.space_report),
-                    ("development", _pos.development_lag),
+                    # development_lag (GM per-ply baseline) intentionally NOT
+                    # surfaced (owner 2026-07-25: "let's not show the GM
+                    # baseline, it's useless") — it is opening-window-bound and
+                    # says nothing a student can act on. Development shows only
+                    # through geometric tells (suggest.py's COMPLETE
+                    # DEVELOPMENT) and the initiative dev-lead face.
                     ("breaks", _met.pawn_breaks),
                     ("passers", _met.passer_report),
                     ("color_complex", _met.color_complex),
@@ -1647,7 +1667,6 @@ def _sides_block(out: dict) -> dict:
                          if h.get("controller") == Side],
             "space": {r: space[r][side] for r in
                       ("center", "kingside", "queenside") if r in space},
-            "development": (m.get("development") or {}).get(side, []),
             "breaks": (m.get("breaks") or {}).get(side, []),
             "passers": (m.get("passers") or {}).get(side, []),
             "trapped": (m.get("trapped") or {}).get(side, []),

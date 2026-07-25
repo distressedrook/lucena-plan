@@ -1,12 +1,15 @@
 """The COMPLETE DEVELOPMENT plan (2026-07-25, owner: "my next concern is
 development — we don't have a plan for it yet").
 
-THE opening plan, previously absent from the menus. Fires only in the OPENING
-phase (development is a defined concept only there — the development_lag ply
-ruling) for a side with >= 2 development debts (home minors + uncastled king),
-names the actual pieces, and rides the corpus-validated development-lag
-notable flag (+8.8pp by quartile) as its calibration. The initiative read's
-development face cites the same concrete tells.
+Gated on a SIDE's OWN development debts, not the global phase (owner
+2026-07-25: "the other team may not have completed the development") — it
+fires for any side with >= 1 debt (a minor still on its home square, or an
+uncastled king with rights), even once the game is a middlegame for the
+developed opponent. Concrete, ply-independent geometry: no rook-connection
+tell ("sometimes the rook may not be connected at all"), no ply-20 cap, and
+no GM baseline ("let's not show the GM baseline, it's useless"). Names the
+actual home pieces. The initiative read's development face cites the same
+concrete tells.
 """
 
 import chess
@@ -36,19 +39,34 @@ def test_fires_in_the_opening_naming_the_home_pieces():
         assert "no engine contract" in verify    # advisory tier
 
 
-def test_does_not_fire_in_a_middlegame():
-    b = chess.Board("r1bq2k1/p4R2/2np2rb/2p4Q/PpN1P2P/3P2P1/1PP5/5RK1 b - - 0 26")
-    menus = build_menus(b)
-    assert not _develop(menus, "W") and not _develop(menus, "B")
+def test_fires_for_a_lagging_side_in_a_middlegame():
+    # White is fully developed (a middlegame for White), but Black's Bc8 is
+    # still home. The lagging side's debt must still surface — this is the
+    # case that started the redefinition (owner 2026-07-25: "the other team
+    # may not have completed the development"). Per side, no phase gate.
+    from lucena_core.reads import game_phase
+    fen = "r1bq2k1/p4R2/2np2rb/2p4Q/PpN1P2P/3P2P1/1PP5/5RK1 b - - 0 26"
+    gp = game_phase(fen)
+    assert gp["phase"] == "middlegame"
+    assert gp["developed"] == {"white": True, "black": False}
+    menus = build_menus(chess.Board(fen))
+    assert not _develop(menus, "W")              # developed -> silent
+    (eff, trig, head, ev, verify, tsq), = _develop(menus, "B")
+    assert "Bc8" in head                         # names the lagging piece
+    assert "1 development debt" in trig
 
 
-def test_needs_real_debt_not_one_stray_piece():
-    # castled, one knight home, rooks connected — a single debt: no plan.
+def test_fires_on_a_single_home_piece():
+    # Castled, everything out except Nb1 — one debt. A lone undeveloped minor
+    # is still undeveloped: no >=2 gate (owner 2026-07-25 — the c8 bishop that
+    # started this). Concrete geometry, not a corpus threshold.
     b = chess.Board()
     for m in ("e4 e5 Nf3 Nc6 Bc4 Bc5 O-O Nf6 d3 d6 Bg5 O-O".split()):
         b.push_san(m)
     menus = build_menus(b)
-    assert not _develop(menus, "W")              # only Nb1 home -> debt 1
+    (eff, trig, head, ev, verify, tsq), = _develop(menus, "W")
+    assert "Nb1" in head                         # only Nb1 home -> debt 1
+    assert "1 development debt" in trig
 
 
 def test_initiative_dev_face_cites_the_debt():

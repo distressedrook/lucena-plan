@@ -10,15 +10,35 @@ so a narrator could select from it. A presentation has to do the
 selecting itself. Concretely, this module owns the editorial decisions the
 prompt used to delegate:
 
-  - the RELIABILITY TIER IS NOW A CODE FILTER. `PlansReadPrompt` carried
-    the rule "NEVER mention an entry with verified=false or null" as an
-    instruction to a model — i.e. the one guarantee that stopped an
-    unconfirmed candidate reaching a student was a sentence in a prompt.
-    Here it is `if not p.get("verified"): continue`. It cannot be
-    ignored, drifted from, or lost to a temperature setting.
+  - the RELIABILITY TIER IS A CODE LABEL. `PlansReadPrompt` carried the
+    rule "NEVER mention an entry with verified=false or null" as an
+    instruction to a model — i.e. the one guarantee about what reached a
+    student was a sentence in a prompt. Here the tier is computed from the
+    verdict and PRINTED with the plan. It cannot be ignored, drifted from,
+    or lost to a temperature setting.
+
+    Owner ruling 2026-07-25: "surface all the plans that we detect" under
+    three tags. Hiding an unconfirmed plan was costing real ideas — the
+    minority attack confirms on only about half of the rolls of the SAME
+    Carlsbad position (the longest-horizon family against 4 engine lines),
+    so a student saw a correct plan flicker in and out. The honest fix is
+    to show it and say what backs it, not to drop it:
+
+      ENGINE_TAG     the plan appears in an eval-equal engine line here
+                     (verdict CONFIRMED-SOUND / -SOUND-LATER)
+      HUMAN_TAG      no engine line, but strong-human (Maia) rollouts from
+                     THIS position play it (verdict HUMAN-TYPICAL)
+      STRUCTURE_TAG  neither leg fired here: the plan is the corpus/theory
+                     pattern for this structure, unverified in this
+                     position. Includes the advisory tier (COMPLETE
+                     DEVELOPMENT, SIMPLIFY — calibrated ideas that have no
+                     engine contract to check at all).
+
+    The tags are ordered strongest-evidence-first and never merged: a
+    structural plan must never read like an engine-confirmed one.
   - selection and ordering, rather than dumping every fact and hoping the
-    narrator picks well: capped weakness lists, verified plans only,
-    material spoken only when it is actually doing something.
+    narrator picks well: capped weakness lists, plans ranked by evidence
+    tier, material spoken only when it is actually doing something.
   - no model-facing artifacts: no opaque POSITION-<hash> id (that existed
     so a narrator could not cheat off the FEN), no "textbook theory may be
     drawn on" hint (an instruction to a narrator that no longer exists).
@@ -35,17 +55,42 @@ Output is markdown-lite text for the client.
 from __future__ import annotations
 
 MAX_WEAKNESSES = 3
-MAX_PLANS = 2
+
+# The three evidence tags, strongest first. Wording is deliberate: the human
+# leg is Maia rollouts FROM THIS POSITION (strong-human policy), not a claim
+# about GM games — the GM corpus is what backs the STRUCTURE tag, so calling
+# the Maia tier "GMs" would swap the two sources.
+ENGINE_TAG = "Engine confirmed"
+HUMAN_TAG = "Strong humans play this"
+STRUCTURE_TAG = "The structure suggests this"
+
+_ENGINE_VERDICTS = ("CONFIRMED-SOUND", "CONFIRMED-SOUND-LATER")
 
 
 def _humanize_structure(name: str) -> str:
     return name.replace("_", " ")
 
 
+def _tier(p: dict) -> int:
+    """0 engine / 1 human / 2 structure — from the VERDICT, not `verified`
+    (which pools the engine and human legs into one boolean)."""
+    verdict = p.get("verdict")
+    if verdict in _ENGINE_VERDICTS:
+        return 0
+    if verdict == "HUMAN-TYPICAL":
+        return 1
+    return 2
+
+
+_TAGS = (ENGINE_TAG, HUMAN_TAG, STRUCTURE_TAG)
+
+
 def _plan_sentence(p: dict) -> str:
-    """One verified plan, as a sentence. Timing rides inside the sentence
-    (never as a bare label), and verdict codes/effect numbers/maia_frac
-    never surface — they are internal jargon."""
+    """One plan, as a sentence. Timing rides inside the sentence (never as a
+    bare label), and verdict codes/effect numbers/maia_frac never surface —
+    they are internal jargon. Timing is an ENGINE-leg fact (it is measured
+    from where the idea lands in the line), so it is absent on the human and
+    structure tiers and the sentence simply ends."""
     idea = (p.get("idea") or "").rstrip(".")
     timing = p.get("timing")
     if timing == "immediate":
@@ -57,15 +102,26 @@ def _plan_sentence(p: dict) -> str:
     return f"{idea}."
 
 
-def _side_plans(plans: list | None) -> list[str]:
-    """VERIFIED plans only — the reliability gate, in code."""
-    out = []
+def _side_plans(plans: list | None,
+                advisory: list | None = None) -> list[tuple[str, str]]:
+    """EVERY detected plan as (tag, sentence), strongest evidence first
+    (owner 2026-07-25). Order inside a tier is the artifact's own — corpus
+    effect, descending — so the ranking within equal evidence is unchanged.
+    Nothing is dropped and nothing is silently promoted: the tag is the
+    whole reliability contract."""
+    tiered: list[list[dict]] = [[], [], []]
     for p in plans or []:
-        if not p.get("verified"):
-            continue
-        out.append(_plan_sentence(p))
-        if len(out) >= MAX_PLANS:
-            break
+        tiered[_tier(p)].append(p)
+    # Advisory candidates carry no family, so there is no engine contract to
+    # check for them — they are structural by construction, and they rank
+    # against the unconfirmed family plans by the same corpus effect (they
+    # carry `effect` for exactly this).
+    tiered[2].extend(advisory or [])
+    out = []
+    for t in (0, 1, 2):
+        # stable: equal effect keeps the artifact's own order
+        for p in sorted(tiered[t], key=lambda e: -(e.get("effect") or 0.0)):
+            out.append((_TAGS[t], _plan_sentence(p)))
     return out
 
 
@@ -110,11 +166,12 @@ def render(post: dict) -> str | None:
 
     weak = post.get("weaknesses") or {}
     plans = post.get("plans") or {}
+    advisory = post.get("advisory") or {}
     body: list[str] = []
     for side in ("white", "black"):
         side_name = side.capitalize()
         ws = (weak.get(side) or [])[:MAX_WEAKNESSES]
-        ps = _side_plans(plans.get(side))
+        ps = _side_plans(plans.get(side), advisory.get(side))
         if not ws and not ps:
             continue
         if body:
@@ -122,9 +179,9 @@ def render(post: dict) -> str | None:
         body.append(f"**{side_name}**")
         for w in ws:
             body.append(f"- {w}")
-        for p in ps:
-            body.append(f"- Plan: {p}")
+        for tag, p in ps:
+            body.append(f"- _{tag}_ — {p}")
 
     if not body:
-        return None                 # nothing verified and nothing to flag
+        return None                 # nothing detected and nothing to flag
     return "\n".join(lines) + "\n\n" + "\n".join(body)

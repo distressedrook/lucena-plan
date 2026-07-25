@@ -92,15 +92,16 @@ def features(fen: str) -> list[dict]:
             kz += [chess.square_name(s) for s in king_zone(k, side)]
     add("kings", "King safety", kz)
 
-    # 7. development — home minors, opening only
-    from lucena_core.reads import game_phase
-    if game_phase(fen)["phase"] == "opening":
-        home: list[str] = []
-        for side, back in ((chess.WHITE, 0), (chess.BLACK, 7)):
-            home += [chess.square_name(s)
-                     for pt in (chess.KNIGHT, chess.BISHOP)
-                     for s in b.pieces(pt, side)
-                     if chess.square_rank(s) == back]
-        add("development", "Development", home)
+    # 7. development — minors still on their OWN original squares, WHENEVER
+    # they exist (owner 2026-07-25: development is ply-independent geometry,
+    # not phase-gated — a lagging side's home piece must light up even once
+    # it's a middlegame for the developed opponent). One definition for the
+    # whole stack: lucena_core.reads.development_debts, which is keyed by
+    # piece type (a bishop on b1 is developed, not "home"). add() no-ops on
+    # an empty list.
+    from lucena_core.reads import development_debts
+    home = [m[1:] for side in (chess.WHITE, chess.BLACK)
+            for m in development_debts(b, side)["minors"]]
+    add("development", "Development", home)
 
     return out

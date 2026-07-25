@@ -771,13 +771,28 @@ are in the repo; scores below are the relevant side's points fraction.
    "NEVER mention an entry with verified=false or null" — was an
    INSTRUCTION INSIDE A PROMPT. The only thing keeping an unconfirmed
    plan candidate away from a student was a sentence a model could drift
-   from at temperature 1.0. It is now `if not p.get("verified"):
-   continue` in code.
+   from at temperature 1.0. It is now computed in code.
+   **THE TIER IS A TAG, NOT A FILTER (owner 2026-07-25: "surface all the
+   plans that we detect" under three tags).** Hiding unconfirmed plans was
+   costing real ideas: measured on the canonical Carlsbad, MINORITY ATTACK
+   confirms on 4/8 fresh rolls of the SAME position (identical 4/8 at the
+   1M/250k research budget — it is not the live node cut; it is the
+   longest-horizon family, 30 plies, against MultiPV=4), so a correct plan
+   flickered in and out between reads. `position_read` now prints every
+   detected candidate with its evidence read off the VERDICT, strongest
+   first and never merged: **Engine confirmed** (CONFIRMED-SOUND/-LATER —
+   in an eval-equal line here), **Strong humans play this** (HUMAN-TYPICAL
+   — the Maia leg only), **The structure suggests this** (neither leg
+   fired: the corpus/theory pattern, plus the whole advisory tier, which
+   has no engine contract to check by construction). The human tag stays
+   OFF the word "GM" deliberately — that leg is Maia rollouts from this
+   position, while the GM corpus is what backs the structure tag; naming
+   it "GMs" would swap the two sources.
    NOT reused: `fact_sheet.build_fact_sheet` (owner: "build fact sheet
    existed FOR the LLM") — it is a grounding artifact, exhaustive and
    hedged so a narrator could select from it; a presentation must do the
-   selecting itself. `position_read.py` is purpose-built: verified plans
-   only (cap 2/side), weaknesses capped at 3/side, material spoken only
+   selecting itself. `position_read.py` is purpose-built: every plan,
+   tagged by tier (no cap), weaknesses capped at 3/side, material spoken only
    when it is doing something (and via the SETTLED standing, finding 27),
    structure NAMED only.
    DELIBERATELY DROPPED with the LLM: the THEORY paragraph — the one
@@ -866,8 +881,30 @@ are in the repo; scores below are the relevant side's points fraction.
        the ways the theory predicts (P008 static comp -> material side
        converts; P121 forced attack -> initiative side converts).
      - **COMPLETE DEVELOPMENT plan** (suggest.py): the missing opening
-       plan — opening-gated, >=2 debts, names the home pieces/castling,
-       cites the corpus-validated development-lag notable flag (+8.8pp).
+       plan — names the home pieces/castling. **Redefined 2026-07-25**
+       (owner: "the ply 20 isn't working ... be concrete about what opening
+       means"): gated on the SIDE's OWN debts, not the global phase, and it
+       fires from ONE debt. A debt is concrete geometry — a minor still on
+       its ORIGINAL square, or a king on e1/e8 still holding rights. Gone:
+       the ply-20 window, the >=2 bar, the rooks-unconnected tell ("sometimes
+       the rook may not be connected at all"), and the GM per-ply baseline
+       (`development_lag`, dropped from the sheet too — "let's not show the
+       GM baseline, it's useless"). Consequence: a lagging side's debt
+       surfaces even when the game is a middlegame for its developed
+       opponent ("the other team may not have completed the development").
+     - **Phase = development, stated concretely** (`lucena_core.reads.
+       game_phase`, same day): opening iff BOTH sides still owe development;
+       middlegame the moment EITHER finishes; endgame still material-gated
+       and first. The read now returns `developed: {white, black}` per side
+       (carried into the sheet's `game_phase` block), because the phase name
+       alone no longer answers "does this side still owe development?".
+       Checked against the initiative dev-face falsification set before
+       shipping: of the 53 Maia-flipped positions, the phase gate admits 8
+       under the new rule vs 9 under the old (P017 in, P107/P142 out), so
+       initiative.py's opening gate keeps its calibration untouched. Over
+       the 3,471-position labeled cache 94% of phases are unchanged (opening
+       317 -> 310); the movement is positions past move 20 where both sides
+       genuinely still owe development, which is the point.
      - **Coach voice ruling (owner)**: user-facing text says the TERM
        ("bad bishop on c1. Try trading it off with Bxf4."), never defines
        it, never mentions engines/SEE/cp. Swept across fact_sheet, suggest,
@@ -905,7 +942,7 @@ are in the repo; scores below are the relevant side's points fraction.
 | `plan_diff.py` | **The plan grammar / retrospective namer** — `snapshot`/`delta_stream`/`parse_line`/`labels`: the hand-written, hand-mirrored event detectors for every plan family (castle, harvest, outpost, pair_break, trade_into_endgame, minority_*, ...). verify.py treats its emissions as ground truth. Pure geometry over move sequences. |
 | `tension.py` | Central-tension read: `central_tension` (cocked central levers), `classify_line` (how a banked line FIRST discharges the tension — keep/lock/resolve), `analyze`/`render` for the sheet's CENTRAL TENSION section. |
 | `dynamism.py` | Sharpness buckets (finding 19): DEAD/QUIET/DYNAMIC/SHARP/RAZOR from narrowness + forcingness + compensation (gapped against SEE-adjusted material). Consumed by `fact_sheet`'s `character` block. |
-| `position_read.py` | Deterministic renderer for the post-verify JSON sheet (`render(post)`) — the code-filter reliability gate (owner ruling 2026-07-24: no LLM in the read path). Consumed by the backend's `render_position_read`. |
+| `position_read.py` | Deterministic renderer for the post-verify JSON sheet (`render(post)`) — no LLM in the read path (owner 2026-07-24), and since 2026-07-25 every detected plan is surfaced with its evidence TAG (engine-confirmed / strong-human / structural) instead of unconfirmed ones being dropped. Consumed by the backend's `render_position_read`. |
 | `king_danger_calibration.py` | `p_catastrophe_profile(danger)` — calibrated P(catastrophe) in the three regimes (findings 21-25); consumed by `fact_sheet`'s king_risk block. |
 | `personal_sharpness.py` | Per-player sharpness read (research-facing; not yet consumed by the shipped sheet). |
 | `research/experiments/studies/campaign_study.py` | Full-corpus campaign calibration (finding 13); the monotone absent<fragment<partial<full gradient + the material-at-start symptom control. Witnesses -> `campaign_study.jsonl`. |

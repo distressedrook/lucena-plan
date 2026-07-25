@@ -21,7 +21,9 @@ def test_middlegame_stage_shape():
     st = features(fen)
     by = {f["stage"]: f for f in st}
     assert by["passers"]["squares"]         # a4/b4-side passers exist
-    assert "development" not in by          # not the opening
+    # development is ply-independent geometry now (owner 2026-07-25): Black's
+    # Bc8 is still home even in this middlegame, so the stage highlights it.
+    assert "c8" in by["development"]["squares"]
     for f in st:                            # every stage carries real squares
         assert f["squares"] and f["label"]
         assert all(len(s) == 2 for s in f["squares"])

@@ -388,62 +388,33 @@ def build_menus(b: chess.Board) -> dict:
                  VERIFY["keep_king_uncastled"])
 
         # COMPLETE DEVELOPMENT (2026-07-25, owner: "my next concern is
-        # development — we don't have a plan for it yet"). THE opening plan,
-        # previously missing from the menus entirely. Fires only in the
-        # OPENING phase (development is a defined concept only there — same
-        # ruling as development_lag's ply window) and only for a side with
-        # real development debt. Advisory tier, but it clears the calibrated
-        # bar: the trigger facts are deterministic geometry, and the
-        # development_lag notable flag is corpus-validated (+8.8pp by
-        # quartile) — the same species of number as SIMPLIFY's +9pp curve.
-        from lucena_core.reads import game_phase as _gp
-        if _gp(b.fen())["phase"] == "opening":
-            back = 0 if side == chess.WHITE else 7
-            home = sorted(
-                f"{b.piece_at(sq).symbol().upper()}{chess.square_name(sq)}"
-                for pt in (chess.KNIGHT, chess.BISHOP)
-                for sq in b.pieces(pt, side)
-                if chess.square_rank(sq) == back)
-            k = b.king(side)
-            uncastled = (k is not None and chess.square_rank(k) == back
-                         and chess.square_file(k) == 4
-                         and b.has_castling_rights(side))
-            rooks = list(b.pieces(chess.ROOK, side))
-            unconnected = (len(rooks) >= 2 and not any(
-                r2 in b.attacks(r1) for r1 in rooks for r2 in rooks
-                if r1 != r2))
-            debt = len(home) + (1 if uncastled else 0)
-            if debt >= 2:
-                cl = []
-                if home:
-                    cl.append("bring the " + ", ".join(home)
-                              + " into play toward natural squares")
-                if uncastled:
-                    cl.append("castle without delay")
-                if unconnected and len(home) <= 1:
-                    cl.append("connect the rooks")
-                cl.append("avoid moving the same piece twice or grabbing "
-                          "material before development is complete")
-                # name GM-baseline laggards when the ply window has them
-                try:
-                    from lucena_core.positional import development_lag as _dl
-                    lags = [e for e in _dl(b.fen())[
-                        "white" if side == chess.WHITE else "black"]
-                        if e["notable"]]
-                    if lags:
-                        cl.append("notably behind GM pace: " + ", ".join(
-                            f"{e['piece']}@{e['square']}" for e in lags[:3]))
-                except Exception:
-                    pass
-                cand(4.5 if debt >= 3 else 4.0,
-                     f"{name_side(side)} has {debt} development debts "
-                     f"in the opening",
-                     "COMPLETE DEVELOPMENT: " + "; ".join(cl),
-                     "opening-phase tells are factual geometry; the "
-                     "development-lag notable flag is corpus-validated "
-                     "(+8.8pp by quartile)",
-                     "advisory — factual trigger, calibrated lag flag; "
-                     "no engine contract")
+        # development"). Gated on THIS SIDE's own development debts, NOT the
+        # global phase (owner: "the other team may not have completed the
+        # development") — so a side with a home piece surfaces even once the
+        # game is a middlegame for the developed opponent. Concrete geometry,
+        # ply-independent, no rook-connection tell and no GM baseline (owner
+        # 2026-07-25: rooks may never connect; "let's not show the GM
+        # baseline, it's useless"). Advisory tier — factual trigger.
+        from lucena_core.reads import development_debts as _dd
+        dd = _dd(b, side)
+        home, uncastled = dd["minors"], dd["uncastled"]
+        debt = len(home) + (1 if uncastled else 0)
+        if debt >= 1:
+            cl = []
+            if home:
+                cl.append("bring the " + ", ".join(home)
+                          + " into play toward natural squares")
+            if uncastled:
+                cl.append("castle without delay")
+            cl.append("avoid moving the same piece twice or grabbing "
+                      "material before development is complete")
+            cand(4.5 if debt >= 3 else 4.0,
+                 f"{name_side(side)} has {debt} development "
+                 f"debt{'s' if debt != 1 else ''}",
+                 "COMPLETE DEVELOPMENT: " + "; ".join(cl),
+                 "factual geometry: minors still on home squares / "
+                 "uncastled king with rights",
+                 "advisory — factual geometric trigger; no engine contract")
 
         wp = _wp(b, enemy)
         if wp:

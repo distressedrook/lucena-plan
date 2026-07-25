@@ -363,15 +363,14 @@ def _fuse_development(fen: str, b: chess.Board, out: dict) -> None:
         out["basis"] = out.get("basis", "") + "+development"
         out["deferred"] = None
         lagger = chess.BLACK if dev_leader == "White" else chess.WHITE
-        back = 7 if lagger == chess.BLACK else 0
-        tells = [f"{b.piece_at(sq).symbol().upper()}{chess.square_name(sq)} still home"
-                 for pt in (chess.KNIGHT, chess.BISHOP)
-                 for sq in sorted(b.pieces(pt, lagger))
-                 if chess.square_rank(sq) == back]
-        k = b.king(lagger)
-        if (k is not None and chess.square_rank(k) == back
-                and chess.square_file(k) == 4
-                and b.has_castling_rights(lagger)):
+        # ONE definition of a development debt for the whole stack
+        # (lucena_core.reads.development_debts) — the same geometry the phase
+        # classifier and the COMPLETE DEVELOPMENT plan read, so the tells
+        # can't drift from the gate that let them speak.
+        from lucena_core.reads import development_debts as _dd
+        dd = _dd(b, lagger)
+        tells = [f"{m} still home" for m in dd["minors"]]
+        if dd["uncastled"]:
             tells.append("king uncastled")
         out[dev_leader.lower()]["why"]["development"] = tells
         return
