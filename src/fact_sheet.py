@@ -1092,8 +1092,16 @@ def _king_risk_block(fen: str) -> dict | None:
 # Above this eval magnitude the position is DECISIVE, not a probing
 # middlegame: positional verdicts ("more space kingside") are noise or
 # actively misleading next to "a queen up". Matches the backend's
-# PLANS_CP_BAND (±1.5 pawns) that gates the equal-position plans read.
-_DECISIVE_CP = 150
+# PLANS_CP_BAND that gates the equal-position plans read.
+#
+# 250, not 150 (owner 2026-07-26: "make the positional information show up when
+# eval < |2.5|"). This is the ONE number behind two behaviours — the Activity /
+# Space bars and the positional badges are suppressed above it, and past it the
+# sheet emits the `winning` block, which the client renders INSTEAD of the whole
+# positional read. At 1.5 a position a pawn-and-a-half down showed nothing but
+# "White is winning", which is precisely where a student still has a game to
+# play and plans worth reading.
+_DECISIVE_CP = 250
 
 # --- compensation read (owner 2026-07-24) ---
 _COMP_MAT_MIN = 150      # settled (SEE-adjusted) material deficit before we
@@ -1108,19 +1116,42 @@ _COMP_SPACE_MIN = 2      # raw space lead that counts as a bind (metrics.space).
 
 
 def _is_decisive(assessment: dict) -> bool:
-    """|eval| past the band. When we HAVE the engine eval (pvs supplied, which
-    the backend always does), trust it OUTRIGHT — it already prices sacrificial
-    compensation, so the material count must NOT override it (else a sound sac
+    """|eval| past the band AND the material explains it (owner 2026-07-26:
+    "make the positional information show up when eval < |2.5| AND the side
+    winning is up in material").
+
+    TWO conditions, because a big eval on its own is not a reason to stop
+    reading a position — it is often the reason to start. A side +3 with LEVEL
+    material is winning by attack, sacrifice or bind, and the positional read
+    is the only thing on the page that says how; blanking it for "White is
+    winning" answers a question nobody asked. Once the leader is also up
+    material, the read has said its piece and conversion is the story.
+
+    When we HAVE the engine eval (pvs supplied, which the backend always does),
+    trust it OUTRIGHT for the magnitude — it already prices sacrificial
+    compensation, so the material count must not override it (else a sound sac
     like Bobotsov-Tal 11...Nxd5, eval ~0 but 'White up a queen for two minors',
     wrongly reads as 'White is winning'). The settled-material backstop applies
     ONLY to the static, no-engine fallback, where total_cp is positional-only
     and would miss a clean material win."""
     total = assessment.get("total_cp")
+    ms = assessment.get("material_stability") or {}
     if assessment.get("eval_source") == "engine":
-        return total is not None and abs(total) > _DECISIVE_CP
-    adj = ((assessment.get("material_stability") or {}).get("adjusted_cp"))
-    return (total is not None and abs(total) > _DECISIVE_CP) or \
-           (adj is not None and abs(adj) > _DECISIVE_CP)
+        big = total is not None and abs(total) > _DECISIVE_CP
+    else:
+        adj = ms.get("adjusted_cp")
+        big = (total is not None and abs(total) > _DECISIVE_CP) or \
+              (adj is not None and abs(adj) > _DECISIVE_CP)
+    if not big:
+        return False
+    # ...and the side that is winning must be the side holding the material.
+    # `_winning_leader` is the same precedence the badge and the winning block
+    # use (engine eval when we have one, settled material otherwise), so the
+    # three can never disagree about who this is. `material_stability.leader`
+    # is the SETTLED count — a pawn or more, SEE-quiescent, so a piece hanging
+    # in the line is not owned (finding 27) — and it is None when material is
+    # level, which is exactly the attack/sacrifice case this keeps open.
+    return ms.get("leader") is not None and ms["leader"] == _winning_leader(assessment)
 
 
 def _decisive_badge(assessment: dict) -> str:
@@ -1129,29 +1160,34 @@ def _decisive_badge(assessment: dict) -> str:
     it. If the material leader disagrees with the winning side (a sacrifice —
     winning while nominally down), parroting the material count would mislead
     exactly as finding 26/27's decoy did, so we say only 'X is winning'."""
-    total = assessment.get("total_cp") or 0
     ms = assessment.get("material_stability") or {}
-    adj = ms.get("adjusted_cp") or 0
-    # Prefer the real eval (present when pvs were supplied); fall back to the
-    # settled-material leader when only the positional fallback cp exists.
-    if abs(total) > _DECISIVE_CP:
-        leader = "White" if total > 0 else "Black"
-    else:
-        leader = ms.get("leader") or ("White" if adj > 0 else "Black")
+    # ONE precedence for who is winning, shared with the winning block and the
+    # decisive gate — see _winning_leader.
+    leader = _winning_leader(assessment)
     if ms.get("leader") == leader and ms.get("standing"):
         return ms["standing"]           # e.g. "White is up a rook"
     return f"{leader} is winning"        # positional / attack / sacrifice
 
 
 def _winning_leader(a: dict) -> str:
-    """Which side is winning — the real eval when pvs are present, else the
-    settled-material leader (same precedence as _decisive_badge)."""
+    """Which side is winning: the ENGINE eval when we have one, the settled
+    material otherwise — and the engine test now checks `eval_source`, which is
+    what the docstring always claimed and the code did not (Codex 2026-07-26).
+
+    Without that check the STATIC fallback's total_cp — a positional term sum,
+    not an eval — could outvote a clean material win and name the wrong side:
+    static +300 for White with Black a queen up read as "White". Harmless while
+    this only picked a label, but the decisive gate now compares this against
+    the material leader, so a wrong answer here would keep the positional read
+    up on an offline position that is plainly lost."""
     total = a.get("total_cp") or 0
     ms = a.get("material_stability") or {}
-    if abs(total) > _DECISIVE_CP:
+    if a.get("eval_source") == "engine" and abs(total) > _DECISIVE_CP:
         return "White" if total > 0 else "Black"
-    return ms.get("leader") or ("White" if (ms.get("adjusted_cp") or 0) > 0
-                                else "Black")
+    if ms.get("leader"):
+        return ms["leader"]
+    adj = ms.get("adjusted_cp") or 0
+    return "White" if (adj or total) > 0 else "Black"
 
 
 def _winning_reason(a: dict) -> str:
