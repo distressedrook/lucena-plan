@@ -687,8 +687,14 @@ def build_menus(b: chess.Board) -> dict:
         # the pawn's color; only pushes free the bishop. Broader than the
         # entombment case above (fires on the mobility-choked bishop the
         # ram-based entombed_bishops misses).
-        from weaknesses import bad_bishop as _bb, sq_color as _sqc
-        for bsq in _bb(b, side):
+        # INSIDE the chain only (2026-07-25, owner: "why is the bishop on h4
+        # bad?"). An outside bishop measures 0.517 vs the inside bishop's
+        # 0.470 — no problem to cure, so neither FREE nor EXCHANGE should be
+        # proposed for it. QGD 7.Bh4 was proposing pawn pushes to relieve a
+        # developed, pressing bishop.
+        from weaknesses import bad_bishop_problem as _bbp, bad_bishop as _bb, \
+            sq_color as _sqc
+        for bsq in _bbp(b, side):
             bcolor = _sqc(bsq)
             frees = [chess.square_name(pp) + "-"
                      + chess.square_name(pp + (8 if side == chess.WHITE else -8))
@@ -716,6 +722,10 @@ def build_menus(b: chess.Board) -> dict:
             # physically impossible. Verified against the banked/live
             # lines that the trade specifically lands on the enemy's good,
             # same-colored bishop, not just any capture.
+            # The TARGET test stays on the raw `bad_bishop` (2026-07-25):
+            # "good enough to be worth trading for" is the stricter bar —
+            # a bishop that is merely outside its chain but choked is not a
+            # prize, even though it is not a problem for its owner.
             enemy_good = [q for q in b.pieces(chess.BISHOP, enemy)
                          if q not in _bb(b, enemy) and _sqc(q) == bcolor]
             if enemy_good:

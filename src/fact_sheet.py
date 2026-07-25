@@ -384,39 +384,37 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
                      + "-".join(chess.square_name(x) for x in route) + ".")
         else:
             L.append(f"Entombed bishop on {sqb}.")
-    from weaknesses import bad_bishop as _bb, bishop_inside_chain, \
-        bishop_confinement
+    # INSIDE-the-chain bishops only (2026-07-25, owner: "why is the bishop on
+    # h4 bad?"). An outside bishop scores 0.517 against the inside bishop's
+    # 0.470 — finding 4's own numbers say it is not a weakness, so the sheet
+    # no longer says it is. See weaknesses.bad_bishop_problem.
+    from weaknesses import bad_bishop_problem as _bb, bishop_confinement
     ent_sqs = set(c["entombed_bishops"])
     for bsq in _bb(b, side):
         if bsq in ent_sqs:
             continue   # already reported as entombed (stronger statement)
-        if bishop_inside_chain(b, side, bsq):
-            # Wall-vs-door split (2026-07-22 user ruling: the Carlsbad c1
-            # bishop isn't 'choked' — it stands BETWEEN two chains and one
-            # pawn tempo opens it). 'Badly choking it' is reserved for
-            # bishops whose blockers are all FIXED; a doored bishop is
-            # stated as undeveloped-with-a-door, naming the door move —
-            # which also stops this line contradicting a confirmed
-            # FREE-THE-BISHOP plan in the same sheet.
-            conf = bishop_confinement(b, side, bsq)
-            if conf["doors"]:
-                doors = ", ".join(f"{chess.square_name(p)}-"
-                                  f"{chess.square_name(q)}"
-                                  for p, q in conf["doors"])
-                L.append(f"The bishop on {chess.square_name(bsq)} is "
-                         "undeveloped but not fixed — "
-                         f"{doors} opens it.")
-            elif conf["open"]:
-                L.append(f"The bishop on {chess.square_name(bsq)} has "
-                         f"most of {name}'s pawns on its color but keeps "
-                         "a clear diagonal.")
-            else:
-                L.append(f"Bad bishop on {chess.square_name(bsq)}, "
-                         "inside its own pawn chain.")
+        # Wall-vs-door split (2026-07-22 user ruling: the Carlsbad c1
+        # bishop isn't 'choked' — it stands BETWEEN two chains and one
+        # pawn tempo opens it). 'Badly choking it' is reserved for
+        # bishops whose blockers are all FIXED; a doored bishop is
+        # stated as undeveloped-with-a-door, naming the door move —
+        # which also stops this line contradicting a confirmed
+        # FREE-THE-BISHOP plan in the same sheet.
+        conf = bishop_confinement(b, side, bsq)
+        if conf["doors"]:
+            doors = ", ".join(f"{chess.square_name(p)}-"
+                              f"{chess.square_name(q)}"
+                              for p, q in conf["doors"])
+            L.append(f"The bishop on {chess.square_name(bsq)} is "
+                     "undeveloped but not fixed — "
+                     f"{doors} opens it.")
+        elif conf["open"]:
+            L.append(f"The bishop on {chess.square_name(bsq)} has "
+                     f"most of {name}'s pawns on its color but keeps "
+                     "a clear diagonal.")
         else:
-            L.append(f"Bad bishop on {chess.square_name(bsq)} — but it "
-                     "stands outside the pawn chain, so the problem is "
-                     "mild.")
+            L.append(f"Bad bishop on {chess.square_name(bsq)}, "
+                     "inside its own pawn chain.")
     if c["occupied_outposts"]:
         L.append(f"{other} has a piece permanently anchored on "
                  + ", ".join(sorted(chess.square_name(q)

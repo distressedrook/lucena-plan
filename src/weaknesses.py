@@ -147,6 +147,28 @@ def bad_bishop(b: chess.Board, side: bool, max_mob: int = 4) -> list[int]:
     return out
 
 
+def bad_bishop_problem(b: chess.Board, side: bool) -> list[int]:
+    """The bad bishops worth SAYING SOMETHING ABOUT — `bad_bishop` minus the
+    ones standing OUTSIDE their own pawn chain (2026-07-25, owner: "why is
+    the bishop on h4 bad?").
+
+    Finding 4 already measured the split and it is not close: an INSIDE
+    (entombed/behind-its-pawns) bishop carries the whole penalty, 0.470,
+    while an OUTSIDE one scores 0.517 — at or above the baseline, i.e. no
+    measurable problem at all. The QGD's 7.Bh4 is the canonical case: five
+    of White's eight pawns sit on dark squares and the bishop's move count
+    lands exactly on the 2.5 mobility bar, so `bad_bishop` fires — but the
+    bishop is developed, outside the chain and pressing f6/e7. Calling that
+    bad (and proposing pawn pushes to "free" it) tells a student the
+    opposite of the truth.
+
+    `bad_bishop` itself is unchanged: plan_diff's corpus emitters are
+    calibrated on it. This is the presentation-side cut, the same shape as
+    the trapped-piece one."""
+    return [sq for sq in bad_bishop(b, side)
+            if bishop_inside_chain(b, side, sq)]
+
+
 def bishop_inside_chain(b: chess.Board, side: bool, sq: int) -> bool:
     """Is the bishop on `sq` INSIDE its own pawn chain (behind its
     same-color pawns) vs OUTSIDE (in front of / level with them)? Finding

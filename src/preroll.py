@@ -67,13 +67,15 @@ def features(fen: str) -> list[dict]:
     add("outposts", "Outposts & holes", holes)
 
     # 4. bishops — bad and entombed (home-square bishops are merely
-    # undeveloped, not bad — the development stage owns them)
-    from weaknesses import entombed_bishops, bad_bishop
+    # undeveloped, not bad — the development stage owns them; and only
+    # INSIDE-the-chain bad bishops light up, 2026-07-25 — an outside bishop
+    # measures 0.517 vs 0.470 and is not a weakness to spotlight)
+    from weaknesses import entombed_bishops, bad_bishop_problem
     _home = {chess.C1, chess.F1, chess.C8, chess.F8}
     bish: list[str] = []
     for side in (chess.WHITE, chess.BLACK):
         bish += _sq(s for s in entombed_bishops(b, side) if s not in _home)
-        bish += _sq(s for s in bad_bishop(b, side) if s not in _home)
+        bish += _sq(s for s in bad_bishop_problem(b, side) if s not in _home)
     add("bishops", "Bishops", bish)
 
     # 5. weak color complexes

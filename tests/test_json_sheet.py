@@ -94,3 +94,29 @@ def test_only_enemy_trapped_pieces_reach_the_side_report():
     fen = "rn1qkbnr/B1p1pppp/1p6/8/8/8/PPPPPPPP/RNBQK1NR b KQkq - 0 4"
     caught = pre_verify_json(fen, None, None)["sides"]["white"]["trapped"]
     assert [e["square"] for e in caught] == ["a7"]
+
+
+def test_an_outside_bishop_is_not_a_bad_bishop():
+    """QGD 7.Bh4 (owner 2026-07-25: "why is the bishop on h4 bad?"). Five of
+    White's eight pawns sit on dark squares and the bishop's mobility lands
+    exactly on the 2.5 bar, so the raw `bad_bishop` detector fires — but the
+    bishop is developed, OUTSIDE its chain and pressing f6/e7. Finding 4
+    measured that split: inside 0.470, outside 0.517 (no penalty at all), so
+    nothing user-facing may call it bad, and neither cure plan may fire for
+    it. An inside bishop still gets named."""
+    import chess
+    from fact_sheet import pre_verify_json
+    from weaknesses import bad_bishop, bad_bishop_problem
+
+    b = chess.Board()
+    for m in "d4 d5 c4 e6 Nc3 Nf6 Bg5 Be7 e3 O-O Nf3 h6 Bh4".split():
+        b.push_san(m)
+    assert chess.H4 in bad_bishop(b, chess.WHITE)            # detector: yes
+    assert bad_bishop_problem(b, chess.WHITE) == []          # presentation: no
+
+    sides = pre_verify_json(b.fen(), None, None)["sides"]
+    assert not any("bishop on h4" in w for w in sides["white"]["weaknesses"])
+    assert not any("BAD BISHOP" in p["idea"].upper()
+                   for p in sides["white"]["plans"])
+    # Black's c8 bishop IS inside the chain — still named, with its door.
+    assert any("bishop on c8" in w for w in sides["black"]["weaknesses"])

@@ -20,7 +20,8 @@ from __future__ import annotations
 
 import chess
 
-from weaknesses import side_rank, is_hole, bad_bishop, strong_squares
+from weaknesses import (side_rank, is_hole, bad_bishop_problem,
+                        strong_squares)
 
 CENTRAL_FILES = {2, 3, 4, 5}   # c d e f
 
@@ -128,9 +129,13 @@ def _describe_result(before_fen: str, after_fen: str, side: bool) -> list[str]:
             out.append(f"concedes {nm} a hole on "
                        + ",".join(sorted(chess.square_name(s)
                                          for s in new_h)))
-    # bad bishop created/relieved for the side to move
-    bb_before = set(bad_bishop(a, side))
-    bb_after = set(bad_bishop(c, side))
+    # bad bishop created/relieved for the side to move. The PROBLEM set
+    # (inside the chain), not the raw detector — this line is user-facing
+    # prose, and "leaves White with a bad bishop" must not fire for a bishop
+    # that merely ends up outside its chain (2026-07-25; finding 4: outside
+    # 0.517 vs inside 0.470).
+    bb_before = set(bad_bishop_problem(a, side))
+    bb_after = set(bad_bishop_problem(c, side))
     who = "White" if side == chess.WHITE else "Black"
     if bb_after - bb_before:
         out.append(f"leaves {who} with a bad bishop")
