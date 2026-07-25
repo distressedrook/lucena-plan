@@ -1669,7 +1669,15 @@ def _sides_block(out: dict) -> dict:
                       ("center", "kingside", "queenside") if r in space},
             "breaks": (m.get("breaks") or {}).get(side, []),
             "passers": (m.get("passers") or {}).get(side, []),
-            "trapped": (m.get("trapped") or {}).get(side, []),
+            # TRAPPED means the ENEMY caught it (owner 2026-07-25: "why is
+            # Ra8 being tagged as trapped? ... they can move, right?"). A
+            # piece with no safe square only because its OWN army is in the
+            # way is UNDEVELOPED — every starting rook, bishop and queen
+            # qualifies on move 1 — and that is the development plan's job,
+            # not a weakness chip. Surface only pieces the enemy is
+            # attacking or whose squares the enemy denies.
+            "trapped": [t for t in (m.get("trapped") or {}).get(side, [])
+                        if t.get("attacked") or t.get("denied_by") == "enemy"],
             "color_control": {c: cc[c][side] for c in ("light", "dark")
                               if c in cc},
             # files this side's heavies control

@@ -73,3 +73,24 @@ def test_deterministic():
     a = post_verify_json(FEN, PVS, ROLLS)
     b = post_verify_json(FEN, PVS, ROLLS)
     assert json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
+
+
+def test_only_enemy_trapped_pieces_reach_the_side_report():
+    """TRAPPED is the ENEMY's doing (owner 2026-07-25: "why is Ra8 being
+    tagged as trapped? ... they can move, right?"). On move 1 every rook,
+    bishop and queen has zero safe moves — blocked by its OWN army — so the
+    metric lists them all; the side report must surface none of them. A piece
+    the enemy actually catches still comes through."""
+    import chess
+    from fact_sheet import pre_verify_json
+    from lucena_core.metrics import trapped_pieces
+
+    assert trapped_pieces(chess.STARTING_FEN)["black"]          # metric: yes
+    sides = pre_verify_json(chess.STARTING_FEN, None, None)["sides"]
+    assert sides["white"]["trapped"] == []                      # report: no
+    assert sides["black"]["trapped"] == []
+
+    # Bxa7 met by ...b6 — b8 and b6 covered, bishop attacked where it stands.
+    fen = "rn1qkbnr/B1p1pppp/1p6/8/8/8/PPPPPPPP/RNBQK1NR b KQkq - 0 4"
+    caught = pre_verify_json(fen, None, None)["sides"]["white"]["trapped"]
+    assert [e["square"] for e in caught] == ["a7"]
