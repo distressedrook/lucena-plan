@@ -237,7 +237,7 @@ def dynamism(fen: str, pvs: list | None, rolls: list | None) -> dict:
     bucket = ("RAZOR" if score >= 9 else "SHARP" if score >= 6 else
               "DYNAMIC" if score >= 3 else "QUIET" if score >= 1 else "DEAD")
     summary = {"RAZOR": "razor-sharp — one inaccuracy changes the verdict",
-               "SHARP": "sharp — concrete and punishing despite the eval",
+               "SHARP": "sharp — concrete and punishing",
                "DYNAMIC": "dynamic — real tension under the surface",
                "QUIET": "quiet — maneuvering, little forcing play",
                "DEAD": "placid — nothing forcing anywhere"}[bucket]

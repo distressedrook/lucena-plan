@@ -821,6 +821,58 @@ are in the repo; scores below are the relevant side's points fraction.
    assertion and one test needing LUCENA_MAIA). New coverage added for
    the epigraph's seed-stability and the theory card.
 
+30. **THE COMPENSATION/INITIATIVE ARC (2026-07-24/25): who is holding, why,
+   and what "initiative" actually is — built, adversarially reviewed on live
+   positions, and validated by 5,300 Maia games.** One two-day thread, all
+   owner-driven; artifacts in `research/experiments/studies/imbalance_benchmark/`.
+     - **Compensation read** (`fact_sheet._compensation_read`): for a
+       SEE-settled material deficit the ENGINE states the magnitude
+       (winning/full/partial — never a term sum; finding 18's ~15% bound is
+       why), a sharpest-to-slowest cascade names the FORM (attack — reading
+       the ENEMY king, not the sacker's own — activity, space), and the
+       line-walk resolves the residue (`_concrete_from_lines`:
+       regained/harvest/pressure/dynamic — 93-96% of once-opaque "concrete"
+       gets a specific board reason). RUNG-0 `only_move` (the MultiPV cliff,
+       computed in-package from caller pvs): ~45% of fired reads were
+       only-move tactics the positional label was masking.
+     - **The imbalance benchmark**: 33,769 GM games -> 66k traded-material
+       positions -> ~3.5k engine-labeled (stratified <=150/type) -> 918
+       equalish. Equalish rate FALLS with sharpness (Q-for-2-minors only
+       16%); static forms name ~57% of real compensation, the line-walk most
+       of the rest. Review harness: `make_review.py` -> `review.html`
+       (stable ids P001.., verdict marking, evidence per card).
+     - **Initiative, un-muddled** (`src/initiative.py`): the VERDICT is the
+       engine's — the mover's MultiPV spread (owner's insight: "if the
+       engine doesn't play the best move, who's losing? That side has the
+       initiative") + material-sign direction (constrained mover behind
+       >=140cp = attacker; near-even/ahead = defender, the 2R-vs-Q case).
+       AUC 0.766 raw / 0.744 shipped vs held-vs-failed (n=1,581) — beats
+       the whole hand-built geometry pile (0.679), which is KEPT as the
+       WHY (checks/captures/loose/passer with SEE safety gate, named in
+       SAN). Verdict tiers: named (strong + geometry-explained) / resolves
+       (material equalizes in-line within ~6 plies) / unclear (owner: "how
+       a human reads an engine line they don't understand") / balanced.
+       TWO FACES + phase gate: a development/activity lead IS initiative in
+       the OPENING (canonical 6/6: Danish/Evans/Marshall named, controls
+       silent, Benko deferred "slow-positional") but NOT in middlegames —
+       falsified by 53x100 Maia3-2600 self-play (flipped-verdict side
+       scored 0.475, 0.430 when crowning the material-up side); the dev
+       face is now opening-gated. Slow-structural initiative (Benko-class)
+       is DEFERRED to the plans layer by name, never stretched.
+     - **Maia3 self-play is a live validation instrument**: `.venv-maia` +
+       `engine/scripts/maia_policy_uci.py`, SelfElo/OppoElo, Temperature
+       1.0 = true policy sampling, ~1s/game (`maia2600_selfplay.py`).
+       Practical outcomes at 2600 disagree with engine equality in exactly
+       the ways the theory predicts (P008 static comp -> material side
+       converts; P121 forced attack -> initiative side converts).
+     - **COMPLETE DEVELOPMENT plan** (suggest.py): the missing opening
+       plan — opening-gated, >=2 debts, names the home pieces/castling,
+       cites the corpus-validated development-lag notable flag (+8.8pp).
+     - **Coach voice ruling (owner)**: user-facing text says the TERM
+       ("bad bishop on c1. Try trading it off with Bxf4."), never defines
+       it, never mentions engines/SEE/cp. Swept across fact_sheet, suggest,
+       tension, dynamism, position_read, metrics whys.
+
 ## What exists in this repo
 
 **Layout (2026-07-22 restructure): `src/` (the library, flat modules), `docs/` (KNOWN_ISSUES.md), `research/` (experiments + gpu_benchmark + data + minority-attack-gm). Rows with a bare module name (`suggest.py`) live in `src/` and ship (see `pyproject.toml` py-modules); rows with a `research/...` path are the harness and never ship. The full shipped src surface is the 13 modules in py-modules — `closed_v0`, `detectors`, `dynamism`, `fact_sheet`, `king_danger_calibration`, `personal_sharpness`, `plan_diff`, `position_read`, `structures`, `suggest`, `tension`, `verify`, `weaknesses`.**

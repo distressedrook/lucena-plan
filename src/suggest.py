@@ -387,10 +387,68 @@ def build_menus(b: chess.Board) -> dict:
                  "positions; engine-contract ONLY, Maia leg is data",
                  VERIFY["keep_king_uncastled"])
 
+        # COMPLETE DEVELOPMENT (2026-07-25, owner: "my next concern is
+        # development — we don't have a plan for it yet"). THE opening plan,
+        # previously missing from the menus entirely. Fires only in the
+        # OPENING phase (development is a defined concept only there — same
+        # ruling as development_lag's ply window) and only for a side with
+        # real development debt. Advisory tier, but it clears the calibrated
+        # bar: the trigger facts are deterministic geometry, and the
+        # development_lag notable flag is corpus-validated (+8.8pp by
+        # quartile) — the same species of number as SIMPLIFY's +9pp curve.
+        from lucena_core.reads import game_phase as _gp
+        if _gp(b.fen())["phase"] == "opening":
+            back = 0 if side == chess.WHITE else 7
+            home = sorted(
+                f"{b.piece_at(sq).symbol().upper()}{chess.square_name(sq)}"
+                for pt in (chess.KNIGHT, chess.BISHOP)
+                for sq in b.pieces(pt, side)
+                if chess.square_rank(sq) == back)
+            k = b.king(side)
+            uncastled = (k is not None and chess.square_rank(k) == back
+                         and chess.square_file(k) == 4
+                         and b.has_castling_rights(side))
+            rooks = list(b.pieces(chess.ROOK, side))
+            unconnected = (len(rooks) >= 2 and not any(
+                r2 in b.attacks(r1) for r1 in rooks for r2 in rooks
+                if r1 != r2))
+            debt = len(home) + (1 if uncastled else 0)
+            if debt >= 2:
+                cl = []
+                if home:
+                    cl.append("bring the " + ", ".join(home)
+                              + " into play toward natural squares")
+                if uncastled:
+                    cl.append("castle without delay")
+                if unconnected and len(home) <= 1:
+                    cl.append("connect the rooks")
+                cl.append("avoid moving the same piece twice or grabbing "
+                          "material before development is complete")
+                # name GM-baseline laggards when the ply window has them
+                try:
+                    from lucena_core.positional import development_lag as _dl
+                    lags = [e for e in _dl(b.fen())[
+                        "white" if side == chess.WHITE else "black"]
+                        if e["notable"]]
+                    if lags:
+                        cl.append("notably behind GM pace: " + ", ".join(
+                            f"{e['piece']}@{e['square']}" for e in lags[:3]))
+                except Exception:
+                    pass
+                cand(4.5 if debt >= 3 else 4.0,
+                     f"{name_side(side)} has {debt} development debts "
+                     f"in the opening",
+                     "COMPLETE DEVELOPMENT: " + "; ".join(cl),
+                     "opening-phase tells are factual geometry; the "
+                     "development-lag notable flag is corpus-validated "
+                     "(+8.8pp by quartile)",
+                     "advisory — factual trigger, calibrated lag flag; "
+                     "no engine contract")
+
         wp = _wp(b, enemy)
         if wp:
             cand(8.4, f"enemy weak pawns {sqn(wp)}",
-                 "HARVEST the weak pawn(s) — attack to WIN them",
+                 "HARVEST the weak pawn(s)",
                  "harvested 1x -> 0.577, 2x -> 0.656; created-never-harvested "
                  "0.453 (worse than nothing)", VERIFY["harvest"])
         from weaknesses import overextended_pawns as _ox
@@ -452,9 +510,7 @@ def build_menus(b: chess.Board) -> dict:
                   f"{chess.square_name(stop)} advance to liquidate it at "
                   "the right moment"]
             if minors_t or heavies_t:
-                cl.append("until then keep pieces on — the isolani's open "
-                          "lines and outpost squares pay only in the "
-                          "middlegame")
+                cl.append("until then keep pieces on")
             cand(3.5, f"own isolated pawn on {chess.square_name(q)}",
                  f"USE OR LIQUIDATE THE ISOLANI on {chess.square_name(q)}: "
                  + "; ".join(cl),
@@ -668,10 +724,8 @@ def build_menus(b: chess.Board) -> dict:
                      for pp in b.pieces(chess.PAWN, side)
                      if _sqc(pp) == bcolor
                      and not b.piece_at(pp + (8 if side == chess.WHITE else -8))]
-            cand(4.5, f"own bad bishop {chess.square_name(bsq)} "
-                 "(choked by same-color pawns)",
-                 "FREE THE BAD BISHOP: push a same-color pawn off its color "
-                 "to open lines for it",
+            cand(4.5, f"own bad bishop {chess.square_name(bsq)}",
+                 "FREE THE BAD BISHOP: push a same-color pawn off its color",
                  "engine frees it in 76% of best lines / 49% of GM games "
                  "when a bad bishop is present (validated on the banked "
                  "benchmark; no random-floor gate — pushing pawns is a "

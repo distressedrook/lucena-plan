@@ -197,15 +197,13 @@ def test_winning_advice():
     tips = F._winning_advice({"total_cp": 400, "material_stability":
                               {"leader": None, "standing": "material is even",
                                "adjusted_cp": 0}})
-    assert tips == ["Keep White's king safe and shut down counterplay — a "
-                    "material lead is worthless if the king gets mated."]
+    assert tips == ["Keep White's king safe and shut down counterplay."]
     # SACRIFICE: White is winning but BLACK is the material leader -> no
     # conversion tips (material_up False), only the king-safety reminder to White
     tips = F._winning_advice({"total_cp": 300, "material_stability":
                               {"leader": "Black", "standing": "Black is up a rook",
                                "adjusted_cp": -1720}})
-    assert tips == ["Keep White's king safe and shut down counterplay — a "
-                    "material lead is worthless if the king gets mated."]
+    assert tips == ["Keep White's king safe and shut down counterplay."]
 
 
 def test_defender_advice():

@@ -191,7 +191,7 @@ def render(a: dict) -> list[str]:
     verb = {"keep": "KEEP the tension (maintain the flexibility)",
             "lock": "LOCK the centre (push a central pawn past)",
             "resolve": "RESOLVE it (capture in the centre)"}
-    L.append(f"  The engine's best lines most often {verb[best]} "
+    L.append(f"  Best play most often {verb[best]} "
              f"({tally[best]}/{n} of them).")
     if tally["keep"]:
         L.append("  - KEEP: keeps both capture options and the push open; "

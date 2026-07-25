@@ -86,7 +86,7 @@ def render(post: dict) -> str | None:
     char = (a.get("character") or {}).get("summary")
     head = verdict or "Here's the position."
     if char:
-        head = f"{head}. Character: {char}"
+        head = f"{head} — {char}"
     lines.append(head.rstrip(".") + ".")
 
     # 2. MATERIAL — spoken only when it is actually saying something.
@@ -104,8 +104,8 @@ def render(post: dict) -> str | None:
     # 3. STRUCTURE — named, and nothing more is claimed about it.
     structs = post.get("structure") or []
     if structs:
-        named = ", ".join(f"{_humanize_structure(s['name'])} (owned by "
-                          f"{s['owner']})" for s in structs[:2])
+        named = ", ".join(f"{_humanize_structure(s['name'])} — "
+                          f"{s['owner']}'s side" for s in structs[:2])
         lines.append(f"Structure: {named}.")
 
     weak = post.get("weaknesses") or {}

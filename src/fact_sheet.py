@@ -273,8 +273,7 @@ def _skeleton_lever_words(b: chess.Board) -> list[str]:
     rams, central, tension, open_files = skeleton(b)
     closed = central >= 2 and open_files == 0 and tension <= 1 and rams >= 4
     if closed:
-        out.append("The center is completely locked — no file can ever be "
-                   "forced open by pawn play alone.")
+        out.append("The center is completely locked.")
     elif rams >= 2:
         out.append(f"There are {rams} pawns locked head-to-head across the "
                    "board.")
@@ -346,16 +345,13 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
     backward = backward_pawns(b, side)          # Kmoch (2026-07-22 ruling)
     back_sqs = {q for q, _ in backward}
     for q, half in backward:
-        L.append(f"Backward pawn on {chess.square_name(q)} — behind its "
-                 "neighbors, and its advance square is controlled by "
-                 f"{other}'s pawns"
-                 + (f"; it sits on a file {other} can pile onto"
+        L.append(f"Backward pawn on {chess.square_name(q)}"
+                 + (f" — on a file {other} can pile onto"
                     if half else "") + ".")
     iso = isolated_pawns(b, side)
     for q, half in iso:
-        L.append(f"Isolated pawn on {chess.square_name(q)} — no neighbor "
-                 "pawn can ever defend it"
-                 + (f", and it sits on a file {other} can pile onto"
+        L.append(f"Isolated pawn on {chess.square_name(q)}"
+                 + (f" — on a file {other} can pile onto"
                     if half else "") + ".")
     iso_sqs = {q for q, _ in iso}
     plain_weak = [q for q in c["weak_pawns"]
@@ -383,22 +379,16 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
                     break
         route = bishop_escape_route(b, side, bsq)
         if obs and traded:
-            L.append(f"The bishop on {sqb} is shut in behind its own "
-                     "pawns; the engine's lines resolve it by TRADING it "
-                     "off (" + " or ".join(obs[:2]) + ").")
+            L.append(f"Bad bishop on {sqb}. Try trading it off with "
+                     + " or ".join(obs[:2]) + ".")
         elif obs:
-            L.append(f"The bishop on {sqb} is shut in behind its own "
-                     "pawns, but the engine's lines extract it: "
+            L.append(f"Bad bishop on {sqb}. Try maneuvering it out via "
                      + " or ".join(obs[:2]) + ".")
         elif route:
-            L.append(f"The bishop on {sqb} is shut in behind its own "
-                     "pawns; a geometric way out exists ("
-                     + "-".join(chess.square_name(x) for x in route)
-                     + "), though the engine's lines don't play the "
-                     "extraction here.")
+            L.append(f"Bad bishop on {sqb}. Try maneuvering it via "
+                     + "-".join(chess.square_name(x) for x in route) + ".")
         else:
-            L.append(f"The bishop on {sqb} is shut in "
-                     "behind its own pawns with no way out.")
+            L.append(f"Entombed bishop on {sqb}.")
     from weaknesses import bad_bishop as _bb, bishop_inside_chain, \
         bishop_confinement
     ent_sqs = set(c["entombed_bishops"])
@@ -419,25 +409,19 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
                                   f"{chess.square_name(q)}"
                                   for p, q in conf["doors"])
                 L.append(f"The bishop on {chess.square_name(bsq)} is "
-                         f"undeveloped, hemmed between {name}'s pawn "
-                         "chains — but its blockers aren't fixed: "
-                         f"{doors} opens lines for it.")
+                         "undeveloped but not fixed — "
+                         f"{doors} opens it.")
             elif conf["open"]:
                 L.append(f"The bishop on {chess.square_name(bsq)} has "
-                         f"most of {name}'s pawns on its color, but keeps "
-                         "a clear diagonal — it can reposition rather "
-                         "than break out.")
+                         f"most of {name}'s pawns on its color but keeps "
+                         "a clear diagonal.")
             else:
-                L.append(f"The bishop on {chess.square_name(bsq)} is bad "
-                         f"and sits INSIDE its own pawn chain — most of "
-                         f"{name}'s pawns are on its color and in front "
-                         "of it, badly choking it.")
+                L.append(f"Bad bishop on {chess.square_name(bsq)}, "
+                         "inside its own pawn chain.")
         else:
-            L.append(f"The bishop on {chess.square_name(bsq)} is a bad "
-                     f"bishop but stands OUTSIDE the pawn chain — most of "
-                     f"{name}'s pawns are on its color, but it has scope on "
-                     "the outside, so the problem is mild (worth exchanging, "
-                     "not critical).")
+            L.append(f"Bad bishop on {chess.square_name(bsq)} — but it "
+                     "stands outside the pawn chain, so the problem is "
+                     "mild.")
     if c["occupied_outposts"]:
         L.append(f"{other} has a piece permanently anchored on "
                  + ", ".join(sorted(chess.square_name(q)
@@ -455,11 +439,9 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
         color = "light" if chess.BB_LIGHT_SQUARES & chess.BB_SQUARES[
             wcc[0]] else "dark"
         L.append(f"A weak {color}-square complex around {name}'s king on "
-                 + ", ".join(chess.square_name(q) for q in wcc)
-                 + f" — no bishop of that color is left to cover them.")
+                 + ", ".join(chess.square_name(q) for q in wcc) + ".")
     if c["back_rank_weak"]:
-        L.append(f"{name}'s king has no luft — the back rank is a mating "
-                 "vulnerability.")
+        L.append(f"{name}'s king has no luft.")
     if c["overextended_pawns"]:
         L.append("Overextended pawn(s) at "
                  + ", ".join(sorted(chess.square_name(q)
@@ -1018,12 +1000,31 @@ def _king_risk_block(fen: str) -> dict | None:
         if not f:
             continue
         d = f.get("danger", 0)
+        # WHY (owner 2026-07-25: "King is 'unsafe' — why?"): every danger
+        # number ships with its citable board facts, assembled from the
+        # term's own components — never re-derived, never a model's words.
+        why: list[str] = []
+        if f.get("zone_attackers"):
+            why.append("attackers: " + ", ".join(f["zone_attackers"][:3]))
+        if f.get("open_files_nearby"):
+            why.append("open " + "/".join(f["open_files_nearby"])
+                       + "-file beside the king")
+        if f.get("shield_pawns") == 0:
+            why.append("no pawn shield")
+        if f.get("storm"):
+            why.append("enemy pawn storm approaching")
+        if f.get("line_pressure"):
+            why.append("heavy pieces on the king's file or rank")
         out[side] = {
             "danger": d,
             "danger_bounded": f.get("danger_bounded"),
             "attack_units": f.get("attack_units"),
             "shield_pawns": f.get("shield_pawns"),
             "zone_attackers": f.get("zone_attackers"),
+            "open_files_nearby": f.get("open_files_nearby"),
+            "storm": f.get("storm"),
+            "line_pressure": f.get("line_pressure"),
+            "why": why,
             "p_catastrophe": p_catastrophe_profile(d),
         }
     return out or None
@@ -1034,6 +1035,17 @@ def _king_risk_block(fen: str) -> dict | None:
 # actively misleading next to "a queen up". Matches the backend's
 # PLANS_CP_BAND (±1.5 pawns) that gates the equal-position plans read.
 _DECISIVE_CP = 150
+
+# --- compensation read (owner 2026-07-24) ---
+_COMP_MAT_MIN = 150      # settled (SEE-adjusted) material deficit before we
+                         # even look for compensation — more than a pawn.
+_COMP_MIN = 100          # the engine eval must offset at least this much
+                         # BEYOND material for the down side, or it's just
+                         # losing (the winning block already speaks).
+_COMP_EVAL_FLOOR = -300  # if the down side is worse than a minor piece even
+                         # AFTER the offset, it's losing, not compensated.
+_COMP_KING_DANGER = 0.4  # enemy king "exposed" — same bar as _winning_reason.
+_COMP_SPACE_MIN = 2      # raw space lead that counts as a bind (metrics.space).
 
 
 def _is_decisive(assessment: dict) -> bool:
@@ -1113,12 +1125,11 @@ def _winning_advice(a: dict) -> list[str]:
                    and "up" in (ms.get("standing") or ""))
     tips: list[str] = []
     if material_up:
-        tips.append(f"{leader} should trade pieces, not pawns — steer into an "
-                    "endgame where the extra material wins on its own.")
+        tips.append(f"{leader} should trade pieces, not pawns, and steer "
+                    "into an endgame.")
         tips.append("No need to rush: convert with simple, safe moves and "
                     "avoid unnecessary complications.")
-    tips.append(f"Keep {leader}'s king safe and shut down counterplay — a "
-                "material lead is worthless if the king gets mated.")
+    tips.append(f"Keep {leader}'s king safe and shut down counterplay.")
     return tips
 
 
@@ -1132,13 +1143,343 @@ def _defender_advice(a: dict) -> list[str]:
     down = (ms.get("leader") == leader and "up" in (ms.get("standing") or ""))
     tips: list[str] = []
     if down:
-        tips.append(f"{loser} should keep pieces on and avoid trades — every "
-                    "swap helps the side that's ahead.")
+        tips.append(f"{loser} should keep pieces on and avoid trades.")
     tips.append(f"{loser} must make it messy: seek complications, counterplay "
                 "and traps — a practical swindle is the best chance.")
-    tips.append(f"{loser} should still guard their own king — down material, a "
-                "second weakness loses on the spot.")
+    tips.append(f"{loser} should still guard their own king.")
     return tips
+
+
+def _join_terms(words: list[str]) -> str:
+    words = [w for w in words if w]
+    if not words:
+        return "a lasting edge"
+    if len(words) == 1:
+        return words[0]
+    return ", ".join(words[:-1]) + " and " + words[-1]
+
+
+def _concrete_from_lines(a: dict, underdog: str) -> tuple[str, str]:
+    """Refine the 'concrete' branch by WALKING the engine lines instead of
+    stopping at "no static feature explains it" (owner 2026-07-24: "when you
+    say 'in the lines', is there a way to calculate and find out?" — yes).
+
+    Reads `line_theories` (already on the sheet: each PV walked to quiescence,
+    with the SEE-settled material and durable terms at the endpoint) plus the
+    root settled material, and classifies the concrete compensation:
+        regained  the deficit CLOSES down a line -> it wins the material back
+                  (naming the settling move / capture from the line's own read)
+        harvest   a term only decisive at the endpoint survives across lines
+                  (finding 2: restructuring is invisible at creation, visible
+                  at the harvest) -> it cashes into that term
+        pressure  a line claws material back but stays nominally down
+        dynamic   none of the above — a standing threat the lines hold, the
+                  genuinely-hard ~half that stays 'read the lines'.
+    Returns (kind, reason)."""
+    lt = a.get("line_theories") or {}
+    lines = lt.get("lines") or []
+    root_adj = (a.get("material_stability") or {}).get("adjusted_cp")
+    sgn = 1 if underdog == "White" else -1        # underdog-favorable sign
+    best = None                                   # (recovery, leaf_signed, line)
+    if root_adj is not None:
+        root_signed = sgn * root_adj
+        for ln in lines:
+            leaf = (ln.get("material") or {}).get("adjusted_cp")
+            if leaf is None:
+                continue
+            recov = sgn * leaf - root_signed      # +cp = down side gains material
+            if best is None or recov > best[0]:
+                best = (recov, sgn * leaf, ln)
+
+    def _first_move(ln):
+        li = ln.get("line")
+        return li[0] if isinstance(li, list) and li else None
+
+    def _resource(ln):
+        # the down side's own material-winning move, named from the settled read
+        for th in (ln.get("material") or {}).get("threats", []):
+            if th.get("side") == underdog and (th.get("see") or 0) > 0:
+                return th.get("san")
+        return _first_move(ln)
+
+    enemy = "Black" if underdog == "White" else "White"
+
+    def _mechanism(ln):
+        # the down side's strongest term at THIS line's endpoint — names WHAT
+        # the pressure is (an attack / activity / a pawn or centre bind), even
+        # when it isn't durable across every line. Falls back to the initiative.
+        te = ln.get("terms") or {}
+        best_t, best_v = None, 0
+        for t in ("king_safety", "activity", "pawns", "center"):
+            v = sgn * te.get(t, 0)
+            if v > best_v:
+                best_t, best_v = t, v
+        if best_t and best_v >= 40:
+            return {"king_safety": f"the attack on {enemy}'s king",
+                    "activity": "the more active pieces",
+                    "pawns": f"the pressure on {enemy}'s pawns",
+                    "center": "the central bind"}[best_t]
+        return "the initiative"
+
+    def _mat_phrase(recov):
+        return ("a rook" if recov >= 450 else "a piece" if recov >= 250
+                else "the exchange" if recov >= 150 else "a pawn")
+
+    # User-facing wording states the CHESS fact, never "the engine's lines"
+    # (owner 2026-07-24: "I don't wanna bring up engine lines") — how we know
+    # is meta; a coach speaks the board.
+    terms = lt.get("summary") or []
+    if best and best[0] >= 100 and best[1] >= -100:         # deficit fully closes
+        mv = _resource(best[2])
+        tail = f" with {mv}" if mv else ""
+        return "regained", f"the material comes straight back{tail}."
+    if terms:
+        return "harvest", f"the play brings {_join_terms(terms)}."
+    if best and best[0] >= 100:                             # claws back, STILL down
+        # name the MECHANISM (what the pressure is) + the material it wins back
+        mech = _mechanism(best[2])
+        verb = "win back" if mech == "the more active pieces" else "wins back"
+        mv = _resource(best[2])
+        tail = f" ({mv})" if mv else ""
+        return "pressure", (f"{mech} {verb} {_mat_phrase(best[0])}{tail}, though "
+                            f"{underdog} stays nominally down.")
+    return "dynamic", f"active threats offset the material."
+
+
+def _initiative_block(fen: str, pvs) -> dict | None:
+    """The initiative read for the sheet (src/initiative.py): per-side 0..1
+    score + leader + the NAMED evidence. Trimmed to what a client renders."""
+    try:
+        from initiative import initiative as _init
+        iv = _init(fen, pvs)
+    except Exception:
+        _log.warning("initiative block failed", exc_info=True)
+        return None
+    out = {"leader": iv["leader"], "diff": iv["diff"],
+           "basis": iv.get("basis"), "magnitude": iv.get("magnitude"),
+           "constrained": iv.get("constrained"),
+           "mover_penalty_cp": iv.get("mover_penalty_cp"),
+           "explained": iv.get("explained"),
+           "resolves": iv.get("resolves"),
+           # the two faces (owner 2026-07-25): mechanism names which carries
+           # the verdict (threats/passer/development); deferred flags the slow
+           # -positional kind neither face can honestly claim.
+           "mechanism": iv.get("mechanism"),
+           "development": iv.get("development"),
+           "deferred": iv.get("deferred")}
+    for s in ("white", "black"):
+        e = iv[s]
+        out[s] = {"score": e["score"],
+                  "prior_score": e.get("prior_score"),
+                  "resources": e.get("resources"),
+                  "forcing_frac": e.get("forcing_frac"),
+                  "forcing_moves": e.get("forcing_moves") or [],
+                  "why": e["static"]["why"]}
+    return out
+
+
+# --- is-this-the-only-move (owner 2026-07-24: "isTheOnlyMove can be done very
+# cheaply in this package") ---
+_ONLY_MOVE_MIN = 150     # eval cliff best->2nd-best (mover's favour) = one move holds
+_ONLY_MOVE_RAZOR = 300   # ...and everything else loses outright
+
+
+def _only_move_block(fen: str, pvs) -> dict | None:
+    """Is exactly ONE move holding the position? Measured from the caller's
+    MultiPV alone — the eval cliff from the best line to the second best, in
+    the side-to-move's favour. No engine roll, no hand-off to a tactics
+    package: the drillability signal is already in `pvs`. A big cliff means the
+    position is TACTICAL — the compensation is conditional on finding the move,
+    so the read must lead with it, not a positional form (measured: ~45% of the
+    fired imbalance reads are only-moves the positional label was masking). cp
+    is +White throughout; MultiPV is ordered best-first for the mover."""
+    if not pvs or len(pvs) < 2:
+        return None
+    c0, c1 = pvs[0].get("cp"), pvs[1].get("cp")
+    u0 = pvs[0].get("ucis") or []
+    if c0 is None or c1 is None or not u0:
+        return None
+    gap = (c0 - c1) if fen.split()[1] == "w" else (c1 - c0)
+    if gap < _ONLY_MOVE_MIN:
+        return None
+    try:
+        move = chess.Board(fen).san(chess.Move.from_uci(u0[0]))
+    except Exception:
+        return None
+    return {"move": move, "gap_cp": round(gap), "razor": gap >= _ONLY_MOVE_RAZOR}
+
+
+def _compensation_read(out: dict) -> dict | None:
+    """WHY a materially-DOWN side is still holding — the compensation read
+    (owner design 2026-07-24: "if less material -> isDrillable -> if not, what
+    compensation do we have? king safety -> activity -> space").
+
+    The split that makes it honest: MAGNITUDE is the ENGINE's to state, FORM is
+    ours to name.
+
+      * MAGNITUDE (how much comp) comes from engine_eval vs SEE-settled
+        material, NEVER from summing our terms. Finding 18 measured that the
+        static family explains only ~15% of eval-minus-material; worse, a naive
+        centipawn sum points the WRONG WAY here — raw mobility (`diff_cp`) is
+        queen-skewed toward the side that still HAS the queen, and the sacker's
+        own exposed king counts against them. So we read the number the engine
+        already priced and only classify it (winning/full/partial/slight).
+
+      * FORM (what kind of comp) is a sharpest-to-slowest cascade, first hit is
+        primary but all are listed:
+            1. ATTACK   — the enemy (material-UP) king is exposed. This reads
+                          the OPPONENT'S king danger, not the down side's own
+                          (at Harikrishna 10.Kxf2 it is WHITE's king that is
+                          exposed, so attack does NOT fire — activity does).
+            2. ACTIVITY — the down side's pieces are the more active. Uses the
+                          activity term's own material-neutral `leader` verdict
+                          (per-side rescaled scores), never `diff_cp`.
+            3. SPACE    — the down side holds a space bind.
+            else CONCRETE — no static feature explains it; it lives in the
+                          engine's lines (finding 18's ~85% residue), said so.
+
+    Fires only on an ENGINE eval — a static-fallback sheet cannot honestly
+    assert compensation. Returns None when there is no material deficit past
+    _COMP_MAT_MIN or the engine prices no meaningful offset (< _COMP_MIN).
+
+    NOTE (future work): the owner's design opens with an isDrillable branch — a
+    forcing/tactical win as the sharpest 'compensation'. A true forcing-tree
+    check lives in lucena-tactics (line_tree) and is not wired into this layer;
+    `tactical` (dynamism SHARP/RAZOR) is the honest stand-in until it is — it
+    flags 'this comp is dynamic, read it in the lines', not a verdict."""
+    a = out.get("assessment") or {}
+    if a.get("eval_source") != "engine":
+        return None
+    total = a.get("total_cp")
+    ms = a.get("material_stability") or {}
+    adj = ms.get("adjusted_cp")
+    if total is None or adj is None or abs(adj) < _COMP_MAT_MIN:
+        return None
+    underdog = "White" if adj < 0 else "Black"
+    enemy = "Black" if underdog == "White" else "White"
+    deficit = abs(adj)
+    eval_ud = total if underdog == "White" else -total   # +cp = good for down side
+    comp = eval_ud + deficit                              # offset beyond material
+    # Two gates: the engine must price REAL offset (>= _COMP_MIN beyond
+    # material), AND the down side must not be losing outright anyway. Down a
+    # rook and still worse by -700 nets ~100cp of "comp" arithmetically, but
+    # calling that 'compensation' to a lost position is noise — if the down
+    # side is worse by more than a minor piece, stay silent and let the
+    # winning/normal read speak.
+    if comp < _COMP_MIN or eval_ud < _COMP_EVAL_FLOOR:
+        return None
+
+    # --- FORM: sharpest-to-slowest cascade ---
+    forms: list[str] = []
+    reason: str | None = None
+    kr = a.get("king_risk") or {}
+    if ((kr.get(enemy.lower()) or {}).get("danger_bounded") or 0) >= _COMP_KING_DANGER:
+        forms.append("attack")
+        reason = (f"{enemy}'s king is exposed — {underdog} has an attack for "
+                  "the material.")
+    if (out.get("activity") or {}).get("leader") == underdog:
+        forms.append("activity")
+        if reason is None:
+            reason = (f"{underdog}'s pieces are far more active; {enemy}'s are "
+                      "passive or undeveloped.")
+    sp = (out.get("metrics") or {}).get("space") or {}
+    sw = sum((sp.get(r) or {}).get("white", {}).get("raw", 0)
+             for r in ("center", "kingside", "queenside"))
+    sb = sum((sp.get(r) or {}).get("black", {}).get("raw", 0)
+             for r in ("center", "kingside", "queenside"))
+    space_lead = (sw - sb) if underdog == "White" else (sb - sw)
+    if space_lead >= _COMP_SPACE_MIN:
+        forms.append("space")
+        if reason is None:
+            reason = f"{underdog} holds a space bind for the material."
+    concrete_kind = None
+    if not forms:
+        forms.append("concrete")
+        # No ROOT static feature — walk the engine lines to say WHAT the
+        # compensation is (regained material / a harvest term / dynamic).
+        concrete_kind, reason = _concrete_from_lines(a, underdog)
+
+    # --- RUNG-0: isTheOnlyMove. If one move holds the position, the
+    # compensation is CONDITIONAL on finding it — that is the headline, not the
+    # positional form (which describes the aftermath and stays in `forms`). ---
+    om = a.get("only_move")
+    if om:
+        forms.insert(0, "only_move")
+        lead = ("only one move holds it" if om["razor"]
+                else "it hinges on a single move")
+        reason = f"{lead} — {om['move']}; anything else loses."
+
+    # --- MAGNITUDE: the engine's word, never a term sum ---
+    if eval_ud >= _DECISIVE_CP:
+        magnitude = "winning"          # comp more than paid — the sac is winning
+    elif eval_ud >= -60:
+        magnitude = "full"             # balance holds despite the deficit
+    else:
+        magnitude = "partial"          # cushions the deficit, doesn't erase it
+
+    down_phrase = ((ms.get("standing") or "").split(" is ", 1)[-1]
+                   .replace("up ", "down ", 1)) or "down material"
+    mag_word = {"winning": "and is already winning",
+                "full": "with full compensation",
+                "partial": "with partial compensation"}[magnitude]
+    summary = f"{underdog} is {down_phrase} {mag_word} — {reason}"
+
+    # --- EVIDENCE (owner 2026-07-25: "wire these explanations in"): the
+    # citable board facts behind the PRIMARY form, pulled from the blocks the
+    # sheet already computed — never re-derived, never free text. ---
+    evidence: list[str] = []
+    primary = forms[0]
+    if primary == "only_move" and om:
+        evidence.append(f"best-to-second-best gap {om['gap_cp']}cp — "
+                        f"{om['move']} is the move")
+    elif primary == "attack":
+        evidence = list(((kr.get(enemy.lower()) or {}).get("why")) or [])
+    elif primary == "activity":
+        act = out.get("activity") or {}
+        for col, lbl in ((underdog.lower(), "working"),
+                         (enemy.lower(), "idle")):
+            ps = (act.get(col) or {}).get("pieces") or []
+            ps = sorted(ps, key=lambda p: -(p.get("score") or 0))
+            pick = ps[:2] if lbl == "working" else ps[-2:]
+            for p in pick:
+                evidence.append(f"{p['piece']}@{p['square']} "
+                                f"activity {p['score']:.2f} ({lbl})")
+    elif primary == "space":
+        evidence.append(f"space squares White {sw} vs Black {sb}")
+    elif primary == "concrete":
+        iv = a.get("initiative") or {}
+        w = ((iv.get(underdog.lower()) or {}).get("why")) or {}
+        if w.get("checks"):
+            evidence.append("checks that stand: " + ", ".join(w["checks"][:3]))
+        if w.get("captures"):
+            evidence.append("sound captures: " + ", ".join(w["captures"][:3]))
+        if w.get("loose"):
+            evidence.append("loose targets: " + ", ".join(w["loose"][:3]))
+        fm = (iv.get(underdog.lower()) or {}).get("forcing_moves") or []
+        if fm:
+            evidence.append("best play keeps forcing: " + ", ".join(fm[:4]))
+
+    return {
+        "side": underdog,
+        "magnitude": magnitude,
+        "summary": summary,
+        "reason": reason,
+        "forms": forms,
+        "primary": forms[0],
+        # for a concrete primary: what the LINES showed —
+        # regained/harvest/pressure/dynamic (None when a static form fired)
+        "concrete_kind": concrete_kind,
+        # citable board facts behind the primary form (owner: "let's verify")
+        "evidence": evidence,
+        "deficit_cp": round(deficit),   # settled material the side is down
+        "comp_cp": round(comp),         # engine eval offset beyond material
+        "eval_cp": round(eval_ud),      # engine eval, +cp = good for the down side
+        # RUNG-0 only-move: {move, gap_cp, razor} when one move holds, else None
+        "only_move": om,
+        # dynamism SHARP/RAZOR: the comp is dynamic — verify it in the lines,
+        # not a static read. Honest stand-in for the isDrillable branch.
+        "tactical": (a.get("character") or {}).get("bucket") in ("SHARP", "RAZOR"),
+    }
 
 
 def _bars_block(out: dict) -> list[dict]:
@@ -1331,6 +1672,16 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
             # KING RISK (2026-07-24, findings 21-25): the danger composite
             # plus its calibrated P(catastrophe) in all three regimes.
             "king_risk": _king_risk_block(fen),
+            # ONLY-MOVE (2026-07-24): is one move holding the position? — the
+            # eval cliff best->2nd-best in the caller's MultiPV. Drillability
+            # signal, no roll. Consumed as the compensation read's rung-0.
+            "only_move": _only_move_block(fen, pvs),
+            # INITIATIVE (2026-07-25): who is making the threats — validated
+            # (AUC 0.74 held-vs-failed on 1,581 real-deficit positions) and
+            # evidence-carrying: every unit is a citable board fact (the
+            # checks that stand, sound captures, loose pieces, the forcing
+            # moves in best play). src/initiative.py.
+            "initiative": _initiative_block(fen, pvs),
             "character": {"bucket": dy["bucket"], "score": dy["score"],
                           "summary": dy["summary"],
                           "components": [{"name": n, "pts": p, "why": w}
@@ -1373,6 +1724,12 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
                        # view — and the storm term makes them worth watching)
                        "king_bars": _king_bars(_a)}
                       if _is_decisive(_a) else None)
+    # COMPENSATION (owner 2026-07-24): WHY a materially-down side is holding —
+    # engine states the magnitude, the cascade (attack -> activity -> space ->
+    # concrete) names the form. Coexists with `winning` (a winning sacrifice
+    # gets both: the verdict AND why it worked) and appears on the equalish
+    # sheet too (down material, eval level = full comp, no winning block).
+    out["compensation"] = _compensation_read(out)
     # whole-sheet FEN redaction, last (2026-07-24): scrub any board string
     # embedded by a nested block (quiescence walks etc.) to its opaque id.
     return _redact_fens(out)
