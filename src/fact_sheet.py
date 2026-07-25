@@ -320,11 +320,6 @@ def _skeleton_lever_words(b: chess.Board) -> list[str]:
     return out
 
 
-_HOLE_TAG_WORDS = {"": "a deep, central hole", "rim": "a hole along the edge "
-                   "(a/h-file, low value)", "shallow": "a shallow hole "
-                   "(only 3 ranks in)"}
-
-
 def _weakness_lines(b: chess.Board, terms: dict, side: bool,
                     pvs: list | None = None,
                     rolls: list | None = None) -> list[str]:
@@ -451,16 +446,25 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
         L.append("Doubled pawns on the "
                  + "/".join(f["doubled_files"]) + "-file"
                  + ("s" if len(f["doubled_files"]) > 1 else "") + ".")
-    hz = holes_in(b, side)
-    if hz:
-        by_tag = {}
-        for h, tag in hz:
-            by_tag.setdefault(tag, []).append(h)
-        bits = [f"{', '.join(sqs)} ({_HOLE_TAG_WORDS[tag]})"
-               for tag, sqs in by_tag.items()]
-        L.append(f"Holes in {name}'s camp (squares no {name} pawn can ever "
-                 f"guard, which {other} can aim to occupy): "
-                 + "; ".join(bits) + ".")
+    # HOLES — only the IMPORTANT ones (owner 2026-07-25: "bringing up all the
+    # holes is what is cluttering information"). The repo's own corpus laws
+    # define important: rim holes price at nothing (0.496), shallow at 0.509
+    # — dropped; a deep hole matters when the enemy can actually USE it
+    # (attacked now, or a knight route reaches it — occupied ones are already
+    # the "piece permanently anchored" line above). Cap 3.
+    from weaknesses import knight_route as _kr
+    keep = []
+    for h, tag in holes_in(b, side):
+        if tag:                                   # rim / shallow — noise
+            continue
+        sq = chess.parse_square(h)
+        pc = b.piece_at(sq)
+        if pc is not None and pc.color != side:
+            continue                              # occupied outpost line owns it
+        if b.attackers(not side, sq) or _kr(b, not side, {sq}):
+            keep.append(h)
+    if keep:
+        L.append(f"Holes at {', '.join(keep[:3])}.")
     return L or ["No significant weaknesses."]
 
 
@@ -952,12 +956,43 @@ def _activity_block(act: dict) -> dict:
     return out
 
 
-def _metrics_block(fen: str) -> dict:
+def _line_moves(fen: str, pvs, rolls, plies: int = 14) -> set[str] | None:
+    """UCIs occurring early in the eval-equal engine lines or the Maia
+    rolls — the filter set for line-gated inventories. None when no lines."""
+    lines = []
+    usable = [p for p in (pvs or []) if p.get("ucis")]
+    if usable:
+        # anchor the eval-equal band on the FIRST pv carrying a cp (MultiPV
+        # is best-first) — an empty-ucis first pv must not disable gating
+        # (Codex P1 2026-07-25)
+        anchor = next((p.get("cp") for p in (pvs or [])
+                       if p.get("cp") is not None), 0)
+        lines += [p["ucis"] for p in usable
+                  if abs((p.get("cp") or 0) - anchor) <= 60]
+    for r in (rolls or []):
+        if isinstance(r, list):
+            lines.append(r)
+    if not lines:
+        # None ONLY when no line source existed at all; usable lines that
+        # all fall outside the band still GATE — to empty (Codex P1 round 2)
+        had_source = bool(usable) or any(isinstance(r, list)
+                                         for r in (rolls or []))
+        return set() if had_source else None
+    return {u for ln in lines for u in ln[:plies]}
+
+
+def _metrics_block(fen: str, pvs=None, rolls=None) -> dict:
     """Batch-2 deterministic metrics (owner work order 2026-07-23):
     regions (control incl. wings/files/holes), space + exploitability,
     development lag (side-conditioned, annoyance-gated `notable`), pawn
     breaks, passers, color complex, trapped pieces. None-safe per metric —
-    the sheet must never die on a read."""
+    the sheet must never die on a read.
+
+    BREAKS are line-gated (owner 2026-07-25: "only the relevant ones after
+    the roll must get presented"): with pvs/rolls supplied, a break survives
+    only if its push actually occurs in an eval-equal engine line or a Maia
+    roll — suggest proposes, the lines filter, same doctrine as the plans.
+    Without lines (research CLI) the full inventory stays."""
     from lucena_core import positional as _pos
     from lucena_core import metrics as _met
     out = {}
@@ -973,6 +1008,12 @@ def _metrics_block(fen: str) -> dict:
         except Exception:
             _log.warning("metrics block %r failed", key, exc_info=True)
             out[key] = None
+    moves = _line_moves(fen, pvs, rolls)
+    if moves is not None and out.get("breaks"):
+        for side in ("white", "black"):
+            rows = out["breaks"].get(side) or []
+            out["breaks"][side] = [r for r in rows
+                                   if (r["pawn"] + r["push"]) in moves]
     return out
 
 
@@ -1695,7 +1736,7 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
         "activity": _activity_block(terms["activity"]),
         # batch-2 metrics (2026-07-23): regions/space/development/breaks/
         # passers/color_complex/trapped — deterministic geometry, data tier
-        "metrics": _metrics_block(fen),
+        "metrics": _metrics_block(fen, pvs, rolls),
         "structure": [{"name": n, "owner": name_side(o)} for n, o in classify(b)],
         "weaknesses": {
             "white": _weakness_lines(b, terms, chess.WHITE, pvs, rolls),
