@@ -120,3 +120,26 @@ def test_an_outside_bishop_is_not_a_bad_bishop():
                    for p in sides["white"]["plans"])
     # Black's c8 bishop IS inside the chain — still named, with its door.
     assert any("bishop on c8" in w for w in sides["black"]["weaknesses"])
+
+
+def test_the_space_bar_is_a_differential_not_a_share():
+    """A share saturates the instant one side is at zero: after 1.Nf3 e5 the bar
+    read 100% Black off a single pawn move, and after 1.e4 it read 100% White
+    (owner 2026-07-26: "why is the space maxxed out for black in this
+    position?"). It is a centered differential now, on the same scale the space
+    badge is calibrated on — a raw lead of 2 is a real edge, so it nudges."""
+    import chess
+    from fact_sheet import pre_verify_json
+
+    def space_bar(moves):
+        b = chess.Board()
+        for m in moves.split():
+            b.push_san(m)
+        bars = {bar["label"]: bar for bar in pre_verify_json(b.fen(), None, None)["bars"]}
+        return bars.get("Space")
+
+    one_pawn = space_bar("Nf3 e5")                  # White has moved no pawn at all
+    assert one_pawn is not None
+    assert 0.3 < one_pawn["value"] < 0.5            # off centre toward Black, nowhere near maxed
+    assert space_bar("e4 e5")["value"] == 0.5       # symmetrical fronts: dead even
+    assert 0.5 < space_bar("e4 Nf6")["value"] < 0.7  # White's one pawn: a nudge, not a rout

@@ -146,7 +146,9 @@ def test_bars_are_comparable_and_gated():
     assert set(bars) == {"Eval", "Activity", "Space", "White king", "Black king"}
     assert bars["Eval"]["mid"] == 0.5 and 0.5 < bars["Eval"]["value"] < 0.6   # slight White
     assert bars["Activity"]["mid"] == 0.5 and bars["Activity"]["value"] > 0.5  # White edge
-    assert bars["Space"]["value"] == 2 / 3 and bars["Space"]["mid"] == 0.5     # 2 vs 1 raw
+    # 2 vs 1 raw is a ONE-square edge: a nudge off centre, not two thirds of the
+    # bar (2026-07-26 — the old share saturated whenever a side was at zero).
+    assert bars["Space"]["value"] == 0.5 + 1 / 16 and bars["Space"]["mid"] == 0.5
     assert "mid" not in bars["Black king"] and bars["Black king"]["value"] == 0.2  # absolute
 
     # decisive: Activity/Space drop, Eval + kings remain

@@ -1575,13 +1575,23 @@ def _bars_block(out: dict) -> list[dict]:
         if aw is not None and ab is not None:
             bars.append({"label": "Activity",
                          "value": c01(0.5 + (aw - ab) * 1.5), "mid": 0.5})
+        # Space is a DIFFERENTIAL on a scale, like Activity — not a share
+        # (owner 2026-07-26: "why is the space maxxed out for black in this
+        # position?"). It was w/(w+b), which saturates the moment one side is
+        # at zero: after 1.Nf3 e5 the bar read 100% Black, and after 1.e4 it
+        # read 100% White, off a single pawn move. `raw` counts squares
+        # claimed past the second rank, so the same scale the space BADGE is
+        # calibrated on applies here — a raw lead of 2 is a real edge
+        # (_SPACE_EDGE_MIN, corpus-checked), so 2 nudges the bar and a
+        # thumping 8 fills it.
         sp = (out.get("metrics") or {}).get("space") or {}
         w = sum((sp.get(r) or {}).get("white", {}).get("raw", 0)
                 for r in ("center", "kingside", "queenside"))
         b = sum((sp.get(r) or {}).get("black", {}).get("raw", 0)
                 for r in ("center", "kingside", "queenside"))
         if w + b > 0:
-            bars.append({"label": "Space", "value": w / (w + b), "mid": 0.5})
+            bars.append({"label": "Space", "value": c01(0.5 + (w - b) / 16.0),
+                         "mid": 0.5})
     bars.extend(_king_bars(a))
     return bars
 
