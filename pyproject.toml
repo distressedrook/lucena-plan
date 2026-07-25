@@ -39,6 +39,7 @@ py-modules = [
     "personal_sharpness",
     "plan_diff",
     "position_read",
+    "preroll",
     "structures",
     "suggest",
     "tension",
