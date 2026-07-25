@@ -1,0 +1,28 @@
+
+===== IMBALANCE BENCHMARK =====
+labeled 3471 | equalish(|cp|<=100) 1752 | dropped(decisive) 1717 | read_err 2
+
+type                  n   eq  eq%   forms(equalish)
+other               638  481  75%   null:469 concrete:6 only_move:3 space:2 activity:1
+minor_mixed         514  350  68%   null:293 only_move:26 concrete:15 space:11 activity:5
+Q_vs_mixed          262  167  64%   null:151 only_move:16
+rook_mixed          259  151  58%   null:132 only_move:11 space:3 concrete:3 activity:2
+exchange            208   90  43%   null:43 only_move:15 activity:13 concrete:11 space:8
+minor_vs_pawns      173   71  41%   null:56 concrete:6 only_move:4 activity:4 space:1
+exchange_for_pawns  164   63  38%   null:58 activity:2 only_move:2 space:1
+rook_vs_pawns       157   48  31%   null:29 only_move:11 space:3 concrete:3 activity:2
+Q_vs_2rooks         151   52  34%   null:38 concrete:9 only_move:2 activity:2 space:1
+2minors_vs_rook     150   48  32%   null:34 only_move:8 concrete:4 activity:2
+double_exchange     150   41  27%   null:20 only_move:11 concrete:4 space:3 activity:3
+2minors_vs_pawns    150   62  41%   null:41 only_move:12 concrete:5 space:3 activity:1
+Q_vs_R+minor        150   45  30%   null:29 activity:9 only_move:5 concrete:2
+Q_vs_R+2minors      150   46  31%   null:36 only_move:5 concrete:3 space:1 activity:1
+Q_vs_2minors        150   24  16%   null:13 activity:5 only_move:4 concrete:1 space:1
+Q_vs_3minors         45   13  29%   null:7 concrete:2 only_move:2 space:1 activity:1
+
+ALL equalish read forms: {'null': 1449, 'only_move': 137, 'concrete': 74, 'activity': 53, 'space': 39}
+  fired 303/1752  (static-explained 92, concrete 74, null 1449)
+concrete resolved by line-walk: {'regained': 48, 'harvest': 18, 'dynamic': 6, 'pressure': 2}
+magnitude when fired: {'full': 279, 'partial': 24}
+
+frozen -> /Users/avismara/Development/lucena/lucena-plans/research/experiments/studies/imbalance_benchmark/imbalance_benchmark.jsonl
