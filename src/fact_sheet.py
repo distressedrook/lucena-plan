@@ -810,7 +810,13 @@ if __name__ == "__main__":
 #     presented as though an engine line confirmed it
 # ═══════════════════════════════════════════════════════════════════════
 
-SHEET_SCHEMA = "lucena-plans/sheet@1"
+# @2 (2026-07-26): `bars` lost the Eval bar and the two king bars, and
+# `winning.king_bars` became `winning.king_tags` — king safety is a tag now.
+# The version is load-bearing, not decoration: sheets are CACHED by position
+# (backend positions.py, memory + Postgres), so without a bump a sheet rolled
+# yesterday would come back today and put the retired bars back on screen.
+# Consumers must treat a foreign schema as a miss, not as a sheet.
+SHEET_SCHEMA = "lucena-plans/sheet@2"
 
 
 def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
@@ -1581,23 +1587,22 @@ def _bars_block(out: dict) -> list[dict]:
     """Labeled 0-1 bars (owner 2026-07-24: 'reintroduce bars instead of
     labels'). Each is driven by a COMPARABLE, head-to-head quantity so the
     per-side-normalization trap that made us switch to badges can't recur:
+    ACTIVITY and SPACE are CENTERED (mid=0.5) off White-minus-Black
+    differentials — 0.5 is dead even, fill past the midline is White's edge.
+    (Activity uses the material-neutral per-side scores; Space uses raw
+    counts.) Both are shown only in an equalish position.
 
-      * Eval / Activity / Space are CENTERED (mid=0.5) off White-minus-Black
-        differentials — 0.5 is dead even, fill past the midline is White's
-        edge. (Activity uses diff_cp, the raw Stockfish mobility differential,
-        NOT the per-side 0-1 norm; Space uses raw counts.)
-      * King safety uses its true ABSOLUTE scale (danger_bounded, 0=safe..
-        1=lost), one bar per king — the two ARE comparable there.
-
-    NO control bar (owner: dropped as noise). Activity/Space are shown only in
-    an equalish position (decisive -> the Eval bar tells the story)."""
+    Two bars have been retired (owner 2026-07-26): the EVAL bar, which drew a
+    number the read already states in words and the app already prints above
+    the board, and the two KING bars, which are a tag now — see _king_tags.
+    NO control bar either (owner 2026-07-24: dropped as noise)."""
     a = out.get("assessment") or {}
     def c01(x): return max(0.0, min(1.0, x))
     bars: list[dict] = []
-    total = a.get("total_cp")
-    if total is not None:
-        bars.append({"label": "Eval", "value": c01(0.5 + total / 1000.0),
-                     "mid": 0.5})
+    # NO EVAL BAR (owner 2026-07-26: "eval bar isn't required"). The verdict
+    # is already stated in words at the top of the read, and the app draws its
+    # own eval readout above the board — a third rendering of the same number
+    # was the least informative thing on the page.
     if not _is_decisive(a):
         # Activity bar off the MATERIAL-NEUTRAL per-side scores (mean per-piece
         # 0-1 mobility) — NOT the raw diff_cp sum, which a queen's mobility
@@ -1628,20 +1633,42 @@ def _bars_block(out: dict) -> list[dict]:
         if w + b > 0:
             bars.append({"label": "Space", "value": c01(0.5 + (w - b) / 16.0),
                          "mid": 0.5})
-    bars.extend(_king_bars(a))
+    # NO KING BARS either: king safety is a TAG now (owner 2026-07-26: "the
+    # king safety bar isn't working. Let's make it into a tag"). It was drawn
+    # from `danger_bounded`, which is danger/899 — measured across 2,400 king
+    # observations in the imbalance corpus it lands between 0.00 and 0.09 in
+    # every ordinary position, so both bars sat pinned at the left end and
+    # said nothing. See _king_tags.
     return bars
 
 
-def _king_bars(a: dict) -> list[dict]:
-    """The two king-safety bars — absolute 0=safe..1=exposed (danger_bounded,
-    now storm-aware). Shown always, INCLUDING when winning (owner: 'run the
-    numbers even when winning' — the diagnostic view)."""
+# King-safety TAG thresholds, on the RAW danger score, taken from the steps of
+# the calibrated table itself (king_danger_calibration._STEPS_IF_PRESSED —
+# P(the king is mated or the eval collapses within 16 plies) under a ~1500
+# defence, the validated regime, n=278). Measured over 2,400 king observations
+# in the imbalance corpus: 84.5% of kings sit below 40 and get no tag at all,
+# 14.6% land in the loose band, 1.0% reach real danger. The old BAR read
+# danger/899 instead, which never left 0.00-0.09 — which is why it looked
+# broken. The 264 step (p 0.75) is real but never fired in the corpus, so
+# nothing is worded around it.
+_KING_LOOSE = 40        # p ~0.31, against a 0.09 base rate
+_KING_DANGER = 114      # p ~0.41
+
+
+def _king_tags(a: dict) -> list[str]:
+    """King safety as short verdicts — the same shape as every other badge on
+    this sheet, and for the same reason: a 0-1 that never moves is false
+    precision on screen. Both sides can be tagged; a safe king says nothing."""
     kr = a.get("king_risk") or {}
-    out: list[dict] = []
-    for side, lbl in (("white", "White king"), ("black", "Black king")):
-        db = (kr.get(side) or {}).get("danger_bounded")
-        if db is not None:
-            out.append({"label": lbl, "value": max(0.0, min(1.0, db))})
+    out: list[str] = []
+    for side, name in (("white", "White"), ("black", "Black")):
+        danger = (kr.get(side) or {}).get("danger")
+        if danger is None:
+            continue
+        if danger >= _KING_DANGER:
+            out.append(f"{name}'s king is in real danger")
+        elif danger >= _KING_LOOSE:
+            out.append(f"{name}'s king is loose")
     return out
 
 
@@ -1682,7 +1709,10 @@ def _badges_block(out: dict) -> list[str]:
         weak = (cc.get(tone) or {}).get("weak_for")
         if weak:
             badges.append(f"{weak}'s {tone} squares are weak")
-    return badges
+    # KING SAFETY, as a tag rather than a pair of bars (owner 2026-07-26). It
+    # leads: a king in trouble outranks a space edge, and unlike the others it
+    # can name BOTH sides.
+    return _king_tags(assessment) + badges
 
 
 def _sides_block(out: dict) -> dict:
@@ -1832,9 +1862,10 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
     out["winning"] = ({"reason": _winning_reason(_a),
                        "advice": _winning_advice(_a),
                        "defense": _defender_advice(_a),
-                       # the king numbers even when winning (owner's diagnostic
-                       # view — and the storm term makes them worth watching)
-                       "king_bars": _king_bars(_a)}
+                       # the king read even when winning (owner's diagnostic
+                       # view — and the storm term makes it worth watching);
+                       # a tag now, like everywhere else
+                       "king_tags": _king_tags(_a)}
                       if _is_decisive(_a) else None)
     # COMPENSATION (owner 2026-07-24): WHY a materially-down side is holding —
     # engine states the magnitude, the cascade (attack -> activity -> space ->

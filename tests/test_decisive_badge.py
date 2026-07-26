@@ -166,22 +166,22 @@ def test_bars_are_comparable_and_gated():
             "queenside": {"white": {"raw": 0}, "black": {"raw": 0}}}},
     }
     bars = {b["label"]: b for b in F._bars_block(out)}
-    assert set(bars) == {"Eval", "Activity", "Space", "White king", "Black king"}
-    assert bars["Eval"]["mid"] == 0.5 and 0.5 < bars["Eval"]["value"] < 0.6   # slight White
+    # TWO bars only (owner 2026-07-26): no eval bar — the read says the verdict
+    # in words and the app prints the number above the board — and no king
+    # bars, king safety being a tag now (see test_king_safety_is_a_tag).
+    assert set(bars) == {"Activity", "Space"}
     assert bars["Activity"]["mid"] == 0.5 and bars["Activity"]["value"] > 0.5  # White edge
     # 2 vs 1 raw is a ONE-square edge: a nudge off centre, not two thirds of the
     # bar (2026-07-26 — the old share saturated whenever a side was at zero).
     assert bars["Space"]["value"] == 0.5 + 1 / 16 and bars["Space"]["mid"] == 0.5
-    assert "mid" not in bars["Black king"] and bars["Black king"]["value"] == 0.2  # absolute
 
     # decisive — a big eval AND the material behind it: Activity/Space drop,
-    # Eval + kings remain
+    # and nothing else was ever a bar
     out["assessment"]["total_cp"] = 900
     out["assessment"]["material_stability"] = {"leader": "White",
                                                "standing": "White is up a rook",
                                                "adjusted_cp": 500}
-    labels = {b["label"] for b in F._bars_block(out)}
-    assert labels == {"Eval", "White king", "Black king"}
+    assert F._bars_block(out) == []
 
 
 def test_winning_reason():
@@ -299,14 +299,34 @@ def test_engine_eval_beats_material_backstop():
     assert F._is_decisive(static) is True
 
 
-def test_winning_shows_king_bars():
-    """King numbers are shown even when winning (owner: 'run the numbers even
-    when winning') — out['winning'].king_bars carries both kings' danger."""
+def test_winning_still_reads_the_kings():
+    """The king read is shown even when winning (owner: 'run the numbers even
+    when winning') — as TAGS now (2026-07-26). A safe king says nothing, so on a
+    quiet won endgame the list is simply empty; the KEY is always present."""
     dec = F._sheet_json("6k1/5ppp/8/8/8/8/5PPP/R5K1 w - - 0 1",
                         [{"cp": 520, "pv": [], "ucis": [], "san": []}], None, verify=False)
-    kb = dec["winning"]["king_bars"]
-    assert [b["label"] for b in kb] == ["White king", "Black king"]
-    assert all(0.0 <= b["value"] <= 1.0 and "mid" not in b for b in kb)
+    assert "king_tags" in dec["winning"]
+    assert all(isinstance(t, str) for t in dec["winning"]["king_tags"])
+
+
+def test_king_safety_is_a_tag_with_real_range():
+    """The BAR was danger/899, which never left 0.00-0.09 in a real position —
+    two bars pinned at the left end, which is why it read as broken (owner
+    2026-07-26: "the king safety bar isn't working. Let's make it into a tag").
+    The tag reads the RAW danger against the calibrated table's own steps."""
+    safe = {"king_risk": {"white": {"danger": 8}, "black": {"danger": 3}}}
+    assert F._king_tags(safe) == []                       # a safe king says nothing
+    loose = {"king_risk": {"white": {"danger": F._KING_LOOSE}, "black": {"danger": 0}}}
+    assert F._king_tags(loose) == ["White's king is loose"]
+    both = {"king_risk": {"white": {"danger": F._KING_DANGER},
+                          "black": {"danger": F._KING_LOOSE}}}
+    assert F._king_tags(both) == ["White's king is in real danger",
+                                  "Black's king is loose"]
+    # and it reaches the badges, ahead of the positional chips
+    out = {"assessment": {**loose, "total_cp": 20},
+           "metrics": {"color_complex": {"dark": {"weak_for": "Black"}}}}
+    assert F._badges_block(out) == ["White's king is loose",
+                                    "Black's dark squares are weak"]
 
 
 def test_activity_bar_uses_per_side_scores_not_diff_cp():
