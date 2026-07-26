@@ -320,6 +320,85 @@ def _skeleton_lever_words(b: chess.Board) -> list[str]:
     return out
 
 
+# -- what a harvest actually costs, and why one is refused (2026-07-26) -------
+# Owner: "we usually harvest the weakness but what is the tradeoff of
+# harvesting this?" Two honest halves, and deliberately no third.
+#
+# A CONFIRMED harvest appears in an eval-equal line, so the engine has already
+# priced it: we must not imply it is a mistake. What we CAN say is what changes
+# hands on the way, and only where the change is real rather than arithmetic. A
+# spike over 15 confirmed harvests found 4 with any categorical delta and three
+# of those were artefacts — "new hole on e4" after capturing the pawn ON e4 is
+# what removing a pawn does, not what the plan costs. Two survive:
+#   * the opponent gets a PASSED PAWN out of the sequence
+#   * the harvester's king crosses a danger tier
+# Both are existing detectors; neither can be produced by the capture itself.
+#
+# A REFUSED harvest is the more useful lesson — the pawn is weak and the lines
+# still will not take it — and the reason is often concrete: nothing attacks it
+# yet, or the capture loses material on the exchange (SEE). Where the reason is
+# positional we say only that the lines leave it alone; narrating a refutation
+# the engine never plays is exactly the unfounded claim this layer refuses to
+# make.
+
+_HARVEST_FAMILIES = ("weakness_harvest", "harvest_overextended")
+
+
+def _king_tier(fen: str, me: str) -> int:
+    """0 safe / 1 loose / 2 in real danger — the same steps _king_tags uses."""
+    try:
+        from lucena_core.positional import analyze_positional
+        from lucena_core.board import Board as _LB
+        ks = analyze_positional(_LB(fen))["terms"]["king_safety"]["features"]
+        d = (ks.get(me) or {}).get("danger") or 0
+    except Exception:
+        return 0
+    return 2 if d >= _KING_DANGER else 1 if d >= _KING_LOOSE else 0
+
+
+def _harvest_cost(fen: str, t: str, ucis: list[str]) -> str | None:
+    """What the harvesting side GIVES UP in the line that wins the pawn."""
+    if not ucis:
+        return None
+    me = "white" if t == "W" else "black"
+    them = "black" if t == "W" else "white"
+    try:
+        b = chess.Board(fen)
+        for u in ucis:
+            b.push(chess.Move.from_uci(u))
+        after = b.fen()
+        from lucena_core.metrics import passer_report
+        before_p = len((passer_report(fen) or {}).get(them) or [])
+        after_p = len((passer_report(after) or {}).get(them) or [])
+        if after_p > before_p:
+            return f"it hands {them.capitalize()} a passed pawn"
+        if _king_tier(after, me) > _king_tier(fen, me):
+            return f"{me.capitalize()}'s king ends up loose"
+    except Exception:
+        _log.warning("harvest cost walk failed", exc_info=True)
+    return None
+
+
+def _harvest_refusal(b: chess.Board, t: str, squares: list[str]) -> str | None:
+    """Why the lines leave a weak pawn alone. Material reasons are named (SEE);
+    positional ones are not invented."""
+    side = chess.WHITE if t == "W" else chess.BLACK
+    reachable = []
+    for name in squares:
+        sq = chess.parse_square(name)
+        if b.attackers(side, sq):
+            reachable.append((name, _see(b, sq, side)))
+    if not reachable:
+        return "nothing attacks it yet"
+    # `_see` FLOORS at 0 — it answers "what can I win by starting captures
+    # here", and declining is best when the answer is 0. So 0 means the
+    # exchange does not win the pawn, which is the concrete reason; it is
+    # never negative, and a test for < 0 could never fire (2026-07-26).
+    if all(v <= 0 for _, v in reachable):
+        return "it is defended — taking it now wins nothing on the exchange"
+    return "the equal lines leave it alone for now"
+
+
 def _holes_block(b: chess.Board) -> list[dict]:
     """The sheet's canonical hole records; never fatal (a sheet must not die
     on a metric)."""
@@ -893,6 +972,10 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
             "route_note": _route_phrase(ev).strip(" ()") or None,
             "verified": None,          # pre-verify: unknown
             "verdict": None,
+            # what winning the pawn gives up (confirmed), and why the lines
+            # decline it (refused) — see _harvest_cost / _harvest_refusal
+            "cost": None,
+            "refused": None,
             "timing": None,
             "maia_frac": None,
             "family": None,            # the confirming arm (set on win)
@@ -945,8 +1028,16 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
                     # confirmation knows the specific, the specific wins.
                     if won.get("family") in ("weakness_harvest",
                                              "harvest_overextended"):
+                        # NARROW, never widen: intersect with the squares the
+                        # plan already names. The emitter records every harvest
+                        # in the walked line, so a line that later wins a
+                        # second pawn was turning "the weak pawn on e5" into
+                        # "the weak pawns on e4, e5" — naming a square that is
+                        # not a weak pawn in THIS position (2026-07-26).
+                        named = set(re.findall(r"[a-h][1-8]", entry["idea"]))
                         got = sorted({d for d in entry["details"]
-                                      if len(d) == 2 and d[0] in "abcdefgh"})
+                                      if len(d) == 2 and d[0] in "abcdefgh"}
+                                     & named)
                         # Narrow the SQUARE LIST inside the plan's own
                         # sentence, never rebuild the sentence: a weak pawn and
                         # an overextended one are different ideas and must not
@@ -956,6 +1047,12 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
                                 r"pawns? on [a-h][1-8](?:, [a-h][1-8])*",
                                 f"pawn{'s' if len(got) > 1 else ''} on "
                                 + ", ".join(got), entry["idea"], count=1)
+                        # ...and what it costs on the way, when the change is
+                        # real rather than the arithmetic of a capture.
+                        entry["cost"] = _harvest_cost(fen, t,
+                                                      won.get("line_ucis") or [])
+                        if entry["cost"]:
+                            entry["idea"] += f" — but {entry['cost']}"
                     if entry["details"] or entry["routes"]:
                         entry["route_note"] = None
                     maia = won.get("maia") or {}
@@ -964,6 +1061,13 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
                 else:
                     entry["verified"] = False
                     entry["verdict"] = (v or {}).get("verdict") or "UNCONFIRMED"
+                    # A REFUSED harvest is a lesson, not a silence: the pawn is
+                    # weak and the lines still will not take it (2026-07-26).
+                    if fams & set(_HARVEST_FAMILIES):
+                        entry["refused"] = _harvest_refusal(
+                            b, t, re.findall(r"[a-h][1-8]", entry["idea"]))
+                        if entry["refused"]:
+                            entry["idea"] += f" — {entry['refused']}"
         # VERIFIED-ONLY families are dropped rather than tagged (owner
         # 2026-07-26: "these have to be engine verified"). The three tiers say
         # how good a plan's evidence is, which is honest for an idea a reader

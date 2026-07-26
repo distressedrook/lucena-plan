@@ -272,6 +272,10 @@ def verify_plan(fen: str, side: str, family: str,
     r = {"family": family, "side": side, "horizon": horizon, "square": square,
          "verdict": "UNSUPPORTED", "engine": None, "maia": None,
          "lag": None, "timing": None, "immediate_move": None, "details": [],
+         # the EARLIEST-firing equal line's moves, kept so a consumer can walk
+         # what the plan actually costs (2026-07-26) — the verdict says the
+         # plan is sound, this says what changes hands on the way
+         "line_ucis": [],
          "routes": []}
 
     if family == "keep_king_uncastled":
@@ -372,6 +376,7 @@ def verify_plan(fen: str, side: str, family: str,
             # now" vs "this becomes available after other stuff happens"
             lag, _detail, best_line = min(firing, key=lambda fp: fp[0])
             r["lag"] = lag
+            r["line_ucis"] = list(best_line.get("ucis") or [])
             r["timing"] = ("immediate" if lag <= 2 else
                           "developing" if lag <= 6 else "long-term")
             if best_line["ucis"]:

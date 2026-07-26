@@ -424,3 +424,75 @@ def test_a_confirmed_harvest_names_the_pawn_the_lines_take(monkeypatch):
     harvest, = [p for p in plans if "arvest" in p["idea"]]
     assert harvest["idea"] == "Harvest the weak pawn on e4"        # not all three
     assert harvest["details"] == ["e4"]
+
+
+def test_a_refused_harvest_says_why(monkeypatch):
+    """Owner 2026-07-26: "what is the tradeoff of harvesting this?" The more
+    useful half is the REFUSAL — the pawn is weak and the lines still will not
+    take it — and the reason is often concrete. Positional refusals say only
+    that the lines leave it alone: narrating a refutation the engine never
+    plays is the unfounded claim this layer refuses to make."""
+    import chess
+    import verify as _verify
+    from fact_sheet import post_verify_json, _harvest_refusal
+
+    monkeypatch.setattr(_verify, "verify_plan",
+                        lambda fen, t, fam, **kw: {"verdict": "NOT-IN-BEST-LINES",
+                                                   "family": fam, "details": [],
+                                                   "line_ucis": []})
+    fen = "r1bq1b1r/pp2n1pp/2p1k3/3np1B1/2BP4/2N2Q2/PPP2PPP/R3K2R b KQ - 1 10"
+    plans = post_verify_json(fen, [{"cp": 20, "pv": [], "ucis": [], "san": []}],
+                             [])["sides"]["white"]["plans"]
+    harvest, = [p for p in plans if "arvest" in p["idea"]]
+    assert harvest["refused"]
+    assert harvest["refused"] in harvest["idea"]
+
+    # the three reasons, each from the board rather than from a story
+    nothing = chess.Board("8/8/4p3/8/8/8/6K1/6k1 w - - 0 40")          # no attacker
+    assert _harvest_refusal(nothing, "W", ["e6"]) == "nothing attacks it yet"
+    # a rook that CAN take on e6, into two defending pawns: the exchange loses
+    losing = chess.Board("6k1/3p1p2/4p3/8/8/8/6PP/4R1K1 w - - 0 40")
+    assert losing.attackers(chess.WHITE, chess.E6)          # it is reachable...
+    assert _harvest_refusal(losing, "W", ["e6"]) == \
+        "it is defended — taking it now wins nothing on the exchange"
+
+
+def test_a_confirmed_harvest_names_what_it_costs(monkeypatch):
+    """A confirmed harvest appears in an EVAL-EQUAL line, so the engine has
+    already priced it — we do not call it a mistake. What we say is what
+    changes hands, and only where the change is real: a passer for the
+    opponent, or the harvester's king crossing a danger tier. "New hole on e4"
+    after capturing the pawn ON e4 is arithmetic, not a cost, and a spike over
+    15 confirmed harvests found three such artefacts for every real signal."""
+    import chess
+    from fact_sheet import _harvest_cost
+
+    # White wins the b5 pawn with axb5 — and Black's a-pawn becomes passed
+    fen = "6k1/8/8/pp6/P7/8/6PP/6K1 w - - 0 40"
+    b = chess.Board(fen)
+    line = [m.uci() for m in b.legal_moves
+            if b.san(m) == "axb5"]
+    assert line, "fixture should allow axb5"
+    cost = _harvest_cost(fen, "W", line)
+    assert cost == "it hands Black a passed pawn"
+    # ...and a quiet capture that changes nothing says nothing
+    assert _harvest_cost("6k1/8/8/8/8/8/6PP/6K1 w - - 0 40", "W", []) is None
+
+
+def test_the_line_narrowing_never_widens(monkeypatch):
+    """The emitter records every harvest in the walked line, so a line that
+    later wins a SECOND pawn was turning "the weak pawn on e5" into "the weak
+    pawns on e4, e5" — naming a square that is not a weak pawn in this
+    position. The narrowing intersects; it never adds."""
+    import verify as _verify
+    from fact_sheet import post_verify_json
+    fen = "r1bq1b1r/pp2n1pp/2p1k3/3np1B1/2BP4/2N2Q2/PPP2PPP/R3K2R b KQ - 1 10"
+    monkeypatch.setattr(_verify, "verify_plan",
+                        lambda fen, t, fam, **kw: {"verdict": "CONFIRMED-SOUND",
+                                                   "family": fam,
+                                                   "details": ["e4", "e5"],
+                                                   "line_ucis": []})
+    plans = post_verify_json(fen, [{"cp": 20, "pv": [], "ucis": [], "san": []}],
+                             [])["sides"]["white"]["plans"]
+    harvest, = [p for p in plans if "arvest" in p["idea"]]
+    assert "e4" not in harvest["idea"] and "e5" in harvest["idea"]
