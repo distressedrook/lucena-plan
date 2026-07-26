@@ -109,8 +109,14 @@ def _static_units(b: chess.Board, side: bool) -> dict:
         # null-move view; illegal while in check -> no resources (you're the
         # one responding, the very definition of not having the initiative)
         if bb.is_check():
-            return {"safe_checks": 0, "good_captures": 0,
-                    "loose_threats": 0, "restriction": 0, "units": 0.0}
+            # "why" must be present on EVERY return: the caller writes
+            # st["why"]["promotion"] unconditionally, so omitting it here made
+            # the whole initiative block raise KeyError for any position where
+            # a side is in check — silently, into a `except: warn` (found
+            # 2026-07-26 by running the game pipeline over a real blitz game,
+            # which is full of checks).
+            return {"safe_checks": 0, "good_captures": 0, "loose_threats": 0,
+                    "restriction": 0, "units": 0.0, "why": {}}
         bb.turn = side
         bb.ep_square = None
     lm = loose_map(bb)
