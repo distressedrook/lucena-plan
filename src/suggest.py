@@ -855,7 +855,12 @@ def build_menus(b: chess.Board) -> dict:
         own_f = s["wf"] if t == "W" else s["bf"]
         opp_f = s["bf"] if t == "W" else s["wf"]
         free_files = [f for f in range(8) if f not in own_f]
-        if free_files:
+        # ...and you need a ROOK to activate (2026-07-26). The trigger is about
+        # FILES, so in a king-and-pawn endgame every file is free of own pawns
+        # and the plan fired with no rook on the board — "put a rook on the
+        # open file" to a player who has none. Found while reading what the
+        # sheet says about endgames.
+        if free_files and b.pieces(chess.ROOK, side):
             kind = [("open" if f not in opp_f else "semi-open",
                      chess.FILE_NAMES[f]) for f in free_files]
             cand(2.6, ", ".join(f"{k} {name}-file" for k, name in kind),

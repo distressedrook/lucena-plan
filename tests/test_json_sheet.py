@@ -496,3 +496,27 @@ def test_the_line_narrowing_never_widens(monkeypatch):
                              [])["sides"]["white"]["plans"]
     harvest, = [p for p in plans if "arvest" in p["idea"]]
     assert "e4" not in harvest["idea"] and "e5" in harvest["idea"]
+
+
+def test_a_plan_never_names_a_piece_you_do_not_have():
+    """ROOK ACTIVATION triggers on FILES — files with no own pawn — so in a
+    king-and-pawn endgame every file qualified and the plan told a player with
+    no rook to put a rook on the open file (2026-07-26, found while reading
+    what the sheet says about endgames). The plan needs the piece it names."""
+    import chess
+    from suggest import build_menus
+    words = {"rook": chess.ROOK, "knight": chess.KNIGHT,
+             "bishop": chess.BISHOP, "queen": chess.QUEEN}
+    for fen in ("8/8/8/4k3/8/4K3/4P3/8 w - - 0 60",          # K+P vs K
+                "8/5ppp/4k3/8/8/4KN2/5PPP/8 w - - 0 40",     # N vs pawns
+                "8/5ppp/4k3/8/8/4K3/5PPP/3Q4 w - - 0 40"):   # Q vs pawns
+        b = chess.Board(fen)
+        for t, side in (("W", chess.WHITE), ("B", chess.BLACK)):
+            for _, _, head, _, _, _ in build_menus(b)[t]:
+                for word, pt in words.items():
+                    if word in head.lower() and not b.pieces(pt, side):
+                        raise AssertionError(f"{fen}: {t} has no {word}: {head}")
+    # ...and with a rook on the board it still fires
+    rooks = chess.Board("8/8/8/5k2/8/8/4PK2/4R2r w - - 0 50")
+    assert any(h.startswith("ROOK ACTIVATION")
+               for _, _, h, _, _, _ in build_menus(rooks)["W"])
