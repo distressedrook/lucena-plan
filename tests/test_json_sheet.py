@@ -118,8 +118,11 @@ def test_an_outside_bishop_is_not_a_bad_bishop():
     assert not any("bishop on h4" in w for w in sides["white"]["weaknesses"])
     assert not any("BAD BISHOP" in p["idea"].upper()
                    for p in sides["white"]["plans"])
-    # Black's c8 bishop IS inside the chain — still named, with its door.
-    assert any("bishop on c8" in w for w in sides["black"]["weaknesses"])
+    # Black's c8 bishop is inside its chain — but at move 7, with the queen's
+    # knight still on b8, Black is DEVELOPING, so it is not called bad either
+    # (2026-07-26; see test_a_home_bishop_is_bad_only_when_it_is_the_last_one_out).
+    assert not any("bishop on c8" in w for w in sides["black"]["weaknesses"])
+    assert any("Bc8" in a["idea"] for a in sides["black"]["advisory"])
 
 
 def test_the_space_bar_is_a_differential_not_a_share():
@@ -143,3 +146,45 @@ def test_the_space_bar_is_a_differential_not_a_share():
     assert 0.3 < one_pawn["value"] < 0.5            # off centre toward Black, nowhere near maxed
     assert space_bar("e4 e5")["value"] == 0.5       # symmetrical fronts: dead even
     assert 0.5 < space_bar("e4 Nf6")["value"] < 0.7  # White's one pawn: a nudge, not a rout
+
+
+def test_a_home_bishop_is_bad_only_when_it_is_the_last_one_out():
+    """Fried Liver, move 10 (owner 2026-07-26: "I am a bit skeptical about the
+    claims on Black's bad bishops"). Black's Bc8 and Bf8 were both called bad
+    and drew two FREE THE BAD BISHOP plans — pushing ...b6 and ...g6 in front of
+    a king already sitting on e6 under fire. They are not bad bishops, they are
+    pieces that have not moved; one ...c6 was all it took to flip them, by
+    making the third light-square pawn.
+
+    The discrimination is the development debt, not the square: the French
+    light-squared bishop behind a fixed e6/d5 chain, with everything else
+    already developed, IS the textbook bad bishop and still fires."""
+    import chess
+    from weaknesses import bad_bishop, bad_bishop_problem
+    from fact_sheet import pre_verify_json
+
+    fried = chess.Board("r1bq1b1r/pp2n1pp/2p1k3/3np1B1/2BP4/2N2Q2/PPP2PPP/R3K2R b KQ - 1 10")
+    assert [chess.square_name(s) for s in bad_bishop(fried, chess.BLACK)] == ["c8", "f8"]
+    assert bad_bishop_problem(fried, chess.BLACK) == []          # ...none surfaced
+    black = pre_verify_json(fried.fen(), None, None)["sides"]["black"]
+    assert not any("bishop" in w for w in black["weaknesses"])
+    assert not any("BAD BISHOP" in p["idea"].upper() for p in black["plans"])
+    # the development plan owns them, and says so by name
+    assert any("Bc8" in a["idea"] and "Bf8" in a["idea"] for a in black["advisory"])
+
+    # the real thing: everything out except the bishop, behind a fixed chain
+    french = chess.Board("r1bq1rk1/pp1nbppp/2p1pn2/3pP3/3P4/2N2N2/PPP2PPP/R1BQ1RK1 b - - 0 10")
+    assert [chess.square_name(s) for s in bad_bishop_problem(french, chess.BLACK)] == ["c8"]
+    # ...but put one knight back on b8 and it is a developing position again
+    developing = chess.Board("rnbq1rk1/pp2bppp/2p1p3/3pP3/3P4/2N2N2/PPP2PPP/R1BQ1RK1 b - - 0 10")
+    assert bad_bishop_problem(developing, chess.BLACK) == []
+
+
+def test_the_bad_bishop_plans_name_the_bishop():
+    """Two bad bishops produced two identical plan lines — the reader could not
+    tell which one either was about (2026-07-26)."""
+    import chess
+    from suggest import build_menus
+    b = chess.Board("r1bq1rk1/pp1nbppp/2p1pn2/3pP3/3P4/2N2N2/PPP2PPP/R1BQ1RK1 b - - 0 10")
+    heads = [h for _, _, h, _, _, _ in build_menus(b)["B"] if "BAD BISHOP" in h]
+    assert heads and all("c8" in h for h in heads)

@@ -162,11 +162,32 @@ def bad_bishop_problem(b: chess.Board, side: bool) -> list[int]:
     bad (and proposing pawn pushes to "free" it) tells a student the
     opposite of the truth.
 
+    AND a bishop still on its ORIGINAL square is only a bad bishop once it is
+    the LAST thing that side has left to develop (2026-07-26, owner, looking at
+    the Fried Liver: "I am a bit skeptical about the claims on Black's bad
+    bishops"). At move 10 there, with the king on e6 under fire, Black's Bc8
+    and Bf8 were both flagged bad and drew two FREE THE BAD BISHOP plans
+    telling Black to push b6 and g6 — pawn moves in front of a hunted king.
+    They are not bad bishops; they are pieces that have not moved yet, and one
+    ...c6 was all it took to flip them from undeveloped to "bad" (it made the
+    third light-square pawn).
+
+    The discrimination is the DEVELOPMENT DEBT, not the square: the French
+    light-squared bishop on c8, behind a fixed e6/d5 chain with everything else
+    already out, IS the textbook bad bishop and still fires — its side has one
+    debt, and it is the bishop. A side with two minors at home is developing,
+    and the COMPLETE DEVELOPMENT plan owns that.
+
     `bad_bishop` itself is unchanged: plan_diff's corpus emitters are
     calibrated on it. This is the presentation-side cut, the same shape as
     the trapped-piece one."""
+    from lucena_core.reads import development_debts
+    debts = development_debts(b, side)
+    still_developing = len(debts["minors"]) + (1 if debts["uncastled"] else 0) > 1
+    home = {chess.C1, chess.F1, chess.C8, chess.F8}
     return [sq for sq in bad_bishop(b, side)
-            if bishop_inside_chain(b, side, sq)]
+            if bishop_inside_chain(b, side, sq)
+            and not (sq in home and still_developing)]
 
 
 def bishop_inside_chain(b: chess.Board, side: bool, sq: int) -> bool:

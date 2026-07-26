@@ -701,8 +701,11 @@ def build_menus(b: chess.Board) -> dict:
                      for pp in b.pieces(chess.PAWN, side)
                      if _sqc(pp) == bcolor
                      and not b.piece_at(pp + (8 if side == chess.WHITE else -8))]
+            # NAME the bishop: with both bishops bad, two identical plan lines
+            # told the reader nothing about which one (2026-07-26).
             cand(4.5, f"own bad bishop {chess.square_name(bsq)}",
-                 "FREE THE BAD BISHOP: push a same-color pawn off its color",
+                 f"FREE THE BAD BISHOP on {chess.square_name(bsq)}: push a "
+                 "same-color pawn off its color",
                  "engine frees it in 76% of best lines / 49% of GM games "
                  "when a bad bishop is present (validated on the banked "
                  "benchmark; no random-floor gate — pushing pawns is a "
@@ -732,8 +735,8 @@ def build_menus(b: chess.Board) -> dict:
                 targets = ",".join(chess.square_name(q) for q in enemy_good)
                 cand(4.5, f"own bad bishop {chess.square_name(bsq)}; "
                      f"{name_side(enemy)}'s bishop on {targets} is good",
-                     f"EXCHANGE THE BAD BISHOP: trade it for "
-                     f"{name_side(enemy)}'s good bishop on {targets}",
+                     f"EXCHANGE THE BAD BISHOP on {chess.square_name(bsq)}: "
+                     f"trade it for {name_side(enemy)}'s good bishop on {targets}",
                      "the other cure: trade the bad piece specifically for "
                      "the enemy's good one, not just any piece — 55x "
                      "discrimination vs the random floor (5.5% "
