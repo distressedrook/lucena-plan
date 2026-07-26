@@ -462,7 +462,16 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
         if b.attackers(not side, sq) or _kr(b, not side, {sq}):
             keep.append(h)
     if keep:
-        L.append(f"Holes at {', '.join(keep[:3])}.")
+        # SAY WHAT IT IS FOR (owner 2026-07-26: "let's mention them and suggest
+        # how one can use them"). A hole in your own camp is not a square you
+        # do something with — it is one your pawns can never guard again, and
+        # the enemy's use of it is the point. Naming that is the coaching; the
+        # plan to plant a piece there belongs to the OTHER side's sheet, where
+        # it is an outpost and engine-verified.
+        names = ", ".join(keep[:3])
+        L.append(f"Holes at {names} — no pawn of yours can guard "
+                 f"{'them' if len(keep[:3]) > 1 else 'it'} again, so a piece "
+                 "that lands there cannot be chased off.")
     return L or ["No significant weaknesses."]
 
 
@@ -797,7 +806,8 @@ if __name__ == "__main__":
 # JSON sheets (2026-07-24, owner ruling): the plans layer emits STRUCTURED
 # artifacts — a PRE-verify JSON (full sheet, every candidate from SUGGEST,
 # unverified) and a POST-verify JSON (same shape, verdict/timing filled,
-# unconfirmed candidates MARKED, never deleted). The text sheet is retired
+# unconfirmed candidates MARKED rather than deleted — except the
+# _VERIFIED_ONLY families, which are omitted until confirmed; see below). The text sheet is retired
 # from the product path (build_fact_sheet stays for research
 # reproducibility only). Standing rules carried into the schema:
 #   - timing is a PLAN-level fact; no immediate_move field exists, ever
@@ -808,6 +818,10 @@ if __name__ == "__main__":
 #     position_read.render labels them (dropping them cost real plans; see
 #     that module's docstring) — but a structural candidate must never be
 #     presented as though an engine line confirmed it
+#   - ONE exception, _VERIFIED_ONLY (owner 2026-07-26): a family whose claim
+#     is a specific maneuver to a specific square is OMITTED until confirmed
+#     rather than marked, because unconfirmed it is unfalsifiable filler
+#     rather than an idea a reader can weigh. Everything else is marked
 # ═══════════════════════════════════════════════════════════════════════
 
 # @2 (2026-07-26): `bars` lost the Eval bar and the two king bars, and
@@ -817,6 +831,16 @@ if __name__ == "__main__":
 # yesterday would come back today and put the retired bars back on screen.
 # Consumers must treat a foreign schema as a miss, not as a sheet.
 SHEET_SCHEMA = "lucena-plans/sheet@2"
+
+# Families whose claim is too SPECIFIC to present unconfirmed — see the drop in
+# _candidates. Everything else is surfaced with its evidence tag instead.
+# Both of these name a SQUARE and assert a piece gets there: "plant a minor on
+# d6" is either something the lines actually do or it is filler, and the reader
+# cannot tell which from a tag (owner 2026-07-26: "I don't think we are
+# engine-verifying this. Let's do that").
+# (the PLAN's family, not the VERIFY key: "OUTPOST PLAN" maps to
+# outpost_occupation + blockade, and the intersection below catches it)
+_VERIFIED_ONLY = {"strong_outpost", "outpost_occupation"}
 
 
 def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
@@ -901,6 +925,16 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
                 else:
                     entry["verified"] = False
                     entry["verdict"] = (v or {}).get("verdict") or "UNCONFIRMED"
+        # VERIFIED-ONLY families are dropped rather than tagged (owner
+        # 2026-07-26: "these have to be engine verified"). The three tiers say
+        # how good a plan's evidence is, which is honest for an idea a reader
+        # can weigh — "double on the file" is sound advice whether or not this
+        # engine plays it. A strong-square knight is not that: it asserts a
+        # SPECIFIC maneuver to a SPECIFIC square in front of the enemy king,
+        # and "the structure suggests you could plant a knight on f5" is
+        # unfalsifiable filler if no line ever gets one there.
+        if entry["verified"] is False and fams & _VERIFIED_ONLY:
+            continue
         plans.append(entry)
     return plans, advisory
 
@@ -1736,9 +1770,20 @@ def _sides_block(out: dict) -> dict:
             "advisory": (out.get("advisory") or {}).get(side, []),
             "control": {r: regions[r][side] for r in
                         ("center", "kingside", "queenside") if r in regions},
-            # outposts/holes THIS side controls (in the enemy camp)
+            # HOLES vs OUTPOSTS are two different things and were one list
+            # (owner 2026-07-26: "let's separate holes and outposts, holes are
+            # differently used than outposts"). The old projection took every
+            # hole THIS side controls, whatever camp it was in — so a hole in
+            # your OWN camp that you happen to cover was filed as your outpost,
+            # which is backwards: it is your weakness, and the square the enemy
+            # wants. A hole belongs to the camp whose pawns can never guard it
+            # again; the side that can USE it is the other one.
+            #   outposts — squares in the ENEMY camp you can occupy
+            #   holes    — squares in YOUR camp the enemy can occupy
             "outposts": [h for h in regions.get("holes", [])
-                         if h.get("controller") == Side],
+                         if h.get("camp") == enemy],
+            "holes": [h for h in regions.get("holes", [])
+                      if h.get("camp") == side],
             "space": {r: space[r][side] for r in
                       ("center", "kingside", "queenside") if r in space},
             "breaks": (m.get("breaks") or {}).get(side, []),

@@ -188,3 +188,113 @@ def test_the_bad_bishop_plans_name_the_bishop():
     b = chess.Board("r1bq1rk1/pp1nbppp/2p1pn2/3pP3/3P4/2N2N2/PPP2PPP/R1BQ1RK1 b - - 0 10")
     heads = [h for _, _, h, _, _, _ in build_menus(b)["B"] if "BAD BISHOP" in h]
     assert heads and all("c8" in h for h in heads)
+
+
+def test_the_strong_square_is_actually_in_front_of_the_king():
+    """The claim names a square "in front of {enemy}'s king" (owner 2026-07-26:
+    "check if those squares are actually in front of the king"). The DETECTOR's
+    rule is about who can challenge a square, not where it sits, so it admits
+    one up to two files away — e5 against a king on g8 was being announced as
+    the square in front of Black's king. The plan now requires the king's file
+    or a neighbour, which is what the sentence says."""
+    import chess
+    from suggest import build_menus
+    from weaknesses import strong_squares
+
+    fen = "r2q1rk1/pp1nbppp/2p2n2/3p2B1/3P4/2NQPN2/PP3PPP/R4RK1 w - - 5 11"
+    b = chess.Board(fen)
+    # the detector still offers the wide ones...
+    assert {chess.square_name(s) for s in strong_squares(b, chess.WHITE)} >= {"e5", "f5"}
+    # ...and the plan takes only what is in front of the king on g8
+    heads = [h for _, _, h, _, _, _ in build_menus(b)["W"] if h.startswith("KNIGHT TO")]
+    assert heads == ["KNIGHT TO f5: maneuver a knight to the strong square in "
+                     "front of Black's king"]
+    black = [h for _, _, h, _, _, _ in build_menus(b)["B"] if h.startswith("KNIGHT TO")]
+    assert black, "Black's own strong-square plan should still fire"
+    assert any(h.startswith("KNIGHT TO g4:") for h in black)     # in front of g1
+    assert not any(h.startswith("KNIGHT TO e4:") for h in black)  # two files off
+
+
+def test_a_strong_square_knight_is_never_presented_unverified(monkeypatch):
+    """Owner 2026-07-26: "these have to be engine verified". The evidence tags
+    are honest for an idea a reader can weigh on its own — doubling rooks is
+    sound advice whether or not this engine plays it — but this plan asserts a
+    SPECIFIC maneuver to a SPECIFIC square, and unconfirmed it is unfalsifiable
+    filler. It is dropped, not tagged."""
+    import chess
+    import verify as _verify
+    from fact_sheet import post_verify_json
+
+    fen = "r2q1rk1/pp1nbppp/2p2n2/3p2B1/3P4/2NQPN2/PP3PPP/R4RK1 w - - 5 11"
+    pvs = [{"cp": 20, "pv": [], "ucis": [], "san": []}]
+
+    def refused(fen, t, fam, **kw):
+        return {"verdict": "NOT-IN-BEST-LINES", "family": fam}
+    monkeypatch.setattr(_verify, "verify_plan", refused)
+    plans = post_verify_json(fen, pvs, [])["sides"]["white"]["plans"]
+    assert not any("Knight to" in p["idea"] for p in plans)
+    assert any("Rook activation" in p["idea"] for p in plans)   # others still tagged
+
+    def confirmed(fen, t, fam, **kw):
+        return {"verdict": "CONFIRMED-SOUND", "family": fam, "timing": "developing"}
+    monkeypatch.setattr(_verify, "verify_plan", confirmed)
+    plans = post_verify_json(fen, pvs, [])["sides"]["white"]["plans"]
+    knight = [p for p in plans if "Knight to" in p["idea"]]
+    assert knight and knight[0]["verified"] is True             # ...and it survives
+
+
+def test_holes_and_outposts_are_different_things():
+    """Owner 2026-07-26: "let's separate holes and outposts. Holes are
+    differently used than outposts."
+
+    A hole belongs to the camp whose pawns can never guard it again; the side
+    that can USE it is the other one. The old projection filed every hole a
+    side CONTROLLED as that side's outpost, whatever camp it was in — so a hole
+    in your own camp that you happen to cover was listed as your asset, exactly
+    backwards. e3 below is White's weakness and Black's target."""
+    from fact_sheet import pre_verify_json
+    fen = "r1bq1rk1/pp2ppbp/2np1np1/8/3NP3/2N1BP2/PPPQ2PP/R3KB1R w KQ - 0 9"
+    sides = pre_verify_json(fen, None, None)["sides"]
+    assert [h["square"] for h in sides["white"]["holes"]] == ["e3"]
+    assert [h["square"] for h in sides["black"]["outposts"]] == ["e3"]
+    assert [h["square"] for h in sides["black"]["holes"]] == ["h6"]
+    assert [h["square"] for h in sides["white"]["outposts"]] == ["h6"]
+    # every outpost is in the enemy camp, every hole in one's own
+    for side, enemy in (("white", "black"), ("black", "white")):
+        assert all(h["camp"] == enemy for h in sides[side]["outposts"])
+        assert all(h["camp"] == side for h in sides[side]["holes"])
+
+
+def test_a_hole_says_what_it_means():
+    """The weakness line states the USE, not just the square: a hole is not a
+    square you do something with, it is one your pawns can never guard again."""
+    from fact_sheet import pre_verify_json
+    fen = "r1bq1b1r/pp2n1pp/2p1k3/3np1B1/2BP4/2N2Q2/PPP2PPP/R3K2R b KQ - 1 10"
+    black = pre_verify_json(fen, None, None)["sides"]["black"]["weaknesses"]
+    line, = [w for w in black if w.startswith("Holes at")]
+    assert "cannot be chased off" in line and "guard it again" in line
+
+
+def test_planting_a_minor_is_never_claimed_unverified(monkeypatch):
+    """"I don't think we are engine-verifying this. Let's do that." Same rule as
+    the strong-square knight: naming a square and asserting a piece gets there
+    is either something the lines do, or it is filler."""
+    import verify as _verify
+    from fact_sheet import post_verify_json
+    # the Carlsbad, where White's outpost plan (d6) genuinely fires
+    fen = "r2q1rk1/pp1nbppp/2p2n2/3p2B1/3P4/2NQPN2/PP3PPP/R4RK1 w - - 5 11"
+    pvs = [{"cp": 20, "pv": [], "ucis": [], "san": []}]
+
+    monkeypatch.setattr(_verify, "verify_plan",
+                        lambda fen, t, fam, **kw: {"verdict": "NOT-IN-BEST-LINES",
+                                                   "family": fam})
+    plans = post_verify_json(fen, pvs, [])["sides"]["white"]["plans"]
+    assert not any("Outpost plan" in p["idea"] for p in plans)
+    assert any("Rook activation" in p["idea"] for p in plans)   # others still tagged
+
+    monkeypatch.setattr(_verify, "verify_plan",
+                        lambda fen, t, fam, **kw: {"verdict": "CONFIRMED-SOUND",
+                                                   "family": fam})
+    plans = post_verify_json(fen, pvs, [])["sides"]["white"]["plans"]
+    planted = [p for p in plans if "Outpost plan" in p["idea"]]
+    assert planted and planted[0]["verified"] is True

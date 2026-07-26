@@ -629,9 +629,19 @@ def build_menus(b: chess.Board) -> dict:
         # maneuver to a square whose only pawn-challenger is an enemy
         # king-shelter pawn (Ruy Lopez Nf5) — broader than a permanent
         # hole. Candidate-tier: fires broadly, the engine gate prunes.
+        # IN FRONT OF THE KING means in front of the king (owner 2026-07-26:
+        # "check if those squares are actually in front of the king"). The
+        # detector admits a square up to TWO files away — its rule is about
+        # who can challenge it, not where it sits — so e5 against a king on g8
+        # was being announced as "the strong square in front of Black's king".
+        # A square within one file of the king's file is; anything wider is a
+        # strong square somewhere else, and this plan does not claim those.
         from weaknesses import strong_squares as _ss
-        ss = [s2 for s2 in _ss(b, side) if b.pieces(chess.KNIGHT, side)
-              and knight_route(b, side, {s2})]
+        eking = b.king(enemy)
+        ekf = chess.square_file(eking) if eking is not None else None
+        ss = [s2 for s2 in _ss(b, side)
+              if b.pieces(chess.KNIGHT, side) and knight_route(b, side, {s2})
+              and ekf is not None and abs(chess.square_file(s2) - ekf) <= 1]
         for s2 in ss[:2]:
             sname = chess.square_name(s2)
             cand(5.0, f"strong square {sname} (only an enemy king-shelter "
