@@ -15,6 +15,7 @@ Three-stage architecture (2026-07-22 ruling):
 """
 from __future__ import annotations
 
+import re
 import sys
 
 import chess
@@ -84,6 +85,52 @@ VERIFY = {
 
 def name_side(s) -> str:
     return "White" if s in (chess.WHITE, "W") else "Black"
+
+
+# A plan may not tell you to move a piece you do not have (owner 2026-07-26:
+# "put a rook on the open file shouldn't surface even in the middle if there
+# are no rooks"). Each candidate's own trigger should check this — ROOK
+# ACTIVATION triggers on FILES and did not — so this is the NET under all of
+# them, applied once in build_menus, and a corpus sweep in the tests keeps it
+# honest for plans written later.
+_PIECE_WORDS = (("rook", chess.ROOK), ("knight", chess.KNIGHT),
+                ("bishop", chess.BISHOP), ("queen", chess.QUEEN))
+
+
+# The plan must tell you to MOVE it — an undirected noun is not a claim about
+# your inventory (Codex 2026-07-26). "BREAK THE BISHOP PAIR: trade a minor for
+# a bishop" names the enemy's bishop as the TARGET, and a first cut of this net
+# deleted that plan for a knight-only side: a worse bug than the one it fixes,
+# and invisible to a sweep that measures what SURVIVES the filter.
+_OWN_ACTION = (r"\b(?:put|place|plant|maneuver|manoeuvre|activate|double|"
+               r"swing|reroute|bring|lift)\b[^.;:]*?")
+
+
+def _missing_piece(b: chess.Board, side: bool, head: str) -> str | None:
+    """The piece this sentence tells YOU to move but you do not own, if any.
+
+    Matches only an OWN-ACTION form ("put a rook on the open file", "plant
+    White's knight on d6"): the piece has to be the object of something the
+    plan asks you to do. Two further exclusions — a clause naming the ENEMY's
+    piece ("trade it for White's good bishop on c4") is about their board, and
+    a parenthesised aside ("double rooks (or rook and queen)") lists
+    ALTERNATIVES the plan's own trigger chooses between.
+
+    It fails SAFE by construction: a phrasing this does not recognise keeps the
+    old behaviour (the candidate's own trigger decides), rather than deleting a
+    correct plan."""
+    text = re.sub(rf"{name_side(not side)}'s [^,.;:]*", "", head)
+    # PROPHYLAXIS QUOTES THE ENEMY'S PLAN VERBATIM ("their top candidate: 'ROOK
+    # ACTIVATION: put a rook ...'"). Found by the drop sweep, not by review: it
+    # is the same bug Codex blocked, wearing a different sentence.
+    text = re.sub(r"their top candidate:.*", "", text)
+    text = re.sub(r"\([^)]*\)", "", text).lower()
+    for word, pt in _PIECE_WORDS:
+        if b.pieces(pt, side):
+            continue
+        if re.search(_OWN_ACTION + rf"\b{word}s?\b", text):
+            return word
+    return None
 
 
 def sqn(sqs) -> str:
@@ -454,6 +501,14 @@ def build_menus(b: chess.Board) -> dict:
         # clause survives.
         from weaknesses import isolated_pawns, backward_pawns
         heavies_t = bool(s[f"{t}.heavies"])
+        # ...but "heavies" is a BOOLEAN over two different pieces, so a
+        # queen-only side was told to "pile rooks/queen" — the very thing the
+        # comment above forbids (Codex 2026-07-26). Name what is on the board.
+        _hw = ("rooks" if len(b.pieces(chess.ROOK, side)) > 1 else
+               "the rook" if b.pieces(chess.ROOK, side) else "")
+        heavy_word = (f"{_hw}/queen" if _hw and b.pieces(chess.QUEEN, side)
+                      else _hw or ("the queen" if b.pieces(chess.QUEEN, side)
+                                   else ""))
         knights_t = bool(b.pieces(chess.KNIGHT, side))
         minors_t = knights_t or bool(b.pieces(chess.BISHOP, side))
         ahead_o = 8 if enemy == chess.WHITE else -8
@@ -477,7 +532,7 @@ def build_menus(b: chess.Board) -> dict:
                 cl.append(f"blockade {chess.square_name(stop)} with the "
                           f"{'light' if stop_light else 'dark'}-squared bishop")
             if heavies_t and half:
-                cl.append(f"pile rooks/queen onto the {fname(q)}-file")
+                cl.append(f"pile {heavy_word} onto the {fname(q)}-file")
             if minors_t or heavies_t:
                 cl.append("trade off its defenders and steer toward an "
                           "endgame, where it falls")
@@ -977,6 +1032,12 @@ def build_menus(b: chess.Board) -> dict:
                               "opening the center must outscore defending",
                               None))
 
+    # THE NET: no plan tells you to move a piece you do not have. Each
+    # candidate's own trigger should already ensure this; this catches the ones
+    # that reason about something else (ROOK ACTIVATION triggers on FILES) and
+    # anything written later.
+    for t, side in (("W", chess.WHITE), ("B", chess.BLACK)):
+        menus[t] = [c for c in menus[t] if not _missing_piece(b, side, c[2])]
     return menus
 
 

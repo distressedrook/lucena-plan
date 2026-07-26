@@ -499,24 +499,91 @@ def test_the_line_narrowing_never_widens(monkeypatch):
 
 
 def test_a_plan_never_names_a_piece_you_do_not_have():
-    """ROOK ACTIVATION triggers on FILES — files with no own pawn — so in a
-    king-and-pawn endgame every file qualified and the plan told a player with
-    no rook to put a rook on the open file (2026-07-26, found while reading
-    what the sheet says about endgames). The plan needs the piece it names."""
+    """Owner 2026-07-26: "put a rook on the open file shouldn't surface even in
+    the middle if there are no rooks."
+
+    ROOK ACTIVATION triggers on FILES — files with no own pawn — so in a
+    king-and-pawn endgame every file qualified. Each candidate's own trigger
+    should check what it names; build_menus applies the NET under all of them,
+    which is what makes this true for plans written later too."""
     import chess
-    from suggest import build_menus
-    words = {"rook": chess.ROOK, "knight": chess.KNIGHT,
-             "bishop": chess.BISHOP, "queen": chess.QUEEN}
+    from suggest import build_menus, _missing_piece
     for fen in ("8/8/8/4k3/8/4K3/4P3/8 w - - 0 60",          # K+P vs K
                 "8/5ppp/4k3/8/8/4KN2/5PPP/8 w - - 0 40",     # N vs pawns
-                "8/5ppp/4k3/8/8/4K3/5PPP/3Q4 w - - 0 40"):   # Q vs pawns
+                "8/5ppp/4k3/8/8/4K3/5PPP/3Q4 w - - 0 40",    # Q vs pawns
+                "r2q1rk1/pp1nbppp/2p2n2/3p2B1/3P4/2NQPN2/PP3PPP/R4RK1 w - - 5 11",
+                "r1bq1b1r/pp2n1pp/2p1k3/3np1B1/2BP4/2N2Q2/PPP2PPP/R3K2R b KQ - 1 10"):
         b = chess.Board(fen)
         for t, side in (("W", chess.WHITE), ("B", chess.BLACK)):
             for _, _, head, _, _, _ in build_menus(b)[t]:
-                for word, pt in words.items():
-                    if word in head.lower() and not b.pieces(pt, side):
-                        raise AssertionError(f"{fen}: {t} has no {word}: {head}")
+                missing = _missing_piece(b, side, head)
+                assert missing is None, f"{fen}: {t} has no {missing}: {head}"
     # ...and with a rook on the board it still fires
     rooks = chess.Board("8/8/8/5k2/8/8/4PK2/4R2r w - - 0 50")
     assert any(h.startswith("ROOK ACTIVATION")
                for _, _, h, _, _, _ in build_menus(rooks)["W"])
+
+
+def test_the_net_reads_only_what_the_plan_asks_YOU_to_move():
+    """Two phrasings it must not swallow: a clause about the ENEMY's piece, and
+    a parenthesised list of ALTERNATIVES (the plan's own trigger picks between
+    those). Without these the net would silently delete correct plans, which is
+    a worse bug than the one it fixes."""
+    import chess
+    from suggest import _missing_piece
+    b = chess.Board("r2q1rk1/pp1nbppp/2p2n2/3p2B1/3P4/2NQPN2/PP3PPP/R4RK1 w - - 5 11")
+    assert _missing_piece(b, chess.WHITE,
+                          "EXCHANGE THE BAD BISHOP on c1: trade it for Black's "
+                          "good bishop on e7") is None
+    # PROPHYLAXIS embeds the OPPONENT's plan verbatim — the rook in it is theirs
+    no_rook = chess.Board("Q7/3k4/1Kp5/3p4/2r5/8/8/8 w - - 1 65")
+    assert _missing_piece(no_rook, chess.WHITE,
+                          "PROPHYLAXIS: pre-empt their best idea — their top "
+                          "candidate: 'ROOK ACTIVATION: put a rook on the "
+                          "open/semi'") is None
+    no_queen = chess.Board("r4rk1/pp3ppp/8/8/8/8/PP3PPP/R4RK1 w - - 0 20")
+    assert _missing_piece(no_queen, chess.WHITE,
+                          "DOUBLE ON THE FILE: double rooks (or rook and queen) "
+                          "on the c-file") is None
+    # ...but the plain claim is caught
+    assert _missing_piece(no_queen, chess.WHITE, "KNIGHT TO f5: maneuver a "
+                          "knight to the strong square") == "knight"
+
+
+def test_besiege_names_the_heavy_pieces_actually_on_the_board():
+    """Codex 2026-07-26, blocking. The weakness matrix's own comment says
+    "never name an executor that isn't on the board", but `heavies` is ONE
+    boolean over two pieces, so a queen-only side read "pile rooks/queen". The
+    net could not catch it either — "pile" is not an own-action verb. Fixed at
+    the source: the phrase is built from inventory."""
+    import chess
+    from suggest import build_menus
+
+    def besiege(fen):
+        heads = [h for _, _, h, _, _, _ in build_menus(chess.Board(fen))["W"]
+                 if h.startswith("BESIEGE THE ISOLATED PAWN")]
+        return heads[0] if heads else ""
+
+    assert "pile the queen onto the d-file" in besiege("4k3/8/8/8/3p4/8/4P3/4K2Q w - - 0 1")
+    assert "pile the rook onto the d-file" in besiege("4k3/8/8/8/3p4/8/4P3/R3K3 w - - 0 1")
+    assert "pile rooks onto the d-file" in besiege("4k3/8/8/8/3p4/8/4P3/R3K2R w - - 0 1")
+    assert "pile rooks/queen onto the d-file" in besiege("4k3/8/8/8/3p4/8/4P3/R2QK2R w - - 0 1")
+
+
+def test_the_net_never_eats_a_plan_whose_bishop_is_the_TARGET():
+    """Codex 2026-07-26, blocking. BREAK THE BISHOP PAIR reads "trade a minor
+    for a bishop" — for a knight-only side that bishop is the ENEMY's, the
+    whole point of the plan. A first cut of the net read the bare noun as an
+    inventory claim and deleted the book's 2nd-strongest family exactly where
+    it applies most. The net matches OWN-ACTION forms only."""
+    import chess
+    from suggest import build_menus, _missing_piece
+    head = ("BREAK THE BISHOP PAIR: trade a minor for a bishop "
+            "(NxB or BxB — the pair dies either way)")
+    # White: two knights, no bishop. Black: the pair.
+    b = chess.Board("r1bqkb1r/pppppppp/8/8/8/8/PPPPPPPP/RN1QKN1R w KQkq - 0 8")
+    assert not b.pieces(chess.BISHOP, chess.WHITE)
+    assert _missing_piece(b, chess.WHITE, head) is None
+    assert any(h.startswith("BREAK THE BISHOP PAIR")
+               for _, _, h, _, _, _ in build_menus(b)["W"]), \
+        "the net must not delete pair_break for a knight-only side"
