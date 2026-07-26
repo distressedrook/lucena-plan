@@ -937,6 +937,25 @@ def _candidates(b: chess.Board, menus: dict, t: str, fen: str,
                     # print a d7-b8-a6-b4-d3 route the lines never played).
                     entry["details"] = won.get("details") or []
                     entry["routes"] = won.get("routes") or []
+                    # HARVEST names the pawn the LINES actually take. The
+                    # trigger lists every weak pawn on the board; the lines
+                    # take one (2026-07-26, owner: "it should name the exact
+                    # pawn that is weak that can be harvested"). Same rule as
+                    # the freeing push and the pair-break trade: when the
+                    # confirmation knows the specific, the specific wins.
+                    if won.get("family") in ("weakness_harvest",
+                                             "harvest_overextended"):
+                        got = sorted({d for d in entry["details"]
+                                      if len(d) == 2 and d[0] in "abcdefgh"})
+                        # Narrow the SQUARE LIST inside the plan's own
+                        # sentence, never rebuild the sentence: a weak pawn and
+                        # an overextended one are different ideas and must not
+                        # collapse into one wording.
+                        if got:
+                            entry["idea"] = re.sub(
+                                r"pawns? on [a-h][1-8](?:, [a-h][1-8])*",
+                                f"pawn{'s' if len(got) > 1 else ''} on "
+                                + ", ".join(got), entry["idea"], count=1)
                     if entry["details"] or entry["routes"]:
                         entry["route_note"] = None
                     maia = won.get("maia") or {}

@@ -388,3 +388,39 @@ def test_an_unreachable_hole_is_geography_not_a_target():
     for h in unreachable:
         assert h["square"] not in chips
         assert h["square"] not in prose
+
+
+def test_harvest_names_the_pawn():
+    """Owner 2026-07-26: "Harvest the weak pawns. What weak pawns? It should
+    name the exact pawn that is weak that can be harvested." The trigger always
+    knew the squares — only the sentence was vague."""
+    import chess
+    from suggest import build_menus
+    # one weak pawn: a5, on a file White has no pawn on and Black cannot support
+    b = chess.Board("1r3rk1/1q3ppp/4b3/pPbp4/3P1B2/3Q2PP/1P3PB1/5RK1 w - - 0 26")
+    head, = [h for _, _, h, _, _, _ in build_menus(b)["W"] if h.startswith("HARVEST")]
+    assert head == "HARVEST the weak pawn on a5"
+    # ...and three of them are listed, not summarised as "the weak pawn(s)"
+    many = chess.Board("6k1/p2n2pp/2pB4/4p3/1PN1p3/P2n1PP1/7P/5K2 w - - 0 32")
+    head, = [h for _, _, h, _, _, _ in build_menus(many)["W"] if h.startswith("HARVEST")]
+    assert head == "HARVEST the weak pawns on e4, e5, c6"
+
+
+def test_a_confirmed_harvest_names_the_pawn_the_lines_take(monkeypatch):
+    """With several weak pawns the trigger lists them all; the lines take ONE.
+    Same rule as the freeing push and the pair-break trade — when the
+    confirmation knows the specific, the specific wins."""
+    import verify as _verify
+    from fact_sheet import post_verify_json
+    fen = "6k1/p2n2pp/2pB4/4p3/1PN1p3/P2n1PP1/7P/5K2 w - - 0 32"   # e4, e5, c6
+    pvs = [{"cp": 20, "pv": [], "ucis": [], "san": []}]
+
+    monkeypatch.setattr(_verify, "verify_plan",
+                        lambda fen, t, fam, **kw: {"verdict": "CONFIRMED-SOUND",
+                                                   "family": fam,
+                                                   "details": ["e4"],
+                                                   "timing": "immediate"})
+    plans = post_verify_json(fen, pvs, [])["sides"]["white"]["plans"]
+    harvest, = [p for p in plans if "arvest" in p["idea"]]
+    assert harvest["idea"] == "Harvest the weak pawn on e4"        # not all three
+    assert harvest["details"] == ["e4"]

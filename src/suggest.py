@@ -418,17 +418,31 @@ def build_menus(b: chess.Board) -> dict:
 
         wp = _wp(b, enemy)
         if wp:
+            # NAME THE PAWN (owner 2026-07-26: "harvest the weak pawns. What
+            # weak pawns? It should name the exact pawn that is weak that can
+            # be harvested"). The trigger always knew which squares they were;
+            # only the sentence was vague. ALL of them, never a silent
+            # first-three (Codex): a sentence that hides two of five targets is
+            # the vagueness this fixes, wearing a number. The post-verify
+            # rewrite narrows it to the one the lines actually take anyway.
+            named = ", ".join(chess.square_name(p) for p in sorted(wp))
             cand(8.4, f"enemy weak pawns {sqn(wp)}",
-                 "HARVEST the weak pawn(s)",
+                 f"HARVEST the weak pawn{'s' if len(wp) > 1 else ''} "
+                 f"on {named}",
                  "harvested 1x -> 0.577, 2x -> 0.656; created-never-harvested "
                  "0.453 (worse than nothing)", VERIFY["harvest"])
         from weaknesses import overextended_pawns as _ox
         ox = _ox(b, enemy)
         if ox:
+            # named, like the harvest (2026-07-26) — and in ITS OWN words: an
+            # overextended pawn is a different animal from a weak one, so the
+            # two plans must not collapse into the same sentence.
+            ox_named = ", ".join(chess.square_name(p) for p in sorted(ox))
             cand(8.0, f"enemy overextended pawn(s) {sqn(ox)}",
-                 "ATTACK THE OVEREXTENDED PAWN: it has outrun its support — "
-                 "restrain it, blockade it, win it, and occupy the holes it "
-                 "left behind (Nimzowitsch)",
+                 f"ATTACK THE OVEREXTENDED PAWN{'S' if len(ox) > 1 else ''} "
+                 f"on {ox_named}: {'they have' if len(ox) > 1 else 'it has'} "
+                 "outrun its support — restrain it, blockade it, win it, and "
+                 "occupy the holes it left behind (Nimzowitsch)",
                  "engine-gated: the pawn falls or the holes behind it become "
                  "outposts in the best lines", VERIFY["harvest_overextended"])
 
