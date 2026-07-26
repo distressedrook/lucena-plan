@@ -364,6 +364,64 @@ def strong_squares(b: chess.Board, side: bool) -> list[int]:
 # (is_hole re-exported above)
 
 
+def holes_report(b: chess.Board) -> list[dict]:
+    """EVERY hole on the board, once, with the attributes its consumers filter
+    on (2026-07-26, owner: "let's unify").
+
+    There were two definitions in one sheet and they disagreed on the page: the
+    chips came from lucena_core.region_control's hole list (kept when the side
+    that can use it controls the square, occupied ones included) while the
+    weakness sentence came from suggest.holes_in (empty squares only, value-
+    tagged, then re-filtered for reachability). Same `is_hole` predicate, same
+    rank window, different relevance rules — so one position reported holes at
+    e4/e5/e6 in a chip row and "Holes at d6" in the prose beside it.
+
+    One list now, and each consumer states its own filter against named fields
+    instead of re-deriving the geography:
+
+      camp        the side whose pawns can never guard it again — ITS weakness
+      user        the other side — the one that can occupy it
+      depth       how deep in `camp`'s territory, from `user`'s side (3-5)
+      tag         "" prime | "rim" a/h-file | "shallow" the user's 4th rank
+                  (the corpus prices: rim 0.496, shallow 0.509 — both noise)
+      empty       nothing stands on it — the state the prose describes when
+                  it says a piece "that lands there"; a square someone is
+                  already sitting on is a different sentence
+      occupied    `user` already has a minor there (a subset of not-empty:
+                  the CAMP's own piece covering its own hole is neither)
+      outpost     ...and a pawn backs it: the classical outpost, realised
+      reachable   `user` attacks it now, or a knight can get there — the test
+                  for whether a hole is a fact about the board or a target
+    """
+    out = []
+    for camp in (chess.WHITE, chess.BLACK):
+        user = not camp
+        for sq in chess.SQUARES:
+            depth = side_rank(sq, user)
+            if not 3 <= depth <= 5:
+                continue
+            if not is_hole(b, sq, camp):
+                continue
+            pc = b.piece_at(sq)
+            occupied = (pc is not None and pc.color == user
+                        and pc.piece_type in (chess.KNIGHT, chess.BISHOP))
+            f = chess.square_file(sq)
+            out.append({
+                "square": chess.square_name(sq),
+                "camp": "white" if camp == chess.WHITE else "black",
+                "user": "white" if user == chess.WHITE else "black",
+                "depth": depth,
+                "tag": "rim" if f in (0, 7) else ("shallow" if depth == 3 else ""),
+                "empty": pc is None,
+                "occupied": occupied,
+                "outpost": occupied and bool(b.attackers(user, sq)
+                                             & b.pieces(chess.PAWN, user)),
+                "reachable": bool(b.attackers(user, sq))
+                or bool(knight_route(b, user, {sq})),
+            })
+    return out
+
+
 def occupied_outposts(b: chess.Board, side: bool) -> list[int]:
     """Enemy minors sitting on pawn-supported holes in our 3rd-5th rank."""
     out = []

@@ -59,7 +59,7 @@ from structures import classify
 from weaknesses import (census, bishop_escape_route, backward_pawns,
                         isolated_pawns, side_rank)
 from plan_diff import snapshot, _see
-from suggest import (build_menus, name_side, pawn_decomposition, holes_in,
+from suggest import (build_menus, name_side, pawn_decomposition,
                      skeleton, candidate_family, standing_batteries)
 
 PREAMBLE = (
@@ -320,9 +320,30 @@ def _skeleton_lever_words(b: chess.Board) -> list[str]:
     return out
 
 
+def _holes_block(b: chess.Board) -> list[dict]:
+    """The sheet's canonical hole records; never fatal (a sheet must not die
+    on a metric)."""
+    try:
+        from weaknesses import holes_report
+        return holes_report(b)
+    except Exception:
+        _log.warning("holes block failed", exc_info=True)
+        return []
+
+
+def _hole_matters(h: dict) -> bool:
+    """Is this hole worth naming? PRIME (rim and shallow price at nothing) and
+    either a piece the user already planted there, or an empty square the user
+    can actually get to. THE relevance rule — the weakness prose and the
+    per-side chips both call this, which is the point of the unified list
+    (2026-07-26)."""
+    return bool(not h["tag"] and (h["occupied"] or (h["empty"] and h["reachable"])))
+
+
 def _weakness_lines(b: chess.Board, terms: dict, side: bool,
                     pvs: list | None = None,
-                    rolls: list | None = None) -> list[str]:
+                    rolls: list | None = None,
+                    holes: list[dict] | None = None) -> list[str]:
     """Everything the original mechanical sheet said about ONE side's camp
     that IS actually a weakness — weak pawns (backward ones called out by
     name), entombed bishop (with escape route if one exists), occupied
@@ -450,17 +471,13 @@ def _weakness_lines(b: chess.Board, terms: dict, side: bool,
     # — dropped; a deep hole matters when the enemy can actually USE it
     # (attacked now, or a knight route reaches it — occupied ones are already
     # the "piece permanently anchored" line above). Cap 3.
-    from weaknesses import knight_route as _kr
-    keep = []
-    for h, tag in holes_in(b, side):
-        if tag:                                   # rim / shallow — noise
-            continue
-        sq = chess.parse_square(h)
-        pc = b.piece_at(sq)
-        if pc is not None and pc.color != side:
-            continue                              # occupied outpost line owns it
-        if b.attackers(not side, sq) or _kr(b, not side, {sq}):
-            keep.append(h)
+    me = "white" if side == chess.WHITE else "black"
+    mine = [h for h in (holes if holes is not None else _holes_block(b))
+            if h["camp"] == me and _hole_matters(h)]   # THE relevance rule
+    # ...then a presentation split, not a second rule: this sentence is about
+    # a square a piece can LAND on, so an already-occupied hole belongs to the
+    # "piece permanently anchored" line above rather than here.
+    keep = [h["square"] for h in mine if h["empty"]]
     if keep:
         # SAY WHAT IT IS FOR (owner 2026-07-26: "let's mention them and suggest
         # how one can use them"). A hole in your own camp is not a square you
@@ -824,13 +841,16 @@ if __name__ == "__main__":
 #     rather than an idea a reader can weigh. Everything else is marked
 # ═══════════════════════════════════════════════════════════════════════
 
+# @3 (2026-07-26): one canonical `holes` list, which the per-side chips and the
+# weakness prose both filter — they used to come from two different hole
+# definitions and disagreed on the page.
 # @2 (2026-07-26): `bars` lost the Eval bar and the two king bars, and
 # `winning.king_bars` became `winning.king_tags` — king safety is a tag now.
 # The version is load-bearing, not decoration: sheets are CACHED by position
 # (backend positions.py, memory + Postgres), so without a bump a sheet rolled
 # yesterday would come back today and put the retired bars back on screen.
 # Consumers must treat a foreign schema as a miss, not as a sheet.
-SHEET_SCHEMA = "lucena-plans/sheet@2"
+SHEET_SCHEMA = "lucena-plans/sheet@3"
 
 # Families whose claim is too SPECIFIC to present unconfirmed — see the drop in
 # _candidates. Everything else is surfaced with its evidence tag instead.
@@ -1780,10 +1800,24 @@ def _sides_block(out: dict) -> dict:
             # again; the side that can USE it is the other one.
             #   outposts — squares in the ENEMY camp you can occupy
             #   holes    — squares in YOUR camp the enemy can occupy
-            "outposts": [h for h in regions.get("holes", [])
-                         if h.get("camp") == enemy],
-            "holes": [h for h in regions.get("holes", [])
-                      if h.get("camp") == side],
+            # ONE hole list for the whole sheet (2026-07-26, owner: "let's
+            # unify") — the same records the weakness prose filters, so the
+            # chips and the sentence can never disagree again. A hole earns a
+            # chip when it is PRIME (rim and shallow price at nothing) and
+            # either free to be used or already occupied by the side that can
+            # use it. A square the camp's OWN pawn or king is standing on is
+            # nobody's target: the pawn structure can never guard it, but the
+            # piece on it is not going to invite anyone in.
+            # ...and REACHABLE, the same target test the prose applies: an
+            # empty hole nobody attacks and no knight can get to is geography,
+            # not a target, and putting it in a chip row while the sentence
+            # ignored it would rebuild the disagreement this unification exists
+            # to remove (Codex 2026-07-26). An occupied one needs no test — a
+            # piece is already standing there.
+            "outposts": [h for h in (out.get("holes") or [])
+                         if h["user"] == side and _hole_matters(h)],
+            "holes": [h for h in (out.get("holes") or [])
+                      if h["camp"] == side and _hole_matters(h)],
             "space": {r: space[r][side] for r in
                       ("center", "kingside", "queenside") if r in space},
             "breaks": (m.get("breaks") or {}).get(side, []),
@@ -1884,13 +1918,20 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
         # passers/color_complex/trapped — deterministic geometry, data tier
         "metrics": _metrics_block(fen, pvs, rolls),
         "structure": [{"name": n, "owner": name_side(o)} for n, o in classify(b)],
-        "weaknesses": {
-            "white": _weakness_lines(b, terms, chess.WHITE, pvs, rolls),
-            "black": _weakness_lines(b, terms, chess.BLACK, pvs, rolls),
-        },
+        # THE hole list — computed ONCE, before anything reads it. Both the
+        # weakness prose (passed in below) and the per-side chips filter these
+        # records through _hole_matters, so the sheet can never again answer
+        # the same question two ways (2026-07-26, owner: "let's unify").
+        "holes": _holes_block(b),
         "tension": _trender(_tension(fen, pvs, rolls)) or [],
         "plans": {},
         "advisory": {},
+    }
+    out["weaknesses"] = {
+        "white": _weakness_lines(b, terms, chess.WHITE, pvs, rolls,
+                                 holes=out["holes"]),
+        "black": _weakness_lines(b, terms, chess.BLACK, pvs, rolls,
+                                 holes=out["holes"]),
     }
     for t, key in (("W", "white"), ("B", "black")):
         plans, advisory = _candidates(b, menus, t, fen, pvs, rolls, verify=verify)

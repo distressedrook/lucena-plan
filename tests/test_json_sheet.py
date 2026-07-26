@@ -251,18 +251,34 @@ def test_holes_and_outposts_are_different_things():
     that can USE it is the other one. The old projection filed every hole a
     side CONTROLLED as that side's outpost, whatever camp it was in — so a hole
     in your own camp that you happen to cover was listed as your asset, exactly
-    backwards. e3 below is White's weakness and Black's target."""
+    backwards. In the Carlsbad below d3 is White's weakness and Black's target,
+    and d6 is the mirror."""
+    import chess
     from fact_sheet import pre_verify_json
-    fen = "r1bq1rk1/pp2ppbp/2np1np1/8/3NP3/2N1BP2/PPPQ2PP/R3KB1R w KQ - 0 9"
+    from weaknesses import holes_report
+
+    fen = "r2q1rk1/pp1nbppp/2p2n2/3p2B1/3P4/2NQPN2/PP3PPP/R4RK1 w - - 5 11"
     sides = pre_verify_json(fen, None, None)["sides"]
-    assert [h["square"] for h in sides["white"]["holes"]] == ["e3"]
-    assert [h["square"] for h in sides["black"]["outposts"]] == ["e3"]
-    assert [h["square"] for h in sides["black"]["holes"]] == ["h6"]
-    assert [h["square"] for h in sides["white"]["outposts"]] == ["h6"]
+    assert [h["square"] for h in sides["black"]["holes"]] == ["d6"]
+    assert [h["square"] for h in sides["white"]["outposts"]] == ["d6"]
+    # ...and it is on nobody else's list: White's own camp has d3, occupied
+    assert [h["square"] for h in sides["white"]["holes"]] == []
+    assert [h["square"] for h in sides["black"]["outposts"]] == []
+    d3, = [h for h in holes_report(chess.Board(fen)) if h["square"] == "d3"]
+    assert d3["camp"] == "white" and d3["empty"] is False
     # every outpost is in the enemy camp, every hole in one's own
     for side, enemy in (("white", "black"), ("black", "white")):
         assert all(h["camp"] == enemy for h in sides[side]["outposts"])
         assert all(h["camp"] == side for h in sides[side]["holes"])
+
+    # ...and a hole the camp's OWN piece is standing on is nobody's target: the
+    # structure can never guard e3 again, but White's bishop is on it.
+    kid = "r1bq1rk1/pp2ppbp/2np1np1/8/3NP3/2N1BP2/PPPQ2PP/R3KB1R w KQ - 0 9"
+    e3, = [h for h in holes_report(chess.Board(kid)) if h["square"] == "e3"]
+    assert e3["camp"] == "white" and e3["empty"] is False
+    ksides = pre_verify_json(kid, None, None)["sides"]
+    assert not any(h["square"] == "e3" for h in ksides["black"]["outposts"])
+    assert not any(h["square"] == "e3" for h in ksides["white"]["holes"])
 
 
 def test_a_hole_says_what_it_means():
@@ -298,3 +314,77 @@ def test_planting_a_minor_is_never_claimed_unverified(monkeypatch):
     plans = post_verify_json(fen, pvs, [])["sides"]["white"]["plans"]
     planted = [p for p in plans if "Outpost plan" in p["idea"]]
     assert planted and planted[0]["verified"] is True
+
+
+def test_the_chips_and_the_prose_read_the_same_holes():
+    """ONE definition (owner 2026-07-26: "let's unify"). The chips came from
+    lucena_core.region_control's hole list and the sentence from
+    suggest.holes_in — same predicate, same rank window, different relevance
+    rules — so a Fried Liver position reported e4/e5/e6 in a chip row and
+    "Holes at d6" in the prose beside it. Both filter one canonical list now."""
+    import re
+    from fact_sheet import pre_verify_json
+    fen = "r1bq1b1r/pp2n1pp/2p1k3/3np1B1/2BP4/2N2Q2/PPP2PPP/R3K2R b KQ - 1 10"
+    sheet = pre_verify_json(fen, None, None)
+    black = sheet["sides"]["black"]
+    chips = {h["square"] for h in black["holes"]}
+    line, = [w for w in black["weaknesses"] if w.startswith("Holes at")]
+    prose = set(re.findall(r"[a-h][1-8]", line.split("—")[0]))
+    assert chips == prose == {"d6"}
+    # e5 and e6 ARE holes in Black's camp — no black pawn can ever guard them —
+    # but Black's own pawn and king are standing there, so neither list calls
+    # them targets (Codex 2026-07-26: `occupied` is about the USER's minor and
+    # cannot double as "the square is taken").
+    assert {h["square"] for h in sheet["holes"] if not h["empty"]} >= {"e5", "e6"}
+    # e4 is the user's own 4th rank — "shallow", priced at 0.509 — so it is in
+    # the canonical list, tagged, and shown by nobody.
+    assert any(h["square"] == "e4" and h["tag"] == "shallow" for h in sheet["holes"])
+    assert "e4" not in chips and "e4" not in prose
+    # and every hole is somebody's outpost: the mirror is exact
+    assert {h["square"] for h in sheet["sides"]["white"]["outposts"]} == chips
+
+
+def test_a_hole_someone_is_standing_on_is_not_announced_as_empty():
+    """`occupied` means the USER's minor is there, so it cannot double as "the
+    square is taken": a hole the CAMP's own piece covers is neither occupied nor
+    empty by that field, and the prose was announcing it as somewhere a piece
+    could land (Codex 2026-07-26). The prose reads `empty`."""
+    import chess
+    from weaknesses import holes_report
+    from fact_sheet import pre_verify_json
+    fen = "4k3/8/8/8/5n2/3N4/8/4K3 b - - 0 1"          # White's own knight on d3
+    d3, = [h for h in holes_report(chess.Board(fen)) if h["square"] == "d3"]
+    assert d3["camp"] == "white" and d3["empty"] is False and d3["occupied"] is False
+    line, = [w for w in pre_verify_json(fen, None, None)["sides"]["white"]["weaknesses"]
+             if w.startswith("Holes at")]
+    assert "d3" not in line.split("—")[0]
+    # ...while f4, where BLACK's knight sits in White's camp, is that side's
+    # realised outpost rather than an empty square either
+    f4, = [h for h in holes_report(chess.Board(fen))
+           if h["square"] == "f4" and h["camp"] == "white"]
+    assert f4["occupied"] is True and f4["empty"] is False
+
+
+def test_an_unreachable_hole_is_geography_not_a_target():
+    """The chips and the prose apply the SAME relevance rule (Codex
+    2026-07-26): an empty prime hole that nobody attacks and no knight can get
+    to is a fact about the pawn structure, not a target, and listing it in a
+    chip row while the sentence ignored it would rebuild the disagreement this
+    unification exists to remove."""
+    import chess
+    from weaknesses import holes_report
+    from fact_sheet import pre_verify_json
+    # kings and a pair of rooks: plenty of holes, no knight anywhere, and the
+    # rooks reach almost none of them.
+    fen = "4k3/8/8/8/8/8/r6r/4K3 w - - 0 40"
+    unreachable = [h for h in holes_report(chess.Board(fen))
+                   if h["camp"] == "white" and not h["tag"] and h["empty"]
+                   and not h["reachable"]]
+    assert unreachable, "fixture should contain an unreachable hole"
+    sheet = pre_verify_json(fen, None, None)
+    chips = {h["square"] for h in sheet["sides"]["white"]["holes"]}
+    prose = " ".join(w for w in sheet["sides"]["white"]["weaknesses"]
+                     if w.startswith("Holes at"))
+    for h in unreachable:
+        assert h["square"] not in chips
+        assert h["square"] not in prose
