@@ -145,6 +145,23 @@ def render(post: dict) -> str | None:
         head = f"{head} — {char}"
     lines.append(head.rstrip(".") + ".")
 
+    # 1b. THE COMMITTED RECOMMENDATION (owner ruling 2026-07-30: "I am OK
+    # with the commit, as long as we tell the student why"). Spoken only when
+    # the sheet grounded a why — the move is the top engine line's first move,
+    # the why is the plan that line enacts (fact_sheet._recommendation_block).
+    # A move without its why never renders; that is the ruling, not a style
+    # choice. Measured basis: reading/LOG.md P11/P18 — naming the move is
+    # +34pp for a weak reader; everything short of it measures ~0.
+    rec = post.get("recommendation")
+    if rec and rec.get("move") and rec.get("why"):
+        # Wording is deliberately about the LINE, not the single move — that
+        # is exactly what the attribution witnessed (the top line enacts the
+        # plan; the move is its first step). "This move achieves X" would
+        # claim more than the evidence.
+        why = rec["why"].rstrip(".")
+        lines.append(f"**Play {rec['move']}** — the strongest continuation "
+                     f"pursues this plan: {why}.")
+
     # 2. MATERIAL — spoken only when it is actually saying something.
     # `standing` is the SETTLED (SEE-quiescent) sentence, never the raw
     # count (finding 27: the raw one said "Black is up a queen for a
