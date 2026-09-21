@@ -32,7 +32,7 @@ import random
 import sys
 from collections import defaultdict
 
-ROOT = "/Users/avismara/Development/lucena"
+ROOT = "/Users/avismara/Projects/active/lucena"
 sys.path.insert(0, f"{ROOT}/engine/python")
 sys.path.insert(0, f"{ROOT}/lucena-core/python")
 

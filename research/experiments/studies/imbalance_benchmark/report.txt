@@ -25,4 +25,4 @@ ALL equalish read forms: {'null': 1449, 'only_move': 137, 'concrete': 74, 'activ
 concrete resolved by line-walk: {'regained': 48, 'harvest': 18, 'dynamic': 6, 'pressure': 2}
 magnitude when fired: {'full': 279, 'partial': 24}
 
-frozen -> /Users/avismara/Development/lucena/lucena-plans/research/experiments/studies/imbalance_benchmark/imbalance_benchmark.jsonl
+frozen -> /Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/studies/imbalance_benchmark/imbalance_benchmark.jsonl

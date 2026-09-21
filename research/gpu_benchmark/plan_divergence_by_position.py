@@ -36,7 +36,7 @@ def _init_worker(bench_path):
 def _process_file(args):
     basename, dirpaths_by_tag, baseline_tag = args
     import chess
-    sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+    sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
     from plan_diff import labels
 
     def lab(fen, ucis, h=25, t=6):

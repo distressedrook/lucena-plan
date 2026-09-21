@@ -23,12 +23,12 @@ from multiprocessing import Pool
 
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-core/python")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-core/python")
 from lucena_core import positional
 from lucena_core.reads import game_phase
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
-OUT = ("/Users/avismara/Development/lucena/lucena-plans/research/experiments/"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
+OUT = ("/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/"
        "reports/center_control_outcome.png")
 RANK = {"opening": 0, "middlegame": 1, "endgame": 2}
 MAX_PLY = 80

@@ -10,7 +10,7 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from structures import classify
 
 MIN_PLIES = 10
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     stats = collections.defaultdict(lambda: {"n": 0, "scores": [],
                                              "ecos": collections.Counter()})
     n = 0
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while True:
             game = chess.pgn.read_game(f)

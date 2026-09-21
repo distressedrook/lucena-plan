@@ -21,12 +21,12 @@ from multiprocessing import Pool
 
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-core/python")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-core/python")
 from lucena_core.board import Board as LBoard
 from lucena_core import positional
 from lucena_core.reads import game_phase
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
 START_PLY = 8
 EVERY = 4
 MAX_PLY = 100

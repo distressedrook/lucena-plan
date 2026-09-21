@@ -15,10 +15,10 @@ from multiprocessing import Pool
 
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-core/python")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-core/python")
 from lucena_core.metrics import material_stability, _static_material
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
 STEP = 3
 HORIZON = 12
 WORKERS = 8

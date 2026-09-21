@@ -17,7 +17,7 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/research/experiments")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments")
 from closed_v0 import skeleton
 
 MIN_RUN = 20
@@ -118,7 +118,7 @@ def study(game):
 if __name__ == "__main__":
     n = 0
     rows = []
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while True:
             game = chess.pgn.read_game(f)

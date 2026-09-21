@@ -20,8 +20,8 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-core/python")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-core/python")
 from plan_diff import labels, snapshot
 from weaknesses import weak_pawns, entombed_bishops
 
@@ -45,7 +45,7 @@ def _max_attack_viability(b) -> float:
     v = _pos.attack_viability(b.fen())
     return max(v["white"]["norm"], v["black"]["norm"])
 
-DIR = "/Users/avismara/Development/lucena/lucena-plans/research/data/annotated"
+DIR = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/annotated"
 
 PLAN_CONCEPTS = {
     "minority attack": {"minority_attack", "minority_attack_general"},

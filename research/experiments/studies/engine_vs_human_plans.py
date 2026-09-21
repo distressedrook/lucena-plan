@@ -22,8 +22,8 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/research/experiments")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments")
 os.environ["EXPLAINER_NODES"] = "1000000"
 # gRPC channels do NOT survive fork(): every subprocess.Popen after channel
 # creation corrupts the poll set ("FD from fork parent still in poll list")
@@ -175,7 +175,7 @@ if __name__ == "__main__":
     _maia = _maia_spawn()          # fork FIRST; the gRPC channel comes after
     rows = []
     scanned = 0
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while len(rows) < TARGET:
             game = chess.pgn.read_game(f)
@@ -205,7 +205,7 @@ if __name__ == "__main__":
                 print(f"{len(rows)}/{TARGET} positions "
                       f"(scanned {scanned})", flush=True)
 
-    out = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/engine_vs_human_plans.jsonl"
+    out = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/engine_vs_human_plans.jsonl"
     with open(out, "w") as g:
         for r in rows:
             g.write(json.dumps(r) + "\n")

@@ -17,7 +17,7 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from weaknesses import census
 
 HOLD = 8
@@ -37,8 +37,8 @@ def achieved_level(series: list[int], hold: int = HOLD) -> int:
 
 
 if __name__ == "__main__":
-    DIRS = ["/Users/avismara/Development/lucena/lucena-plans/minority-attack",
-            "/Users/avismara/Development/lucena/lucena-plans/minority-attack-gm"]
+    DIRS = ["/Users/avismara/Projects/active/lucena/lucena-plans/minority-attack",
+            "/Users/avismara/Projects/active/lucena/lucena-plans/minority-attack-gm"]
     rows = []
     for d in DIRS:
         corpus = "gm" if d.endswith("gm") else "lichess"

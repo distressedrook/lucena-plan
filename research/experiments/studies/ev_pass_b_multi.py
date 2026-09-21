@@ -23,8 +23,8 @@ import time
 
 import chess
 
-SRC = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions25.jsonl"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_multi_maia.jsonl"
+SRC = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_positions25.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_multi_maia.jsonl"
 K = 16
 HORIZON = 25
 BAND = 0.40                    # p_i/(p_1+p_i) >= BAND -> contested choice

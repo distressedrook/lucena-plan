@@ -18,8 +18,8 @@ from lucena_core.engine_client._pb import engine_pb2 as pb
 
 HORIZON = 25
 PLY_AT = 28
-IN = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions25.jsonl"
+IN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_positions25.jsonl"
 
 probes = Probes()
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     wanted = {r["n"]: r for r in rows}
     actual25 = {}
     n = 0
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while len(actual25) < len(wanted):
             game = chess.pgn.read_game(f)

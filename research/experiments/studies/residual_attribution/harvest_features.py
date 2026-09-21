@@ -26,7 +26,7 @@ import json
 import os
 import sys
 
-ROOT = "/Users/avismara/Development/lucena"
+ROOT = "/Users/avismara/Projects/active/lucena"
 sys.path.insert(0, f"{ROOT}/engine/python")
 sys.path.insert(0, f"{ROOT}/lucena-core/python")
 sys.path.insert(0, f"{ROOT}/lucena-plans/src")

@@ -30,10 +30,10 @@ import glob
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/research/experiments")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments")
 from overnight_lift import PGN, index_games
 
-MAIA_SHARDS = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/maia_shards"
+MAIA_SHARDS = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/maia_shards"
 
 
 def banked_anchors():
@@ -62,8 +62,8 @@ def banked_anchors():
                              "kstudy": key in kstudy})
     return rows
 
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-MANIFEST = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.manifest.json"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+MANIFEST = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.manifest.json"
 HORIZON = 25
 
 if __name__ == "__main__":
@@ -109,7 +109,7 @@ if __name__ == "__main__":
             g.write(json.dumps(row, separators=(",", ":")) + "\n")
     sha = hashlib.sha256(open(OUT, "rb").read()).hexdigest()
     commit = subprocess.run(
-        ["git", "-C", "/Users/avismara/Development/lucena/lucena-plans/src",
+        ["git", "-C", "/Users/avismara/Projects/active/lucena/lucena-plans/src",
          "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
     manifest = {
         "name": "benchmark_v1", "positions": len(rows),

@@ -84,7 +84,7 @@ if __name__ == "__main__":
     onsets, ecos, results = [], collections.Counter(), collections.Counter()
     open_results = collections.Counter()
     samples = []
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while True:
             game = chess.pgn.read_game(f)

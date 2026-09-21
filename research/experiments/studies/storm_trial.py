@@ -4,8 +4,8 @@ by the victim's center state at the anchor."""
 import glob, json, statistics, chess, chess.pgn
 from multiprocessing import Pool
 
-PGN = '/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn'
-SH = '/Users/avismara/Development/lucena/lucena-plans/research/experiments/lift_shards'
+PGN = '/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn'
+SH = '/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/lift_shards'
 
 
 def central_levers(b, side):

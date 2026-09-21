@@ -130,7 +130,7 @@ if __name__ == "__main__":
     hits = n = 0
     good_wins = draws = 0
     examples = []
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while True:
             game = chess.pgn.read_game(f)

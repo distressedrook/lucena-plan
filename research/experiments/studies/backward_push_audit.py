@@ -28,13 +28,13 @@ from multiprocessing import Pool
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import labels, snapshot
 from weaknesses import backward_half_open
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
-BENCH = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-ENG = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/eng_shards"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
+BENCH = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+ENG = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/eng_shards"
 ANCHORS = (20, 30, 40, 50)
 H_FAST, T_FAST = 12, 2
 H_SLOW, T_SLOW = 25, 6

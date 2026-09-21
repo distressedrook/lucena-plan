@@ -24,7 +24,7 @@ import io, os, sys, json, random, multiprocessing as mp
 from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = "/Users/avismara/Development/lucena/lucena-plans"
+ROOT = "/Users/avismara/Projects/active/lucena/lucena-plans"
 sys.path.insert(0, os.path.join(ROOT, "src"))
 import chess, chess.pgn, chess.engine
 

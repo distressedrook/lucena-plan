@@ -23,8 +23,8 @@ import multiprocessing
 import os
 import sys
 
-ENGINE_PY = "/Users/avismara/Development/lucena/engine/python"
-SRC = "/Users/avismara/Development/lucena/lucena-plans/src"
+ENGINE_PY = "/Users/avismara/Projects/active/lucena/engine/python"
+SRC = "/Users/avismara/Projects/active/lucena/lucena-plans/src"
 
 BENCH = {}
 

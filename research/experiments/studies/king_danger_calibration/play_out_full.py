@@ -19,7 +19,7 @@ import os
 import sys
 import time
 
-ROOT = "/Users/avismara/Development/lucena"
+ROOT = "/Users/avismara/Projects/active/lucena"
 sys.path.insert(0, f"{ROOT}/engine/python")
 sys.path.insert(0, f"{ROOT}/lucena-core/python")
 

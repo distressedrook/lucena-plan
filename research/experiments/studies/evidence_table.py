@@ -18,7 +18,7 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from detectors import is_carlsbad, is_carlsbad_reversed
 
 STRUCT_MIN = 10
@@ -63,8 +63,8 @@ def stage(game, side):
 
 
 if __name__ == "__main__":
-    CORPORA = [("lichess", "/Users/avismara/Development/lucena/lucena-plans/research/data/lichess_elite_2023-01.pgn"),
-               ("gm", "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn")]
+    CORPORA = [("lichess", "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/lichess_elite_2023-01.pgn"),
+               ("gm", "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn")]
     rows = []
     for name, path in CORPORA:
         n = 0
@@ -86,7 +86,7 @@ if __name__ == "__main__":
                                      "stage": r[0], "score": r[1]})
         print(f"[{name}] done: {n} games", flush=True)
 
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/experiments/carlsbad_row.jsonl", "w") as g:
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/carlsbad_row.jsonl", "w") as g:
         for r in rows:
             g.write(json.dumps(r) + "\n")
 

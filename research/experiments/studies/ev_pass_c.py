@@ -8,12 +8,12 @@ import sys
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import labels
 
-A = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
-B = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_maia.jsonl"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/engine_vs_human_plans.jsonl"
+A = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
+B = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_maia.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/engine_vs_human_plans.jsonl"
 
 if __name__ == "__main__":
     pos = [json.loads(l) for l in open(A)]

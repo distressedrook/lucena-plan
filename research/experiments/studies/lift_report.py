@@ -8,7 +8,7 @@ import json
 import math
 import statistics
 
-SHARDS = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/lift_shards"
+SHARDS = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/lift_shards"
 
 
 def wilson(k, n, z=1.96):

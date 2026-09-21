@@ -28,12 +28,12 @@ import time
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import labels
 
-LIFT_SHARDS = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/lift_shards"
-OUT_DIR = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/maia_shards"
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
+LIFT_SHARDS = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/lift_shards"
+OUT_DIR = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/maia_shards"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
 N_ARGMAX = 4000
 N_KSTUDY = 300
 K = 8

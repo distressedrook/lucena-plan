@@ -15,7 +15,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 import kstudy_reduce
 
-BASE = "/Users/avismara/Development/lucena/lucena-plans/research/experiments"
+BASE = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments"
 SHARDS = f"{BASE}/maia_shards"
 REPORT = f"{BASE}/lift_report.txt"
 KREPORT = f"{BASE}/kstudy_report.txt"
