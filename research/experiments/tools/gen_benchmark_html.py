@@ -13,10 +13,10 @@ import time
 import urllib.parse
 from multiprocessing import Pool
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 
-BENCH = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/reports/benchmark_sheets.html"
+BENCH = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/reports/benchmark_sheets.html"
 WORKERS = 8
 
 HEAD = """<!doctype html>

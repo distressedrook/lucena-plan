@@ -35,7 +35,7 @@ def _init_worker(bench_path):
 def _label_file(path):
     # imported inside the worker so each process gets its own module state
     import chess
-    sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+    sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
     from plan_diff import labels
 
     def lab(fen, ucis, h=25, t=6):

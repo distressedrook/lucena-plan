@@ -38,12 +38,12 @@ from multiprocessing import Pool
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from closed_v0 import center_locked
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
-BENCH = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-ENG = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/eng_shards"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
+BENCH = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+ENG = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/eng_shards"
 ANCHORS = (20, 30, 40, 50)
 HOLD_PLIES = 12          # the rule: not castled in the next 6 moves
 EQUAL_BAND = 50

@@ -20,7 +20,7 @@ import sys
 import chess
 import chess.pgn
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
 WINDOW = 30
 SCORE = {"1-0": 1.0, "0-1": 0.0, "1/2-1/2": 0.5}
 

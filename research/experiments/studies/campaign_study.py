@@ -28,12 +28,12 @@ from multiprocessing import Pool
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import parse_line
 from hierarchy import CAMPAIGNS, compose
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/campaign_study.jsonl"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/campaign_study.jsonl"
 WORKERS = 8
 MIN_PLIES = 40
 

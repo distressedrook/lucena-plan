@@ -20,7 +20,7 @@ import collections
 import statistics
 import sys
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/research/experiments")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments")
 from kstudy_reduce import load_rows
 
 

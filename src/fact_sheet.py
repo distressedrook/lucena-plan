@@ -1963,6 +1963,75 @@ def _sides_block(out: dict) -> dict:
     return sides
 
 
+def _recommendation_block(b: chess.Board, fen: str, pvs,
+                          plans: dict) -> dict | None:
+    """The COMMITTED recommendation (owner ruling 2026-07-30): the sheet may
+    name the move to play — as long as it tells the student WHY, and the why
+    is witnessed, never narrated.
+
+    Grounding contract, per the house rules ("every specific the sheet prints
+    comes from the firing eval-equal lines"):
+      * the MOVE is the first move of the top engine line (pvs[0] — the same
+        line the assessment eval already trusts);
+      * the WHY is the plan that line ENACTS: plan_diff.parse_line labels
+        PV1, and the earliest mover-side family that matches a detected plan
+        entry supplies the wording. The attribution is the engine line's own
+        emission — plan_diff is the grammar verify.py treats as ground truth.
+      * no grounded why -> NO recommendation. The ruling was "commit AND tell
+        why", not "commit"; a bare move without its reason must not render.
+
+    Measured context (reading/LOG.md P11/P18): naming the move moves a weak
+    reader +34pp; every wording short of it measures ~0. This block is that
+    finding, gated on honesty.
+    """
+    if not pvs or not pvs[0].get("ucis"):
+        return None
+    ucis = pvs[0]["ucis"]
+    try:
+        first = chess.Move.from_uci(ucis[0])
+    except ValueError:
+        return None
+    if first not in b.legal_moves:
+        return None
+    move_san = b.san(first)
+
+    from plan_diff import parse_line
+    mover = "W" if b.turn else "B"
+    side_key = "white" if b.turn else "black"
+    moves = []
+    bb = chess.Board(fen)
+    for uci in ucis:
+        try:
+            mv = chess.Move.from_uci(uci)
+        except ValueError:
+            break
+        if mv not in bb.legal_moves:
+            break
+        moves.append(mv)
+        bb.push(mv)
+    try:
+        events = parse_line(chess.Board(fen), moves, horizon=25)
+    except Exception:
+        return None
+    fired = sorted((ev.get("ply", 99), ev["name"]) for ev in events
+                   if ev.get("side") == mover)
+    if not fired:
+        return None
+
+    entries = (plans or {}).get(side_key) or []
+    for _ply, fam in fired:
+        for entry in entries:
+            fams = set(entry.get("families") or [])
+            if entry.get("family"):
+                fams.add(entry["family"])
+            if fam in fams and entry.get("idea"):
+                return {"move": move_san,
+                        "family": fam,
+                        "why": entry["idea"],
+                        "verdict": entry.get("verdict")}
+    return None
+
+
 def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
     b = chess.Board(fen)
     pid = opaque_id(fen)
@@ -2060,6 +2129,11 @@ def _sheet_json(fen: str, pvs, rolls, *, verify: bool) -> dict:
         plans, advisory = _candidates(b, menus, t, fen, pvs, rolls, verify=verify)
         out["plans"][key] = plans
         out["advisory"][key] = advisory
+    # THE COMMITTED RECOMMENDATION (owner ruling 2026-07-30): post-verify
+    # only — the why cites a detected plan entry, and pre-verify entries
+    # carry no verdicts to cite. None when no grounded why exists.
+    out["recommendation"] = (_recommendation_block(b, fen, pvs, out["plans"])
+                             if verify else None)
     # TEMPORARY: the per-side White/Black view, projected from the blocks
     # above (owner 2026-07-23). Producers are unchanged; this is additive.
     out["sides"] = _sides_block(out)

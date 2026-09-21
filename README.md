@@ -7,8 +7,9 @@ freeing breaks — each backed by corpus statistics from GM play and verifiable
 against engine lines. The tactical sibling explains *why a combination wins*;
 this repo explains *what to do when nothing is hanging*.
 
-Private and proprietary. Consumed by `lucena-backend`; the research corpus
-and audit harness live in-repo but never ship.
+Open-source under AGPL-3.0-or-later. Consumed by `lucena-backend`; the research
+corpus and audit harness live in-repo and are intentionally documented as part
+of the project record.
 
 ## The idea
 

@@ -22,12 +22,12 @@ from multiprocessing import Pool
 
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-core/python")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-core/python")
 from lucena_core.board import Board as LBoard
 from lucena_core import positional
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
-OUT = ("/Users/avismara/Development/lucena/lucena-plans/research/experiments/"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
+OUT = ("/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/"
        "reports/attack_viability_validation.png")
 ANCHOR_MAX = 60
 STEP = 4

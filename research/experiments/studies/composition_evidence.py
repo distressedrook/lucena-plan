@@ -17,7 +17,7 @@ import collections
 import glob
 import json
 
-SHARDS = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/lift_shards"
+SHARDS = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/lift_shards"
 
 MECHANISMS = {"rook_lift", "pair_acquisition", "storm_launch",
               "fix_then_attack", "wing_expansion", "majority_roll",

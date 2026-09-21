@@ -24,12 +24,12 @@ from multiprocessing import Pool
 
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-core/python")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-core/python")
 from lucena_core.board import Board as LBoard
 from lucena_core import positional
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
-OUT = ("/Users/avismara/Development/lucena/lucena-plans/research/experiments/"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
+OUT = ("/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/"
        "reports/activity_outcome.png")
 WINDOWS = {"opening 8-20": (8, 20), "middlegame 21-40": (21, 40),
            "late 41-60": (41, 60)}

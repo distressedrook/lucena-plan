@@ -12,7 +12,7 @@ Mann-Whitney and the per-bin hold rate.
 """
 import os, sys, json
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = "/Users/avismara/Development/lucena/lucena-plans"
+ROOT = "/Users/avismara/Projects/active/lucena/lucena-plans"
 sys.path.insert(0, os.path.join(ROOT, "src"))
 import chess
 from initiative import initiative

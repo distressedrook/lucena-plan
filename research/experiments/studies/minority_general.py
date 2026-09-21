@@ -22,7 +22,7 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from detectors import is_carlsbad, is_carlsbad_reversed
 
 QS = {0, 1, 2}          # files a, b, c
@@ -85,8 +85,8 @@ def study(game, side):
 
 
 if __name__ == "__main__":
-    CORPORA = [("gm", "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"),
-               ("lichess", "/Users/avismara/Development/lucena/lucena-plans/research/data/lichess_elite_2023-01.pgn")]
+    CORPORA = [("gm", "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"),
+               ("lichess", "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/lichess_elite_2023-01.pgn")]
     rows = []
     for cname, path in CORPORA:
         n = 0

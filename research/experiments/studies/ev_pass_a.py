@@ -24,7 +24,7 @@ PLY_AT = 28
 HORIZON = 12
 EQUAL_CP = 50
 TARGET = 120
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
 
 probes = Probes()
 
@@ -80,7 +80,7 @@ def random_line(b: chess.Board, seed: int):
 
 if __name__ == "__main__":
     rows, scanned = [], 0
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f, open(OUT, "w") as g:
         while len(rows) < TARGET:
             game = chess.pgn.read_game(f)

@@ -13,12 +13,12 @@ import json
 import sys
 import urllib.parse
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from suggest import CANDIDATE_FAMILIES
 
-IN = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/agreement_benchmark.json"
-BENCH = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/reports/agreement_report.html"
+IN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/agreement_benchmark.json"
+BENCH = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/reports/agreement_report.html"
 MIN_N = 6
 
 # family key -> display label, reversed from suggest.py's CANDIDATE_FAMILIES

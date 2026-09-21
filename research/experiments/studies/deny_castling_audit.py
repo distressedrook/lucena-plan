@@ -22,12 +22,12 @@ import sys
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import snapshot
 
-BENCH = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-ENG_DIR = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/eng_shards"
-MAIA_DIR = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/maia_shards"
+BENCH = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+ENG_DIR = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/eng_shards"
+MAIA_DIR = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/maia_shards"
 EQUAL_BAND = 50
 WINDOW = 12          # ~5-6 of the opponent's own moves
 

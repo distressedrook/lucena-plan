@@ -7,7 +7,7 @@ moving term changes. Output feeds the human segmentation audit.
 """
 import sys, json, argparse
 import chess, chess.pgn
-sys.path.insert(0, '/Users/avismara/Development/lucena/engine/python')
+sys.path.insert(0, '/Users/avismara/Projects/active/lucena/engine/python')
 from lucena_core import positional
 from lucena_core.board import Board as LBoard
 

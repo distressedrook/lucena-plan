@@ -25,8 +25,8 @@ from lucena_core.engine_client.probes import Probes
 import grpc
 from lucena_core.engine_client._pb import engine_pb2 as pb
 
-SRC = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions25.jsonl"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_multi.jsonl"
+SRC = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_positions25.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_multi.jsonl"
 MULTIPV = 4
 HORIZON = 25
 MAIN_NODES = 1_000_000

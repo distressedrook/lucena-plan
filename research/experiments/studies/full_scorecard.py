@@ -11,10 +11,10 @@ import json
 import statistics
 import sys
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import labels
 
-D = "/Users/avismara/Development/lucena/lucena-plans/research/experiments"
+D = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments"
 
 
 def fam(l):

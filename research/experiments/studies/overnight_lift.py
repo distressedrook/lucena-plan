@@ -23,11 +23,11 @@ from multiprocessing import Pool
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import labels, snapshot
 
-PGN = "/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn"
-SHARDS = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/lift_shards"
+PGN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn"
+SHARDS = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/lift_shards"
 ANCHORS = (20, 30, 40, 50)
 H_FAST, T_FAST = 12, 2
 H_SLOW, T_SLOW = 25, 6

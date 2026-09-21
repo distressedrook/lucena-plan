@@ -11,8 +11,8 @@ import chess
 
 HORIZON = int(__import__("os").environ.get("EV_HORIZON", "12"))
 MAIA_ELO = 2400
-IN = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/ev_maia.jsonl"
+IN = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_positions.jsonl"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/ev_maia.jsonl"
 
 _SRV = ("import sys\n"
         "from lucena_engine.maia import MaiaEngine\n"

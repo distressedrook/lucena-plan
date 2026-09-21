@@ -23,7 +23,7 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/engine/python")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/engine/python")
 from lucena_core import positional  # noqa: E402
 from lucena_core.board import Board as LBoard  # noqa: E402
 

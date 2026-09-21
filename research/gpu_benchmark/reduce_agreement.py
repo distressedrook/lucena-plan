@@ -27,7 +27,7 @@ import sys
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import labels
 
 EQUAL_BAND = 50

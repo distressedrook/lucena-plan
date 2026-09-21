@@ -26,7 +26,7 @@ import glob
 import json
 import math
 
-BASE = "/Users/avismara/Development/lucena/lucena-plans/research/experiments"
+BASE = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments"
 SHARDS = f"{BASE}/maia_shards"
 OUT = f"{BASE}/kstudy_report.txt"
 EXPECTED_KSHARDS = 12

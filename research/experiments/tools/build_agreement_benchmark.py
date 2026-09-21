@@ -30,13 +30,13 @@ from multiprocessing import Pool
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import labels
 
-BENCH = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-ENG = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/eng_shards"
-MAIA = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/maia_shards"
-OUT = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/agreement_benchmark.json"
+BENCH = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+ENG = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/eng_shards"
+MAIA = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/maia_shards"
+OUT = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/agreement_benchmark.json"
 EQUAL_BAND = 50
 WORKERS = 8
 WITNESS_CAP = 12   # example positions kept per family per leg

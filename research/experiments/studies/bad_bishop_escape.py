@@ -151,7 +151,7 @@ def study(game):
 if __name__ == "__main__":
     import statistics
     rows, n = [], 0
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while True:
             game = chess.pgn.read_game(f)
@@ -164,7 +164,7 @@ if __name__ == "__main__":
                 rows.extend(study(game))
             except Exception:
                 continue
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/experiments/bad_bishop_cases.jsonl",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/bad_bishop_cases.jsonl",
               "w") as g:
         for r in rows:
             g.write(json.dumps(r) + "\n")

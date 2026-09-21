@@ -18,7 +18,7 @@ import sys
 
 import chess
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from weaknesses import (weak_pawns, entombed_bishops, exposed_king, is_hole,
                         side_rank)
 

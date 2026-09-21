@@ -106,7 +106,7 @@ def study(game):
 if __name__ == "__main__":
     n = hits = 0
     rows = []
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/data/gm_classical.pgn",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/data/gm_classical.pgn",
               encoding="latin-1") as f:
         while True:
             game = chess.pgn.read_game(f)
@@ -157,7 +157,7 @@ if __name__ == "__main__":
     for rt, k in collections.Counter(r["route"] for r in rows).most_common(10):
         print(f"  {rt}: {k}")
     import json
-    with open("/Users/avismara/Development/lucena/lucena-plans/research/experiments/outpost_plans.jsonl",
+    with open("/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/outpost_plans.jsonl",
               "w") as g:
         for r in rows:
             g.write(json.dumps(r) + "\n")

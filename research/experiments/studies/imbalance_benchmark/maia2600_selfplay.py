@@ -3,7 +3,7 @@
 continuations for the 53 development-flipped positions. Checkpointed per
 position; cap-adjudicated by Stockfish eval."""
 import os, sys, json, multiprocessing as mp
-ROOT = "/Users/avismara/Development/lucena"
+ROOT = "/Users/avismara/Projects/active/lucena"
 SRC = f"{ROOT}/lucena-plans/src"
 STUDY = f"{ROOT}/lucena-plans/research/experiments/studies/imbalance_benchmark"
 sys.path.insert(0, SRC)

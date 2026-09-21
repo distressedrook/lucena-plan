@@ -15,9 +15,9 @@ from __future__ import annotations
 import glob
 import json
 
-BENCH = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
-ENG = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/eng_shards"
-MAIA = "/Users/avismara/Development/lucena/lucena-plans/research/experiments/maia_shards"
+BENCH = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/benchmark_v1.jsonl"
+ENG = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/eng_shards"
+MAIA = "/Users/avismara/Projects/active/lucena/lucena-plans/research/experiments/maia_shards"
 
 _fen2id: dict[str, str] | None = None
 _eng: dict[str, list] | None = None

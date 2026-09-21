@@ -19,7 +19,7 @@ import sys
 import chess
 import chess.pgn
 
-sys.path.insert(0, "/Users/avismara/Development/lucena/lucena-plans/src")
+sys.path.insert(0, "/Users/avismara/Projects/active/lucena/lucena-plans/src")
 from plan_diff import snapshot, parse_line, _minority_pre
 from weaknesses import weak_pawns, entombed_bishops
 from suggest import CANDIDATE_FAMILIES
